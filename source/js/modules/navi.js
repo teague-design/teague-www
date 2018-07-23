@@ -1,4 +1,4 @@
-import * as core from "./core";
+import * as core from "../core";
 
 
 /**
@@ -20,7 +20,7 @@ const navi = {
      */
     init () {
         this.isOpen = false;
-        this.element = core.dom.navi;
+        this.element = core.dom.body.find( ".js-navi" );
         this.items = this.element.find( ".js-navi-a" );
         this.trigger = core.dom.body.find( ".js-controller--navi" );
         this.bind();

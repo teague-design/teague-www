@@ -1,5 +1,5 @@
-import log from "../core/log";
-import emitter from "../core/emitter";
+import log from "../../core/log";
+import emitter from "../../core/emitter";
 
 
 /**

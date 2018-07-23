@@ -47,45 +47,12 @@ const dom = {
     /**
      *
      * @public
-     * @member views
-     * @memberof core.dom
-     * @description The cached view nodes.
-     *
-     */
-    views: $( config.viewSelector ),
-
-
-    /**
-     *
-     * @public
-     * @member intro
-     * @memberof core.dom
-     * @description The cached intro node.
-     *
-     */
-    intro: $( config.introSelector ),
-
-
-    /**
-     *
-     * @public
      * @member main
      * @memberof core.dom
      * @description The cached main node.
      *
      */
-    main: $( config.mainSelector ),
-
-
-    /**
-     *
-     * @public
-     * @member navi
-     * @memberof core.dom
-     * @description The cached <nav> nodes.
-     *
-     */
-    navi: $( config.naviSelector )
+    main: $( config.mainSelector )
 };
 
 

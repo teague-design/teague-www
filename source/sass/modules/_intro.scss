@@ -7,31 +7,6 @@
         }
 }
 .intro__logo {
-    animation: logo 2000ms 1;
     max-width: 100%;
-    width: 0;
-    }
-
-
-
-@keyframes logo {
-    0% {
-        opacity: 1;
-        width: 50px;
-    }
-
-    15% {
-        opacity: 1;
-        width: $logo-width;
-    }
-
-    90% {
-        opacity: 1;
-        width: $logo-width;
-    }
-
-    100% {
-        opacity: 0;
-        width: $logo-width / 2;
-    }
+    width: $logo-width;
 }

@@ -1,5 +1,5 @@
 import ScrollController from "properjs-scrollcontroller";
-import * as core from "../core";
+import * as core from "../../core";
 import Controller from "properjs-controller";
 
 

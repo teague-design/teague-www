@@ -1,9 +1,12 @@
 import $ from "properjs-hobo";
+import Controller from "properjs-controller";
 import PageController from "properjs-pagecontroller";
+// import paramalama from "paramalama";
+import * as gsap from "gsap/all";
 import Controllers from "./class/Controllers";
 import * as core from "./core";
-import views from "./views";
-import navi from "./navi";
+import navi from "./modules/navi";
+
 
 
 /**
@@ -23,26 +26,62 @@ const router = {
      *
      */
     init () {
-        this.pageClass = "";
-        this.pageDuration = core.util.getElementDuration( core.dom.main[ 0 ] );
+        this.blit = new Controller();
+        this.animDuration = 500;
         this.controllers = new Controllers({
             el: core.dom.main,
             cb: () => {
-                core.emitter.fire( "app--page-teardown" );
+                // core.emitter.fire( "app--page-teardown" );
+                this.topper();
             }
         });
+
+        core.emitter.on( "app--intro-teardown", () => {
+            this.controllers.animate();
+        });
+
+        // Transition page state stuff
+        this.state = {
+            now: null,
+            future: null
+        };
+        this.church = null;
+
         this.bindEmpty();
         this.initPages();
         this.prepPages();
 
-        core.emitter.on( "app--page-teardown", () => this.topper() );
-        core.emitter.on( "app--anim-request", () => {
-            if ( this.controllers.animController ) {
-                this.controllers.animController.handle();
-            }
-        });
+        core.log( "[Router initialized]", this );
+    },
 
-        core.log( "[Router initialized]" );
+
+    load () {
+        return new Promise(( resolve ) => {
+            this.controller = new PageController({
+                transitionTime: this.animDuration,
+                routerOptions: {
+                    async: true
+                }
+            });
+
+            this.controller.setConfig([
+                "/",
+                ":view",
+                ":view/:uid"
+            ]);
+
+            // this.controller.setModules( [] );
+
+            //this.controller.on( "page-controller-router-samepage", () => {} );
+            this.controller.on( "page-controller-router-transition-out", this.changePageOut.bind( this ) );
+            this.controller.on( "page-controller-router-refresh-document", this.changeContent.bind( this ) );
+            this.controller.on( "page-controller-router-transition-in", this.changePageIn.bind( this ) );
+            this.controller.on( "page-controller-initialized-page", ( data ) => {
+                this.initPage( data );
+                resolve();
+            });
+            this.controller.initPage();
+        });
     },
 
 
@@ -59,16 +98,6 @@ const router = {
     },
 
 
-    prepPages () {
-        this.controllers.exec();
-
-        setTimeout(() => {
-            this.controllers.animate();
-
-        }, this.pageDuration );
-    },
-
-
     /**
      *
      * @public
@@ -78,27 +107,12 @@ const router = {
      *
      */
     initPages () {
-        this.controller = new PageController({
-            transitionTime: this.pageDuration
-        });
 
-        this.controller.setConfig([
-            "/",
-            ":view",
-            ":view/:uid"
-        ]);
+    },
 
-        this.controller.setModules([
-            views
-        ]);
 
-        //this.controller.on( "page-controller-router-samepage", () => {} );
-        this.controller.on( "page-controller-router-transition-out", this.changePageOut.bind( this ) );
-        this.controller.on( "page-controller-router-refresh-document", this.changeContent.bind( this ) );
-        this.controller.on( "page-controller-router-transition-in", this.changePageIn.bind( this ) );
-        this.controller.on( "page-controller-initialized-page", this.initPage.bind( this ) );
-
-        this.controller.initPage();
+    prepPages () {
+        this.controllers.exec();
     },
 
 
@@ -112,7 +126,10 @@ const router = {
      *
      */
     initPage ( data ) {
-        this.changeClass( data );
+        this.setDoc( data );
+        this.setState( "now", data );
+        this.setState( "future", data );
+        this.setClass();
     },
 
 
@@ -144,137 +161,165 @@ const router = {
     },
 
 
-    /**
-     *
-     * @public
-     * @method changeClass
-     * @param {object} data The PageController data object
-     * @memberof router
-     * @description Handle document className swapping by page section.
-     *
-     */
-    changeClass ( data ) {
-        if ( this.view ) {
-            core.dom.html.removeClass( `is-${this.view}-page is-uid-page` );
-        }
-
-        if ( this.uid ) {
-            core.dom.html.removeClass( "is-uid-page" );
-        }
-
-        this.view = (data.request.params.view || core.config.homepage);
-        this.uid = (data.request.params.uid || null);
-
-        core.dom.html.addClass( `is-${this.view}-page` );
-
-        if ( this.uid ) {
-            core.dom.html.addClass( "is-uid-page" );
-        }
-
-        navi.active( this.view );
+    setDoc ( data ) {
+        this.doc = this.parseDoc( data.response );
     },
 
 
-    /**
-     *
-     * @public
-     * @method changePageOut
-     * @param {object} data The PageController data object
-     * @memberof router
-     * @description Trigger transition-out animation.
-     *
-     */
+    setState ( time, data ) {
+        this.state[ time ] = {
+            raw: data,
+            uid: data.request.params.uid || null,
+            view: data.request.params.view || core.config.homepage,
+            cat: data.request.query.category || null
+        };
+
+        if ( time === "future" ) {
+            this.church = {
+                isFeedFeed: (this.state.now.view === this.state.future.view && !this.state.now.uid && !this.state.future.uid),
+                isFeedDetail: (this.state.now.view === this.state.future.view && !this.state.now.uid && this.state.future.uid),
+                isDetailDetail: (this.state.now.view === this.state.future.view && this.state.now.uid && this.state.future.uid),
+                isDetailFeed: (this.state.now.view === this.state.future.view && this.state.now.uid && !this.state.future.uid)
+            };
+        }
+    },
+
+
+    setTheme () {
+        if ( this.doc.data.darkside ) {
+            core.dom.html.addClass( "is-darkside" );
+
+        } else {
+            core.dom.html.removeClass( "is-darkside" );
+        }
+    },
+
+
+    setPath () {
+        if ( this.church.isFeedDetail ) {
+            core.dom.html.addClass( "is-feed-detail" );
+
+        } else if ( this.church.isFeedFeed ) {
+            core.dom.html.addClass( "is-feed-feed" );
+
+        } else if ( this.church.isDetailDetail ) {
+            core.dom.html.addClass( "is-detail-detail" );
+
+        } else if ( this.church.isDetailFeed ) {
+            core.dom.html.addClass( "is-detail-feed" );
+        }
+    },
+
+
+    unsetPath () {
+        core.dom.html.removeClass( "is-feed-detail is-feed-feed is-detail-detail is-detail-feed" );
+    },
+
+
+    setClass () {
+        if ( this.state.future.view ) {
+            core.dom.html.addClass( `is-${this.state.now.view}-page` );
+        }
+
+        if ( this.state.future.uid ) {
+            core.dom.html.addClass( `is-uid-page` );
+        }
+
+        if ( this.state.future.cat ) {
+            core.dom.html.addClass( `is-cat-page` );
+        }
+    },
+
+
+    unsetClass () {
+        if ( this.state.now.view !== this.state.future.view ) {
+            core.dom.html.removeClass( `is-${this.state.now.view}-page` );
+        }
+
+        if ( this.state.now.uid && !this.state.future.uid ) {
+            core.dom.html.removeClass( `is-uid-page` );
+        }
+
+        if ( this.state.now.cat && !this.state.future.cat ) {
+            core.dom.html.removeClass( `is-cat-page` );
+        }
+    },
+
+
     changePageOut ( data ) {
-        core.dom.main.addClass( "is-inactive" );
+        core.dom.html.addClass( "is-tranny" );
+        this.setState( "future", data );
+        this.setPath();
+        this.unsetClass();
+        this.setClass();
+        this.transitionOut();
         navi.close();
-        this.changeClass( data );
+        navi.active( this.state.future.view );
         this.controllers.destroy();
     },
 
 
-    /**
-     *
-     * @public
-     * @method changeContent
-     * @param {object} data The PageController data object
-     * @memberof router
-     * @description Swap the new content into the DOM.
-     *
-     */
     changeContent ( data ) {
-        const doc = this.parseDoc( data.response );
-
-        core.dom.main[ 0 ].innerHTML = doc.html;
-
-        core.emitter.fire( "app--analytics-pageview", doc );
-
-        // Ensure topout prior to preload being done...
+        this.setDoc( data );
+        this.setTheme();
+        core.dom.main[ 0 ].innerHTML = this.doc.html;
         this.topper();
-
-        // Execute `pre` controller actions
         this.controllers.exec();
-
-        this.changeClass( data );
+        core.emitter.fire( "app--analytics-pageview", this.doc );
     },
 
 
-    /**
-     *
-     * @public
-     * @method changePageIn
-     * @param {object} data The PageController data object
-     * @memberof router
-     * @description Trigger transition-in animation.
-     *
-     */
-    changePageIn ( /* data */ ) {
-        core.dom.main.removeClass( "is-inactive" );
-
-        this.controllers.exec();
-
+    changePageIn ( data ) {
         setTimeout(() => {
+            core.dom.html.removeClass( "is-tranny" );
             this.controllers.animate();
+            this.transitionIn();
+            this.setState( "now", data );
+            this.unsetPath();
 
-        }, this.pageDuration );
+        }, this.animDuration );
     },
 
-    /**
-     *
-     * @public
-     * @method route
-     * @param {string} path The uri to route to
-     * @memberof router
-     * @description Trigger app to route a specific page. [Reference]{@link https://github.com/ProperJS/Router/blob/master/Router.js#L222}
-     *
-     */
+
+    tweenContent ( opacity ) {
+        const isOne = (opacity === 1);
+
+        this.tween = gsap.TweenLite.to( core.dom.main[ 0 ], 0.5, {
+            css: {
+                opacity
+            },
+            ease: isOne ? gsap.Power4.easeOut : gsap.Power4.easeIn,
+            onComplete: () => {}
+        });
+    },
+
+
+    transitionOut () {
+        this.tweenContent( 0 );
+    },
+
+
+    transitionIn () {
+        this.blit.go(() => {
+            if ( this.tween && !this.tween.isActive() ) {
+                this.blit.stop();
+
+                this.tweenContent( 1 );
+            }
+        });
+    },
+
+
     route ( path ) {
         this.controller.getRouter().trigger( path );
     },
 
 
-    /**
-     *
-     * @public
-     * @method push
-     * @param {string} path The uri to route to
-     * @param {function} cb Optional callback to fire
-     * @memberof router
-     * @description Trigger a silent route with a supplied callback.
-     *
-     */
     push ( path, cb ) {
         this.controller.routeSilently( path, (cb || core.util.noop) );
     },
 
 
-    /**
-     *
-     * @public
-     * @method topper
-     * @memberof router
-     * @description Set scroll position and clear scroll classNames.
-     *
-     */
     topper () {
         window.scrollTo( 0, 0 );
     }
