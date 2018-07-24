@@ -1,0 +1,24 @@
+<%
+/* Form
+locals { item, slice, scope }
+*/
+const config = locals.context.get( 'config' );
+let total = slice.items.length;
+let current = 0;
+%>
+<form class="form js-form" data-action="<%= slice.primary.submit_action %>">
+    <% slice.items.forEach(( element, i ) => { %>
+        <%
+        const type = element.input_type.toLowerCase();
+        current++;
+        %>
+        <div class="form__block">
+            <div class="form__field">
+                <input class="form__input" type="<%= type %>" placeholder="<%= element.input_text %>" />
+                <% if ( current === total ) { %>
+                    <button class="form__sub btn"><%= slice.primary.submit_label%></button>
+                <% } %>
+            </div>
+        </div>
+    <% }) %>
+</form>

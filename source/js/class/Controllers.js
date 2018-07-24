@@ -1,6 +1,8 @@
 import * as core from "../core";
 import ImageController from "./controllers/ImageController";
 import AnimateController from "./controllers/AnimateController";
+import FormController from "./controllers/FormController";
+import ThemeController from "./controllers/ThemeController";
 
 
 /**
@@ -53,6 +55,9 @@ class Controllers {
 
     exec () {
         this.controllers = [];
+
+        this.push( "form", this.element.find( ".js-form" ), FormController, true );
+        this.push( "theme", this.element.find( ".js-theme" ), ThemeController, true );
 
         this.images = this.element.find( core.config.lazyImageSelector );
         this.imageController = new ImageController( this.images );

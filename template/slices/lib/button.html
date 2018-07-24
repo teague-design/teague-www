@@ -1,0 +1,12 @@
+<%
+/* Button
+locals { item, slice, scope }
+*/
+const config = locals.context.get( 'config' );
+const doc = slice.primary.document_link;
+const href = locals.context.getUrl( doc );
+%>
+<a class="btn" href="<%= href %>">
+    <div class="btn__text"><%= slice.primary.text %></div>
+    <div class="btn__anim"></div>
+</a>

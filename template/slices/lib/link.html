@@ -1,0 +1,19 @@
+<%
+/* Link
+locals { item, slice, scope }
+*/
+const config = locals.context.get( 'config' );
+const doc = slice.primary.document_link;
+const ext = slice.primary.external_link;
+const href = doc.id ? locals.context.getUrl( doc ) : ext.url;
+const targ = ext ? ext.target : '';
+const icon = slice.primary.icon.toLowerCase();
+%>
+<a class="link" href="<%= href %>" target="<%= targ %>">
+    <div class="link__wrap">
+        <div class="link__text"><%= slice.primary.text %></div>
+        <div class="link__icon icon icon--<%= icon %>">
+            <%- include( `../../partials/svg/icon-${icon}.svg`, {style: 'spot'} ) %>
+        </div>
+    </div>
+</a>

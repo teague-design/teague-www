@@ -2,8 +2,20 @@
  * Document
 *******************************************************************************/
 html {
-    background-color: $white;
     color: $black;
+    background-color: $white;
+    transition: color $base-duration $ease-before,
+                background-color $base-duration $ease-after;
+
+    &.is-theme-dark {
+        color: $white;
+        background-color: $black;
+    }
+
+    &.is-theme-spot {
+        color: $white;
+        background-color: $spot;
+    }
 }
 body {
     background-color: transparent;

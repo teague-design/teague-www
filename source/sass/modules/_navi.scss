@@ -14,7 +14,12 @@
             left: 0;
             bottom: 0;
             transform: translate3d( 0, 10px, 0 );
+            transition: background-color $base-duration $ease-before;
         }
+    }
+
+    .is-theme-spot &.is-active:after {
+        background-color: $white;
     }
 }
 .navi__a + .navi__a {

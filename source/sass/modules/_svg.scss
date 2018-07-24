@@ -1,6 +1,6 @@
 .svg {
     fill: $black;
-    transition: fill $fast-duration $ease;
+    transition: fill $base-duration $ease-before;
 }
 .svg--lite {
     fill: $white;
@@ -11,8 +11,26 @@
 .svg--logo {
     width: 93px;
     height: 13px;
+
+    .is-theme-spot &,
+    .is-theme-dark & {
+        fill: $white;
+    }
 }
 .svg--mark {
     width: 95px;
     height: 56px;
+
+    .is-theme-spot &,
+    .is-theme-dark & {
+        fill: $white;
+    }
+}
+.svg--arrow {
+    width: 27px;
+    height: 5px;
+
+    .is-theme-spot & {
+        fill: $white;
+    }
 }

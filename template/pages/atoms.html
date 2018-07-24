@@ -5,5 +5,10 @@
     const scope = 'atoms';
     const type = 'lib';
     %>
+    <div class="atoms__theme js-theme -exp -wrap">
+        <div class="swatch swatch--light js-theme-swatch is-active" data-theme="light"></div>
+        <div class="swatch swatch--dark js-theme-swatch" data-theme="dark"></div>
+        <div class="swatch swatch--spot js-theme-swatch" data-theme="spot"></div>
+    </div>
     <%- include( '../partials/slices.html', {item, slices, scope, type} ) %>
 </div>

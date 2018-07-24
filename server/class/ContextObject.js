@@ -79,8 +79,11 @@ class ContextObject {
     }
 
     // Prismic specific... tsk tsk...?
-    getUrl ( item ) {
-        return `/${item.type}/${item.uid}/`;
+    getUrl ( doc ) {
+        const type = (config.generate.mappings[ doc.type ] || doc.type);
+        const resolvedUrl = doc.uid === config.homepage ? "/" : ((type === "page") ? `/${doc.uid}/` : `/${type}/${doc.uid}/`);
+
+        return resolvedUrl;
     }
 
     // Prismic specific... tsk tsk...?

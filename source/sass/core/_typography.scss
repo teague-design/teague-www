@@ -58,3 +58,183 @@
 /******************************************************************************
  * Buttons
 *******************************************************************************/
+.btn {
+    @include h6();
+    line-height: 1;
+    color: $spot;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px 0;
+    transition: color 600ms $ease;
+
+    .is-hoverable &:hover {
+        color: $white;
+    }
+    .is-hoverable &:hover .btn__anim {
+        transform: scaleX( 1.3 );
+    }
+    .is-hoverable &:hover .btn__anim:after {
+        transform: scaleY( 20 );
+    }
+
+    .is-theme-spot & {
+        color: $white;
+    }
+    .is-hoverable.is-theme-spot &:hover {
+        color: $spot;
+    }
+}
+.btn__text {
+    position: relative;
+    z-index: 2;
+}
+.btn__anim {
+    height: 1px;
+    background-color: $spot;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    transform-origin: bottom center;
+    transition: transform $base-duration $ease-before,
+                background-color $base-duration $ease-before;
+    z-index: 1;
+
+    &:after {
+        content: "";
+        height: 1px;
+        background-color: $spot;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        transform-origin: bottom center;
+        transition: transform 700ms $ease-after,
+                    background-color 700ms $ease-after;
+    }
+
+    .is-theme-spot &,
+    .is-theme-spot &:after {
+        background-color: $white;
+    }
+}
+
+
+/******************************************************************************
+ * Links
+*******************************************************************************/
+.link {
+    @include h6();
+    line-height: 1;
+    color: $spot;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    padding: 5px 0;
+
+    .svg--arrow {
+        transition: width $fast-duration $ease;
+
+        rect {
+            transition: width $fast-duration $ease;
+        }
+        polygon {
+            transition: transform $fast-duration $ease;
+        }
+    }
+
+    .is-hoverable &:hover .svg--arrow {
+        width: 38px;
+
+        rect {
+            width: 35px;
+        }
+        polygon {
+            transform: translate3d( 11px, 0, 0 );
+        }
+    }
+
+    .is-theme-spot & {
+        color: $white;
+    }
+}
+.link__wrap {
+    @include flex-center();
+}
+.link__text {
+    padding-right: 5px;
+}
+
+
+
+/******************************************************************************
+ * Forms
+*******************************************************************************/
+.form {}
+.form__input {
+    @include p();
+    color: $grey2;
+    -webkit-appearance: none;
+    outline: 0;
+    background-color: transparent;
+    border: 1px solid $black;
+    border-radius: 0;
+    height: 40px;
+    width: 100%;
+    padding: 0 13px;
+    transition: color $base-duration $ease-before,
+                border-color $base-duration $ease-before;
+
+    &:focus {
+        color: $black;
+    }
+
+    .is-theme-dark & {
+        color: $grey3;
+        border-color: $white;
+    }
+
+    .is-theme-spot & {
+        color: $white;
+        border-color: $white;
+    }
+
+    &::-webkit-input-placeholder {
+        color: $grey2;
+
+        .is-theme-dark & {
+            color: $grey3;
+        }
+
+        .is-theme-spot & {
+            color: $white;
+        }
+    }
+}
+.form__field {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    max-width: 330px;
+}
+.form__sub {
+    -webkit-appearance: none;
+    outline: 0;
+    background-color: transparent;
+    border: 0;
+    border-radius: 0;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate3d( -13px, -50%, 0 );
+
+    .is-hoverable &:hover {
+        color: $spot;
+    }
+
+    .is-theme-spot &,
+    .is-hoverable.is-theme-spot &:hover {
+        color: $white;
+    }
+}
