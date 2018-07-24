@@ -1,15 +1,22 @@
 .navi {
-    &.is-active {
-        pointer-events: none;
+    @include flex-left();
+}
+.navi__a {
+    position: relative;
 
-        .navi__ul {
-            pointer-events: auto;
-            }
+    &.is-active {
+        &:after {
+            background-color: $spot;
+            content: "";
+            height: 2px;
+            width: 100%;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            transform: translate3d( 0, 10px, 0 );
+        }
     }
 }
-.navi__li + .navi__li {
-    margin-top: $p-bump * 2;
-    }
-.navi__a {
-    color: $spot;
-    }
+.navi__a + .navi__a {
+    margin-left: 60px;
+}

@@ -48,7 +48,6 @@ const router = {
         this.church = null;
 
         this.bindEmpty();
-        this.initPages();
         this.prepPages();
 
         core.log( "[Router initialized]", this );
@@ -98,19 +97,6 @@ const router = {
     },
 
 
-    /**
-     *
-     * @public
-     * @method initPages
-     * @memberof router
-     * @description Create the PageController instance.
-     *
-     */
-    initPages () {
-
-    },
-
-
     prepPages () {
         this.controllers.exec();
     },
@@ -130,6 +116,7 @@ const router = {
         this.setState( "now", data );
         this.setState( "future", data );
         this.setClass();
+        navi.active( this.state.future.view );
     },
 
 

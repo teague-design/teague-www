@@ -94,6 +94,7 @@
 @mixin h6() {
     font-size: $h6-size;
     line-height: $h6-line;
+    text-transform: uppercase;
     @include font-family-meta-medium();
 }
 
@@ -134,4 +135,24 @@
     @media only screen and ( min-width: $min ) and ( max-width: $max ) {
         @content;
     }
+}
+
+
+
+/******************************************************************************
+ * Utility
+*******************************************************************************/
+@mixin flex-center() {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+@mixin flex-left() {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+}
+@mixin wrap-p() {
+    max-width: $p-wrap;
+    width: 100%;
 }

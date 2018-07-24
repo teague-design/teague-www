@@ -13,6 +13,14 @@ body {
     -webkit-touch-callout: none;
     @include font-family-meta-regular();
 }
+pre {
+    font-family: monospace;
+    font-size: $p-size;
+    margin-top: $padding-1;
+    overflow-x: auto;
+    outline: 1px solid $spot;
+    padding: $padding-1;
+}
 
 
 

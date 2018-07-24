@@ -4,6 +4,7 @@
 .p,
 .cms p {
     @include p();
+    @include wrap-p();
 
     strong {
         @include font-family-meta-medium();

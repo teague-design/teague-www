@@ -33,19 +33,14 @@ $grid-columns: 12 11 10 9 8 7 6 5 4 3 2 1;
  * Spacing
 *******************************************************************************/
 $expander-1: 8vw;
-$expander-2: 16vw;
-$expander-3: 32vw;
-$padding-1: 8vw;
-$padding-2: 16vw;
+$padding-1: 35px;
 
 
 
 /******************************************************************************
  * Sizes
 *******************************************************************************/
-$wrap-copy: 700px;
-$logo-width: 256px;
-$header-height: 256px;
+$header-height: 125px;
 $bind-width: 1480px;
 $mobile-width: 480px;
 
@@ -60,6 +55,7 @@ $mobile-width: 480px;
 $p-bump: 24px;
 $p-size: 15px;
 $p-line: 24 / 15;
+$p-wrap: 530px;
 
 $h1-size: 264px;
 $h1-size-mobile: 96px;

@@ -15,7 +15,7 @@ const intro = {
 
         if ( this.element.length ) {
             this.logTime = Date.now();
-            this.minTime = 4000;
+            this.minTime = 2000;
             this.blit = new Controller();
             this.animIn();
         }

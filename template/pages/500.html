@@ -3,8 +3,8 @@ const error = locals.context.get( 'error' );
 %>
 <div class="cms -pad">
     <div class="-wrap -exp">
-        <h3 class="h3">Page Error</h3>
-<pre class="-expt -spot">
+        <h2>Page Error</h2>
+<pre class="">
 <%- error.toString().replace( /\</g, '&lt;' ).replace( /\>/g, '&gt;' ) %>
 </pre>
     </div>

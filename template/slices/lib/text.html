@@ -1,0 +1,9 @@
+<%
+/*
+locals { item, slice, scope }
+*/
+locals.slice.items.forEach(( sliceItem, i ) => { %>
+    <div class="cms slice--text__node -exp">
+        <%- locals.context.get( 'dom' ).RichText.asHtml( sliceItem.text ) %>
+    </div>
+<% }) %>

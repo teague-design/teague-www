@@ -1,0 +1,13 @@
+<%
+/*
+locals { item, slices, scope, type }
+*/
+locals.slices.forEach(( slice, i ) => { %>
+    <%
+    const sliceType = slice.slice_type.replace( /_+/g, '-' );
+    const slicePartial = `../slices/${locals.type}/${sliceType}.html`;
+    %>
+    <section class="<%= scope %>__slices slice slice--<%= sliceType %> -exp -wrap">
+        <%- include( slicePartial, {item, slice, scope} ) %>
+    </section>
+<% }) %>

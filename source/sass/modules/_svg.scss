@@ -1,3 +1,18 @@
 .svg {
+    fill: $black;
     transition: fill $fast-duration $ease;
-    }
+}
+.svg--lite {
+    fill: $white;
+}
+.svg--spot {
+    fill: $spot;
+}
+.svg--logo {
+    width: 93px;
+    height: 13px;
+}
+.svg--mark {
+    width: 95px;
+    height: 56px;
+}

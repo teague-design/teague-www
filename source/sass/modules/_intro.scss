@@ -1,4 +1,5 @@
 .intro {
+    @include flex-center();
     pointer-events: auto;
     z-index: $z_layer_intro;
 
@@ -8,5 +9,4 @@
 }
 .intro__logo {
     max-width: 100%;
-    width: $logo-width;
 }
