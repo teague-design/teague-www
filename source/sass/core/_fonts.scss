@@ -3,18 +3,27 @@
  *
  * Use `$font-path` which is determined in `webpack.config.js`
 *******************************************************************************/
-
-// Calamity Sans... Works with Clutch
-// https://github.com/kitajchuk/clutch
 @font-face {
-    font-family: $font-family-regular;
-    src: url( "#{$font-path}#{$font-family-regular}.woff" ) format( "woff" );
+    font-family: $font-family-main-regular;
+    src: url( "#{$font-path}#{$font-family-main-regular}.woff" ) format( "woff" );
     font-style: normal;
     font-stretch: normal;
 }
 @font-face {
-    font-family: $font-family-bold;
-    src: url( "#{$font-path}#{$font-family-bold}.woff" ) format( "woff" );
+    font-family: $font-family-main-semibold;
+    src: url( "#{$font-path}#{$font-family-main-semibold}.woff" ) format( "woff" );
+    font-style: normal;
+    font-stretch: normal;
+}
+@font-face {
+    font-family: $font-family-meta-regular;
+    src: url( "#{$font-path}#{$font-family-meta-regular}.woff" ) format( "woff" );
+    font-style: normal;
+    font-stretch: normal;
+}
+@font-face {
+    font-family: $font-family-meta-medium;
+    src: url( "#{$font-path}#{$font-family-meta-medium}.woff" ) format( "woff" );
     font-style: normal;
     font-stretch: normal;
 }

@@ -1,20 +1,23 @@
 /******************************************************************************
  * Fonts
 *******************************************************************************/
-$font-family-regular: "Calamity-Regular";
-$font-family-bold: "Calamity-Bold";
+// Semibold, Roman
+$font-family-main-regular: "ChronicleDisplay-Roman";
+$font-family-main-semibold: "ChronicleDisplay-Semibold";
+
+// Regular, Medium
+$font-family-meta-regular: "DINPro-Regular";
+$font-family-meta-medium: "DINPro-Medium";
 
 
 
 /******************************************************************************
  * Colors
 *******************************************************************************/
-$spot: #6441a4;
+$spot: #FF00A8; // Think pink ;-P
 $black: #000;
 $white: #fff;
-$grey: #3B3B3B;
-$grey2: #808080;
-$grey3: #B3B3B3;
+$grey: #8B8B8B;
 
 
 
@@ -43,7 +46,7 @@ $padding-2: 16vw;
 $wrap-copy: 700px;
 $logo-width: 256px;
 $header-height: 256px;
-$bind-width: 1680px;
+$bind-width: 1480px;
 $mobile-width: 480px;
 
 
@@ -51,25 +54,35 @@ $mobile-width: 480px;
 
 /******************************************************************************
  * Typography
+ * Fluid type calculation:
+ * $h1-size-fluid: calc( #{$h1-size-mobile} + ???vw );
 *******************************************************************************/
-$p-bump: 20px;
-$p-size: 20px;
-$p-size-meta: 16px;
-$p-size-bold: 22px;
-$p-line: 1.6;
-$p-max-width: 570px;
-$h1-size: 192px;
-$h1-size-mobile: 64px;
-$h1-size-fluid: calc( #{$h1-size-mobile} + 7.5vw );
-$h1-line: 1;
-$h2-size: 128px;
-$h2-size-mobile: 32px;
-$h2-size-fluid: calc( #{$h2-size-mobile} + 5vw );
-$h2-line: 1;
-$h3-size: 96px;
-$h3-size-mobile: 24px;
-$h3-size-fluid: calc( #{$h3-size-mobile} + 3.75vw );
-$h3-line: 1;
+$p-bump: 24px;
+$p-size: 15px;
+$p-line: 24 / 15;
+
+$h1-size: 264px;
+$h1-size-mobile: 96px;
+$h1-line: 133 / 264;
+
+$h2-size: 112px;
+$h2-size-mobile: 48px;
+$h2-line: 120 / 112;
+
+$h3-size: 64px;
+$h3-size-mobile: 40px;
+$h3-line: 72 / 64;
+
+$h4-size: 48px;
+$h4-size-mobile: 32px;
+$h4-line: 56 / 48;
+
+$h5-size: 32px;
+$h5-size-mobile: 24px;
+$h5-line: 40 / 32;
+
+$h6-size: 10px;
+$h6-line: 16 / 10;
 
 
 

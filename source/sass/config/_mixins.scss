@@ -10,12 +10,20 @@
 /******************************************************************************
  * Fonts: Styles
 *******************************************************************************/
-@mixin font-family-regular() {
-    font-family: $font-family-regular;
+@mixin font-family-main-regular() {
+    font-family: $font-family-main-regular;
     @include font-normal();
 }
-@mixin font-family-bold() {
-    font-family: $font-family-bold;
+@mixin font-family-main-semibold() {
+    font-family: $font-family-main-semibold;
+    @include font-normal();
+}
+@mixin font-family-meta-regular() {
+    font-family: $font-family-meta-regular;
+    @include font-normal();
+}
+@mixin font-family-meta-medium() {
+    font-family: $font-family-meta-medium;
     @include font-normal();
 }
 
@@ -26,7 +34,7 @@
 @mixin p() {
     font-size: $p-size;
     line-height: $p-line;
-    @include font-family-regular();
+    @include font-family-meta-regular();
 }
 @mixin li() {
     padding-left: 20px;
@@ -38,26 +46,55 @@
 @mixin ul-li() {
     list-style: disc;
 }
-@mixin b() {
-    font-weight: 600;
-}
-@mixin em() {
-    font-style: italic;
-}
 @mixin h1() {
     font-size: $h1-size-mobile;
     line-height: $h1-line;
-    @include font-family-bold();
+    @include font-family-main-semibold();
+
+    @include respond-min( $mobile-width ) {
+        font-size: $h1-size;
+    }
 }
 @mixin h2() {
     font-size: $h2-size-mobile;
     line-height: $h2-line;
-    @include font-family-bold();
+    @include font-family-main-semibold();
+
+    @include respond-min( $mobile-width ) {
+        font-size: $h2-size;
+    }
 }
 @mixin h3() {
     font-size: $h3-size-mobile;
     line-height: $h3-line;
-    @include font-family-bold();
+    @include font-family-main-regular();
+
+    @include respond-min( $mobile-width ) {
+        font-size: $h3-size;
+    }
+}
+@mixin h4() {
+    font-size: $h4-size-mobile;
+    line-height: $h4-line;
+    @include font-family-main-regular();
+
+    @include respond-min( $mobile-width ) {
+        font-size: $h4-size;
+    }
+}
+@mixin h5() {
+    font-size: $h5-size-mobile;
+    line-height: $h5-line;
+    @include font-family-main-regular();
+
+    @include respond-min( $mobile-width ) {
+        font-size: $h5-size;
+    }
+}
+@mixin h6() {
+    font-size: $h6-size;
+    line-height: $h6-line;
+    @include font-family-meta-medium();
 }
 
 
