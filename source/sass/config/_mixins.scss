@@ -95,7 +95,12 @@
     font-size: $h6-size;
     line-height: $h6-line;
     text-transform: uppercase;
+    letter-spacing: 3px;
     @include font-family-meta-medium();
+}
+@mixin btn() {
+    font-size: 12px;
+    letter-spacing: 1.5px;
 }
 
 

@@ -60,6 +60,7 @@
 *******************************************************************************/
 .btn {
     @include h6();
+    @include btn();
     line-height: 1;
     color: $spot;
     position: relative;
@@ -75,7 +76,7 @@
         transform: scaleX( 1.3 );
     }
     .is-hoverable &:hover .btn__anim:after {
-        transform: scaleY( 20 );
+        transform: scaleY( 23 );
     }
 
     .is-theme-spot & {
@@ -126,6 +127,7 @@
 *******************************************************************************/
 .link {
     @include h6();
+    @include btn();
     line-height: 1;
     color: $spot;
     position: relative;
