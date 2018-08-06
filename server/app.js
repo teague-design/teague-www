@@ -42,6 +42,10 @@ router.on( "latest", {
             query.push( client.Predicates.at( "document.tags", [req.query.tag] ) );
         }
 
+        if ( req.query.category ) {
+            query.push( client.Predicates.at( "my.story.category", req.query.category ) );
+        }
+
         return query;
     },
     orderings ( client, api, form, cache, req ) {
