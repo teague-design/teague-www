@@ -87,7 +87,7 @@ const config = {
     authorizations: {
         token: null,
         apps: [
-            // "vimeo"
+            "vimeo"
         ]
     }
 };
