@@ -42,6 +42,28 @@ expressApp.use( express.static( core.config.template.staticDir, {
  * Configure Express Routes.
  *
  */
+const setRoutes = () => {
+    // SYSTEM
+    expressApp.get( "/preview", getPreview );
+    expressApp.post( "/webhook", getWebhook );
+    expressApp.get( "/sitemap.xml", getSitemap );
+    expressApp.get( "/authorizations", checkAuthToken, getAuthorizations );
+    expressApp.get( "/authorizations/:app", checkAuthToken, getAuthorizationForApp );
+
+    // AUTHORIZATIONS
+    core.config.authorizations.apps.forEach(( app ) => {
+        require( `../auth/${app}` ).init( expressApp );
+    });
+
+    // API => JSON
+    expressApp.get( "/api/:type", setReq, getApi );
+    expressApp.get( "/api/:type/:uid", setReq, getApi );
+
+    // URI => HTML
+    expressApp.get( "/", setReq, getPage );
+    expressApp.get( "/:type", setReq, getPage );
+    expressApp.get( "/:type/:uid", setReq, getPage );
+};
 const setReq = function ( req, res, next ) {
     req.params.type = req.params.type || core.config.homepage;
 
@@ -128,24 +150,6 @@ const getAuthorizationForApp = function ( req, res ) {
 
 
 
-// SYSTEM
-expressApp.get( "/preview", getPreview );
-expressApp.post( "/webhook", getWebhook );
-expressApp.get( "/sitemap.xml", getSitemap );
-expressApp.get( "/authorizations", checkAuthToken, getAuthorizations );
-expressApp.get( "/authorizations/:app", checkAuthToken, getAuthorizationForApp );
-
-// API => JSON
-expressApp.get( "/api/:type", setReq, getApi );
-expressApp.get( "/api/:type/:uid", setReq, getApi );
-
-// URI => HTML
-expressApp.get( "/", setReq, getPage );
-expressApp.get( "/:type", setReq, getPage );
-expressApp.get( "/:type/:uid", setReq, getPage );
-
-
-
 /**
  *
  * Router API.
@@ -176,10 +180,8 @@ module.exports = {
      *
      */
     init () {
-        // Init authorizations
-        core.config.authorizations.apps.forEach(( app ) => {
-            require( `../auth/${app}` ).init( expressApp );
-        });
+        // Init routes
+        setRoutes();
 
         // Fetch ./template/pages listing
         core.template.getPages().then(() => {

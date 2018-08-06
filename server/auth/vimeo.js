@@ -87,7 +87,7 @@ const getVimeoVideo = ( req, res ) => {
 
 module.exports = {
     init ( expressApp ) {
-        expressApp.get( "/vimeo/:videoId", getVimeoVideo );
+        expressApp.get( "/api/vimeo/:videoId", getVimeoVideo );
     },
 
 
