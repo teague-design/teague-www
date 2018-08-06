@@ -46,7 +46,7 @@
             }
         }
     },
-    "Content": {
+    "Slices": {
         "slices": {
             "type": "Slices",
             "fieldset": "Dynamic Page Content",

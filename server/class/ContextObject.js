@@ -16,6 +16,7 @@ class ContextObject {
     constructor ( page ) {
         this.site = null;
         this.navi = null;
+        this.footer = null;
         this.page = page;
         this.cache = config.env.production;
         this.error = null;
@@ -49,14 +50,36 @@ class ContextObject {
     }
 
     getPageTitle () {
-        const item = this.get( "item" );
-        let title = this.get( "site" ).data.title;
+        const page = this.get( "page" );;
+        const site = this.get( "site" );
+        const navi = this.get( "navi" );
+        const items = this.get( "items" );
+        let item = this.get( "item" );
+        let title = site.data.title;
+        let navItem = null;
+
+        if ( typeof title === "object" ) {
+            title = prismicDOM.RichText.asText( title );
+        }
+
+        // Supports collection mapping to content-type
+        if ( items ) {
+            item = navi.items.find(( nav ) => {
+                return (nav.uid === page);
+            });
+
+            if ( item ) {
+                item.data = {
+                    title: item.title
+                };
+            }
+
+        } else if ( item && (typeof item.data.title === "object") ) {
+            item.data.title = prismicDOM.RichText.asText( item.data.title );
+        }
 
         if ( config.api.adapter === "prismic" ) {
-            title = (item ? (typeof item.data.title === "object" ? prismicDOM.RichText.asText( item.data.title ) : item.data.title) + ` — ${title}` : title);
-
-        } else if ( config.api.adapter === "contentful" ) {
-            title = (item ? `${item.fields.title} — ${title}` : title);
+            title = (item ? `${item.data.title} — ${title}` : title);
         }
 
         return title;
@@ -70,9 +93,6 @@ class ContextObject {
         if ( config.api.adapter === "prismic" ) {
             pageImage = item ? item.data.image.url : null;
             appImage = appImage.url;
-
-        } else if ( config.api.adapter === "contentful" ) {
-            pageImage = item ? item.fields.image.fields.file.url : null;
         }
 
         return (pageImage || appImage);

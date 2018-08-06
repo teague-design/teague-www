@@ -56,7 +56,7 @@ class Controllers {
     exec () {
         this.controllers = [];
 
-        this.push( "form", this.element.find( ".js-form" ), FormController, true );
+        this.push( "form", core.dom.body.find( ".js-form" ), FormController, true );
         this.push( "theme", this.element.find( ".js-theme" ), ThemeController, true );
 
         this.images = this.element.find( core.config.lazyImageSelector );

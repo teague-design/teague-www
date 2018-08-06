@@ -4,11 +4,13 @@
 .p,
 .cms p {
     @include p();
-    @include wrap-p();
 
     strong {
         @include font-family-meta-medium();
     }
+}
+.cms p {
+    @include wrap-p();
 }
 .li,
 .cms li {
@@ -214,11 +216,18 @@
         }
     }
 }
+.form__block + .form__block {
+    margin-top: 24px;
+}
 .form__field {
     position: relative;
     display: inline-block;
     width: 100%;
-    max-width: 330px;
+    max-width: 480px;
+
+    @include respond( $break-tablet-small ) {
+        max-width: 100%;
+    }
 }
 .form__sub {
     -webkit-appearance: none;
@@ -226,10 +235,6 @@
     background-color: transparent;
     border: 0;
     border-radius: 0;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translate3d( -13px, -50%, 0 );
 
     .is-hoverable &:hover {
         color: $spot;
@@ -239,4 +244,17 @@
     .is-hoverable.is-theme-spot &:hover {
         color: $white;
     }
+}
+.form__input + .form__sub {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate3d( -13px, -50%, 0 );
+}
+.form__area {
+    height: 170px;
+    padding-top: 8px;
+}
+.form__button {
+    text-align: right;
 }

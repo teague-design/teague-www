@@ -10,15 +10,29 @@ let current = 0;
     <% slice.items.forEach(( element, i ) => { %>
         <%
         const type = element.input_type.toLowerCase();
+        const isArea = (type === 'textarea');
         current++;
         %>
         <div class="form__block">
             <div class="form__field">
-                <input class="form__input" type="<%= type %>" placeholder="<%= element.input_text %>" />
-                <% if ( current === total ) { %>
+                <% if ( isArea ) { %>
+                    <textarea class="form__input form__area" type="<%= type %>" placeholder="<%= element.input_text %>"></textarea>
+                <% } else { %>
+                    <input class="form__input" type="<%= type %>" placeholder="<%= element.input_text %>" />
+                <% } %>
+                <% if ( current === total && !isArea ) { %>
                     <button class="form__sub btn"><%= slice.primary.submit_label%></button>
                 <% } %>
             </div>
         </div>
+        <% if ( isArea ) { %>
+            <div class="form__block">
+                <div class="form__field form__button">
+                    <% if ( current === total && isArea ) { %>
+                        <button class="form__sub btn"><%= slice.primary.submit_label%></button>
+                    <% } %>
+                </div>
+            </div>
+        <% } %>
     <% }) %>
 </form>

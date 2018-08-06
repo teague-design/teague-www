@@ -25,3 +25,8 @@
 .navi__a + .navi__a {
     margin-left: 60px;
 }
+.navi__a--home {
+    &:after {
+        display: none;
+    }
+}

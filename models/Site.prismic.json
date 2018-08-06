@@ -268,5 +268,16 @@
                 }
             }
         }
+    },
+    "Footer": {
+        "footer":{
+            "type":"Slices",
+            "fieldset":"Footer",
+            "config":{
+                "choices":{
+                    
+                }
+            }
+        }
     }
 }

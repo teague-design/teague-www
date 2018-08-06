@@ -30,6 +30,15 @@ router.on( "page", {
         ]);
     }
 });
+router.on( "site", {
+    fetchLinks ( client, api, form, cache, req ) {
+        form.fetchLinks([
+            "page.title",
+            "page.image",
+            "page.description"
+        ]);
+    }
+});
 
 
 

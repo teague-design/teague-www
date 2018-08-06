@@ -59,7 +59,8 @@ const getPage = function ( req, res, listener ) {
         const done = function () {
             context.set({
                 navi: core.query.cache.navi,
-                site: core.query.cache.site
+                site: core.query.cache.site,
+                footer: core.query.cache.footer
             });
 
             resolve(( callback ) => {

@@ -157,6 +157,11 @@
     align-items: center;
     justify-content: flex-start;
 }
+@mixin flex-right() {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
 @mixin wrap-p() {
     max-width: $p-wrap;
     width: 100%;

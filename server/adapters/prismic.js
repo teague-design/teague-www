@@ -148,7 +148,8 @@ const getPartial = function ( req, data, listener ) {
 
         localObject.context.set({
             site: cache.site,
-            navi: cache.navi
+            navi: cache.navi,
+            footer: cache.footer
         });
 
         if ( data.document ) {
@@ -184,18 +185,21 @@ const getPartial = function ( req, data, listener ) {
 const getSite = function ( req ) {
     return new Promise(( resolve, reject ) => {
         prismic.api( core.config.api.access, apiOptions ).then(( api ) => {
-            api.getSingle( "site" ).then(( document ) => {
+            api.getSingle( "site", {fetchLinks: ["page.title", "page.image", "page.description"]} ).then(( document ) => {
                 const navi = {
                     items: []
                 };
                 const site = {
                     data: {}
                 };
+                const footer = {
+                    data: {}
+                };
 
                 // Normalize site context
                 for ( let i in document.data ) {
                     // Skip navi since we process that elsewhere...
-                    if ( i !== "navi" ) {
+                    if ( i !== "navi" && i !== "footer" ) {
                         // Handle `null` values...
                         if ( !document.data[ i ] ) {
                             site.data[ i ] = "";
@@ -228,14 +232,15 @@ const getSite = function ( req ) {
                     });
                 });
 
+                // Normalize footer Context
+                footer.data = document.data.footer[ 0 ];
+
                 cache.api = api;
                 cache.site = site;
                 cache.navi = navi;
+                cache.footer = footer;
 
                 resolve();
-
-            }).catch(( error ) => {
-                console.log( error );
             });
         });
     });

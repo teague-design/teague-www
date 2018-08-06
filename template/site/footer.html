@@ -1,1 +1,96 @@
-<footer class="footer js-footer -wrap"></footer>
+<%
+const site = locals.context.get( 'site' );
+const footer = locals.context.get( 'footer' );
+const dom = locals.context.get( 'dom' );
+%>
+<footer class="footer js-footer -wrap">
+    <div class="footer__main">
+        <div class="footer__l">
+            <div class="footer__story">
+                <div class="cms">
+                    <h6><%= footer.data.primary.design_story_label %></h6>
+                </div>
+                <!--
+                    Story logic: most recent story, optionally filtered by tag
+                -->
+            </div>
+            <div class="footer__newsletter">
+                <div class="cms">
+                    <h6><%= footer.data.primary.newsletter_label %></h6>
+                    <div class="-exp">
+                        <%- dom.RichText.asHtml( footer.data.primary.newsletter_cta ) %>
+                    </div>
+                </div>
+                <%- include( '../slices/lib/form.html', {
+                    slice: {
+                        primary: {
+                            submit_label: 'Submit',
+                            submit_action: 'Newsletter'
+                        },
+                        items: [
+                            {
+                                input_type: 'Email',
+                                input_text: 'Enter Email'
+                            }
+                        ]
+                    }
+                }) %>
+            </div>
+        </div>
+        <div class="footer__r">
+            <div class="footer__contact">
+                <div class="cms">
+                    <h6><%= footer.data.primary.contact_label %></h6>
+                    <div class="-exp">
+                        <%- dom.RichText.asHtml( footer.data.primary.contact_cta ) %>
+                    </div>
+                </div>
+                <%- include( '../slices/lib/form.html', {
+                    slice: {
+                        primary: {
+                            submit_label: 'Submit',
+                            submit_action: 'Contact'
+                        },
+                        items: [
+                            {
+                                input_type: 'Text',
+                                input_text: 'Name'
+                            },
+                            {
+                                input_type: 'Email',
+                                input_text: 'Email'
+                            },
+                            {
+                                input_type: 'Text',
+                                input_text: 'Company'
+                            },
+                            {
+                                input_type: 'Textarea',
+                                input_text: 'Message'
+                            }
+                        ]
+                    }
+                }) %>
+            </div>
+        </div>
+    </div>
+    <nav class="footer__navi">
+        <div class="footer__social">
+            <a href="/" class="footer__a">
+                <%- include( '../partials/svg/teague-mark.svg' ) %>
+            </a>
+            <% site.data.social_accounts.forEach(( social ) => { %>
+                <a href="<%= social.account_url %>" class="footer__a p" target="_blank">
+                    <%= social.account_name %>
+                </a>
+            <% }) %>
+        </div>
+        <div class="footer__legal">
+            <% site.data.legal_pages.forEach(( legal ) => { %>
+                <a href="/<%= legal.legal_page.uid %>/" class="footer__a p -grey">
+                    <%- dom.RichText.asHtml( legal.legal_page.data.title ) %>
+                </a>
+            <% }) %>
+        </div>
+    </nav>
+</footer>

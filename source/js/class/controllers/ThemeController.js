@@ -21,7 +21,9 @@ class ThemeController {
             spot: "is-theme-spot"
         };
 
-        this.bind();
+        if ( this.element.length ) {
+            this.bind();
+        }
     }
 
 
@@ -41,6 +43,7 @@ class ThemeController {
 
     destroy () {
         this.element.off();
+        core.dom.html.removeClass( `${this.classes.light} ${this.classes.dark} ${this.classes.spot}` );
     }
 }
 

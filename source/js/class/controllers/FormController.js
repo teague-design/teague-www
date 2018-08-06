@@ -1,4 +1,5 @@
-// import * as core from "../../core";
+import $ from "properjs-hobo";
+import Form from "../components/Form";
 
 
 /**
@@ -6,30 +7,29 @@
  * @public
  * @global
  * @class FormController
- * @param {Element} element The dom element to work with.
+ * @param {Element} elements The dom elements to work with.
  * @classdesc Handle forms.
  *
  */
 class FormController {
-    constructor ( element ) {
-        this.element = element;
-        this.data = this.element.data();
+    constructor ( elements ) {
+        this.elements = elements;
+        this.instances = [];
 
-        this.bind();
-    }
+        this.elements.forEach(( node ) => {
+            const elem = $( node );
+            const data = elem.data();
 
-
-    bind () {
-        this.element.on( "submit", ( e ) => {
-            e.preventDefault();
-            console.log( this, e );
-            return false;
+            this.instances.push( new Form( elem, data ) );
         });
     }
 
 
     destroy () {
-        this.element.off();
+        this.instances.forEach(( instance ) => {
+            instance.destroy();
+            instance = null;
+        });
     }
 }
 
