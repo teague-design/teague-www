@@ -36,7 +36,7 @@ router.on( "site", {
         form.fetchLinks( fetchFields );
     }
 });
-router.on( "stories", {
+router.on( "latest", {
     query ( client, api, query, cache, req ) {
         if ( req.query.tag ) {
             query.push( client.Predicates.at( "document.tags", [req.query.tag] ) );
