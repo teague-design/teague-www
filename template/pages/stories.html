@@ -1,1 +1,7 @@
-<div class="stories -pad"></div>
+<%
+const items = locals.context.get( 'items' );
+%>
+<div class="stories -pad">
+    <div class="stories__taxi taxi js-taxi view js-view -wrap -exp -pad" data-uid="taxi" data-url="/api/stories/" data-clean="true" data-view="feed"></div>
+    <div class="stories__feed feed js-feed view js-view -wrap -exp -pad" data-uid="feed" data-url="/api/stories/"></div>
+</div>

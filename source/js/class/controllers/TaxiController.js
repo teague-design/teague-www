@@ -1,17 +1,16 @@
-import View from "../components/View";
-import paramalama from "paramalama";
+import Taxi from "../components/Taxi";
 
 
 
 /**
  *
  * @public
- * @class ViewController
- * @param {Hobo} elements The ajax/js-template view modules
- * @classdesc Handles views
+ * @class TaxiController
+ * @param {Hobo} element The taxonomy filter modules
+ * @classdesc Handles filtering stories
  *
  */
-class ViewController {
+class TaxiController {
     constructor ( elements ) {
         this.elements = elements;
         this.instances = [];
@@ -25,12 +24,7 @@ class ViewController {
             const elem = this.elements.eq( i );
             const data = elem.data();
 
-            this.instances.push(new View({
-                id: data.uid,
-                el: elem,
-                url: data.url,
-                qs: data.clean ? null : paramalama( window.location.search )
-            }));
+            this.instances.push( new Taxi( elem, data ) );
         });
     }
 
@@ -48,4 +42,4 @@ class ViewController {
 /******************************************************************************
  * Export
 *******************************************************************************/
-export default ViewController;
+export default TaxiController;

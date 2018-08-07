@@ -4,6 +4,7 @@ import AnimateController from "./controllers/AnimateController";
 import FormController from "./controllers/FormController";
 import ThemeController from "./controllers/ThemeController";
 import ViewController from "./controllers/ViewController";
+import TaxiController from "./controllers/TaxiController";
 
 
 /**
@@ -59,6 +60,7 @@ class Controllers {
 
         this.push( "form", core.dom.body.find( ".js-form" ), FormController, true );
         this.push( "view", core.dom.body.find( ".js-view" ), ViewController, true );
+        this.push( "taxi", core.dom.body.find( ".js-taxi" ), TaxiController, true );
         this.push( "theme", this.element.find( ".js-theme" ), ThemeController, true );
 
         this.images = this.element.find( core.config.lazyImageSelector );

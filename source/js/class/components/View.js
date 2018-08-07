@@ -27,6 +27,9 @@ class View {
         this.dataType = "json";
         this.method = "GET";
 
+        // Store View instance for update(s)
+        this.element.data( "instance", this );
+
         this.init();
     }
 
@@ -46,6 +49,16 @@ class View {
             this.exec();
             this.done();
         });
+    }
+
+
+
+    update ( json ) {
+        this.json = json;
+        this.destroy();
+        this.render();
+        this.exec();
+        this.done();
     }
 
 

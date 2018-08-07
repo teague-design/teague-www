@@ -59,7 +59,7 @@ const config = {
     // Browser-sync config
     browser: {
         port: 8001,
-        hobo: "is eq not attr filter detach remove append",
+        hobo: "is eq not one next prev attr last first index parent filter detach append remove trigger prepend closest children removeAttr toggleClass",
         appcache: false
     },
     // Static assets config

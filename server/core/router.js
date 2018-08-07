@@ -49,7 +49,7 @@ expressApp.use( express.static( core.config.template.staticDir, {
 const setRoutes = () => {
     // SYSTEM
     expressApp.get( "/preview", getPreview );
-    expressApp.post( "/webhook", getWebhook );
+    expressApp.post( "/webhook", postWebhook );
     expressApp.get( "/sitemap.xml", getSitemap );
     expressApp.get( "/authorizations", checkAuthToken, getAuthorizations );
     expressApp.get( "/authorizations/:app", checkAuthToken, getAuthorizationForApp );
@@ -68,6 +68,15 @@ const setRoutes = () => {
     expressApp.get( "/:type", checkCSRF, setReq, getPage );
     expressApp.get( "/:type/:uid", checkCSRF, setReq, getPage );
 };
+
+
+
+
+/**
+ *
+ * Request handling.
+ *
+ */
 const setReq = ( req, res, next ) => {
     req.params.type = req.params.type || core.config.homepage;
 
@@ -77,7 +86,15 @@ const getKey = ( type ) => {
     const key = type;
 
     return key || core.config.homepage;
-}
+};
+
+
+
+/**
+ *
+ * :GET API
+ *
+ */
 const getApi = ( req, res ) => {
     const key = getKey( req.params.type );
 
@@ -90,6 +107,14 @@ const getApi = ( req, res ) => {
         }
     });
 };
+
+
+
+/**
+ *
+ * :GET Pages
+ *
+ */
 const getPage = ( req, res ) => {
     const key = getKey( req.params.type );
 
@@ -100,17 +125,21 @@ const getPage = ( req, res ) => {
         });
     });
 };
+
+
+
+/**
+ *
+ * :GET  Prismic stuff
+ * :POST Prismic stuff
+ *
+ */
 const getPreview = ( req, res ) => {
     core.query.getPreview( req, res ).then(( url ) => {
         res.redirect( url );
     });
 };
-const getCSRF = ( req, res ) => {
-    res.status( 200 ).json({
-        csrf: req.csrfToken()
-    });
-};
-const getWebhook = ( req, res ) => {
+const postWebhook = ( req, res ) => {
     // Skip if update is in progress, Skip if invalid secret was sent
     if ( !isSiteUpdate && req.body.secret === core.config.api.secret ) {
         isSiteUpdate = true;
@@ -122,7 +151,7 @@ const getWebhook = ( req, res ) => {
     }
 
     // Always resolve with a 200 and some text
-    res.status( 200 ).send( core.config.api.secret );
+    res.status( 200 ).send( "success" );
 };
 const getSitemap = ( req, res ) => {
     const sitemap = require( `../generators/${core.config.api.adapter}.sitemap` );
@@ -132,6 +161,27 @@ const getSitemap = ( req, res ) => {
     });
 
 };
+
+
+
+/**
+ *
+ * :GET CSRF
+ *
+ */
+const getCSRF = ( req, res ) => {
+    res.status( 200 ).json({
+        csrf: req.csrfToken()
+    });
+};
+
+
+
+/**
+ *
+ * Middleware checks
+ *
+ */
 const checkOrigin = ( req, res, next ) => {
     // No origin means not CORS :-)
     if ( !req.headers.origin ) {
@@ -151,6 +201,14 @@ const checkAuthToken = ( req, res, next ) => {
         res.redirect( "/" );
     }
 };
+
+
+
+/**
+ *
+ * :GET Authorizations
+ *
+ */
 const getAuthorizations = ( req, res ) => {
     req.params.type = "authorizations";
     core.content.getPage( req, res, listeners.authorizations ).then(( callback ) => {

@@ -222,12 +222,8 @@
 .form__field {
     position: relative;
     display: inline-block;
-    width: 100%;
-    max-width: 480px;
-
-    @include respond( $break-tablet-small ) {
-        max-width: 100%;
-    }
+    width: 480px;
+    max-width: 100%;
 }
 .form__sub {
     -webkit-appearance: none;
