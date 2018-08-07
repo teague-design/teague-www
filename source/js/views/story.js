@@ -8,7 +8,7 @@ export default ( view ) => {
     const story = view.json.documents.shift();
     const title = dom.RichText.asHtml( story.data.title ).replace( /h1/g, "h3" );
 
-    console.log( story );
+    // console.log( story );
 
     return `
         <div class="cms">
