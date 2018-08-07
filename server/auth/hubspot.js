@@ -116,10 +116,28 @@ const getHubspotAnalytics = ( req, res ) => {
 
 
 
+const postHubspotContactForm = ( req, res ) => {
+    res.status( 200 ).json({
+        form: "Contact"
+    });
+};
+
+
+
+const postHubspotNewsletterForm = ( req, res ) => {
+    res.status( 200 ).json({
+        form: "Newsletter"
+    });
+};
+
+
+
 module.exports = {
-    init ( expressApp ) {
+    init ( expressApp, checkCSRF ) {
         expressApp.get( "/api/hubspot/forms", getHubspotForms );
         expressApp.get( "/api/hubspot/analytics", getHubspotAnalytics );
+        expressApp.post( "/api/hubspot/form-contact", checkCSRF, postHubspotContactForm );
+        expressApp.post( "/api/hubspot/form-newsletter", checkCSRF, postHubspotNewsletterForm );
     },
 
 

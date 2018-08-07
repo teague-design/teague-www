@@ -58,6 +58,7 @@ const getPage = function ( req, res, listener ) {
         };
         const done = function () {
             context.set({
+                csrf: req.csrfToken(),
                 navi: core.query.cache.navi,
                 site: core.query.cache.site,
                 footer: core.query.cache.footer

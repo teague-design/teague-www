@@ -6,7 +6,16 @@ const read = ( file ) => {
 };
 const config = {
     // The URL of your actual site
-    url: "https://teague.com",
+    url: "http://teague.com",
+    // Whitelist of URLs for valid CSRF
+    // whitelist: [
+    //     "http://localhost:8001",
+    //     "http://54.71.20.59",
+    //     "http://52.10.236.152",
+    //     "http://teague.com",
+    //     "http://www.teague.com",
+    //     "http://staging.teague.com"
+    // ],
     // Homepage UID
     homepage: "home",
     // Page Not Found UID — 404

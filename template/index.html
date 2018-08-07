@@ -45,7 +45,7 @@
     </head>
     <body class="-fzero">
         <%- include( 'site/header.html' ) %>
-        <main class="main js-main" data-title="<%= locals.context.getPageTitle() %>">
+        <main class="main js-main" data-title="<%= locals.context.getPageTitle() %>" data-csrf="<%= locals.context.get( 'csrf' ) %>">
             <%- include( locals.context.getTemplate() ) %>
         </main>
         <%- include( 'site/footer.html' ) %>

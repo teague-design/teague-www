@@ -8,6 +8,7 @@ const compression = require( "compression" );
 const cookieParser = require( "cookie-parser" );
 const bodyParser = require( "body-parser" );
 const lager = require( "properjs-lager" );
+const csurf = require( "csurf" );
 const listeners = {};
 const core = {
     query: require( "./query" ),
@@ -16,6 +17,9 @@ const core = {
     template: require( "./template" )
 };
 const ContextObject = require( "../class/ContextObject" );
+const checkCSRF = csurf({
+    cookie: true
+});
 let isSiteUpdate = false;
 
 
@@ -52,7 +56,7 @@ const setRoutes = () => {
 
     // AUTHORIZATIONS
     core.config.authorizations.apps.forEach(( app ) => {
-        require( `../auth/${app}` ).init( expressApp );
+        require( `../auth/${app}` ).init( expressApp, checkCSRF );
     });
 
     // API => JSON
@@ -60,21 +64,21 @@ const setRoutes = () => {
     expressApp.get( "/api/:type/:uid", setReq, getApi );
 
     // URI => HTML
-    expressApp.get( "/", setReq, getPage );
-    expressApp.get( "/:type", setReq, getPage );
-    expressApp.get( "/:type/:uid", setReq, getPage );
+    expressApp.get( "/", checkCSRF, setReq, getPage );
+    expressApp.get( "/:type", checkCSRF, setReq, getPage );
+    expressApp.get( "/:type/:uid", checkCSRF, setReq, getPage );
 };
-const setReq = function ( req, res, next ) {
+const setReq = ( req, res, next ) => {
     req.params.type = req.params.type || core.config.homepage;
 
     next();
 };
-const getKey = function ( type ) {
+const getKey = ( type ) => {
     const key = type;
 
     return key || core.config.homepage;
 }
-const getApi = function ( req, res ) {
+const getApi = ( req, res ) => {
     const key = getKey( req.params.type );
 
     core.query.getApi( req, res, listeners[ key ] ).then(( result ) => {
@@ -86,7 +90,7 @@ const getApi = function ( req, res ) {
         }
     });
 };
-const getPage = function ( req, res ) {
+const getPage = ( req, res ) => {
     const key = getKey( req.params.type );
 
     core.content.getPage( req, res, listeners[ key ] ).then(( callback ) => {
@@ -96,12 +100,17 @@ const getPage = function ( req, res ) {
         });
     });
 };
-const getPreview = function ( req, res ) {
+const getPreview = ( req, res ) => {
     core.query.getPreview( req, res ).then(( url ) => {
         res.redirect( url );
     });
 };
-const getWebhook = function ( req, res ) {
+const getCSRF = ( req, res ) => {
+    res.status( 200 ).json({
+        csrf: req.csrfToken()
+    });
+};
+const getWebhook = ( req, res ) => {
     // Skip if update is in progress, Skip if invalid secret was sent
     if ( !isSiteUpdate && req.body.secret === core.config.api.secret ) {
         isSiteUpdate = true;
@@ -115,7 +124,7 @@ const getWebhook = function ( req, res ) {
     // Always resolve with a 200 and some text
     res.status( 200 ).send( core.config.api.secret );
 };
-const getSitemap = function ( req, res ) {
+const getSitemap = ( req, res ) => {
     const sitemap = require( `../generators/${core.config.api.adapter}.sitemap` );
 
     sitemap.generate().then(( xml ) => {
@@ -123,15 +132,26 @@ const getSitemap = function ( req, res ) {
     });
 
 };
-const checkAuthToken = function ( req, res, next ) {
+const checkOrigin = ( req, res, next ) => {
+    // No origin means not CORS :-)
+    if ( !req.headers.origin ) {
+        next();
+
+    } else {
+        res.status( 200 ).json({
+            error: "Invalid origin for request"
+        });
+    }
+};
+const checkAuthToken = ( req, res, next ) => {
     if ( req.query.token === core.config.authorizations.token ) {
         next();
 
     } else {
         res.redirect( "/" );
     }
-}
-const getAuthorizations = function ( req, res ) {
+};
+const getAuthorizations = ( req, res ) => {
     req.params.type = "authorizations";
     core.content.getPage( req, res, listeners.authorizations ).then(( callback ) => {
         // Handshake callback :-P
@@ -140,7 +160,7 @@ const getAuthorizations = function ( req, res ) {
         });
     });
 };
-const getAuthorizationForApp = function ( req, res ) {
+const getAuthorizationForApp = ( req, res ) => {
     const app = core.config.authorizations.apps.find(( app ) => {
         return (app === req.params.app);
     });

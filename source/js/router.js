@@ -77,6 +77,7 @@ const router = {
             this.controller.on( "page-controller-router-transition-in", this.changePageIn.bind( this ) );
             this.controller.on( "page-controller-initialized-page", ( data ) => {
                 this.initPage( data );
+                this.csrf = core.dom.main.data().csrf;
                 resolve();
             });
             this.controller.initPage();
@@ -133,17 +134,21 @@ const router = {
     parseDoc ( html ) {
         let doc = document.createElement( "html" );
         let main = null;
+        let data = null;
 
         doc.innerHTML = html;
 
         doc = $( doc );
         main = doc.find( core.config.mainSelector );
+        data = main.data();
+
+        this.csrf = data.csrf;
 
         return {
-            doc: doc,
-            main: main,
-            html: main[ 0 ].innerHTML,
-            data: main.data()
+            doc,
+            main,
+            data,
+            html: main[ 0 ].innerHTML
         };
     },
 
