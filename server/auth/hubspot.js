@@ -21,25 +21,7 @@ const getHubspotAuth = ( req, res ) => {
 
     // 0.2 Token Request
     } else if ( req.query.code ) {
-        request({
-            url: "https://api.hubapi.com/oauth/v1/token",
-            json: true,
-            method: "POST",
-            form: {
-                code: req.query.code,
-                grant_type: "authorization_code",
-                redirect_uri: authorization.config.redirectUrl,
-                client_secret: authorization.config.clientSecret,
-                client_id: authorization.config.clientId
-            },
-            headers: {
-                "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
-            }
-
-        }).then(( json ) => {
-            json.created_at = Date.now();
-            core.files.write( authorization.store, json, true );
-
+        getHubspotToken( req, res, "authorization_code", () => {
             res.redirect( `/authorizations/?token=${core.config.authorizations.token}` );
         });
     }
@@ -47,20 +29,69 @@ const getHubspotAuth = ( req, res ) => {
 
 
 
-const getHubspotAPIData = ( req, res, url ) => {
-    const oauthJson = core.files.read( authorization.store, true );
+const getHubspotToken = ( req, res, grantType, cb ) => {
+    const form = {
+        grant_type: grantType,
+        redirect_uri: authorization.config.redirectUrl,
+        client_secret: authorization.config.clientSecret,
+        client_id: authorization.config.clientId
+    };
+
+    // Handle token refresh on expiration
+    if ( grantType === "refresh_token" ) {
+        const oauthJson = core.files.read( authorization.store, true );
+
+        form.refresh_token = oauthJson.refresh_token;
+
+    // Handle initial authorization redirect from Oauth2 window
+    } else {
+        form.code = req.query.code;
+    }
 
     request({
-        url: url,
+        form,
+        url: "https://api.hubapi.com/oauth/v1/token",
         json: true,
-        method: "GET",
+        method: "POST",
         headers: {
-            "Authorization": `Bearer ${oauthJson.access_token}`
+            "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
         }
 
     }).then(( json ) => {
-        res.status( 200 ).json( json );
+        json.created_at = Date.now();
+        core.files.write( authorization.store, json, true );
+
+        if ( typeof cb === "function" ) {
+            cb();
+        }
     });
+}
+
+
+
+const getHubspotAPIData = ( req, res, url ) => {
+    const _getReq = () => {
+        const oauthJson = core.files.read( authorization.store, true );
+
+        request({
+            url: url,
+            json: true,
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${oauthJson.access_token}`
+            }
+
+        }).then(( json ) => {
+            res.status( 200 ).json( json );
+
+        }).catch(( error ) => {
+            getHubspotToken( req, res, "refresh_token", () => {
+                _getReq();
+            });
+        });
+    };
+
+    _getReq();
 };
 
 
