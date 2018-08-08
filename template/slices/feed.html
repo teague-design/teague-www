@@ -4,4 +4,4 @@ locals { item, slice, scope }
 */
 const contentType = slice.primary.content.toLowerCase();
 %>
-<div class="feed js-feed view js-view -wrap -exp -pad" data-uid="feed" data-url="/api/<%= contentType %>/"></div>
+<div class="feed js-feed view js-view -wrap -exp -pad" data-uid="feed" data-url="/api/<%= contentType %>/" data-page="/<%= item.uid %>/"></div>

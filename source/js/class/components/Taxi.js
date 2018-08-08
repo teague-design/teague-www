@@ -1,5 +1,6 @@
 import $ from "properjs-hobo";
 import * as core from "../../core";
+import router from "../../router";
 
 
 
@@ -70,15 +71,19 @@ class Taxi {
             return `${data.query}=${data.value}`;
 
         }).join( "&" );
+        const apiUrl = `${this.data.url}?${query}`;
+        const webUrl = `${this.data.page}?${query}`;
 
         $.ajax({
-            url: `${this.data.url}?${query}`,
+            url: apiUrl,
             dataType: "json",
             method: "GET"
 
         }).then(( json ) => {
             this.viewInstance.update( json );
         });
+
+        router.push( webUrl );
     }
 
 
