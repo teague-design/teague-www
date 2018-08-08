@@ -11,7 +11,7 @@
         color: $grey3;
         border-color: $white;
 
-        .is-theme-dark & {
+        .is-theme-black & {
             color: $grey2;
             border-color: $black;
         }
@@ -19,13 +19,13 @@
         &::-webkit-input-placeholder {
             color: $grey3;
 
-            .is-theme-dark & {
+            .is-theme-black & {
                 color: $grey2;
             }
         }
     }
 
-    .is-theme-dark & {
+    .is-theme-black & {
         background-color: $white;
         color: $black;
     }

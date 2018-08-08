@@ -5,6 +5,7 @@ const fs = require( "fs" );
 const fetchFields = [
     "page.title",
     "page.image",
+    "page.theme",
     "page.description"
 ];
 
@@ -37,6 +38,9 @@ router.on( "site", {
     }
 });
 router.on( "stories", {
+    fetchLinks ( client, api, form, cache, req ) {
+        form.fetchLinks( fetchFields );
+    },
     query ( client, api, query, cache, req ) {
         if ( req.query.tag ) {
             query.push( client.Predicates.any( "document.tags", Array.isArray( req.query.tag ) ? req.query.tag : [req.query.tag] ) );

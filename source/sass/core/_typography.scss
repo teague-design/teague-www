@@ -194,7 +194,7 @@
         color: $black;
     }
 
-    .is-theme-dark & {
+    .is-theme-black & {
         color: $grey3;
         border-color: $white;
     }
@@ -207,7 +207,7 @@
     &::-webkit-input-placeholder {
         color: $grey2;
 
-        .is-theme-dark & {
+        .is-theme-black & {
             color: $grey3;
         }
 

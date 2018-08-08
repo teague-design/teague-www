@@ -8,7 +8,7 @@ html {
     transition: color $base-duration $ease-before,
                 background-color $base-duration $ease-after;
 
-    &.is-theme-dark {
+    &.is-theme-black {
         color: $white;
         background-color: $black;
     }

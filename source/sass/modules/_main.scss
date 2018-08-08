@@ -40,11 +40,11 @@
     .swatch + .swatch {
         margin-left: 40px;
     }
-    .swatch--light {
+    .swatch--white {
         background-color: $white;
         outline: 1px solid $black;
 
-        .is-theme-dark &,
+        .is-theme-black &,
         .is-theme-spot & {
             outline: none;
         }
@@ -53,10 +53,10 @@
             background-color: $black;
         }
     }
-    .swatch--dark {
+    .swatch--black {
         background-color: $black;
 
-        .is-theme-dark & {
+        .is-theme-black & {
             outline: 1px solid $white;
         }
 
