@@ -1,15 +1,15 @@
 <%
-/*
-locals { item, slices, scope, type }
+/* Slices iterator
+locals { item, slices, scope }
 */
 %>
-<section class="<%= scope %>__slices">
+<section class="slices <%= scope %>__slices">
     <% locals.slices.forEach(( slice, i ) => { %>
         <%
         const sliceType = slice.slice_type.replace( /_+/g, '-' );
-        const slicePartial = `../slices/${locals.type}/${sliceType}.html`;
+        const slicePartial = `../slices/${sliceType}.html`;
         %>
-        <div class="slice slice--<%= sliceType %> -exp -wrap">
+        <div class="slice slice--<%= sliceType %>">
             <%- include( slicePartial, {item, slice, scope} ) %>
         </div>
     <% }) %>

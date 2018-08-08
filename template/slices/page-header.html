@@ -1,0 +1,20 @@
+<%
+/* Page Header
+locals { item, slice, scope }
+*/
+const config = locals.context.get( 'config' );
+const isImage = slice.primary.header_image.url;
+%>
+<div class="main__header <% if ( isImage ) { %>main__header--image<% } %> -pad-mast">
+    <div class="main__header__title cms -wrap">
+        <%- locals.context.get( 'dom' ).RichText.asHtml( slice.primary.header_title ) %>
+    </div>
+    <% if ( isImage ) { %>
+        <div class="main__header__image">
+            <%- include( '../partials/image.html', {image: slice.primary.header_image} ) %>
+        </div>
+    <% } %>
+    <div class="main__header__desc cms -wrap">
+        <%- locals.context.get( 'dom' ).RichText.asHtml( slice.primary.header_description ) %>
+    </div>
+</div>

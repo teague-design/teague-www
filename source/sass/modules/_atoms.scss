@@ -1,0 +1,74 @@
+.atoms {
+    .slice {
+        padding-bottom: $expander-1;
+        padding-top: $expander-1;
+        padding-left: $padding-1;
+        padding-right: $padding-1;
+    }
+}
+.atoms__theme {
+    @include flex-left();
+
+    .swatch {
+        position: relative;
+        height: 128px;
+        width: 128px;
+        cursor: pointer;
+
+        &:after {
+            content: "";
+            height: 32px;
+            width: 32px;
+            border-radius: 32px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate3d( -50%, -50%, 0 );
+            transition: opacity $base-duration $ease;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        &.is-active:after {
+            opacity: 1;
+        }
+    }
+    .swatch + .swatch {
+        margin-left: 40px;
+    }
+    .swatch--white {
+        background-color: $white;
+        outline: 1px solid $black;
+
+        .is-theme-black &,
+        .is-theme-spot & {
+            outline: none;
+        }
+
+        &:after {
+            background-color: $black;
+        }
+    }
+    .swatch--black {
+        background-color: $black;
+
+        .is-theme-black & {
+            outline: 1px solid $white;
+        }
+
+        &:after {
+            background-color: $white;
+        }
+    }
+    .swatch--spot {
+        background-color: $spot;
+
+        .is-theme-spot & {
+            outline: 1px solid $white;
+        }
+
+        &:after {
+            background-color: $white;
+        }
+    }
+}

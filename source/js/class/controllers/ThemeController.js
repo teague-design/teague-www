@@ -17,8 +17,7 @@ class ThemeController {
         this.swatches = this.element.find( ".js-theme-swatch" );
         this.classes = {
             white: "is-theme-white",
-            black: "is-theme-black",
-            spot: "is-theme-spot"
+            black: "is-theme-black"
         };
 
         if ( this.element.length ) {
@@ -35,7 +34,7 @@ class ThemeController {
             this.swatches.removeClass( "is-active" );
             swatch.addClass( "is-active" );
 
-            core.dom.html.removeClass( `${this.classes.white} ${this.classes.black} ${this.classes.spot}` );
+            core.dom.html.removeClass( `${this.classes.white} ${this.classes.black}` );
             core.dom.html.addClass( this.classes[ data.theme ] );
         });
     }
@@ -43,7 +42,7 @@ class ThemeController {
 
     destroy () {
         this.element.off();
-        core.dom.html.removeClass( `${this.classes.white} ${this.classes.black} ${this.classes.spot}` );
+        core.dom.html.removeClass( `${this.classes.white} ${this.classes.black}` );
     }
 }
 

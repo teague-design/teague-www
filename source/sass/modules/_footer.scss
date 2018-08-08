@@ -2,6 +2,8 @@
     background-color: $black;
     color: $white;
     padding-top: $expander-2;
+    transition: color $base-duration $ease-before,
+                background-color $base-duration $ease-after;
 
     .svg--mark {
         fill: $white;

@@ -1,15 +1,5 @@
-<div class="atoms -pad">
-    <%
-    const item = locals.context.get( 'item' );
-    const slices = item.data.slices;
-    const scope = 'atoms';
-    const type = 'lib';
-    const theme = item && item.data.theme ? item.data.theme.toLowerCase() : null;
-    %>
-    <div class="atoms__theme js-theme -exp -wrap">
-        <div class="swatch swatch--white js-theme-swatch <%= (theme === 'white') ? 'is-active' : '' %>" data-theme="white"></div>
-        <div class="swatch swatch--black js-theme-swatch <%= (theme === 'black') ? 'is-active' : '' %>" data-theme="black"></div>
-        <!-- <div class="swatch swatch--spot js-theme-swatch" data-theme="spot"></div> -->
-    </div>
-    <%- include( '../partials/slices.html', {item, slices, scope, type} ) %>
+<%- include( '../partials/page.html' ) %>
+<div class="atoms__theme js-theme -exp -wrap">
+    <div class="swatch swatch--white js-theme-swatch" data-theme="white"></div>
+    <div class="swatch swatch--black js-theme-swatch" data-theme="black"></div>
 </div>

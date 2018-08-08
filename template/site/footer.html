@@ -10,7 +10,7 @@ const dom = locals.context.get( 'dom' );
                 <div class="cms">
                     <h6><%= footer.data.primary.design_story_label %></h6>
                 </div>
-                <div class="footer__story view js-view" data-uid="story" data-url="/api/stories/"></div>
+                <div class="footer__story view js-view" data-uid="story" data-url="/api/story/"></div>
             </div>
             <div class="footer__newsletter">
                 <div class="cms">
@@ -19,7 +19,7 @@ const dom = locals.context.get( 'dom' );
                         <%- dom.RichText.asHtml( footer.data.primary.newsletter_cta ) %>
                     </div>
                 </div>
-                <%- include( '../slices/lib/form.html', {
+                <%- include( '../slices/form.html', {
                     slice: {
                         primary: {
                             submit_label: 'Submit',
@@ -43,7 +43,7 @@ const dom = locals.context.get( 'dom' );
                         <%- dom.RichText.asHtml( footer.data.primary.contact_cta ) %>
                     </div>
                 </div>
-                <%- include( '../slices/lib/form.html', {
+                <%- include( '../slices/form.html', {
                     slice: {
                         primary: {
                             submit_label: 'Submit',

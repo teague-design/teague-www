@@ -30,6 +30,13 @@
 .-pad {
     padding-top: $header-height;
     }
+.-pad-mast {
+    padding-top: 21vw;
+
+    @include respond-min( $bind-width ) {
+        padding-top: 310px
+    }
+}
 
 
 

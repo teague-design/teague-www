@@ -37,7 +37,7 @@ router.on( "site", {
         form.fetchLinks( fetchFields );
     }
 });
-router.on( "stories", {
+router.on( "story", {
     fetchLinks ( client, api, form, cache, req ) {
         form.fetchLinks( fetchFields );
     },

@@ -45,7 +45,12 @@ const router = {
             now: null,
             future: null
         };
-        this.church = null;
+
+        // Theme classNames
+        this.themes = {
+            white: "is-theme-white",
+            black: "is-theme-black"
+        };
 
         this.bindEmpty();
         this.prepPages();
@@ -165,46 +170,15 @@ const router = {
             view: data.request.params.view || core.config.homepage,
             cat: data.request.query.category || null
         };
-
-        if ( time === "future" ) {
-            this.church = {
-                isFeedFeed: (this.state.now.view === this.state.future.view && !this.state.now.uid && !this.state.future.uid),
-                isFeedDetail: (this.state.now.view === this.state.future.view && !this.state.now.uid && this.state.future.uid),
-                isDetailDetail: (this.state.now.view === this.state.future.view && this.state.now.uid && this.state.future.uid),
-                isDetailFeed: (this.state.now.view === this.state.future.view && this.state.now.uid && !this.state.future.uid)
-            };
-        }
     },
 
 
     setTheme () {
-        if ( this.doc.data.darkside ) {
-            core.dom.html.addClass( "is-darkside" );
+        core.dom.html.removeClass( `${this.themes.white} ${this.themes.black}` );
 
-        } else {
-            core.dom.html.removeClass( "is-darkside" );
+        if ( this.doc.data.theme ) {
+            core.dom.html.addClass( this.themes[ this.doc.data.theme ] );
         }
-    },
-
-
-    setPath () {
-        if ( this.church.isFeedDetail ) {
-            core.dom.html.addClass( "is-feed-detail" );
-
-        } else if ( this.church.isFeedFeed ) {
-            core.dom.html.addClass( "is-feed-feed" );
-
-        } else if ( this.church.isDetailDetail ) {
-            core.dom.html.addClass( "is-detail-detail" );
-
-        } else if ( this.church.isDetailFeed ) {
-            core.dom.html.addClass( "is-detail-feed" );
-        }
-    },
-
-
-    unsetPath () {
-        core.dom.html.removeClass( "is-feed-detail is-feed-feed is-detail-detail is-detail-feed" );
     },
 
 
@@ -241,7 +215,6 @@ const router = {
     changePageOut ( data ) {
         core.dom.html.addClass( "is-tranny" );
         this.setState( "future", data );
-        this.setPath();
         this.unsetClass();
         this.setClass();
         this.transitionOut();
@@ -267,20 +240,19 @@ const router = {
             this.controllers.animate();
             this.transitionIn();
             this.setState( "now", data );
-            this.unsetPath();
 
         }, this.animDuration );
     },
 
 
     tweenContent ( opacity ) {
-        const isOne = (opacity === 1);
+        // const isOne = (opacity === 1);
 
-        this.tween = gsap.TweenLite.to( core.dom.main[ 0 ], 0.5, {
+        this.tween = gsap.TweenLite.to( core.dom.main[ 0 ], 0.25, {
             css: {
                 opacity
             },
-            ease: isOne ? gsap.Power4.easeOut : gsap.Power4.easeIn,
+            ease: gsap.Power2.easeInOut,
             onComplete: () => {}
         });
     },
