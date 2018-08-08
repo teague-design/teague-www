@@ -4,6 +4,7 @@
 html {
     color: $black;
     background-color: $white;
+    overflow-x: hidden;
     transition: color $base-duration $ease-before,
                 background-color $base-duration $ease-after;
 
