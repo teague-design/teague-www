@@ -29,7 +29,10 @@ let current = 0;
             <div class="form__block">
                 <div class="form__field form__button">
                     <% if ( current === total && isArea ) { %>
-                        <button class="form__sub btn"><%= slice.primary.submit_label%></button>
+                        <button class="form__sub btn">
+                            <div class="btn__text"><%= slice.primary.submit_label%></div>
+                            <div class="btn__anim"></div>
+                        </button>
                     <% } %>
                 </div>
             </div>

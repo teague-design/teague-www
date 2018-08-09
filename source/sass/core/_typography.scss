@@ -232,10 +232,6 @@
     border: 0;
     border-radius: 0;
 
-    .is-hoverable &:hover {
-        color: $spot;
-    }
-
     .is-theme-spot &,
     .is-hoverable.is-theme-spot &:hover {
         color: $white;
@@ -253,4 +249,8 @@
 }
 .form__button {
     text-align: right;
+
+    .form__sub {
+        margin-right: 7px;
+    }
 }

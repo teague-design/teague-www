@@ -27,6 +27,15 @@
         }
     }
 
+    .form__input + .form__sub {
+        .is-hoverable &:hover {
+            color: $white;
+        }
+        .is-hoverable.is-theme-black &:hover {
+            color: $black;
+        }
+    }
+
     .is-theme-black & {
         background-color: $white;
         color: $black;

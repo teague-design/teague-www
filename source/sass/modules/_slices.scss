@@ -1,3 +1,10 @@
-.slice--text__node {
-    
+.slice--form {
+    .form__input + .form__sub {
+        .is-hoverable &:hover {
+            color: $black;
+        }
+        .is-hoverable.is-theme-black &:hover {
+            color: $white;
+        }
+    }
 }
