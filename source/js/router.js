@@ -246,13 +246,13 @@ const router = {
 
 
     tweenContent ( opacity ) {
-        // const isOne = (opacity === 1);
+        const isOne = (opacity === 1);
 
-        this.tween = gsap.TweenLite.to( core.dom.main[ 0 ], 0.25, {
+        this.tween = gsap.TweenLite.to( core.dom.main[ 0 ], 0.5, {
             css: {
                 opacity
             },
-            ease: gsap.Power2.easeInOut,
+            ease: isOne ? gsap.Power4.easeIn : gsap.Power4.easeOut,
             onComplete: () => {}
         });
     },

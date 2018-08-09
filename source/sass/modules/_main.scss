@@ -1,11 +1,4 @@
-.main {
-    transition: opacity $fast-duration $ease;
-
-    &.is-inactive {
-        opacity: 0;
-        pointer-events: none;
-        }
-}
+.main {}
 .main__header {}
 .main__header--image {
     .main__header__desc {
