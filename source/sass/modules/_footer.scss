@@ -7,6 +7,10 @@
 
     .svg--mark {
         fill: $white;
+
+        .is-theme-black & {
+            fill: $black;
+        }
     }
 
     .form__input {
