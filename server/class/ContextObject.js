@@ -98,7 +98,6 @@ class ContextObject {
         return (pageImage || appImage);
     }
 
-    // Prismic specific... tsk tsk...?
     getUrl ( doc ) {
         const type = (config.generate.mappings[ doc.type ] || doc.type);
         const resolvedUrl = doc.uid === config.homepage ? "/" : ((type === "page") ? `/${doc.uid}/` : `/${type}/${doc.uid}/`);
@@ -106,7 +105,6 @@ class ContextObject {
         return resolvedUrl;
     }
 
-    // Prismic specific... tsk tsk...?
     getMediaAspect ( media ) {
         return `${media.height / media.width * 100}%`;
     }
