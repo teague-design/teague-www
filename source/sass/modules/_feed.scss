@@ -1,9 +1,15 @@
+$feed-padding: 3.3783783784vw;
+
+
 .feed {
-    margin: 0 -50px;
+    margin: 0 (-$feed-padding);
 }
 .feed__item {
     display: inline-block;
     vertical-align: top;
     width: 33.333333%;
-    padding: 0 50px;
+    padding: 0 $feed-padding;
+}
+.feed__image {
+    padding: 20px 0;
 }

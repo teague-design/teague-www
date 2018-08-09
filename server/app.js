@@ -53,7 +53,7 @@ router.on( "story", {
         return query;
     },
     orderings ( client, api, form, cache, req ) {
-        form.orderings( ["document.last_publication_date desc"] );
+        form.orderings( ["my.story.sort_date desc"] );
     }
 });
 
