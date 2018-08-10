@@ -78,22 +78,15 @@ class ContextObject {
             item.data.title = prismicDOM.RichText.asText( item.data.title );
         }
 
-        if ( config.api.adapter === "prismic" ) {
-            title = (item ? `${item.data.title} — ${title}` : title);
-        }
+        title = (item ? `${item.data.title} — ${title}` : title);
 
         return title;
     }
 
     getPageImage () {
         const item = this.get( "item" );
-        let appImage = this.get( "site" ).data.appImage;
-        let pageImage = null;
-
-        if ( config.api.adapter === "prismic" ) {
-            pageImage = item ? item.data.image.url : null;
-            appImage = appImage.url;
-        }
+        const appImage = this.get( "site" ).data.appImage.url;
+        const pageImage = item ? item.data.image.url : null;
 
         return (pageImage || appImage);
     }
