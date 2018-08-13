@@ -1,5 +1,4 @@
 import View from "../components/View";
-import paramalama from "paramalama";
 
 
 
@@ -25,12 +24,7 @@ class ViewController {
             const elem = this.elements.eq( i );
             const data = elem.data();
 
-            this.instances.push(new View({
-                id: data.uid,
-                el: elem,
-                url: data.url,
-                qs: data.clean ? null : paramalama( window.location.search )
-            }));
+            this.instances.push( new View( elem, data ) );
         });
     }
 

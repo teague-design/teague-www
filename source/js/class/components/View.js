@@ -1,6 +1,7 @@
 import * as core from "../../core";
 import $ from "properjs-hobo";
 import ImageController from "../controllers/ImageController";
+import paramalama from "paramalama";
 
 
 /**
@@ -15,13 +16,12 @@ import ImageController from "../controllers/ImageController";
  *
  */
 class View {
-    // args { id, el, url, qs, cb }
-    constructor ( args ) {
-        this.id = args.id;
-        this.element = args.el;
-        this.endpoint = args.url;
-        this.callback = args.cb;
-        this.query = args.qs;
+    constructor ( elem, data ) {
+        this.data = data;
+        this.element = elem;
+        this.id = this.data.uid;
+        this.endpoint = this.data.url;
+        this.query = this.data.clean ? null : paramalama( window.location.search );
         this.json = null;
         this.controllers = {};
         this.dataType = "json";
@@ -70,11 +70,7 @@ class View {
      * @method done
      *
      */
-    done () {
-        if ( typeof this.callback === "function" ) {
-            this.callback();
-        }
-    }
+    done () {}
 
 
     /**

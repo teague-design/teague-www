@@ -10,13 +10,19 @@ export default ( view ) => {
                 return `
                     <div class="feed__item">
                         <div class="feed__cat cms">
-                            <h6>${doc.data.category}</h6>
+                            <a href="${view.data.page}?category=${doc.data.category}">
+                                <h6>${doc.data.category}</h6>
+                            </a>
                         </div>
                         <div class="feed__image">
-                            ${viewImage( doc.data.image )}
+                            <a href="/${doc.type}/${doc.uid}/">
+                                ${viewImage( doc.data.image )}
+                            </a>
                         </div>
                         <div class="feed__title cms">
-                            ${dom.RichText.asHtml( doc.data.title ).replace( /h1/g, "h4" )}
+                            <a href="/${doc.type}/${doc.uid}/">
+                                ${dom.RichText.asHtml( doc.data.title ).replace( /h1/g, "h4" )}
+                            </a>
                         </div>
                     </div>
                 `;
