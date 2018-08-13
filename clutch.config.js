@@ -99,6 +99,7 @@ const config = {
     authorizations: {
         token: null,
         apps: [
+            "icims",
             "vimeo",
             "hubspot"
         ]

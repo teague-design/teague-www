@@ -169,11 +169,11 @@ const getSitemap = ( req, res ) => {
  * :GET CSRF
  *
  */
-const getCSRF = ( req, res ) => {
-    res.status( 200 ).json({
-        csrf: req.csrfToken()
-    });
-};
+// const getCSRF = ( req, res ) => {
+//     res.status( 200 ).json({
+//         csrf: req.csrfToken()
+//     });
+// };
 
 
 
