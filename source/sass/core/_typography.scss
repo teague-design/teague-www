@@ -222,7 +222,7 @@
 .form__field {
     position: relative;
     display: inline-block;
-    width: 480px;
+    width: $form-input-width;
     max-width: 100%;
 }
 .form__sub {

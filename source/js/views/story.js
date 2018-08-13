@@ -14,7 +14,7 @@ export default ( view ) => {
         <div class="cms">
             <div class="-exp">${title}</div>
             <div class="">
-                <a class="link" href="">
+                <a class="link" href="/${story.type}/${story.uid}/">
                     <div class="link__wrap">
                         <div class="link__text">Read All About It</div>
                         <div class="link__icon icon icon--arrow">

@@ -6,12 +6,17 @@
     padding-top: $expander-1;
     }
 .-wrap {
-    padding-left: $padding-1;
-    padding-right: $padding-1;
+    padding-left: $padding-1 / 2;
+    padding-right: $padding-1 / 2;
+
+    @include respond-min( $mobile-width ) {
+        padding-left: $padding-1;
+        padding-right: $padding-1;
     }
+}
 .-wrap-p {
     @include wrap-p();
-    }
+}
 .-vtop {
     vertical-align: top;
     }

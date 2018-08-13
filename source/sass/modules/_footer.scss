@@ -84,6 +84,12 @@
     align-items: center;
     flex-wrap: wrap;
 
+    @include respond( $break-tablet-small ) {
+        height: auto;
+        padding-top: $expander-1;
+        padding-bottom: $expander-1;
+    }
+
     .footer__social {
         .footer__a:first-child {
             @include respond( $break-tablet-small ) {
@@ -92,11 +98,17 @@
         }
     }
 
-    .footer__social,
+    .footer__social {
+        @include respond( $break-tablet-small ) {
+            width: 100%;
+            justify-content: space-between;
+        }
+    }
     .footer__legal {
         @include respond( $break-tablet-small ) {
             width: 100%;
             justify-content: center;
+            margin-top: $padding-1;
         }
     }
 }

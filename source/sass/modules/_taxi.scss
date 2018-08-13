@@ -18,14 +18,22 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
+
+    @include respond( $mobile-width ) {
+        flex-wrap: wrap;
+    }
 }
 .taxi__select {
     position: relative;
     display: inline-block;
-    width: 33vw;
-    max-width: 480px;
+    width: $taxi-input-width;
+    max-width: 100%;
     cursor: pointer;
     user-select: none;
+
+    @include respond( $mobile-width ) {
+        width: 100%;
+    }
 }
 .taxi__show {
     @include taxi-field();
@@ -93,7 +101,31 @@
                     background-color $base-duration $ease;
     }
 }
+.taxi__cats {
+    z-index: 2;
+}
+.taxi__tags {
+    z-index: 1;
+}
+.taxi__cats,
+.taxi__tags {
+    position: relative;
+
+    @include respond( $mobile-width ) {
+        width: 100%;
+    }
+}
 .taxi__tags,
 .taxi__sub {
-    margin-left: 30px;
+    margin-left: $padding-1;
+
+    @include respond( $mobile-width ) {
+        margin-left: 0;
+        margin-top: $padding-1 / 2;
+    }
+}
+.taxi__sub {
+    .is-hoverable &:hover {
+        color: $black;
+    }
 }
