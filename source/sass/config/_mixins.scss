@@ -52,6 +52,10 @@
     @include font-family-main-semibold();
 
     @include respond-min( $mobile-width ) {
+        font-size: $h1-size-fluid;
+    }
+
+    @include respond-min( $bind-width ) {
         font-size: $h1-size;
     }
 }
@@ -61,6 +65,10 @@
     @include font-family-main-semibold();
 
     @include respond-min( $mobile-width ) {
+        font-size: $h2-size-fluid;
+    }
+
+    @include respond-min( $bind-width ) {
         font-size: $h2-size;
     }
 }
@@ -70,6 +78,10 @@
     @include font-family-main-regular();
 
     @include respond-min( $mobile-width ) {
+        font-size: $h3-size-fluid;
+    }
+
+    @include respond-min( $bind-width ) {
         font-size: $h3-size;
     }
 }
@@ -79,6 +91,10 @@
     @include font-family-main-regular();
 
     @include respond-min( $mobile-width ) {
+        font-size: $h4-size-fluid;
+    }
+
+    @include respond-min( $bind-width ) {
         font-size: $h4-size;
     }
 }
@@ -88,6 +104,10 @@
     @include font-family-main-regular();
 
     @include respond-min( $mobile-width ) {
+        font-size: $h5-size-fluid;
+    }
+
+    @include respond-min( $bind-width ) {
         font-size: $h5-size;
     }
 }
