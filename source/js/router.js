@@ -2,7 +2,7 @@ import $ from "properjs-hobo";
 import Controller from "properjs-controller";
 import PageController from "properjs-pagecontroller";
 // import paramalama from "paramalama";
-import * as gsap from "gsap/all";
+// import * as gsap from "gsap/all";
 import Controllers from "./class/Controllers";
 import * as core from "./core";
 import navi from "./modules/navi";
@@ -246,15 +246,22 @@ const router = {
 
 
     tweenContent ( opacity ) {
-        const isOne = (opacity === 1);
+        // const isOne = (opacity === 1);
 
-        this.tween = gsap.TweenLite.to( core.dom.main[ 0 ], 0.5, {
-            css: {
-                opacity
-            },
-            ease: isOne ? gsap.Power4.easeIn : gsap.Power4.easeOut,
-            onComplete: () => {}
-        });
+        // this.tween = gsap.TweenLite.to( core.dom.main[ 0 ], 0.5, {
+        //     css: {
+        //         opacity
+        //     },
+        //     ease: isOne ? gsap.Power4.easeIn : gsap.Power4.easeOut,
+        //     onComplete: () => {}
+        // });
+
+        if ( opacity === 0 ) {
+            core.dom.html.addClass( "is-tranny" );
+
+        } else {
+            core.dom.html.removeClass( "is-tranny" );
+        }
     },
 
 

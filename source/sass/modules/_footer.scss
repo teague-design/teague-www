@@ -2,8 +2,14 @@
     background-color: $black;
     color: $white;
     padding-top: $expander-2;
-    transition: color $base-duration $ease-before,
-                background-color $base-duration $ease-after;
+    transition: color $base-duration $ease,
+                opacity $base-duration $ease,
+                background-color $base-duration $ease;
+
+    .is-tranny & {
+        opacity: 0;
+        pointer-events: none;
+    }
 
     .svg--mark {
         fill: $white;
