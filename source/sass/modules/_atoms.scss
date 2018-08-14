@@ -49,8 +49,7 @@
         background-color: $white;
         outline: 1px solid $black;
 
-        .is-theme-black &,
-        .is-theme-spot & {
+        .is-theme-black & {
             outline: none;
         }
 
@@ -71,10 +70,6 @@
     }
     .swatch--spot {
         background-color: $spot;
-
-        .is-theme-spot & {
-            outline: 1px solid $white;
-        }
 
         &:after {
             background-color: $white;

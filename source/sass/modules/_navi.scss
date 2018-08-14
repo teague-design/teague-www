@@ -17,10 +17,6 @@
             transition: background-color $base-duration $ease;
         }
     }
-
-    .is-theme-spot &.is-active:after {
-        background-color: $white;
-    }
 }
 .navi__a + .navi__a {
     margin-left: 60px;

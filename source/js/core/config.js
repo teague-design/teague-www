@@ -1,6 +1,3 @@
-import Easing from "properjs-easing";
-
-
 /**
  *
  * @public

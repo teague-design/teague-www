@@ -12,7 +12,6 @@
     width: 93px;
     height: 13px;
 
-    .is-theme-spot &,
     .is-theme-black & {
         fill: $white;
     }
@@ -21,7 +20,6 @@
     width: 39px;
     height: 23px;
 
-    .is-theme-spot &,
     .is-theme-black & {
         fill: $white;
     }
@@ -29,8 +27,4 @@
 .svg--arrow {
     width: 27px;
     height: 5px;
-
-    .is-theme-spot & {
-        fill: $white;
-    }
 }
