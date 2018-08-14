@@ -26,14 +26,9 @@
 .taxi__select {
     position: relative;
     display: inline-block;
-    width: $taxi-input-width;
-    max-width: 100%;
     cursor: pointer;
     user-select: none;
-
-    @include respond( $mobile-width ) {
-        width: 100%;
-    }
+    width: 100%;
 }
 .taxi__show {
     @include taxi-field();
@@ -110,8 +105,14 @@
 .taxi__cats,
 .taxi__tags {
     position: relative;
+    width: $taxi-input-width;
+    max-width: 100%;
 
-    @include respond( $mobile-width ) {
+    @include respond( $taxi-break-width ) {
+        width: 33.333333vw;
+    }
+
+    @include respond( $break-mobile-full ) {
         width: 100%;
     }
 }
