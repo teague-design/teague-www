@@ -17,14 +17,6 @@ import navi from "./modules/navi";
  *
  */
 const router = {
-    /**
-     *
-     * @public
-     * @method init
-     * @memberof router
-     * @description Initialize the router module.
-     *
-     */
     init () {
         this.blit = new Controller();
         this.animDuration = 500;
@@ -90,14 +82,6 @@ const router = {
     },
 
 
-    /**
-     *
-     * @public
-     * @method bindEmpty
-     * @memberof router
-     * @description Suppress #hash links.
-     *
-     */
     bindEmpty () {
         core.dom.body.on( "click", "[href^='#']", ( e ) => e.preventDefault() );
     },
@@ -108,15 +92,6 @@ const router = {
     },
 
 
-    /**
-     *
-     * @public
-     * @method initPage
-     * @param {object} data The PageController data object
-     * @memberof router
-     * @description Cache the initial page load.
-     *
-     */
     initPage ( data ) {
         this.setDoc( data );
         this.setState( "now", data );
@@ -126,16 +101,6 @@ const router = {
     },
 
 
-    /**
-     *
-     * @public
-     * @method parseDoc
-     * @param {string} html The responseText to parse out
-     * @memberof router
-     * @description Get the DOM information to cache for a request.
-     * @returns {object}
-     *
-     */
     parseDoc ( html ) {
         let doc = document.createElement( "html" );
         let main = null;

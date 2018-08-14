@@ -29,15 +29,6 @@ class App {
     }
 
 
-    /**
-     *
-     * @public
-     * @instance
-     * @method init
-     * @memberof App
-     * @description Initialize application modules.
-     *
-     */
     init () {
         this.core.detect.init();
         this.intro.init();

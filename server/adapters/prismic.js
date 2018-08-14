@@ -55,11 +55,23 @@ const getApi = function ( req, res, listener ) {
 
             // Single document for /:type/:uid
             if ( req.params.uid ) {
-                data.document = getDoc( req.params.uid, json );
+                data.document = getDoc( req.params.uid, json.results );
 
             // All documents for /:type
             } else {
-                data.documents = json;
+                data.documents = json.results;
+            }
+
+            // Pagination information
+            // console.log( json );
+            data.pagination = {
+                page: json.page,
+                results_per_page: json.results_per_page,
+                results_size: json.results_size,
+                total_results_size: json.total_results_size,
+                total_pages: json.total_pages,
+                next_page: json.next_page,
+                prev_page: json.prev_page
             }
 
             // Render partial for ?format=html&template=foo
@@ -277,7 +289,7 @@ const getDataForApi = function ( req, listener ) {
         const doQuery = function ( type ) {
             prismic.api( core.config.api.access, apiOptions ).then(( api ) => {
                 const done = function ( json ) {
-                    resolve( json.results );
+                    resolve( json );
                 };
                 const fail = function ( error ) {
                     resolve({
@@ -316,6 +328,11 @@ const getDataForApi = function ( req, listener ) {
                     // @hook: fetchLinks
                     if ( listener && listener.handlers.fetchLinks ) {
                         listener.handlers.fetchLinks( prismic, cache.api, form, cache, req );
+                    }
+
+                    // @hook: pagination
+                    if ( listener && listener.handlers.pagination ) {
+                        listener.handlers.pagination( prismic, cache.api, form, cache, req );
                     }
 
                     // submit
@@ -411,6 +428,11 @@ const getDataForPage = function ( req, listener ) {
                     listener.handlers.fetchLinks( prismic, cache.api, form, cache, req );
                 }
 
+                // @hook: pagination
+                if ( listener && listener.handlers.pagination ) {
+                    listener.handlers.pagination( prismic, cache.api, form, cache, req );
+                }
+
                 // submit
                 form.submit().then( done ).catch( fail );
             }
@@ -465,7 +487,7 @@ const getDoc = function ( uid, documents ) {
 const getForm = function ( req, api, collection ) {
     const form = api.data.forms[ collection ] ? collection : "everything";
 
-    return api.form( form ).pageSize( 100 ).ref( getRef( req, api ) );
+    return api.form( form ).pageSize( core.config.pagination.allSize ).ref( getRef( req, api ) );
 };
 
 

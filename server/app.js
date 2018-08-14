@@ -54,6 +54,12 @@ router.on( "story", {
     },
     orderings ( client, api, form, cache, req ) {
         form.orderings( ["my.story.sort_date desc"] );
+    },
+    pagination ( client, api, form, cache, req ) {
+        if ( !req.query.nopaging ) {
+            form.pageSize( config.pagination.size );
+            form.page( (req.query.page || 1) );
+        }
     }
 });
 router.on( "taxonomy", {

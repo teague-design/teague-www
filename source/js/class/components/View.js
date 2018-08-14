@@ -21,7 +21,9 @@ class View {
         this.element = elem;
         this.id = this.data.uid;
         this.endpoint = this.data.url;
-        this.query = this.data.clean ? null : paramalama( window.location.search );
+        this.query = paramalama( window.location.search );
+        this.skips = this.data.skips ? this.data.skips.split( "|" ) : [];
+        this.flags = this.data.flags ? this.data.flags.split( "|" ) : [];
         this.json = null;
         this.controllers = {};
         this.dataType = "json";
@@ -29,6 +31,23 @@ class View {
 
         // Store View instance for update(s)
         this.element.data( "instance", this );
+
+        // clean = no queryString
+        // flags = queryString to add
+        // skips = queryString to ignore
+        if ( this.data.clean ) {
+            this.query = { clean: 1 };
+        }
+
+        this.skips.forEach(( skip ) => {
+            if ( this.query[ skip ] ) {
+                delete this.query[ skip ];
+            }
+        });
+
+        this.flags.forEach(( flag ) => {
+            this.query[ flag ] = 1;
+        });
 
         this.init();
     }

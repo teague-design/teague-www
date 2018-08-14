@@ -22,6 +22,11 @@ const config = {
     notfound: "404",
     // Page Server Error UID - 500
     notright: "500",
+    // Pagination settings
+    pagination: {
+        size: 1, // Change to 12 !!!
+        allSize: 100
+    },
     // Timestamp ( Stamp of instantiation )
     timestamp: Date.now(),
     // Environments
