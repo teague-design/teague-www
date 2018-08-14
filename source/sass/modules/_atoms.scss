@@ -4,6 +4,15 @@
         padding-top: $expander-1;
         padding-left: $padding-1;
         padding-right: $padding-1;
+
+        &:first-child {
+            padding-top: 0;
+        }
+
+        &.slice--image {
+            padding-left: 0;
+            padding-right: 0;
+        }
     }
 }
 .atoms__theme {

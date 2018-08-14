@@ -103,15 +103,30 @@ const loadImages = function ( images, handler ) {
     // Normalize the images
     images = (images || $( config.lazyImageSelector ));
 
-    // Hook here to determine image variant sizes to load ?
-    // images.forEach(( image, i ) => {
-    //     const data = images.eq( i ).data();
-    //
-    //     // data-img-size="[width, height]"
-    //     if ( data.imgSize ) {
-    //         image.className += ` image--${data.imgSize[ 0 ] > data.imgSize[ 1 ] ? "wide" : "tall"}`;
-    //     }
-    // });
+    // Normalize for image asset data from CMS
+    images.forEach(( el, i ) => {
+        const elem = images.eq( i );
+        const data = elem.data();
+        const isMobile = ((data.imgJson && data.imgJson.mobile && data.imgJson.mobile.url) && (window.innerWidth <= config.mobileMediaHack) && detect.isDevice());
+        const isTablet = ((data.imgJson && data.imgJson.tablet && data.imgJson.tablet.url) && (window.innerWidth <= config.tabletMediaHack) && detect.isDevice());
+        let dims = ((data.imgJson && data.imgJson.dimensions) || null);
+
+        // Normalize for mobile image asset if there is one
+        if ( isMobile ) {
+            dims = data.imgJson.mobile.dimensions;
+            elem.attr( config.lazyImageAttr, data.imgJson.mobile.url );
+
+        // Normalize for tablet image asset if there is one
+        } else if ( isTablet ) {
+            dims = data.imgJson.tablet.dimensions;
+            elem.attr( config.lazyImageAttr, data.imgJson.tablet.url );
+        }
+
+        // Normalize the padding if dimensions exist
+        if ( dims ) {
+            elem[ 0 ].style.paddingBottom = `${dims.height / dims.width * 100}%`;
+        }
+    });
 
     return new ImageLoader({
         elements: images,

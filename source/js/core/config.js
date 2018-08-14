@@ -24,50 +24,6 @@ const config = {
     /**
      *
      * @public
-     * @member defaultEasing
-     * @memberof core.config
-     * @description The default easing function for javascript Tweens.
-     *
-     */
-    defaultEasing: Easing.easeInOutCubic,
-
-
-    /**
-     *
-     * @public
-     * @member defaultDuration
-     * @memberof core.config
-     * @description The default duration for javascript Tweens.
-     *
-     */
-    defaultDuration: 400,
-
-
-    /**
-     *
-     * @public
-     * @member defaultVideoChannel
-     * @memberof core.config
-     * @description The [MediaBox]{@link https://github.com/ProperJS/MediaBox} channel used for video.
-     *
-     */
-    defaultVideoChannel: "vid",
-
-
-    /**
-     *
-     * @public
-     * @member defaultAudioChannel
-     * @memberof core.config
-     * @description The [MediaBox]{@link https://github.com/ProperJS/MediaBox} channel used for audio.
-     *
-     */
-    defaultAudioChannel: "bgm",
-
-
-    /**
-     *
-     * @public
      * @member mainSelector
      * @memberof core.config
      * @description The string selector used for <main> node.
@@ -85,6 +41,8 @@ const config = {
      *
      */
     lazyImageSelector: ".js-lazy-image",
+    tabletMediaHack: 1024,
+    mobileMediaHack: 480,
 
 
     /**

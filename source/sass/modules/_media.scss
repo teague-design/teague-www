@@ -1,4 +1,22 @@
 .image {
     max-width: 100%;
     width: 100%;
+    padding-bottom: $padding-img;
+
+    .is-touchable & {
+        @include respond( $break-tablet-small ) {
+            padding-bottom: $padding-img-mobile;
+        }
     }
+
+    &[data-imageloader="true"] {
+        padding-bottom: 0 !important;
+    }
+}
+.image-wrap {
+    background-color: #989898;
+
+    .is-theme-black & {
+        background-color: #222;
+    }
+}
