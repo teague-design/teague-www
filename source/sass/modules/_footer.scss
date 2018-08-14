@@ -20,11 +20,11 @@
     }
 
     .form__input {
-        color: $grey3;
+        color: $white;
         border-color: $white;
 
         .is-theme-black & {
-            color: $grey2;
+            color: $black;
             border-color: $black;
         }
 
