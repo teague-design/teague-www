@@ -1,0 +1,18 @@
+<%
+/* Video
+locals { item, slice, scope }
+*/
+const media = {};
+
+if ( slice.primary.vimeo_url && false ) {
+    media.vimeo = slice.primary.vimeo_url;
+
+} else if ( slice.primary.video_file ) {
+    media.video = slice.primary.video_file;
+}
+
+if ( slice.primary.poster_image ) {
+    media.poster = slice.primary.poster_image;
+}
+%>
+<%- include( '../partials/video.html', {media} ) %>

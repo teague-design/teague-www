@@ -28,3 +28,24 @@
     width: 27px;
     height: 5px;
 }
+.svg--play,
+.svg--pause,
+.svg--sound,
+.svg--fs {
+    .is-theme-black & {
+        fill: $white;
+    }
+}
+.svg--play,
+.svg--pause {
+    height: 11px;
+    width: 11px;
+}
+.svg--fs {
+    height: 13px;
+    width: 16px;
+}
+.svg--sound {
+    height: 12.6px;
+    width: 14px;
+}

@@ -1,11 +1,18 @@
+<%
+const navi = locals.context.get( 'navi' );
+const config = locals.context.get( 'config' );
+%>
 <nav class="navi js-navi">
-    <% locals.context.get( 'navi' ).items.forEach(( item ) => { %>
+    <% navi.items.forEach(( item ) => { %>
         <a class="navi__a navi__a--<%= item.uid %> js-navi-a js-navi--<%= item.uid %> p" href="<%= item.slug %>">
-            <% if ( item.uid === locals.context.get( 'config' ).homepage ) { %>
+            <% if ( item.uid === config.homepage ) { %>
                 <%- include( '../partials/svg/teague-logo.svg' ) %>
             <% } else { %>
                 <%= item.title %>
             <% } %>
         </a>
     <% }) %>
+    <% if ( config.env.sandbox ) { %>
+        <a class="navi__a navi__a--atoms js-navi-a js-navi--atoms p" href="/page/atoms/">Atoms</a>
+    <% } %>
 </nav>

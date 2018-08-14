@@ -1,3 +1,7 @@
+$ui-margin: 22px;
+
+
+
 .image {
     max-width: 100%;
     width: 100%;
@@ -18,5 +22,120 @@
 
     .is-theme-black & {
         background-color: #222;
+    }
+}
+
+
+
+.video {
+    .image,
+    .image-wrap {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .svg--play,
+    .svg--pause {
+        display: none;
+    }
+    &.is-paused .svg--play {
+        display: block;
+    }
+    &.is-playing .svg--pause {
+        display: block;
+    }
+}
+.video,
+.video__wrap {
+    position: relative;
+}
+.video__wrap {
+    overflow: hidden;
+    cursor: pointer;
+}
+.video__node,
+.video__poster {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.video__poster {
+    transition: opacity $base-duration $ease;
+
+    .is-paused &,
+    .is-playing & {
+        opacity: 0;
+        pointer-events: none;
+    }
+}
+.video__ui {
+    height: 35px;
+    padding: 0 120px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0;
+    pointer-events: none;
+
+    .is-paused &,
+    .is-playing & {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+.video__ui__pp,
+.video__ui__sound,
+.video__ui__fs {
+    cursor: pointer;
+}
+.video__ui__timeline {
+    margin: 0 $ui-margin;
+    height: 2px;
+    width: 100%;
+    background-color: $black;
+    position: relative;
+    transition: opacity $base-duration $ease;
+
+    .is-theme-black & {
+        background-color: $white;
+    }
+}
+.video__ui__scrubber {
+    position: absolute;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    background-color: $spot;
+    transform: translate3d( 50%, -50%, 0 );
+    border-radius: 10px;
+}
+.video__ui__ellapsed {
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 100%;
+    top: 0;
+    background-color: $spot;
+}
+.video__ui__fs {
+    margin-left: $ui-margin;
+}
+.video__ui__sound {
+    svg {
+        transform: scaleY( -1 );
+    }
+    rect {
+        transition: height $base-duration $ease;
+        transform-origin: bottom;
+
+        .is-muted & {
+            height: 4px;
+        }
     }
 }

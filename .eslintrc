@@ -43,7 +43,7 @@
             1,
             2
         ],
-        "consistent-return": 2,
+        "consistent-return": 1,
         "curly": 2,
         "default-case": 2,
         "dot-notation": 2,
@@ -193,7 +193,7 @@
                 "min": 2,
                 "max": 37,
                 "properties": "never",
-                "exceptions": ["$", "e", "i", "j", "x", "y", "z"]
+                "exceptions": ["$", "e", "i", "j", "x", "y", "z", "a", "b"]
             }
         ],
         //"id-match": [2, "^[a-z]+([A-Z][a-z]+)*$", {"properties": false}],
