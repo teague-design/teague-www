@@ -362,6 +362,7 @@ const getDataForPage = function ( req, listener ) {
             let query = [];
             const navi = getNavi( type );
             const form = getForm( req, cache.api, type );
+            const isHeadlessHome = (type === core.config.homepage);
             const isNaviNoForm = (navi && !cache.api.data.forms[ type ]);
             const done = function ( json ) {
                 if ( !json.results.length ) {
@@ -378,8 +379,8 @@ const getDataForPage = function ( req, listener ) {
                     data.items = json.results;
 
                     // uid
-                    if ( uid || isNaviNoForm ) {
-                        data.item = getDoc( (isNaviNoForm ? navi.uid : uid), json.results );
+                    if ( uid || isNaviNoForm || isHeadlessHome ) {
+                        data.item = getDoc( (isHeadlessHome ? core.config.homepage : (isNaviNoForm ? navi.uid : uid)), json.results );
 
                         if ( !data.item ) {
                             reject( `The document with UID "${isNaviNoForm ? navi.uid : uid}" could not be found by Prismic.` );
@@ -394,7 +395,11 @@ const getDataForPage = function ( req, listener ) {
             };
 
             // query: type?
-            if ( isNaviNoForm ) {
+            if ( isHeadlessHome ) {
+                query.push( prismic.Predicates.at( "document.type", "page" ) );
+                query.push( prismic.Predicates.at( "my.page.uid", core.config.homepage ) );
+
+            } else if ( isNaviNoForm ) {
                 query.push( prismic.Predicates.at( "document.type", navi.type ) );
                 query.push( prismic.Predicates.at( "document.id", navi.id ) );
 
