@@ -6,7 +6,10 @@ const fetchFields = [
     "page.title",
     "page.image",
     "page.theme",
-    "page.description"
+    "page.description",
+    "taxonomy.name",
+    "taxonomy.image",
+    "taxonomy.description"
 ];
 
 
@@ -63,22 +66,8 @@ router.on( "story", {
     }
 });
 router.on( "taxonomy", {
-    query ( client, api, query, cache, req ) {
-        if ( req.query.tag ) {
-            query.push( client.Predicates.any( "document.tags", Array.isArray( req.query.tag ) ? req.query.tag : [req.query.tag] ) );
-        }
-
-        if ( req.query.category ) {
-            query.push( client.Predicates.at( "my.story.category", req.query.category ) );
-        }
-
-        return query;
-    },
-    context ( context, cache, req ) {
-        context.set( "taxonomy", (req.query.tag || req.query.category) );
-        context.set( "contentType", req.query.type );
-
-        return context;
+    fetchLinks ( client, api, form, cache, req ) {
+        form.fetchLinks( fetchFields );
     }
 });
 

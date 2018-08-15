@@ -1,14 +1,16 @@
 <%
 /* Taxonomy ( tag, category ) */
-const taxonomy = locals.context.get( 'taxonomy' );
-const contentType = locals.context.get( 'contentType' );
+const item = locals.context.get( 'item' );
 %>
 <div class="taxonomy -pad">
-    <div class="main__header -pad">
-        <div class="main__header__title cms -wrap">
-            <h2><%= taxonomy %></h2>
-        </div>
-        <div class="main__header__desc cms -wrap"></div>
-    </div>
+    <%- include( '../slices/page-header.html', {
+        slice: {
+            primary: {
+                header_title: item.data.name,
+                header_image: item.data.image,
+                header_description: item.data.description
+            }
+        }
+    })%>
 </div>
-<div class="feed js-feed view js-view -wrap -exp -pad" data-uid="feed" data-url="/api/<%= contentType %>/" data-page="/taxonomy/"></div>
+<div class="feed js-feed view js-view -wrap -exp -pad" data-uid="feed" data-url="/api/story/" data-page="/taxonomy/"></div>

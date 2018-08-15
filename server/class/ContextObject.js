@@ -86,7 +86,7 @@ class ContextObject {
     getPageImage () {
         const item = this.get( "item" );
         const appImage = this.get( "site" ).data.appImage.url;
-        const pageImage = item ? item.data.image.url : null;
+        const pageImage = (item && item.data.image) ? item.data.image.url : null;
 
         return (pageImage || appImage);
     }
