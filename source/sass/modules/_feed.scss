@@ -32,20 +32,6 @@
     display: flex;
     align-items: center;
 
-    &:before {
-        content: "";
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 5px 6px 5px 0;
-        border-color: transparent $spot transparent transparent;
-        margin-right: $padding-1 / 2;
-    }
-}
-.feed__pagination__prev {
-    display: flex;
-    align-items: center;
-
     &:after {
         content: "";
         width: 0;
@@ -55,5 +41,19 @@
         border-color: transparent transparent transparent $spot;
         margin-left: $padding-1 / 2;
 
+    }
+}
+.feed__pagination__prev {
+    display: flex;
+    align-items: center;
+
+    &:before {
+        content: "";
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 5px 6px 5px 0;
+        border-color: transparent $spot transparent transparent;
+        margin-right: $padding-1 / 2;
     }
 }

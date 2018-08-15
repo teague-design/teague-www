@@ -40,9 +40,9 @@ export default ( view ) => {
             }).join( "" )}
         </div>
         <div class="feed__pagination">
-            ${view.json.pagination.prev_page ? `<a class="feed__pagination__next" href="${view.data.page}${getPagedQuery( view.json.pagination.page - 1 )}"><span class="h6 -spot">Next</span></a>` : ``}
+            ${view.json.pagination.prev_page ? `<a class="feed__pagination__prev" href="${view.data.page}${getPagedQuery( view.json.pagination.page - 1 )}"><span class="h6 -spot">Prev</span></a>` : ``}
             <div class="feed__pagination__curr p">${view.json.pagination.page} of ${view.json.pagination.total_pages}</div>
-            ${view.json.pagination.next_page ? `<a class="feed__pagination__prev" href="${view.data.page}${getPagedQuery( view.json.pagination.page + 1 )}"><span class="h6 -spot">Prev</span></a>` : ``}
+            ${view.json.pagination.next_page ? `<a class="feed__pagination__next" href="${view.data.page}${getPagedQuery( view.json.pagination.page + 1 )}"><span class="h6 -spot">Next</span></a>` : ``}
         </div>
     `;
 };
