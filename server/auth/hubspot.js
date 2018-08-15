@@ -117,6 +117,7 @@ const getHubspotAnalytics = ( req, res ) => {
 
 
 const postHubspotContactForm = ( req, res ) => {
+    lager.data( req.body );
     res.status( 200 ).json({
         form: "Contact"
     });
@@ -125,6 +126,7 @@ const postHubspotContactForm = ( req, res ) => {
 
 
 const postHubspotNewsletterForm = ( req, res ) => {
+    lager.data( req.body );
     res.status( 200 ).json({
         form: "Newsletter"
     });
@@ -136,6 +138,9 @@ module.exports = {
     init ( expressApp, checkCSRF ) {
         expressApp.get( "/api/hubspot/forms", getHubspotForms );
         expressApp.get( "/api/hubspot/analytics", getHubspotAnalytics );
+
+        // Possibly use express validator
+        // https://express-validator.github.io/docs/
         expressApp.post( "/api/hubspot/form-contact", checkCSRF, postHubspotContactForm );
         expressApp.post( "/api/hubspot/form-newsletter", checkCSRF, postHubspotNewsletterForm );
     },

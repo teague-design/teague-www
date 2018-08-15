@@ -126,6 +126,10 @@ $ui-margin: 22px;
 }
 .video__ui__fs {
     margin-left: $ui-margin;
+
+    @include respond( $navi-break ) {
+        display: none;
+    }
 }
 .video__ui__sound {
     svg {
