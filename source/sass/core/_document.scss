@@ -12,6 +12,10 @@ html {
         color: $white;
         background-color: $black;
     }
+
+    &.is-navi-mobile-open {
+        overflow: hidden;
+    }
 }
 body {
     background-color: transparent;
@@ -20,6 +24,10 @@ body {
     -webkit-tap-highlight-color: rgba( 0, 0, 0, 0 );
     -webkit-touch-callout: none;
     @include font-family-meta-regular();
+
+    .is-navi-mobile-open {
+        overflow: hidden;
+    }
 }
 pre {
     font-family: monospace;

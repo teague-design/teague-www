@@ -34,7 +34,11 @@
     }
 .-pad {
     padding-top: $header-height;
+
+    @include respond( $navi-break ) {
+        padding-top: $header-height-mobile;
     }
+}
 .-pad-mast {
     padding-top: 21vw;
 

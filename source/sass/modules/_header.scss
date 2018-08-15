@@ -6,4 +6,55 @@
     top: 0;
     width: 100%;
     z-index: $z_layer_header;
+
+    @include respond( $navi-break ) {
+        justify-content: space-between;
+        height: $header-height-mobile;
+    }
+}
+
+
+
+.logo {
+    .svg--logo {
+        .is-theme-black & {
+            fill: $white;
+        }
+
+        .is-navi-mobile-open & {
+            fill: $black;
+        }
+    }
+}
+
+
+
+.menu {
+    cursor: pointer;
+    display: none;
+
+    @include respond( $navi-break ) {
+        display: block;
+    }
+
+    .svg--ex,
+    .svg--navi {
+        .is-navi-mobile-open & {
+            fill: $black;
+        }
+    }
+}
+.menu__ex {
+    display: none;
+
+    .is-navi-mobile-open & {
+        display: block;
+    }
+}
+.menu__navi {
+    display: block;
+
+    .is-navi-mobile-open & {
+        display: none;
+    }
 }

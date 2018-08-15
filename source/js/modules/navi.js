@@ -22,13 +22,15 @@ const navi = {
         this.isOpen = false;
         this.element = core.dom.body.find( ".js-navi" );
         this.items = this.element.find( ".js-navi-a" );
-        this.trigger = core.dom.body.find( ".js-controller--navi" );
+        this.mobile = core.dom.body.find( ".js-navi-mobile" );
+        this.mobileTrigger = core.dom.body.find( ".js-menu-icon-navi" );
+        this.mobileItems = this.mobile.find( ".js-navi-a" );
         this.bind();
     },
 
 
     bind () {
-        this.trigger.on( "click", () => {
+        this.mobileTrigger.on( "click", () => {
             this.toggle();
         });
     },
@@ -36,21 +38,23 @@ const navi = {
 
     open () {
         this.isOpen = true;
-        this.element.addClass( "is-active" );
-        core.dom.html.addClass( "is-navi-open" );
+        this.mobile.addClass( "is-active" );
+        core.dom.html.addClass( "is-navi-mobile-open" );
     },
 
 
     close () {
         this.isOpen = false;
-        this.element.removeClass( "is-active" );
-        core.dom.html.removeClass( "is-navi-open" );
+        this.mobile.removeClass( "is-active" );
+        core.dom.html.removeClass( "is-navi-mobile-open" );
     },
 
 
     active ( view ) {
         this.items.removeClass( "is-active" );
         this.items.filter( `.js-navi--${view}` ).addClass( "is-active" );
+        this.mobileItems.removeClass( "is-active" );
+        this.mobileItems.filter( `.js-navi--${view}` ).addClass( "is-active" );
     },
 
 

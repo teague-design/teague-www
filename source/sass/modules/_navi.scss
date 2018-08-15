@@ -1,5 +1,9 @@
 .navi {
     @include flex-left();
+
+    @include respond( $navi-break ) {
+        display: none;
+    }
 }
 .navi__a {
     position: relative;
@@ -18,11 +22,21 @@
         }
     }
 }
-.navi__a + .navi__a {
-    margin-left: 60px;
+.navi__a {
+    margin-left: $padding-1 * 2;
 }
-.navi__a--home {
-    &:after {
-        display: none;
+
+
+
+.navi-mobile {
+    position: fixed;
+    color: $black;
+
+    .is-navi-mobile-open & {
+        pointer-events: auto;
     }
+}
+.navi-mobile__a {
+    margin-top: $padding-1;
+    display: block;
 }

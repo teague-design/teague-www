@@ -1,3 +1,26 @@
+<%
+const navi = locals.context.get( 'navi' );
+%>
 <header class="header js-header -wrap">
-    <%- include( './navi.html' ) %>
+    <a class="logo js-logo" href="/">
+        <%- include( '../partials/svg/teague-logo.svg' ) %>
+    </a>
+    <nav class="navi js-navi">
+        <% navi.items.forEach(( item ) => { %>
+            <a class="navi__a navi__a--<%= item.uid %> js-navi-a js-navi--<%= item.uid %> p" href="<%= item.slug %>"><%= item.title %></a>
+        <% }) %>
+    </nav>
+    <menu class="menu js-menu">
+        <div class="menu__icon menu__navi js-menu-icon-navi">
+            <%- include( '../partials/svg/icon-navi.svg' ) %>
+        </div>
+        <div class="menu__icon menu__ex js-menu-icon-navi">
+            <%- include( '../partials/svg/icon-ex.svg' ) %>
+        </div>
+    </menu>
 </header>
+<nav class="navi-mobile js-navi-mobile screen screen--white -pad -wrap">
+    <% navi.items.forEach(( item ) => { %>
+        <a class="navi-mobile__a navi-mobile__a--<%= item.uid %> js-navi-a js-navi--<%= item.uid %> h3" href="<%= item.slug %>"><%= item.title %></a>
+    <% }) %>
+</nav>

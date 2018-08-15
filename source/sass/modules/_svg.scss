@@ -11,10 +11,6 @@
 .svg--logo {
     width: 93px;
     height: 13px;
-
-    .is-theme-black & {
-        fill: $white;
-    }
 }
 .svg--mark {
     width: 39px;
@@ -48,4 +44,16 @@
 .svg--sound {
     height: 12.6px;
     width: 14px;
+}
+.svg--navi {
+    width: 21px;
+    height: 10px;
+
+    .is-theme-black & {
+        fill: $white;
+    }
+}
+.svg--ex {
+    width: 17px;
+    height: 17px;
 }
