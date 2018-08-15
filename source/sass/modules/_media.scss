@@ -77,7 +77,7 @@ $ui-margin: 22px;
     height: 35px;
     padding: 0 120px;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-between;
     opacity: 0;
     pointer-events: none;
@@ -100,6 +100,7 @@ $ui-margin: 22px;
     background-color: $black;
     position: relative;
     transition: opacity $base-duration $ease;
+    transform: translateY( -4px );
 
     .is-theme-black & {
         background-color: $white;
