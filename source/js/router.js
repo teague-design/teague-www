@@ -195,7 +195,7 @@ const router = {
         core.dom.main[ 0 ].innerHTML = this.doc.html;
         this.topper();
         this.controllers.exec();
-        core.emitter.fire( "app--analytics-pageview", this.doc );
+        core.emitter.fire( "app--trackpageview", this.doc );
     },
 
 
@@ -252,7 +252,13 @@ const router = {
 
 
     push ( path, cb ) {
-        this.controller.routeSilently( path, (cb || core.util.noop) );
+        this.controller.routeSilently( path, () => {
+            core.emitter.fire( "app--trackpageview", this.doc );
+
+            if ( typeof cb === "function" ) {
+                cb();
+            }
+        });
     },
 
 

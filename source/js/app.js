@@ -7,19 +7,19 @@ import router from "./router";
 import * as core from "./core";
 import navi from "./modules/navi";
 import intro from "./modules/intro";
-import Analytics from "./class/services/Analytics";
+import Tracker from "./class/services/Tracker";
 
 
 /**
  *
  * @public
  * @class App
- * @classdesc Load the App application Class to handle it ALL.
+ * @classdesc One Class to rule them all!
  *
  */
 class App {
     constructor () {
-        this.analytics = new Analytics();
+        this.tracker = new Tracker();
         this.core = core;
         this.intro = intro;
         this.router = router;
