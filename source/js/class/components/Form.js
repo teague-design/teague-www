@@ -7,7 +7,8 @@ import * as core from "../../core";
 class Form {
     constructor ( element, data ) {
         this.element = element;
-        this.fields = this.element.find( ".js-form-field" );
+        this.fields = null;
+        this.view = null;
         this.elemData = data;
         this.formData = {};
 
@@ -23,49 +24,52 @@ class Form {
         });
 
         // Only trap Enter on single input forms, like Newsletter
-        if ( this.fields.length === 1 ) {
-            this.element.on( "keypress", ( e ) => {
-                if ( e.keyCode === 13 ) {
-                    e.preventDefault();
-                    this.processForm();
-                    return false;
-                }
-            });
-        }
+        this.element.on( "keypress", ( e ) => {
+            this.getFields();
+
+            if ( this.fields.length === 1 && e.keyCode === 13 ) {
+                e.preventDefault();
+                this.processForm();
+                return false;
+            }
+        });
     }
 
 
     processForm () {
+        this.getFields();
         this.parseForm();
         this.postForm().then(( json ) => {
-            this.clearForm();
+            if ( json.error ) {
+                core.log( "warn", json.error );
 
-            core.log( json );
-
-        }).catch(( error ) => {
-            core.log( "warn", error );
+            } else {
+                this.clearForm();
+                core.log( json );
+            }
         });
+    }
+
+
+    getFields () {
+        this.fields = this.element.find( ".js-form-field" );
     }
 
 
     parseForm () {
         this.formData = {
             _csrf: router.csrf,
-            _data: {}
+            _page: {
+                url: window.location.href,
+                title: document.title
+            },
+            _form: {}
         };
         this.fields.forEach(( field ) => {
-            this.formData._data[ field.name ] = {
+            this.formData._form[ field.name ] = {
                 type: field.type,
                 value: field.value
             };
-        });
-    }
-
-
-    clearForm () {
-        this.formData = {};
-        this.fields.forEach(( field ) => {
-            field.value = "";
         });
     }
 
@@ -79,6 +83,14 @@ class Form {
             headers: {
                 "Content-Type": "application/x-www-form-urlencoded"
             }
+        });
+    }
+
+
+    clearForm () {
+        this.formData = {};
+        this.fields.forEach(( field ) => {
+            field.value = "";
         });
     }
 

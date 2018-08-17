@@ -2,41 +2,6 @@
 /* Form
 locals { item, slice, scope }
 */
-const config = locals.context.get( 'config' );
-let total = slice.items.length;
-let current = 0;
+const formName = slice.primary.submit_action;
 %>
-<form class="form js-form" action="" data-action="<%= slice.primary.submit_action %>">
-    <% slice.items.forEach(( element, i ) => { %>
-        <%
-        const type = element.input_type.toLowerCase();
-        const name = element.input_name.toLowerCase();
-        const isArea = (type === 'textarea');
-        current++;
-        %>
-        <div class="form__block">
-            <div class="form__field">
-                <% if ( isArea ) { %>
-                    <textarea name="<%= name %>" class="form__input form__area js-form-field" placeholder="<%= element.input_text %>" autocapitalize="sentences" autocorrect="on"></textarea>
-                <% } else { %>
-                    <input name="<%= name %>" class="form__input js-form-field" type="<%= type %>" placeholder="<%= element.input_text %>" />
-                <% } %>
-                <% if ( current === total && !isArea ) { %>
-                    <button class="form__sub btn" type="submit"><%= slice.primary.submit_label%></button>
-                <% } %>
-            </div>
-        </div>
-        <% if ( isArea ) { %>
-            <div class="form__block">
-                <div class="form__field form__button">
-                    <% if ( current === total && isArea ) { %>
-                        <button class="form__sub btn" type="submit">
-                            <div class="btn__text"><%= slice.primary.submit_label%></div>
-                            <div class="btn__anim"></div>
-                        </button>
-                    <% } %>
-                </div>
-            </div>
-        <% } %>
-    <% }) %>
-</form>
+<form class="form js-form view js-view" data-uid="form" data-url="/api/hubspot/form/<%= formName.toLowerCase() %>" data-action="<%= formName %>" action=""></form>

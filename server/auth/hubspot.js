@@ -96,52 +96,77 @@ const getHubspotAPIData = ( req, res, url ) => {
 
 
 
-const getHubspotForms = ( req, res ) => {
+const getHubspotFormByGUID = ( req, res ) => {
     getHubspotAPIData(
         req,
         res,
-        "https://api.hubapi.com/forms/v2/forms"
+        `https://api.hubapi.com/forms/v2/forms/${authorization.config.forms[ req.params.guid ] || req.params.guid}`
     );
-};
-
-
-
-const getHubspotAnalytics = ( req, res ) => {
-    getHubspotAPIData(
-        req,
-        res,
-        "https://api.hubapi.com/analytics/v2/reports/totals/total"
-    );
-};
-
-
-
-const postHubspotContactForm = ( req, res ) => {
-    lager.data( req.body );
-    res.status( 200 ).json({
-        form: "Contact"
-    });
 };
 
 
 
 const postHubspotNewsletterForm = ( req, res ) => {
-    lager.data( req.body );
-    res.status( 200 ).json({
-        form: "Newsletter"
+    // lager.data( req.body );
+    const https = require( "https" );
+    const querystring = require( "querystring" );
+    const postData = querystring.stringify({
+        email: req.body._form.email.value,
+        hs_context: JSON.stringify({
+            "hutk": req.cookies.hubspotutk,
+            "ipAddress": req.ip,
+            "pageUrl": req.body._page.url,
+            "pageName": req.body._page.title
+        })
     });
+    const options = {
+        hostname: "forms.hubspot.com",
+        path: `/uploads/form/v2/${authorization.config.portalId}/${authorization.config.forms.newsletter}`,
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded",
+            "Content-Length": postData.length
+        }
+    };
+    const httpRequest = https.request( options, ( response ) => {
+        // lager.info( `Status: ${response.statusCode}`  );
+        // lager.info( `Headers: ${JSON.stringify( response.headers )}` );
+        response.setEncoding( "utf8" );
+        response.on( "data", ( chunk ) => {
+            lager.info( `Body: ${chunk}` );
+        });
+
+        if ( response.statusCode === 204 ) {
+            res.status( 200 ).json({
+                errors: null,
+                success: true
+            });
+        }
+    });
+
+    httpRequest.on( "error", ( e ) => {
+        // lager.info( `Problem with request ${e.message}` );
+    });
+    httpRequest.write( postData );
+    httpRequest.end();
 };
+// const postHubspotContactForm = ( req, res ) => {
+//     lager.data( req.body );
+//     res.status( 200 ).json({
+//         form: "Contact"
+//     });
+// };
 
 
 
 module.exports = {
     init ( expressApp, checkCSRF ) {
-        expressApp.get( "/api/hubspot/forms", getHubspotForms );
-        expressApp.get( "/api/hubspot/analytics", getHubspotAnalytics );
+        expressApp.get( "/api/hubspot/form/:guid", getHubspotFormByGUID );
 
         // Possibly use express validator
         // https://express-validator.github.io/docs/
-        expressApp.post( "/api/hubspot/form-contact", checkCSRF, postHubspotContactForm );
+        // https://developers.hubspot.com/docs/methods/forms/submit_form
+        // expressApp.post( "/api/hubspot/form-contact", checkCSRF, postHubspotContactForm );
         expressApp.post( "/api/hubspot/form-newsletter", checkCSRF, postHubspotNewsletterForm );
     },
 
