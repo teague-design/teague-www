@@ -35,8 +35,13 @@ class View {
         // clean = no queryString
         // flags = queryString to add
         // skips = queryString to ignore
+        // tag|category = queryString to add
         if ( this.data.clean ) {
             this.query = { clean: 1 };
+        }
+
+        if ( this.data.tag ) {
+            this.query.tag = [this.data.tag];
         }
 
         this.skips.forEach(( skip ) => {

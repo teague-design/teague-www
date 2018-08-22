@@ -1,6 +1,9 @@
 <%
 /* Taxonomy ( tag, category ) */
+const dom = locals.context.get( 'dom' );
 const item = locals.context.get( 'item' );
+const type = item.data.type.toLowerCase();
+const tag = dom.RichText.asText( item.data.name );
 %>
 <div class="taxonomy -pad">
     <%- include( '../slices/page-header.html', {
@@ -13,4 +16,4 @@ const item = locals.context.get( 'item' );
         }
     })%>
 </div>
-<div class="feed js-feed view js-view -wrap -exp -pad" data-uid="feed" data-url="/api/story/" data-page="/taxonomy/"></div>
+<div class="feed js-feed view js-view -wrap -exp -pad" data-uid="feed" data-url="/api/story/" data-page="/taxonomy/" data-<%= type %>="<%= tag %>"></div>
