@@ -18,23 +18,31 @@ class HomeController {
         this.length = this.slices.length;
         this.inMotion = true;
         this._onMouseWheel = this.onMouseWheel.bind( this );
+        this._onMouseWheelF = this.onMouseWheelF.bind( this );
 
+        this.bindWheelF();
         this.bindWheel();
         this.transition();
     }
 
 
-    onMouseWheel ( e ) {
+    onMouseWheelF ( e ) {
         e.preventDefault();
-
+        return false;
+    }
+    onMouseWheel ( e ) {
         if ( !this.inMotion ) {
             this.handleWheel( e );
         }
-
-        return false;
+    }
+    bindWheelF () {
+        core.dom.doc.on( "DOMMouseScroll mousewheel", this._onMouseWheelF );
     }
     bindWheel () {
         core.dom.doc.on( "DOMMouseScroll mousewheel", this._onMouseWheel );
+    }
+    unbindWheelF () {
+        core.dom.doc.off( "DOMMouseScroll mousewheel", this._onMouseWheelF );
     }
     unbindWheel () {
         core.dom.doc.off( "DOMMouseScroll mousewheel", this._onMouseWheel );
@@ -42,7 +50,6 @@ class HomeController {
     handleWheel ( e ) {
         this.unbindWheel();
         this.inMotion = true;
-        core.log( "Mouse Stopped" );
 
         // Scroll up ( rewind )
         if ( e.deltaY < 0 ) {
@@ -196,7 +203,8 @@ class HomeController {
 
 
     destroy () {
-        this.unbind();
+        this.unbindWheelF();
+        this.unbindWheel();
     }
 }
 
