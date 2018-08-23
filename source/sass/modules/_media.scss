@@ -81,6 +81,8 @@ $ui-margin: 22px;
     justify-content: space-between;
     opacity: 0;
     pointer-events: none;
+    transition: opacity $base-duration $ease;
+    width: 100%;
 
     .is-paused &,
     .is-playing & {
@@ -142,5 +144,32 @@ $ui-margin: 22px;
         .is-muted & {
             height: 4px;
         }
+    }
+}
+
+
+
+.video--fs {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+
+    .video__wrap {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .video__node {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        transform: translate3d( -50%, -50%, 0 );
     }
 }

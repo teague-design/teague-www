@@ -1,6 +1,7 @@
 import * as core from "../../core";
 import $ from "properjs-hobo";
 import Controller from "properjs-controller";
+import VideoFS from "./VideoFS";
 
 
 
@@ -72,15 +73,20 @@ class Video {
                 this.isReadyState = true;
                 this.controller.stop();
 
-                // Basic events
-                this.events();
-
                 // Width / Height
                 if ( !this.width || !this.height ) {
                     this.width = this.node[ 0 ].videoWidth;
                     this.height = this.node[ 0 ].videoHeight;
                     this.wrapit();
                 }
+
+                // FS ?
+                if ( this.elemData.fs ) {
+                    this.videoFS = new VideoFS( this );
+                }
+
+                // Basic events
+                this.events();
             }
         });
 
@@ -342,6 +348,11 @@ class Video {
         if ( this.controller ) {
             this.controller.stop();
             this.controller = null;
+        }
+
+        if ( this.videoFS ) {
+            this.videoFS.destroy();
+            this.videoFS = null;
         }
 
         this.elem.off();

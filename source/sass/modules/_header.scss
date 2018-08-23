@@ -6,6 +6,13 @@
     top: 0;
     width: 100%;
     z-index: $z_layer_header;
+    pointer-events: none;
+
+    .logo,
+    .navi,
+    .menu {
+        pointer-events: auto;
+    }
 
     @include respond( $navi-break ) {
         justify-content: space-between;

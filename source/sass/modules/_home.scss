@@ -1,0 +1,162 @@
+.home {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+
+    .is-home-page & {
+        padding-top: 0;
+    }
+
+    .slice {
+        height: 100vh;
+        width: 100%;
+        position: absolute;
+        left: 0;
+        top: 0;
+        z-index: 1;
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity $base-duration $ease;
+
+        &.is-active {
+            opacity: 1;
+            pointer-events: auto;
+            z-index: 2;
+        }
+    }
+
+    .svg--mark-fluid {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
+
+
+
+// REEL
+.home__reel-video {
+    .video__ui {
+        position: absolute;
+        left: 0;
+        bottom: 30px;
+        opacity: 0;
+        pointer-events: none;
+    }
+
+    .video__wrap {
+        cursor: default;
+    }
+
+    &.is-fs {
+        .video__ui {
+            opacity: 1;
+            z-index: 1;
+            pointer-events: auto;
+        }
+    }
+}
+.home__reel-mark {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform: translate3d( -100%, 0, 0 );
+    transition: transform $long-duration $ease;
+
+    &.is-full {
+        transform: translate3d( 0, 0, 0 );
+    }
+    &.is-half {
+        transform: translate3d( -50%, 0, 0 );
+    }
+}
+.home__reel-desc {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate3d( 0, -25%, 0 );
+    opacity: 0;
+    transition: opacity $base-duration $ease,
+                transform $base-duration $ease;
+
+    &.is-anim {
+        transform: translate3d( 0, -50%, 0 );
+        opacity: 1;
+    }
+}
+.home__reel-cta {
+    position: absolute;
+    left: 16.216216216vw;
+    bottom: 50px;
+    transform: translate3d( 0, 100%, 0 );
+    opacity: 0;
+    transition: opacity $base-duration $ease,
+                transform $base-duration $ease;
+
+    &.is-anim {
+        transform: translate3d( 0, 0, 0 );
+        opacity: 1;
+    }
+
+    @include respond( $navi-break ) {
+        left: 0;
+    }
+}
+.home__reel-ex {
+    position: absolute;
+    right: 75px;
+    top: $header-height / 2;
+    transform: translate3d( 0, -50%, 0 );
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity $base-duration $ease;
+    cursor: pointer;
+
+    &.is-anim {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+
+
+
+// ABOUT
+.home__about-image {
+    width: 100%;
+}
+.home__about-mark {
+    rect {
+        transition: height $long-duration $ease,
+                    width $long-duration $ease,
+                    y $long-duration $ease;
+    }
+
+    &.is-expand {
+        rect:nth-child( 1 ) {
+            width: 846px;
+            height: 469px;
+            y: 182px;
+        }
+        rect:nth-child( 2 ) {
+            width: 100%;
+        }
+    }
+}
+.home__about-desc {
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translate3d( 0, -25%, 0 );
+    opacity: 0;
+    padding-right: $padding-1 * 2;
+    transition: opacity $base-duration $ease,
+                transform $base-duration $ease;
+
+    &.is-anim {
+        transform: translate3d( 0, -50%, 0 );
+        opacity: 1;
+    }
+}

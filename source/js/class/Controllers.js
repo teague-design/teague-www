@@ -6,6 +6,7 @@ import ThemeController from "./controllers/ThemeController";
 import ViewController from "./controllers/ViewController";
 import TaxiController from "./controllers/TaxiController";
 import VideoController from "./controllers/VideoController";
+import HomeController from "./controllers/HomeController";
 
 
 /**
@@ -64,6 +65,7 @@ class Controllers {
         this.push( "taxi", core.dom.body.find( ".js-taxi" ), TaxiController, true );
         this.push( "video", core.dom.body.find( ".js-video" ), VideoController, true );
         this.push( "theme", this.element.find( ".js-theme" ), ThemeController, true );
+        this.push( "home", this.element.find( ".js-home" ), HomeController, true );
 
         this.images = this.element.find( core.config.lazyImageSelector );
         this.imageController = new ImageController( this.images );

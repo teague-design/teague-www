@@ -54,6 +54,26 @@
 .cms h6 {
     @include h6();
 }
+.cms h1,
+.cms h2,
+.cms h3,
+.cms h4,
+.cms h5 {
+    /*
+        Supports multi-line in CMS:
+        <div class="cms">
+            <h2>...</h2>
+            <h2>...</h2>
+            <h2>...</h2>
+        </div>
+
+        For mobile breakpoint simply remove
+        the new line by overriding display...
+    */
+    @include respond( $navi-break ) {
+        display: inline;
+    }
+}
 
 
 
@@ -150,8 +170,12 @@
 .link__wrap {
     @include flex-center();
 }
-.link__text {
-    padding-right: 5px;
+.link__icon {
+    padding-left: 5px;
+
+    &.icon--play {
+        padding-left: 25px;
+    }
 }
 
 

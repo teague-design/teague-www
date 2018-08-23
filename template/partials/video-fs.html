@@ -1,0 +1,29 @@
+<%
+/* Video FS
+locals media { vimeo?, video? }
+Vimeo: string vimeo url
+Video: prismic media object
+*/
+%>
+<div class="video video--fs js-video" data-fs="1" data-json="<%= JSON.stringify( media ) %>">
+    <div class="video__wrap js-video-wrap">
+        <video class="video__node js-video-node" playsinline loop muted></video>
+    </div>
+    <div class="video__ui js-video-ui">
+        <div class="video__ui__pp js-video-pp">
+            <%- include( './svg/icon-pause.svg' ) %>
+            <%- include( './svg/icon-play.svg' ) %>
+        </div>
+        <div class="video__ui__timeline">
+            <div class="video__ui__ellapsed js-video-ellapsed">
+                <div class="video__ui__scrubber"></div>
+            </div>
+        </div>
+        <div class="video__ui__sound js-video-sound">
+            <%- include( './svg/icon-sound.svg' ) %>
+        </div>
+        <div class="video__ui__fs js-video-fs">
+            <%- include( './svg/icon-fs.svg' ) %>
+        </div>
+    </div>
+</div>

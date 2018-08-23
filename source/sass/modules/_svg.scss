@@ -20,6 +20,10 @@
         fill: $white;
     }
 }
+.svg--mark-fluid {
+    width: auto;
+    height: 100vh;
+}
 .svg--arrow {
     width: 27px;
     height: 5px;
@@ -32,7 +36,10 @@
         fill: $white;
     }
 }
-.svg--play,
+.svg--play {
+    width: 9px;
+    height: 13px;
+}
 .svg--pause {
     height: 11px;
     width: 11px;
@@ -53,7 +60,11 @@
         fill: $white;
     }
 }
-.svg--ex {
+.svg--ex-mobile {
     width: 17px;
     height: 17px;
+}
+.svg--ex {
+    height: 19px;
+    width: 19px;
 }

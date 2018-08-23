@@ -4,6 +4,6 @@ const item = locals.context.get( 'item' );
 const slices = item.data.slices;
 const scope = item.uid;
 %>
-<div class="<%= scope %> -pad">
+<div class="<%= scope %> js-<%= scope %> -pad">
     <%- include( './slices.html', {item, slices, scope} ) %>
 </div>
