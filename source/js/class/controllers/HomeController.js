@@ -17,7 +17,7 @@ class HomeController {
         this.index = 0;
         this.length = this.slices.length;
         this.inMotion = true;
-        this._onMouseWheel = this._onMouseWheel.bind( this );
+        this._onMouseWheel = this.onMouseWheel.bind( this );
 
         this.bindWheel();
         this.transition();
