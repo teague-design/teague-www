@@ -17,28 +17,33 @@ class HomeController {
         this.index = 0;
         this.length = this.slices.length;
         this.inMotion = true;
+        this._onMouseWheel = this._onMouseWheel.bind( this );
 
-        this.bind();
+        this.bindWheel();
         this.transition();
     }
 
 
-    bind () {
-        core.dom.doc.on( "DOMMouseScroll mousewheel", ( e ) => {
-            e.preventDefault();
+    onMouseWheel ( e ) {
+        e.preventDefault();
 
-            if ( !this.inMotion ) {
-                this.inMotion = true;
-                this.handle( e );
-                core.log( "Mouse Stopped" );
-            }
+        if ( !this.inMotion ) {
+            this.handleWheel( e );
+        }
 
-            return false;
-        });
+        return false;
     }
+    bindWheel () {
+        core.dom.doc.on( "DOMMouseScroll mousewheel", this._onMouseWheel );
+    }
+    unbindWheel () {
+        core.dom.doc.off( "DOMMouseScroll mousewheel", this._onMouseWheel );
+    }
+    handleWheel ( e ) {
+        this.unbindWheel();
+        this.inMotion = true;
+        core.log( "Mouse Stopped" );
 
-
-    handle ( e ) {
         // Scroll up ( rewind )
         if ( e.deltaY < 0 ) {
             if ( this.index !== 0 ) {
@@ -55,10 +60,9 @@ class HomeController {
 
         this.transition();
     }
-
-
-    unbind () {
-        core.dom.doc.off( "DOMMouseScroll mousewheel" );
+    resetWheel () {
+        this.bindWheel();
+        this.inMotion = false;
     }
 
 
@@ -101,7 +105,7 @@ class HomeController {
         desc.addClass( "is-anim" );
 
         setTimeout(() => {
-            this.inMotion = false;
+            this.resetWheel();
 
         }, 2000 );
     }
@@ -149,9 +153,13 @@ class HomeController {
         setTimeout(() => {
             desc.addClass( "is-anim" );
             cta.addClass( "is-anim" );
-            this.inMotion = false;
 
         }, 2500 );
+
+        setTimeout(() => {
+            this.resetWheel();
+
+        }, 3000 );
     }
     unloadReel () {
         const slice = this.slices.eq( 0 );
@@ -170,13 +178,19 @@ class HomeController {
 
 
     loadDiscover () {
-        this.inMotion = false;
+        setTimeout(() => {
+            this.resetWheel();
+
+        }, 2000 );
     }
     unloadDiscover () {}
 
 
     loadStories () {
-        this.inMotion = false;
+        setTimeout(() => {
+            this.resetWheel();
+
+        }, 2000 );
     }
     unloadStories () {}
 

@@ -15,7 +15,8 @@
         "sourceType": "module"
     },
     "globals": {
-        "hobo": true
+        "hobo": true,
+        "require": true
     },
     "rules": {
         // Possible Errors
