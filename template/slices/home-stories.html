@@ -1,0 +1,26 @@
+<%
+/* Home Stories
+locals { item, slice, scope }
+primary { stories_description, stories_cta, stories_page_link }
+*/
+const dom = locals.context.get( 'dom' );
+const itemsMapped = slice.items.map(( item ) => {
+    return item.story;
+});
+%>
+<div class="home__stories-desc cms -wrap -pad">
+    <%- dom.RichText.asHtml( slice.primary.stories_description ) %>
+    <%- include( './link.html', {
+        slice: {
+            primary: {
+                document_link: slice.primary.stories_page_link,
+                external_link: {},
+                text: slice.primary.stories_cta,
+                icon: 'Arrow'
+            }
+        }
+    }) %>
+</div>
+<div class="home__stories-slider">
+    <%- include( '../partials/slider.html', {items: itemsMapped} ) %>
+</div>

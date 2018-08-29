@@ -49,24 +49,20 @@ class HomeController {
         core.dom.doc.off( "DOMMouseScroll mousewheel", this._onMouseWheel );
     }
     handleWheel ( e ) {
-        this.unbindWheel();
-        this.inMotion = true;
-
         // Scroll up ( rewind )
         if ( e.deltaY < 0 ) {
             if ( this.index !== 0 ) {
                 this.index--;
+                this.transition();
             }
 
         // Scroll down ( advance )
-        } else if ( this.index === this.length ) {
-            this.index = 0;
-
-        } else {
-            this.index++;
+        } else if ( e.deltaY > 0 ) {
+            if ( this.index !== (this.length - 1) ) {
+                this.index++;
+                this.transition();
+            }
         }
-
-        this.transition();
     }
     resetWheel () {
         this.bindWheel();
@@ -81,6 +77,8 @@ class HomeController {
 
     transition () {
         // This needs to happen each time
+        this.inMotion = true;
+        this.unbindWheel();
         this.unload();
 
         if ( this.index === 0 ) {
@@ -216,6 +214,10 @@ class HomeController {
 
 
     loadStories () {
+        const slice = this.slices.eq( 3 ).addClass( "is-active" );
+        const desc = slice.find( ".js-home-stories-desc" );
+
+        desc.addClass( "is-anim" );
         core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
 
         setTimeout(() => {
@@ -223,7 +225,12 @@ class HomeController {
 
         }, 2000 );
     }
-    unloadStories () {}
+    unloadStories () {
+        const slice = this.slices.eq( 3 );
+        const desc = slice.find( ".js-home-stories-desc" );
+
+        desc.removeClass( "is-anim" );
+    }
 
 
     destroy () {

@@ -7,6 +7,10 @@ const fetchFields = [
     "page.image",
     "page.theme",
     "page.description",
+    "story.title",
+    "story.image",
+    "story.theme",
+    "story.description",
     "taxonomy.name",
     "taxonomy.image",
     "taxonomy.description"

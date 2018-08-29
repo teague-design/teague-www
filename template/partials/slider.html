@@ -1,0 +1,14 @@
+<%
+/* Slider
+locals items [document, document, ...]
+*/
+%>
+<div class="slider js-slider">
+    <div class="slider__items js-slider-belt">
+        <% locals.items.forEach(( item ) => { %>
+            <div class="slider__item">
+                <%- include( './image.html', {image: item.data.image} ) %>
+            </div>
+        <% })%>
+    </div>
+</div>
