@@ -161,11 +161,16 @@ class HomeController {
         const ex = slice.find( ".js-home-reel-ex" );
         const video = slice.find( ".js-home-reel-video" );
 
-        desc.removeClass( "is-anim" );
+        desc.addClass( "is-animo" );
         cta.removeClass( "is-anim" ).off( "click" );
         ex.removeClass( "is-anim" ).off( "click" );
         mark.removeClass( "is-full is-half" );
         video.removeClass( "is-fs" );
+
+        setTimeout(() => {
+            desc.removeClass( "is-anim is-animo" );
+
+        }, 1000 );
     }
 
 
@@ -188,16 +193,24 @@ class HomeController {
         const mark = slice.find( ".js-home-about-mark" );
         const desc = slice.find( ".js-home-about-desc" );
 
-        mark.removeClass( "is-expand" );
-        desc.removeClass( "is-anim" );
+        mark.addClass( "is-contract" );
+        desc.addClass( "is-animo" );
+
+        setTimeout(() => {
+            mark.removeClass( "is-expand is-contract" );
+            desc.removeClass( "is-anim is-animo" );
+
+        }, 1000 );
     }
 
 
     loadDiscover () {
         const slice = this.slices.eq( 2 ).addClass( "is-active" );
         const desc = slice.find( ".js-home-discover-desc" );
+        const mark = slice.find( ".js-home-discover-mark" );
 
         desc.addClass( "is-anim" );
+        mark.addClass( "is-expand" );
         core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
 
         setTimeout(() => {
@@ -208,8 +221,15 @@ class HomeController {
     unloadDiscover () {
         const slice = this.slices.eq( 2 );
         const desc = slice.find( ".js-home-discover-desc" );
+        const mark = slice.find( ".js-home-discover-mark" );
 
-        desc.removeClass( "is-anim" );
+        desc.addClass( "is-animo" );
+        mark.removeClass( "is-expand" );
+
+        setTimeout(() => {
+            desc.removeClass( "is-anim is-animo" );
+
+        }, 1000 );
     }
 
 

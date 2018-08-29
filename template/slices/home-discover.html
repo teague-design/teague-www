@@ -5,8 +5,13 @@ primary { discover_label, discover_description, discover_cta, discover_page_link
 */
 const dom = locals.context.get( 'dom' );
 %>
-<div class="home__discover-image">
-    <%- include( '../partials/image.html', {image: slice.primary.discover_image} ) %>
+<div class="home__discover-mark js-home-discover-mark">
+    <svg class="svg svg--mark-fluid svg--lite" x="0px" y="0px" viewBox="0 0 1416 835" style="enable-background:new 0 0 1416 835;">
+        <clipPath id="discoverClip">
+            <rect x="275.1" y="700.2" width="1202" height="134.8" />
+        </clipPath>
+        <image y="12vw" class="home__discover-image" xlink:href="<%= slice.primary.discover_image.url %>" clip-path="url(#discoverClip)" />
+    </svg>
 </div>
 <div class="home__discover-desc js-home-discover-desc cms -wrap">
     <div class="home__discover-label">

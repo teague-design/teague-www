@@ -7,11 +7,11 @@ const dom = locals.context.get( 'dom' );
 %>
 <div class="home__about-mark js-home-about-mark">
     <svg class="svg svg--mark-fluid svg--lite" x="0px" y="0px" viewBox="0 0 1416 835" style="enable-background:new 0 0 1416 835;">
-        <clipPath id="markclip">
+        <clipPath id="aboutClip">
             <rect x="0" y="466.4" width="708" height="134.8" />
             <rect x="0" y="700.2" width="433.4" height="134.8" />
         </clipPath>
-        <image y="12vw" class="home__about-image" xlink:href="<%= slice.primary.about_image.url %>" clip-path="url(#markclip)" />
+        <image y="12vw" class="home__about-image" xlink:href="<%= slice.primary.about_image.url %>" clip-path="url(#aboutClip)" />
     </svg>
 </div>
 <div class="home__about-desc js-home-about-desc cms">
