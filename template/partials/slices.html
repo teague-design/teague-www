@@ -9,7 +9,7 @@ locals { item, slices, scope }
         const sliceType = slice.slice_type.replace( /_+/g, '-' );
         const slicePartial = `../slices/${sliceType}.html`;
         %>
-        <div class="slice slice--<%= sliceType %> js-slice" data-index="<%= i %>">
+        <div class="slice slice--<%= sliceType %> js-slice" data-index="<%= i %>" data-prop="<%= slice.slice_type %>">
             <%- include( slicePartial, {item, slice, scope} ) %>
         </div>
     <% }) %>

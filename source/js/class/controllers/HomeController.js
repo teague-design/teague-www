@@ -20,6 +20,8 @@ class HomeController {
         this.isDisabled = false;
         this._onMouseWheel = this.onMouseWheel.bind( this );
         this._onMouseWheelF = this.onMouseWheelF.bind( this );
+        this._loadFunc = null;
+        this._unloadFunc = null;
 
         this.bindWheelF();
         this.bindWheel();
@@ -52,6 +54,9 @@ class HomeController {
         // Scroll up ( rewind )
         if ( e.deltaY < 0 ) {
             if ( this.index !== 0 ) {
+                if ( this._unloadFunc ) {
+                    this._unloadFunc();
+                }
                 this.index--;
                 this.transition();
             }
@@ -59,6 +64,9 @@ class HomeController {
         // Scroll down ( advance )
         } else if ( e.deltaY > 0 ) {
             if ( this.index !== (this.length - 1) ) {
+                if ( this._unloadFunc ) {
+                    this._unloadFunc();
+                }
                 this.index++;
                 this.transition();
             }
@@ -73,37 +81,22 @@ class HomeController {
     unload () {
         this.slices.removeClass( "is-active" );
     }
-
-
     transition () {
-        // This needs to happen each time
         this.inMotion = true;
         this.unbindWheel();
         this.unload();
 
-        if ( this.index === 0 ) {
-            this.unloadAbout();
-            this.loadReel();
+        const slice = this.slices.eq( this.index );
+        const data = slice.data();
 
-        } else if ( this.index === 1 ) {
-            this.unloadReel();
-            this.unloadDiscover();
-            this.loadAbout();
-
-        } else if ( this.index === 2 ) {
-            this.unloadAbout();
-            this.unloadStories();
-            this.loadDiscover();
-
-        } else if ( this.index === 3 ) {
-            this.unloadDiscover();
-            this.loadStories();
-        }
+        this._loadFunc = this[ `${data.prop}_load` ].bind( this );
+        this._unloadFunc = this[ `${data.prop}_unload` ].bind( this );
+        this._loadFunc();
     }
 
 
-    loadReel () {
-        const slice = this.slices.eq( 0 ).addClass( "is-active" );
+    home_reel_load () {
+        const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const mark = slice.find( ".js-home-reel-mark" );
         const desc = slice.find( ".js-home-reel-desc" );
         const cta = slice.find( ".js-home-reel-cta" );
@@ -153,8 +146,8 @@ class HomeController {
 
         }, 3000 );
     }
-    unloadReel () {
-        const slice = this.slices.eq( 0 );
+    home_reel_unload () {
+        const slice = this.slices.eq( this.index );
         const mark = slice.find( ".js-home-reel-mark" );
         const desc = slice.find( ".js-home-reel-desc" );
         const cta = slice.find( ".js-home-reel-cta" );
@@ -174,8 +167,8 @@ class HomeController {
     }
 
 
-    loadAbout () {
-        const slice = this.slices.eq( 1 ).addClass( "is-active" );
+    home_about_load () {
+        const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const mark = slice.find( ".js-home-about-mark" );
         const desc = slice.find( ".js-home-about-desc" );
 
@@ -188,8 +181,8 @@ class HomeController {
 
         }, 2000 );
     }
-    unloadAbout () {
-        const slice = this.slices.eq( 1 );
+    home_about_unload () {
+        const slice = this.slices.eq( this.index );
         const mark = slice.find( ".js-home-about-mark" );
         const desc = slice.find( ".js-home-about-desc" );
 
@@ -204,8 +197,8 @@ class HomeController {
     }
 
 
-    loadDiscover () {
-        const slice = this.slices.eq( 2 ).addClass( "is-active" );
+    home_discover_load () {
+        const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-discover-desc" );
         const mark = slice.find( ".js-home-discover-mark" );
 
@@ -218,8 +211,8 @@ class HomeController {
 
         }, 2000 );
     }
-    unloadDiscover () {
-        const slice = this.slices.eq( 2 );
+    home_discover_unload () {
+        const slice = this.slices.eq( this.index );
         const desc = slice.find( ".js-home-discover-desc" );
         const mark = slice.find( ".js-home-discover-mark" );
 
@@ -233,8 +226,8 @@ class HomeController {
     }
 
 
-    loadStories () {
-        const slice = this.slices.eq( 3 ).addClass( "is-active" );
+    home_stories_load () {
+        const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-stories-desc" );
 
         desc.addClass( "is-anim" );
@@ -245,8 +238,8 @@ class HomeController {
 
         }, 2000 );
     }
-    unloadStories () {
-        const slice = this.slices.eq( 3 );
+    home_stories_unload () {
+        const slice = this.slices.eq( this.index );
         const desc = slice.find( ".js-home-stories-desc" );
 
         desc.removeClass( "is-anim" );
