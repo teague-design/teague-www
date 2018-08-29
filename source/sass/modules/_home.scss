@@ -171,3 +171,40 @@
         margin-top: $expander-1 / 2;
     }
 }
+.home__about-label {
+    margin-bottom: $expander-1 / 2;
+}
+
+
+
+// DISCOVER
+.home__discover-desc {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translate3d( 0, -25%, 0 );
+    opacity: 0;
+    transition: opacity $base-duration $ease,
+                transform $base-duration $ease;
+
+    &.is-anim {
+        transform: translate3d( 0, -50%, 0 );
+        opacity: 1;
+    }
+}
+.home__discover-cta {
+    padding-top: $expander-1;
+
+    .link {
+        margin-top: $expander-1 / 2;
+    }
+}
+.home__discover-label {
+    margin-bottom: $expander-1 / 2;
+}
+.home__discover-image {
+    width: 81.081081081vw;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}

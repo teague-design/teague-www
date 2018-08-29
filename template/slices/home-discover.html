@@ -1,0 +1,29 @@
+<%
+/* Home Discover
+locals { item, slice, scope }
+primary { discover_label, discover_description, discover_cta, discover_page_link, discover_image }
+*/
+const dom = locals.context.get( 'dom' );
+%>
+<div class="home__discover-image">
+    <%- include( '../partials/image.html', {image: slice.primary.discover_image} ) %>
+</div>
+<div class="home__discover-desc js-home-discover-desc cms -wrap">
+    <div class="home__discover-label">
+        <h6><%= slice.primary.discover_label %></h6>
+    </div>
+    <%- dom.RichText.asHtml( slice.primary.discover_description ) %>
+    <div class="home__discover-cta">
+        <%- dom.RichText.asHtml( slice.primary.discover_cta ) %>
+        <%- include( './link.html', {
+            slice: {
+                primary: {
+                    document_link: slice.primary.discover_page_link,
+                    external_link: {},
+                    text: dom.RichText.asText( slice.primary.discover_page_link.data.title ),
+                    icon: 'Arrow'
+                }
+            }
+        }) %>
+    </div>
+</div>

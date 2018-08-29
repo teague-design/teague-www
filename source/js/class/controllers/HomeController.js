@@ -114,6 +114,7 @@ class HomeController {
         const videoInstance = video.find( ".js-video" ).data().Video;
 
         mark.addClass( "is-full" );
+        core.dom.html.removeClass( "is-theme-black" ).addClass( "is-theme-white" );
 
         cta.on( "click", () => {
             this.isDisabled = true;
@@ -177,6 +178,7 @@ class HomeController {
 
         mark.addClass( "is-expand" );
         desc.addClass( "is-anim" );
+        core.dom.html.removeClass( "is-theme-black" ).addClass( "is-theme-white" );
 
         setTimeout(() => {
             this.resetWheel();
@@ -194,15 +196,28 @@ class HomeController {
 
 
     loadDiscover () {
+        const slice = this.slices.eq( 2 ).addClass( "is-active" );
+        const desc = slice.find( ".js-home-discover-desc" );
+
+        desc.addClass( "is-anim" );
+        core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
+
         setTimeout(() => {
             this.resetWheel();
 
         }, 2000 );
     }
-    unloadDiscover () {}
+    unloadDiscover () {
+        const slice = this.slices.eq( 2 );
+        const desc = slice.find( ".js-home-discover-desc" );
+
+        desc.removeClass( "is-anim" );
+    }
 
 
     loadStories () {
+        core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
+
         setTimeout(() => {
             this.resetWheel();
 

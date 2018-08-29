@@ -15,8 +15,11 @@ const dom = locals.context.get( 'dom' );
     </svg>
 </div>
 <div class="home__about-desc js-home-about-desc cms">
+    <div class="home__about-label">
+        <h6><%= slice.primary.about_label %></h6>
+    </div>
     <%- dom.RichText.asHtml( slice.primary.about_description ) %>
-    <div class="home__about-cta js-home-about-cta">
+    <div class="home__about-cta">
         <%- dom.RichText.asHtml( slice.primary.about_cta ) %>
         <%- include( './link.html', {
             slice: {
