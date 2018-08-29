@@ -4,7 +4,7 @@ locals { item, slice, scope }
 */
 const media = {};
 
-if ( slice.primary.vimeo_url && false ) {
+if ( slice.primary.vimeo_url ) {
     media.vimeo = slice.primary.vimeo_url;
 
 } else if ( slice.primary.video_file ) {

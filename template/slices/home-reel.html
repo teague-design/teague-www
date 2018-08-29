@@ -6,7 +6,7 @@ primary { reel_vimeo_url, reel_cta, reel_description }
 const dom = locals.context.get( 'dom' );
 const media = {};
 
-if ( slice.primary.reel_vimeo_url && false ) {
+if ( slice.primary.reel_vimeo_url ) {
     media.vimeo = slice.primary.reel_vimeo_url;
 
 } else if ( slice.primary.reel_video_file ) {
