@@ -30,6 +30,11 @@ router.on( "authorizations", {
         });
     }
 });
+router.on( config.homepage, {
+    fetchLinks ( client, api, form, cache, req ) {
+        form.fetchLinks( fetchFields );
+    }
+});
 router.on( "page", {
     fetchLinks ( client, api, form, cache, req ) {
         form.fetchLinks( fetchFields );

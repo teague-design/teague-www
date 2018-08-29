@@ -9,7 +9,7 @@ class Taxi {
         this.element = element;
         this.data = data;
         this.viewElement = core.dom.body.find( `.js-view[data-uid="${this.data.view}"]` );
-        this.viewInstance = this.viewElement.data().instance;
+        this.viewInstance = this.viewElement.data().View;
 
         this.bind();
     }

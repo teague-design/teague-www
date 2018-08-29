@@ -29,6 +29,9 @@ class Video {
         this.isPlaying = false;
         this.isReadyState = false;
 
+        // Store instance with element...
+        this.elem.data( "Video", this );
+
         // Vimeo without CMS mobile alternative
         if ( this.elemData.json.vimeo && !core.detect.isDevice() ) {
             this.vimeoId = this.elemData.json.vimeo.split( "/" ).pop().replace( /\//g, "" );

@@ -24,6 +24,7 @@ class VideoFS {
 
     auto () {
         this.video.togglePlay();
+        this.video.toggleSound();
     }
 
 

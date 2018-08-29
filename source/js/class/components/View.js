@@ -30,7 +30,7 @@ class View {
         this.method = "GET";
 
         // Store View instance for update(s)
-        this.element.data( "instance", this );
+        this.element.data( "View", this );
 
         // clean = no queryString
         // flags = queryString to add

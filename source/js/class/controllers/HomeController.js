@@ -17,6 +17,7 @@ class HomeController {
         this.index = 0;
         this.length = this.slices.length;
         this.inMotion = true;
+        this.isDisabled = false;
         this._onMouseWheel = this.onMouseWheel.bind( this );
         this._onMouseWheelF = this.onMouseWheelF.bind( this );
 
@@ -31,7 +32,7 @@ class HomeController {
         return false;
     }
     onMouseWheel ( e ) {
-        if ( !this.inMotion ) {
+        if ( !this.inMotion && !this.isDisabled ) {
             this.handleWheel( e );
         }
     }
@@ -103,29 +104,6 @@ class HomeController {
     }
 
 
-    loadAbout () {
-        const slice = this.slices.eq( 1 ).addClass( "is-active" );
-        const mark = slice.find( ".js-home-about-mark" );
-        const desc = slice.find( ".js-home-about-desc" );
-
-        mark.addClass( "is-expand" );
-        desc.addClass( "is-anim" );
-
-        setTimeout(() => {
-            this.resetWheel();
-
-        }, 2000 );
-    }
-    unloadAbout () {
-        const slice = this.slices.eq( 1 );
-        const mark = slice.find( ".js-home-about-mark" );
-        const desc = slice.find( ".js-home-about-desc" );
-
-        mark.removeClass( "is-expand" );
-        desc.removeClass( "is-anim" );
-    }
-
-
     loadReel () {
         const slice = this.slices.eq( 0 ).addClass( "is-active" );
         const mark = slice.find( ".js-home-reel-mark" );
@@ -133,23 +111,31 @@ class HomeController {
         const cta = slice.find( ".js-home-reel-cta" );
         const ex = slice.find( ".js-home-reel-ex" );
         const video = slice.find( ".js-home-reel-video" );
+        const videoInstance = video.find( ".js-video" ).data().Video;
 
         mark.addClass( "is-full" );
 
         cta.on( "click", () => {
+            this.isDisabled = true;
             desc.removeClass( "is-anim" );
             cta.removeClass( "is-anim" );
             ex.addClass( "is-anim" );
             mark.removeClass( "is-half" );
             video.addClass( "is-fs" );
+            videoInstance.toggleSound();
         });
 
         ex.on( "click", () => {
+            this.isDisabled = false;
             desc.addClass( "is-anim" );
             cta.addClass( "is-anim" );
             ex.removeClass( "is-anim" );
             mark.addClass( "is-half" );
             video.removeClass( "is-fs" );
+
+            if ( !videoInstance.isMuted ) {
+                videoInstance.toggleSound();
+            }
         });
 
         setTimeout(() => {
@@ -181,6 +167,29 @@ class HomeController {
         ex.removeClass( "is-anim" ).off( "click" );
         mark.removeClass( "is-full is-half" );
         video.removeClass( "is-fs" );
+    }
+
+
+    loadAbout () {
+        const slice = this.slices.eq( 1 ).addClass( "is-active" );
+        const mark = slice.find( ".js-home-about-mark" );
+        const desc = slice.find( ".js-home-about-desc" );
+
+        mark.addClass( "is-expand" );
+        desc.addClass( "is-anim" );
+
+        setTimeout(() => {
+            this.resetWheel();
+
+        }, 2000 );
+    }
+    unloadAbout () {
+        const slice = this.slices.eq( 1 );
+        const mark = slice.find( ".js-home-about-mark" );
+        const desc = slice.find( ".js-home-about-desc" );
+
+        mark.removeClass( "is-expand" );
+        desc.removeClass( "is-anim" );
     }
 
 
