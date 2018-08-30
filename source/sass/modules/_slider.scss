@@ -1,8 +1,52 @@
 .slider {
     white-space: nowrap;
+    letter-spacing: 10vw;
+    width: 100%;
+}
+.slider__pane {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+.slider__belt {
+    transition: transform $base-duration $ease;
 }
 .slider__item {
-    width: 47.297297297vw;
+    width: 50vw;
     display: inline-block;
     vertical-align: top;
+}
+.slider__navi {
+    white-space: nowrap;
+    letter-spacing: 10px;
+    padding-top: $padding-1;
+    text-align: right;
+    padding-right: $padding-1;
+    user-select: none;
+}
+.slider__navi__next {
+    display: inline-block;
+    vertical-align: middle;
+    cursor: pointer;
+}
+.slider__navi__prev {
+    display: inline-block;
+    vertical-align: middle;
+    transform: scaleX( -1 );
+    cursor: pointer;
+}
+.slider__navi__curr {
+    cursor: pointer;
+    display: inline-block;
+    vertical-align: middle;
+    height: 2px;
+    width: 10px;
+    background-color: $white;
+    transition: width $base-duration $ease,
+                background-color $base-duration $ease;
+
+    &.is-active {
+        width: 20px;
+        background-color: $spot;
+    }
 }

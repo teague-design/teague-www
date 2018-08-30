@@ -8,7 +8,7 @@ const itemsMapped = slice.items.map(( item ) => {
     return item.story;
 });
 %>
-<div class="home__stories-desc cms -wrap -pad">
+<div class="home__stories-desc cms -wrap">
     <%- dom.RichText.asHtml( slice.primary.stories_description ) %>
     <%- include( './link.html', {
         slice: {

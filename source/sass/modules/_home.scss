@@ -131,60 +131,53 @@
 
 
 // ABOUT
-.home__about-image {
-    width: 100%;
-}
 .home__about-mark {
-    rect {
-        transition: height $long-duration $ease,
-                    width $long-duration $ease,
-                    y $long-duration $ease,
-                    x $long-duration $ease;
-    }
+    visibility: hidden;
+    pointer-events: none;
 
-    &.is-expand {
-        rect:nth-child( 1 ) {
-            width: 846px;
-            height: 469px;
-            y: 182px;
-        }
-        rect:nth-child( 2 ) {
-            width: 100%;
-        }
+    .svg {
+        transform: translate3d( -50%, 0, 0 );
     }
-    &.is-contract {
-        rect:nth-child( 1 ) {
-            width: 0;
-            height: 469px;
-            y: 182px;
-        }
-        rect:nth-child( 2 ) {
-            x: 275.1px;
-            width: 1202px;
-        }
+}
+.home__about-image {
+    left: 0;
+    height: calc( 100vh - 12vw );
+    top: 12vw;
+    position: absolute;
+    width: 100vw;
+
+    .image {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        transform: translate3d( 0, 0, 0 );
+        transition: clip-path $base-duration $ease;
+        background-position: 0 0;
+        background-size: cover;
     }
 }
 .home__about-desc {
     position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translate3d( 0, -25%, 0 );
+    top: 14vw;
+    left: 52vw;
+    transform: translate3d( 0, 25%, 0 );
     opacity: 0;
-    padding-right: $padding-1 * 2;
     transition: opacity $base-duration $ease,
                 transform $base-duration $ease;
 
     &.is-anim {
-        transform: translate3d( 0, -50%, 0 );
+        transform: translate3d( 0, 0, 0 );
         opacity: 1;
     }
     &.is-animo {
-        transform: translate3d( 0, -75%, 0 );
+        transform: translate3d( 0, -25%, 0 );
         opacity: 0;
     }
 }
 .home__about-cta {
-    padding-left: 7.027027027vw;
+    padding-left: 10vw;
     padding-top: $expander-1;
 
     .link {
@@ -198,8 +191,32 @@
 
 
 // DISCOVER
+.home__about-mark {
+    visibility: hidden;
+    pointer-events: none;
+}
 .home__discover-image {
+    left: 0;
+    height: 100%;
+    top: 0;
+    position: absolute;
     width: 100%;
+
+    .image {
+        position: fixed;
+        left: 20vw;
+        top: 12vw;
+        width: calc( 100vw - 20vw );
+        height: calc( 100vh - 12vw );
+        transform: translate3d( 0, 0, 0 );
+        transition: clip-path $base-duration $ease,
+                    width $base-duration $ease,
+                    height $base-duration $ease,
+                    left $base-duration $ease,
+                    top $base-duration $ease;
+        background-position: 50% 50%;
+        background-size: cover;
+    }
 }
 .home__discover-desc {
     position: absolute;
@@ -229,27 +246,30 @@
 .home__discover-label {
     margin-bottom: $expander-1 / 2;
 }
-.home__discover-mark {
-    rect {
-        transition: height $long-duration $ease,
-                    width $long-duration $ease,
-                    y $long-duration $ease;
-    }
-
-    &.is-expand {
-        rect {
-            y: 182px;
-            width: 1202px;
-            height: 666px;
-        }
-    }
-}
 
 
 
 // STORIES
 .home__stories-desc {
+    padding-top: 10.472972973vw;
+    position: relative;
+    z-index: 2;
+
     .link {
         margin-top: $expander-1 / 2;
+    }
+}
+.home__stories-slider {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+
+    .slider {
+        position: absolute;
+        padding-left: 27.027027027vw;
+        bottom: 100px;
     }
 }

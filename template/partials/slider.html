@@ -4,11 +4,24 @@ locals items [document, document, ...]
 */
 %>
 <div class="slider js-slider">
-    <div class="slider__items js-slider-belt">
-        <% locals.items.forEach(( item ) => { %>
-            <div class="slider__item">
-                <%- include( './image.html', {image: item.data.image} ) %>
-            </div>
+    <div class="slider__pane">
+        <div class="slider__belt js-slider-belt">
+            <% locals.items.forEach(( item ) => { %>
+                <div class="slider__item">
+                    <%- include( './image.html', {image: item.data.image} ) %>
+                </div>
+            <% })%>
+        </div>
+    </div>
+    <div class="slider__navi js-slider-navi">
+        <div class="slider__navi__prev js-slider-prev">
+            <%- include( './svg/icon-play.svg' ) %>
+        </div>
+        <% locals.items.forEach(( item, i ) => { %>
+            <div class="slider__navi__curr js-slider-curr" data-index="<%= i %>"></div>
         <% })%>
+        <div class="slider__navi__next js-slider-next">
+            <%- include( './svg/icon-play.svg' ) %>
+        </div>
     </div>
 </div>

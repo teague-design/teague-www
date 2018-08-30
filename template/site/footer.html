@@ -4,47 +4,17 @@ const footer = locals.context.get( 'footer' );
 const dom = locals.context.get( 'dom' );
 %>
 <footer class="footer js-footer -wrap">
-    <div class="footer__main">
-        <div class="footer__l">
-            <div class="footer__stories">
-                <div class="cms">
-                    <h6><%= footer.data.primary.design_story_label %></h6>
-                </div>
-                <div class="footer__story view js-view" data-uid="story" data-url="/api/story/" data-skips="page" data-flags="nopaging"></div>
-            </div>
-            <div class="footer__newsletter">
-                <div class="cms">
-                    <h6><%= footer.data.primary.newsletter_label %></h6>
-                    <div class="-exp">
-                        <%- dom.RichText.asHtml( footer.data.primary.newsletter_cta ) %>
-                    </div>
-                </div>
-                <%- include( '../slices/form.html', {
-                    slice: {
-                        primary: {
-                            submit_action: 'Newsletter'
-                        }
-                    }
-                }) %>
-            </div>
+    <div class="footer__newsletter">
+        <div class="cms">
+            <h6><%= footer.data.primary.newsletter_label %></h6>
         </div>
-        <div class="footer__r">
-            <div class="footer__contact">
-                <div class="cms">
-                    <h6><%= footer.data.primary.contact_label %></h6>
-                    <div class="-exp">
-                        <%- dom.RichText.asHtml( footer.data.primary.contact_cta ) %>
-                    </div>
-                </div>
-                <%- /* include( '../slices/form.html', {
-                    slice: {
-                        primary: {
-                            submit_action: 'Contact'
-                        }
-                    }
-                }) */ %>
-            </div>
-        </div>
+        <%- include( '../slices/form.html', {
+            slice: {
+                primary: {
+                    submit_action: 'Newsletter'
+                }
+            }
+        }) %>
     </div>
     <nav class="footer__navi">
         <div class="footer__social">

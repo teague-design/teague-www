@@ -1,26 +1,27 @@
-import $ from "properjs-hobo";
-import Form from "../components/Form";
-
-
 /**
  *
  * @public
- * @global
- * @class FormController
- * @param {Element} elements The dom elements to work with.
- * @classdesc Handle forms.
+ * @class BaseController
+ * @param {Hobo} element The module element
+ * @classdesc Handles basic module instantiation
  *
  */
-class FormController {
-    constructor ( elements ) {
+class BaseController {
+    constructor ( elements, component ) {
         this.elements = elements;
+        this.component = component;
         this.instances = [];
 
-        this.elements.forEach(( node ) => {
-            const elem = $( node );
+        this.init();
+    }
+
+
+    init () {
+        this.elements.forEach(( el, i ) => {
+            const elem = this.elements.eq( i );
             const data = elem.data();
 
-            this.instances.push( new Form( elem, data ) );
+            this.instances.push( new this.component( elem, data ) );
         });
     }
 
@@ -38,4 +39,4 @@ class FormController {
 /******************************************************************************
  * Export
 *******************************************************************************/
-export default FormController;
+export default BaseController;

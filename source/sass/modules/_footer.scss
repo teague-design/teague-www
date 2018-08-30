@@ -51,31 +51,10 @@
         color: $black;
     }
 }
-.footer__main {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    flex-wrap: wrap;
-
-    .footer__l {
-        width: 55vw;
+.footer__newsletter {
+    .form {
+        padding-top: $padding-1;
     }
-    .footer__r {
-        width: 30vw;
-
-        @include respond( $break-tablet-small ) {
-            padding-top: $expander-2;
-        }
-    }
-    .footer__l,
-    .footer__r {
-        @include respond( $break-tablet-small ) {
-            width: 100%;
-        }
-    }
-}
-.footer__stories {
-    padding-bottom: $expander-2;
 }
 .footer__navi {
     height: $header-height;
