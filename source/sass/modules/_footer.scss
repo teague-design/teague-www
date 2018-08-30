@@ -1,54 +1,9 @@
 .footer {
-    background-color: $black;
-    color: $white;
     padding-top: $expander-2;
-    transition: color $base-duration $ease,
-                opacity $base-duration $ease,
-                background-color $base-duration $ease;
 
     .is-tranny & {
         opacity: 0;
         pointer-events: none;
-    }
-
-    .svg--mark {
-        fill: $white;
-
-        .is-theme-black & {
-            fill: $black;
-        }
-    }
-
-    .form__input {
-        color: $white;
-        border-color: $white;
-
-        .is-theme-black & {
-            color: $black;
-            border-color: $black;
-        }
-
-        &::-webkit-input-placeholder {
-            color: $grey3;
-
-            .is-theme-black & {
-                color: $grey2;
-            }
-        }
-    }
-
-    .form__input + .form__sub {
-        .is-hoverable &:hover {
-            color: $white;
-        }
-        .is-hoverable.is-theme-black &:hover {
-            color: $black;
-        }
-    }
-
-    .is-theme-black & {
-        background-color: $white;
-        color: $black;
     }
 }
 .footer__newsletter {

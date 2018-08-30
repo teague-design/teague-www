@@ -2,6 +2,7 @@
     white-space: nowrap;
     letter-spacing: 10vw;
     width: 100%;
+    user-select: none;
 }
 .slider__pane {
     overflow: hidden;
@@ -15,6 +16,11 @@
     width: 50vw;
     display: inline-block;
     vertical-align: top;
+    cursor: pointer;
+
+    .image {
+        pointer-events: none;
+    }
 }
 .slider__navi {
     white-space: nowrap;
@@ -22,18 +28,19 @@
     padding-top: $padding-1;
     text-align: right;
     padding-right: $padding-1;
-    user-select: none;
 }
 .slider__navi__next {
     display: inline-block;
     vertical-align: middle;
     cursor: pointer;
+    transform: scaleX( -1 );
+    margin-left: 10px;
 }
 .slider__navi__prev {
     display: inline-block;
     vertical-align: middle;
-    transform: scaleX( -1 );
     cursor: pointer;
+    margin-right: 10px;
 }
 .slider__navi__curr {
     cursor: pointer;
@@ -48,5 +55,74 @@
     &.is-active {
         width: 20px;
         background-color: $spot;
+    }
+}
+
+
+
+// SPLASH
+.slider__splash {
+    white-space: normal;
+    letter-spacing: 0;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 38.716216216vw;
+
+    &:before {
+        content: attr(data-label);
+        @include h6();
+        @include wrap();
+    }
+}
+.slider__splash__item {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    padding-top: $padding-1 * 2;
+    pointer-events: none;
+
+    p {
+        padding-top: $padding-1;
+        padding-bottom: $padding-1 / 2;
+        width: 22.5vw;
+    }
+
+    p,
+    a,
+    h4 {
+        opacity: 0;
+        transform: translate3d( 0, $padding-1, 0 );
+        transition: opacity $base-duration $ease,
+                    transform $base-duration $ease;
+    }
+
+    p {
+        transition-delay: 50ms;
+    }
+
+    a {
+        transition-delay: 100ms;
+    }
+
+    &.is-active {
+        pointer-events: auto;
+
+        p,
+        a,
+        h4 {
+            opacity: 1;
+            transform: translate3d( 0, 0, 0 );
+        }
+    }
+
+    &.is-exit {
+        p,
+        a,
+        h4 {
+            opacity: 0;
+            transform: translate3d( 0, -50%, 0 );
+        }
     }
 }

@@ -5,7 +5,9 @@ primary { stories_description, stories_cta, stories_page_link }
 */
 const dom = locals.context.get( 'dom' );
 const itemsMapped = slice.items.map(( item ) => {
-    return item.story;
+    const doc = item.story;
+    doc.cta = item.story_cta;
+    return doc;
 });
 %>
 <div class="home__stories-desc cms -wrap">
@@ -22,5 +24,5 @@ const itemsMapped = slice.items.map(( item ) => {
     }) %>
 </div>
 <div class="home__stories-slider">
-    <%- include( '../partials/slider.html', {items: itemsMapped} ) %>
+    <%- include( '../partials/slider.html', {items: itemsMapped, options: {spawn: 'home', label: dom.RichText.asText( slice.primary.stories_page_link.data.title )} } ) %>
 </div>

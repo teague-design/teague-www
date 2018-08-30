@@ -6,13 +6,7 @@
     padding-top: $expander-1;
     }
 .-wrap {
-    padding-left: $padding-1 / 2;
-    padding-right: $padding-1 / 2;
-
-    @include respond-min( $mobile-width ) {
-        padding-left: 2.027027027vw;
-        padding-right: 2.027027027vw;
-    }
+    @include wrap();
 }
 .-wrap-p {
     @include wrap-p();

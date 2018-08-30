@@ -1,0 +1,6 @@
+<svg class="svg svg--article <% if ( locals.style ) { %>svg--<%= locals.style %><% } %>">
+    <rect width="13.3" height="1" />
+    <rect y="4" width="13.3" height="1" />
+    <rect y="8" width="13.3" height="1" />
+    <rect x="0" y="12" width="9.3" height="1" />
+</svg>

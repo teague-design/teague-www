@@ -186,3 +186,12 @@
     max-width: $p-wrap;
     width: 100%;
 }
+@mixin wrap() {
+    padding-left: $padding-1 / 2;
+    padding-right: $padding-1 / 2;
+
+    @include respond-min( $mobile-width ) {
+        padding-left: $padding-v;
+        padding-right: $padding-v;
+    }
+}

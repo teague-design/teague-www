@@ -2,13 +2,7 @@
     .slice {
         padding-bottom: $expander-1;
         padding-top: $expander-1;
-        padding-left: $padding-1 / 2;
-        padding-right: $padding-1 / 2;
-
-        @include respond-min( $mobile-width ) {
-            padding-left: $padding-1;
-            padding-right: $padding-1;
-        }
+        @include wrap();
 
         &:first-child {
             padding-top: 0;

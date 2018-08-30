@@ -93,8 +93,6 @@ const config = {
             // contentType => collectionId
             // e.g. casestudy: "work"
             // Ensures you get /work/:uid rather than /casestudy/:uid
-            story: "stories",
-            casestudy: "work"
         }
     },
     // Third-party app Oauth authorizations

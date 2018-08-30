@@ -14,18 +14,40 @@ import $ from "properjs-hobo";
 class Slider {
     constructor ( element ) {
         this.element = element;
+        this.elemData = this.element.data();
         this.belt = this.element.find( ".js-slider-belt" );
         this.prev = this.element.find( ".js-slider-prev" );
         this.next = this.element.find( ".js-slider-next" );
         this.currs = this.element.find( ".js-slider-curr" );
+        this.items = this.element.find( ".js-slider-item" );
         this.data = {
             index: 0,
             length: this.currs.length
         };
         this.isPanning = false;
+        this._spawnFunc = this[ `spawn_${this.elemData.spawn}` ].bind( this );
+        this._swapFunc = this[ `swap_${this.elemData.spawn}` ].bind( this );
 
         this.init();
         this.bind();
+        this._spawnFunc();
+    }
+
+
+    spawn_home () {
+        this.splash = this.element.find( ".js-slider-splash" );
+        this.splashItems = this.element.find( ".js-slider-splash-item" );
+
+        this.splashItems.first().addClass( "is-active" );
+    }
+    swap_home () {
+        this.splashItems.filter( ".is-active" ).addClass( "is-exit" );
+        this.splashItems.eq( this.data.index ).addClass( "is-active" );
+
+        setTimeout( () => {
+            this.splashItems.filter( ".is-exit" ).removeClass( "is-exit is-active" );
+
+        }, 500 );
     }
 
 
@@ -36,21 +58,32 @@ class Slider {
 
     bind () {
         this.prev.on( "click", () => {
-            this.rewind();
+            if ( this.data.index !== 0 ) {
+                this.rewind();
+            }
         });
         this.next.on( "click", () => {
-            this.advance();
+            if ( this.data.index !== (this.data.length - 1) ) {
+                this.advance();
+            }
         });
-        this.currs.on( "click", ( e ) => {
-            const target = $( e.target );
-            const index = parseInt( target.data().index, 10 );
+        this.currs.on( "click", this.onHitItem.bind( this ));
+        this.items.on( "click", this.onHitItem.bind( this ));
+    }
 
+
+    onHitItem ( e ) {
+        const target = $( e.target );
+        const index = parseInt( target.data().index, 10 );
+
+        if ( index !== 0 && (index !== (this.data.length - 1)) ) {
             this.goto( index );
-        });
+        }
     }
 
 
     updateUI () {
+        this._swapFunc();
         this.currs.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
     }
 

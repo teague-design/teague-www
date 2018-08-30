@@ -1,13 +1,15 @@
 <%
 /* Slider
-locals items [document, document, ...]
+locals { items, options }
+options.spawn: home, careers, story, work
 */
+const dom = locals.context.get( 'dom' );
 %>
-<div class="slider js-slider">
+<div class="slider js-slider" data-spawn="<%= locals.options.spawn %>">
     <div class="slider__pane">
         <div class="slider__belt js-slider-belt">
-            <% locals.items.forEach(( item ) => { %>
-                <div class="slider__item">
+            <% locals.items.forEach(( item, i ) => { %>
+                <div class="slider__item js-slider-item" data-index="<%= i %>">
                     <%- include( './image.html', {image: item.data.image} ) %>
                 </div>
             <% })%>
@@ -15,13 +17,33 @@ locals items [document, document, ...]
     </div>
     <div class="slider__navi js-slider-navi">
         <div class="slider__navi__prev js-slider-prev">
-            <%- include( './svg/icon-play.svg' ) %>
+            <%- include( './svg/icon-prev.svg', {style: 'lite'} ) %>
         </div>
         <% locals.items.forEach(( item, i ) => { %>
             <div class="slider__navi__curr js-slider-curr" data-index="<%= i %>"></div>
         <% })%>
         <div class="slider__navi__next js-slider-next">
-            <%- include( './svg/icon-play.svg' ) %>
+            <%- include( './svg/icon-prev.svg', {style: 'lite'} ) %>
         </div>
     </div>
+    <% if ( locals.options.spawn === 'home' ) { %>
+        <div class="slider__splash js-slider-splash" data-label="<%= locals.options.label %>">
+            <% locals.items.forEach(( item, i ) => { %>
+                <div class="slider__splash__item js-slider-splash-item cms -wrap" data-index="<%= i %>">
+                    <%- dom.RichText.asHtml( item.data.title ).replace( /h1/g, 'h4' ) %>
+                    <p><%= item.data.excerpt %></p>
+                    <%- include( '../slices/link.html', {
+                        slice: {
+                            primary: {
+                                document_link: item,
+                                external_link: {},
+                                text: item.cta,
+                                icon: 'Article'
+                            }
+                        }
+                    }) %>
+                </div>
+            <% })%>
+        </div>
+    <% } %>
 </div>

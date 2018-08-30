@@ -1,0 +1,3 @@
+<svg class="svg svg--prev <% if ( locals.style ) { %>svg--<%= locals.style %><% } %>">
+    <polygon points="9.5,1.5 8.2,0 0,7.4 8.2,14.8 9.5,13.3 3,7.4 " />
+</svg>
