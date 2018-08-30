@@ -46,19 +46,20 @@ class HomeController {
     }
     bindScroll () {
         this.unbindWheel();
-        this.unbindWheelF();
 
         scroll2({
             y: this._scroller.getScrollMax(),
             ease: Easing.easeOutCubic,
-            duration: 500
-        });
+            duration: 500,
+            complete: () => {
+                this.unbindWheelF();
+                this._scroller.on( "scroll", () => {
+                    const scrollY = this._scroller.getScrollY();
 
-        this._scroller.on( "scroll", () => {
-            const scrollY = this._scroller.getScrollY();
-
-            if ( scrollY <= 0 ) {
-                this.unbindScroll();
+                    if ( scrollY <= 0 ) {
+                        this.unbindScroll();
+                    }
+                });
             }
         });
     }
