@@ -353,7 +353,7 @@ class HomeController {
         const desc = slice.find( ".js-home-discover-desc" );
         const image = slice.find( ".image" );
         const storiesSlice = this.slices.filter( "[data-prop='home_stories']" );
-        const storiesImage = storiesSlice.find( ".image" ).first();
+        const storiesImage = storiesSlice.find( ".js-slider-item.is-active" );
         const storiesImageBounds = storiesImage[ 0 ].getBoundingClientRect();
         const aboutSlice = this.slices.filter( "[data-prop='home_about']" );
         const aboutRect2 = aboutSlice.find( "rect:nth-child(4)" );

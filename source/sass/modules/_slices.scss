@@ -8,3 +8,8 @@
         }
     }
 }
+.slice--text {
+    p + p {
+        margin-top: $p-bump;
+        }
+}

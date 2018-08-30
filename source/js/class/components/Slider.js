@@ -53,6 +53,7 @@ class Slider {
 
     init () {
         this.currs.first().addClass( "is-active" );
+        this.items.first().addClass( "is-active" );
     }
 
 
@@ -76,7 +77,7 @@ class Slider {
         const target = $( e.target );
         const index = parseInt( target.data().index, 10 );
 
-        if ( index !== 0 && (index !== (this.data.length - 1)) ) {
+        if ( index >= 0 && index <= (this.data.length - 1) ) {
             this.goto( index );
         }
     }
@@ -85,6 +86,7 @@ class Slider {
     updateUI () {
         this._swapFunc();
         this.currs.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
+        this.items.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
     }
 
 
