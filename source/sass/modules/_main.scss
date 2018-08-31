@@ -22,3 +22,25 @@
     width: 100%;
     padding-top: $expander-2;
 }
+.main__header__title {
+    opacity: 0;
+    transform: translate3d( 0, 100%, 0 );
+    transition: opacity $base-duration $ease,
+                transform $base-duration $ease;
+
+    .is-paged & {
+        opacity: 1;
+        transform: translate3d( 0, 0, 0 );
+    }
+}
+.main__header__image {
+    opacity: 0;
+    transform: translate3d( 0, 100%, 0 );
+    transition: opacity $base-duration $ease,
+                transform $base-duration $ease;
+
+    .is-paged & {
+        opacity: 1;
+        transform: translate3d( 0, 0, 0 );
+    }
+}

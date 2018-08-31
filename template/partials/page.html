@@ -3,7 +3,8 @@
 const item = locals.context.get( 'item' );
 const slices = item.data.slices;
 const scope = item.uid;
+const isPages = scope !== locals.context.get( 'config' ).homepage;
 %>
-<div class="<%= scope %> js-<%= scope %> -pad">
+<div class="<%= scope %> js-<%= scope %> <%= isPages ? 'js-pages' : '' %> -pad">
     <%- include( './slices.html', {item, slices, scope} ) %>
 </div>

@@ -1,9 +1,10 @@
 import * as core from "../core";
 import BaseController from "./controllers/BaseController";
 import ImageController from "./controllers/ImageController";
-import AnimateController from "./controllers/AnimateController";
+// import AnimateController from "./controllers/AnimateController";
 import ThemeController from "./controllers/ThemeController";
 import HomeController from "./controllers/HomeController";
+import PagesController from "./controllers/PagesController";
 import Form from "./components/Form";
 import View from "./components/View";
 import Taxi from "./components/Taxi";
@@ -76,6 +77,7 @@ class Controllers {
         // Unique Controllers...
         this.push( "theme", core.dom.body.find( ".js-theme" ), ThemeController );
         this.push( "home", core.dom.body.find( ".js-home" ), HomeController );
+        this.push( "pages", core.dom.body.find( ".js-pages" ), PagesController );
 
         this.images = this.element.find( core.config.lazyImageSelector );
         this.imageController = new ImageController( this.images );
@@ -90,9 +92,9 @@ class Controllers {
 
 
     animate () {
-        this.animates = this.element.find( core.config.lazyAnimSelector );
-        this.animController = new AnimateController( this.element, this.animates, 10 );
-        this.animController.start();
+        // this.animates = this.element.find( core.config.lazyAnimSelector );
+        // this.animController = new AnimateController( this.element, this.animates, 10 );
+        // this.animController.start();
     }
 
 
@@ -101,9 +103,9 @@ class Controllers {
             this.imageController.destroy();
         }
 
-        if ( this.animController ) {
-            this.animController.destroy();
-        }
+        // if ( this.animController ) {
+        //     this.animController.destroy();
+        // }
 
         this.kill();
     }
