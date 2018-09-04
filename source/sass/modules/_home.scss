@@ -271,5 +271,9 @@
         position: absolute;
         padding-left: 27.027027027vw;
         bottom: 100px;
+
+        @include respond( $bind-width ) {
+            bottom: 40px;
+        }
     }
 }
