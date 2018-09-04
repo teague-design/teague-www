@@ -34,6 +34,15 @@
     max-width: 1048px;
     width: 100%;
     padding-top: $expander-2;
+    opacity: 0;
+    transform: translate3d( 0, 50%, 0 );
+    transition: opacity $base-duration $ease $fast-duration,
+                transform $base-duration $ease $fast-duration;
+
+    .is-paged & {
+        opacity: 1;
+        transform: translate3d( 0, 0, 0 );
+    }
 }
 .main__header__title {
     opacity: 0;
