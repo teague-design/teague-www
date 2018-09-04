@@ -187,8 +187,8 @@
     width: 100%;
 }
 @mixin wrap() {
-    padding-left: $padding-1 / 2;
-    padding-right: $padding-1 / 2;
+    padding-left: 20px;
+    padding-right: 20px;
 
     @include respond-min( $mobile-width ) {
         padding-left: $padding-v;
