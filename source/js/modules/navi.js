@@ -1,4 +1,5 @@
 import * as core from "../core";
+import $ from "properjs-hobo";
 
 
 /**
@@ -21,6 +22,7 @@ const navi = {
     init () {
         this.isOpen = false;
         this.element = core.dom.body.find( ".js-navi" );
+        this.header = core.dom.body.find( ".js-header" );
         this.items = this.element.find( ".js-navi-a" );
         this.mobile = core.dom.body.find( ".js-navi-mobile" );
         this.mobileTrigger = core.dom.body.find( ".js-menu-icon-navi" );
@@ -32,6 +34,13 @@ const navi = {
     bind () {
         this.mobileTrigger.on( "click", () => {
             this.toggle();
+        });
+
+        this.mobileItems.on( "click", ".js-navi-a", ( e ) => {
+            const targ = $( e.target );
+            const data = targ.data();
+
+            console.log( data );
         });
     },
 

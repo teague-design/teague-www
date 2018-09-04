@@ -7,7 +7,7 @@ const navi = locals.context.get( 'navi' );
     </a>
     <nav class="navi js-navi">
         <% navi.items.forEach(( item ) => { %>
-            <a class="navi__a navi__a--<%= item.uid %> js-navi-a js-navi--<%= item.uid %> p" href="<%= item.slug %>"><%= item.title %></a>
+            <a class="navi__a navi__a--<%= item.uid %> js-navi-a js-navi--<%= item.uid %> p" href="<%= item.slug %>" data-json="<%= JSON.stringify( item ) %>"><%= item.title %></a>
         <% }) %>
     </nav>
     <menu class="menu js-menu">
@@ -21,6 +21,6 @@ const navi = locals.context.get( 'navi' );
 </header>
 <nav class="navi-mobile js-navi-mobile screen screen--white -pad -wrap">
     <% navi.items.forEach(( item ) => { %>
-        <a class="navi-mobile__a navi-mobile__a--<%= item.uid %> js-navi-a js-navi--<%= item.uid %> h3" href="<%= item.slug %>"><%= item.title %></a>
+        <a class="navi-mobile__a navi-mobile__a--<%= item.uid %> js-navi-a js-navi--<%= item.uid %> h3" href="<%= item.slug %>" data-json="<%= JSON.stringify( item ) %>"><%= item.title %></a>
     <% }) %>
 </nav>

@@ -32,12 +32,6 @@
     position: fixed;
     color: $black;
 
-    .navi__a {
-        &.is-active {
-            color: $spot;
-        }
-    }
-
     .is-navi-mobile-open & {
         pointer-events: auto;
     }
@@ -45,4 +39,8 @@
 .navi-mobile__a {
     margin-top: $padding-1;
     display: block;
+
+    &.is-active {
+        color: $spot;
+    }
 }

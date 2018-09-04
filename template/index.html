@@ -55,6 +55,7 @@ const theme = item && item.data.theme ? item.data.theme.toLowerCase() : null;
             <%- include( locals.context.getTemplate() ) %>
         </main>
         <%- include( 'site/footer.html' ) %>
+        <%- include( 'site/bigpink.html' ) %>
         <script src="<%= locals.context.get( 'javascript' ) + '?v=' + locals.context.get( 'timestamp' ) %>"></script>
         <%- include( 'site/analytics.html' ) %>
     </body>

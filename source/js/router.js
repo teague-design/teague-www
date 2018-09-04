@@ -17,12 +17,13 @@ import navi from "./modules/navi";
 const router = {
     init () {
         this.blit = new Controller();
+        this.bigpink = core.dom.body.find( ".js-bigpink" );
+        this.bigpinkTitle = this.bigpink.find( ".js-bigpink-title" );
         this.animDuration = 500;
         this.controllers = new Controllers({
             el: core.dom.main,
             cb: () => {
                 this.topper();
-                this.controllers.animate();
             }
         });
 
@@ -143,7 +144,7 @@ const router = {
 
     setClass () {
         if ( this.state.future.view ) {
-            core.dom.html.addClass( `is-${this.state.now.view}-page` );
+            core.dom.html.addClass( `is-${this.state.future.view}-page` );
         }
 
         if ( this.state.future.uid ) {
@@ -172,14 +173,22 @@ const router = {
 
 
     changePageOut ( data ) {
-        core.dom.html.addClass( "is-tranny" );
+        const activeEl = $( this.controller.getRouter().getActiveEl() );
+        const activeData = activeEl.data();
+
         this.setState( "future", data );
         this.unsetClass();
         this.setClass();
-        this.transitionOut();
         navi.close();
         navi.active( this.state.future.view );
         this.controllers.destroy();
+
+        if ( activeData.json ) {
+            this.transitionOutPink( activeEl, activeData );
+
+        } else {
+            this.transitionOut();
+        }
     },
 
 
@@ -194,11 +203,18 @@ const router = {
 
 
     changePageIn ( data ) {
+        const activeEl = $( this.controller.getRouter().getActiveEl() );
+        const activeData = activeEl.data();
+
         setTimeout(() => {
-            core.dom.html.removeClass( "is-tranny" );
-            this.controllers.animate();
-            this.transitionIn();
             this.setState( "now", data );
+
+            if ( activeData.json ) {
+                this.transitionInPink( activeEl, activeData );
+
+            } else {
+                this.transitionIn();
+            }
 
         }, this.animDuration );
     },
@@ -217,16 +233,22 @@ const router = {
     transitionOut () {
         this.tweenContent( 0 );
     },
+    transitionOutPink ( elem, data ) {
+        this.bigpinkTitle[ 0 ].innerHTML = `<h1>${data.json.title}</h1>`;
+        this.bigpink.removeClass( "is-hidden" ).addClass( "is-active" );
+    },
 
 
     transitionIn () {
-        this.blit.go(() => {
-            if ( this.tween && !this.tween.isActive() ) {
-                this.blit.stop();
+        this.tweenContent( 1 );
+    },
+    transitionInPink ( /*elem, data*/ ) {
+        this.bigpink.addClass( "is-inactive" );
 
-                this.tweenContent( 1 );
-            }
-        });
+        setTimeout(() => {
+            this.bigpink.addClass( "is-hidden" ).removeClass( "is-active is-inactive" );
+
+        }, 500 );
     },
 
 

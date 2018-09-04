@@ -1,7 +1,6 @@
 import * as core from "../core";
 import BaseController from "./controllers/BaseController";
 import ImageController from "./controllers/ImageController";
-// import AnimateController from "./controllers/AnimateController";
 import ThemeController from "./controllers/ThemeController";
 import HomeController from "./controllers/HomeController";
 import PagesController from "./controllers/PagesController";
@@ -91,21 +90,10 @@ class Controllers {
     }
 
 
-    animate () {
-        // this.animates = this.element.find( core.config.lazyAnimSelector );
-        // this.animController = new AnimateController( this.element, this.animates, 10 );
-        // this.animController.start();
-    }
-
-
     destroy () {
         if ( this.imageController ) {
             this.imageController.destroy();
         }
-
-        // if ( this.animController ) {
-        //     this.animController.destroy();
-        // }
 
         this.kill();
     }
