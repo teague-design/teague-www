@@ -3,7 +3,7 @@
 locals { item, slice, scope }
 */
 locals.slice.items.forEach(( sliceItem, i ) => { %>
-    <div class="cms slice--text__node -exp">
+    <div class="cms slice--text__node">
         <%- locals.context.get( 'dom' ).RichText.asHtml( sliceItem.text ) %>
     </div>
 <% }) %>

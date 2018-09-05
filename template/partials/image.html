@@ -4,8 +4,19 @@ locals { image, options }
 main: 2400, tablet: 1600, mobile: 800
 */
 %>
-<% if ( locals.options && locals.options.bg ) { %>
-    <div class="image js-lazy-image" data-img-src="<%= image.url %>" data-img-json="<%= JSON.stringify( image ) %>"></div>
+<% if ( locals.options && locals.options.home ) { %>
+    <% if ( locals.options && locals.options.bg ) { %>
+        <div class="image js-lazy-image" data-img-src="<%= image.url %>" data-img-json="<%= JSON.stringify( image ) %>"></div>
+    <% } else { %>
+        <img class="image js-lazy-image" data-img-src="<%= image.url %>" data-img-json="<%= JSON.stringify( image ) %>" />
+    <% } %>
+
 <% } else { %>
-    <img class="image js-lazy-image" data-img-src="<%= image.url %>" data-img-json="<%= JSON.stringify( image ) %>" />
+    <div class="image-wrap js-lazy-image-wrap" style="padding-bottom:<%= image.dimensions.height / image.dimensions.width * 100 %>%;">
+        <% if ( locals.options && locals.options.bg ) { %>
+            <div class="image js-lazy-image" data-img-src="<%= image.url %>" data-img-json="<%= JSON.stringify( image ) %>"></div>
+        <% } else { %>
+            <img class="image js-lazy-image" data-img-src="<%= image.url %>" data-img-json="<%= JSON.stringify( image ) %>" />
+        <% } %>
+    </div>
 <% } %>

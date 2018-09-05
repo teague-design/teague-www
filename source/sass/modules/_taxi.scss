@@ -1,20 +1,8 @@
-@mixin taxi-field() {
-    display: flex;
-    align-items: center;
-    height: 40px;
-    width: 100%;
-    padding: 0 13px;
-}
-
-
-
-
 .taxi {
     @include p();
-    color: $grey2;
     line-height: 1;
 }
-.taxi__fields {
+.taxi__cats {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -23,110 +11,31 @@
         flex-wrap: wrap;
     }
 }
-.taxi__select {
+.taxi__cat {
     position: relative;
-    display: inline-block;
-    cursor: pointer;
-    user-select: none;
-    width: 100%;
-}
-.taxi__show {
-    @include taxi-field();
-    position: relative;
-    background-color: transparent;
-    border: 1px solid $black;
 
     &:after {
         content: "";
-        width: 0;
-        height: 0;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-top: 5px solid $black;
-        transform: translate3d( -20px, -50%, 0 );
+        height: 1px;
         position: absolute;
-        top: 50%;
-        right: 0;
+        left: 0;
+        bottom: -5px;
+        background-color: $spot;
+        display: none;
+        right: 3px;
     }
-}
-.taxi__menu {
-    border-left: 1px solid $black;
-    border-right: 1px solid $black;
-    border-bottom: 1px solid $black;
-    background-color: $white;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    transform: translate3d( 0, 40px, 0 );
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity $base-duration $ease;
-
-    &.is-active {
-        opacity: 1;
-        pointer-events: auto;
-    }
-}
-.taxi__option {
-    @include taxi-field();
-    color: $black;
-    padding: 0 26px;
-    transition: color $base-duration $ease;
 
     &.is-active {
         color: $spot;
 
-        &:before {
-            border-color: $spot;
-            background-color: $spot;
+        &:after {
+            display: block;
         }
     }
-
-    &:before {
-        margin-right: 20px;
-        content: "";
-        height: 9px;
-        width: 9px;
-        border-radius: 9px;
-        border: 1px solid $black;
-        transition: border-color $base-duration $ease,
-                    background-color $base-duration $ease;
-    }
 }
-.taxi__cats {
-    z-index: 2;
+.taxi__label + .taxi__cat {
+    margin-left: 20px;
 }
-.taxi__tags {
-    z-index: 1;
-}
-.taxi__cats,
-.taxi__tags {
-    position: relative;
-    width: $taxi-input-width;
-    max-width: 100%;
-
-    @include respond( $taxi-break-width ) {
-        width: 33.333333vw;
-    }
-
-    @include respond( $break-mobile-full ) {
-        width: 100%;
-    }
-}
-.taxi__tags,
-.taxi__sub {
-    margin-left: $padding-1;
-
-    @include respond( $mobile-width ) {
-        margin-left: 0;
-        margin-top: $padding-1 / 2;
-    }
-}
-.taxi__sub {
-    .is-hoverable &:hover {
-        color: $black;
-    }
+.taxi__cat + .taxi__cat {
+    margin-left: 40px;
 }

@@ -14,7 +14,15 @@ const fetchFields = [
     "story.excerpt",
     "taxonomy.name",
     "taxonomy.image",
-    "taxonomy.description"
+    "taxonomy.description",
+    "taxonomy.type",
+    "author.name",
+    "cta.hubspot_form",
+    "cta.page_link",
+    "cta.page_link.title",
+    "cta.title",
+    "cta.description",
+    "cta.link_text"
 ];
 
 
@@ -55,9 +63,9 @@ router.on( "story", {
         form.fetchLinks( fetchFields );
     },
     query ( client, api, query, cache, req ) {
-        if ( req.query.tag ) {
-            query.push( client.Predicates.any( "document.tags", Array.isArray( req.query.tag ) ? req.query.tag : [req.query.tag] ) );
-        }
+        // if ( req.query.tag ) {
+        //     query.push( client.Predicates.any( "document.tags", Array.isArray( req.query.tag ) ? req.query.tag : [req.query.tag] ) );
+        // }
 
         if ( req.query.category ) {
             query.push( client.Predicates.at( "my.story.category", req.query.category ) );
@@ -69,7 +77,8 @@ router.on( "story", {
         form.orderings( ["my.story.sort_date desc"] );
     },
     pagination ( client, api, form, cache, req ) {
-        if ( !req.query.nopaging ) {
+        // Only handle paging for AJAX API requests...
+        if ( req.query.ajax && !req.query.nopaging ) {
             form.pageSize( config.pagination.size );
             form.page( (req.query.page || 1) );
         }

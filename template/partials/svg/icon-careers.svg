@@ -1,0 +1,8 @@
+<svg class="svg svg--careers <% if ( locals.style ) { %>svg--<%= locals.style %><% } %>">
+    <polygon points="0.6,26.2 4.1,26.2 4.1,20.4 5.3,20.4 5.3,26.2 15.8,26.2 15.8,20.4 16.9,20.4 16.9,26.2 20.4,26.2 20.4,15.8 0.6,15.8"/>
+    <rect x="18.1" y="1.8" width="9.3" height="1.2"/>
+    <rect x="18.1" y="12.2" width="9.3" height="1.2"/>
+    <ellipse transform="matrix(0.9732 -0.2298 0.2298 0.9732 -1.477 2.4812)" cx="9.9" cy="7.6" rx="5.8" ry="5.8"/>
+    <rect x="18.1" y="5.2" width="9.3" height="1.2"/>
+    <rect x="18.1" y="8.8" width="9.3" height="1.2"/>
+</svg>

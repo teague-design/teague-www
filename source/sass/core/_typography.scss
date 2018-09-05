@@ -233,6 +233,13 @@
     background-color: transparent;
     border: 0;
     border-radius: 0;
+
+    .is-hoverable &:hover {
+        color: $spot;
+    }
+    .is-hoverable.is-theme-black &:hover {
+        color: $white;
+    }
 }
 .form__input + .form__sub {
     position: absolute;

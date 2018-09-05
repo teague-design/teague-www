@@ -1,19 +1,23 @@
 <%
-/* Taxonomy ( tag, category ) */
+/* Taxonomy ( category ) */
 const dom = locals.context.get( 'dom' );
 const item = locals.context.get( 'item' );
-const type = item.data.type.toLowerCase();
-const tag = dom.RichText.asText( item.data.name );
+const category = dom.RichText.asText( item.data.name );
 %>
-<div class="taxonomy -pad">
-    <%- include( '../slices/page-header.html', {
-        slice: {
-            primary: {
-                header_title: item.data.name,
-                header_image: item.data.image,
-                header_description: item.data.description
-            }
-        }
-    })%>
+<div class="taxonomy js-pages -pad">
+    <div class="slices taxonomy__slices">
+        <div class="slice slice--page-header js-slice" data-index="0" data-prop="page_header">
+            <%- include( '../slices/page-header.html', {
+                item,
+                slice: {
+                    primary: {
+                        header_title: item.data.name,
+                        header_image: item.data.image,
+                        header_description: item.data.description
+                    }
+                }
+            })%>
+        </div>
+    </div>
 </div>
-<div class="feed js-feed view js-view -wrap -exp -pad" data-uid="feed" data-url="/api/story/" data-page="/taxonomy/" data-<%= type %>="<%= tag %>"></div>
+<div class="feed js-feed view js-view -wrap -exp -pad" data-uid="feed" data-url="/api/story/" data-page="/taxonomy/" data-category="<%= category %>"></div>

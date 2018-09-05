@@ -1,0 +1,38 @@
+.ctas {
+    text-align: center;
+}
+.ctas--multi {
+    .ctas__wrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .cta {
+        width: 33.333333%;
+        max-width: 23.648648649vw;
+    }
+}
+.ctas__wrap {
+    border-top: 1px solid $grey4;
+    border-bottom: 1px solid $grey4;
+    display: inline-block;
+    text-align: left;
+    width: 100%;
+    // max-width: $bind-width;
+}
+.cta {}
+.cta--newsletter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.cta__desc {
+    margin-top: 20px;
+}
+.cta__icon {
+    margin-bottom: 20px;
+}
+.cta__link {
+    margin-top: 40px;
+}

@@ -11,47 +11,91 @@
     .main__header__desc {
         padding-top: 0;
     }
+
+    .is-story-page & {
+        padding-top: 4.0540540541vw;
+    }
 }
-.main__header__image {
-    padding-top: $expander-2 / 2;
-    padding-bottom: 100px;
-    width: 90vw;
+.main__header--story {
+    .main__header__image {
+        padding-bottom: 40px;
+    }
+}
+.main__header__image,
+.main__header__desc,
+.main__header__cat,
+.main__header__title,
+.main__header__deets__l,
+.main__header__deets__r {
     opacity: 0;
     transform: translate3d( 0, 50%, 0 );
     transition: opacity $base-duration $ease,
                 transform $base-duration $ease;
 
+    .is-paged & {
+        opacity: 1;
+        transform: translate3d( 0, 0, 0 );
+    }
+}
+.main__header__image {
+    padding-top: $expander-2 / 2;
+    padding-bottom: 100px;
+    width: 90vw;
+
     @include respond( $mobile-width ) {
         width: 100vw;
     }
 
-    .is-paged & {
-        opacity: 1;
-        transform: translate3d( 0, 0, 0 );
+
+}
+.main__header__deets {
+    width: 90vw;
+    display: flex;
+    justify-content: space-between;
+    padding-right: 0;
+
+    @include respond( $mobile-width ) {
+        width: 100vw;
+        padding-right: $padding-v;
+    }
+}
+.main__header__tags {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-bottom: 50px;
+        outline: 1px solid red;
+}
+.main__header__tag {
+    display: inline-block;
+    vertical-align: middle;
+
+    & + .main__header__tag {
+        padding-left: 40px;
+    }
+}
+.main__header__deets__l {
+    max-width: 47vw;
+    width: 100%;
+}
+.main__header__deets__r {
+    max-width: 13.25vw;
+    width: 100%;
+
+    h6 {
+        padding-bottom: 50px;
+    }
+
+    .main__header__auth {
+        padding-bottom: 20px;
     }
 }
 .main__header__desc {
     max-width: 1048px;
     width: 100%;
     padding-top: $expander-2;
-    opacity: 0;
-    transform: translate3d( 0, 50%, 0 );
-    transition: opacity $base-duration $ease $fast-duration,
-                transform $base-duration $ease $fast-duration;
-
-    .is-paged & {
-        opacity: 1;
-        transform: translate3d( 0, 0, 0 );
-    }
 }
-.main__header__title {
-    opacity: 0;
-    transform: translate3d( 0, 100%, 0 );
-    transition: opacity $base-duration $ease,
-                transform $base-duration $ease;
-
-    .is-paged & {
-        opacity: 1;
-        transform: translate3d( 0, 0, 0 );
-    }
+.main__header__title {}
+.main__header__cat {
+    padding-bottom: 20px;
 }

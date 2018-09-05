@@ -204,8 +204,8 @@ class HomeController {
     home_about_load () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-about-desc" );
-        const image1 = slice.find( ".image:nth-child(1)" );
-        const image2 = slice.find( ".image:nth-child(2)" );
+        const image1 = slice.find( ".js-lazy-image" ).first();
+        const image2 = slice.find( ".js-lazy-image" ).last();
         const rect1 = slice.find( "rect:nth-child(3)" );
         const rect2 = slice.find( "rect:nth-child(4)" );
         let image2Bounds = image2[ 0 ].getBoundingClientRect();

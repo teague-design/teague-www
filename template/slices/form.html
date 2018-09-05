@@ -2,6 +2,6 @@
 /* Form
 locals { item, slice, scope }
 */
-const formName = slice.primary.submit_action;
+const formName = locals.slice.primary.submit_action;
 %>
 <form class="form js-form view js-view" data-uid="form" data-url="/api/hubspot/form/<%= formName.toLowerCase() %>" data-action="<%= formName %>" action=""></form>

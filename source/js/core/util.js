@@ -107,6 +107,7 @@ const loadImages = function ( images, handler ) {
     images.forEach(( el, i ) => {
         const elem = images.eq( i );
         const data = elem.data();
+        const wrap = elem.closest( ".js-lazy-image-wrap" );
         const isMobile = ((data.imgJson && data.imgJson.mobile && data.imgJson.mobile.url) && (window.innerWidth <= config.mobileMediaHack) && detect.isDevice());
         const isTablet = ((data.imgJson && data.imgJson.tablet && data.imgJson.tablet.url) && (window.innerWidth <= config.tabletMediaHack) && detect.isDevice());
         let dims = ((data.imgJson && data.imgJson.dimensions) || null);
@@ -123,8 +124,8 @@ const loadImages = function ( images, handler ) {
         }
 
         // Normalize the padding if dimensions exist
-        if ( dims ) {
-            elem[ 0 ].style.paddingBottom = `${dims.height / dims.width * 100}%`;
+        if ( dims && wrap.length ) {
+            wrap[ 0 ].style.paddingBottom = `${dims.height / dims.width * 100}%`;
         }
     });
 

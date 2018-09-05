@@ -5,7 +5,6 @@ $ui-margin: 22px;
 .image {
     max-width: 100%;
     width: 100%;
-    padding-bottom: $padding-img;
 
     .is-touchable & {
         @include respond( $break-tablet-small ) {
@@ -13,17 +12,27 @@ $ui-margin: 22px;
         }
     }
 
-    &[data-imageloader="true"] {
-        padding-bottom: 0 !important;
-    }
+    // &[data-imageloader="true"] {
+    //     padding-bottom: 0 !important;
+    // }
 }
-// .image-wrap {
-//     background-color: #989898;
-//
-//     .is-theme-black & {
-//         background-color: #222;
-//     }
-// }
+.image-wrap {
+    // background-color: #989898;
+    position: relative;
+    padding-bottom: $padding-img;
+
+    > .image {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    // .is-theme-black & {
+        // background-color: #222;
+    // }
+}
 
 
 

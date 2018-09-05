@@ -9,7 +9,15 @@
     }
 }
 .slice--text {
-    p + p {
+    p + p,
+    h4 + p {
         margin-top: $p-bump;
-        }
+    }
+
+    h6 + h4 {
+        margin-top: 20px;
+    }
+}
+.slice--text + .slice--ctas {
+    padding-top: 90px;
 }

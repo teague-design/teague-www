@@ -2,7 +2,7 @@
 /* Page container */
 const item = locals.context.get( 'item' );
 const slices = item.data.slices;
-const scope = item.uid;
+const scope = item.type !== 'page' ? item.type : item.uid;
 const isPages = scope !== locals.context.get( 'config' ).homepage;
 %>
 <div class="<%= scope %> js-<%= scope %> <%= isPages ? 'js-pages' : '' %> -pad">

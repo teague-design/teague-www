@@ -6,7 +6,7 @@ primary { discover_label, discover_description, discover_cta, discover_page_link
 const dom = locals.context.get( 'dom' );
 %>
 <div class="home__discover-image js-home-discover-image">
-    <%- include( '../partials/image.html', {image: slice.primary.discover_image, options: {bg: true}} ) %>
+    <%- include( '../partials/image.html', {image: slice.primary.discover_image, options: {bg: true, home: true}} ) %>
 </div>
 <div class="home__discover-desc js-home-discover-desc cms -wrap">
     <div class="home__discover-label">

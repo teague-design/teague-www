@@ -1,0 +1,8 @@
+<svg class="svg svg--media <% if ( locals.style ) { %>svg--<%= locals.style %><% } %>">
+    <rect x="7" y="9.3" width="14" height="1.2"/>
+    <rect x="7" y="11.7" width="12.8" height="1.2"/>
+    <rect x="7" y="5.8" width="4.7" height="1.2"/>
+    <rect x="7" y="14" width="14" height="1.2"/>
+    <path d="M25.7,11.7v-0.6V1.2H2.3v10.5H0v15.2h28V11.7H25.7z M23.3,21H4.7V3.5h18.7V21z"/>
+    <rect x="7" y="16.3" width="12.8" height="1.2"/>
+</svg>

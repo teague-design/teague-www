@@ -1,0 +1,13 @@
+.story {
+    .slice--page-header {
+        padding-bottom: $expander-2 * 2;
+    }
+
+    .slice--text {
+        @include wrap();
+    }
+
+    .slice--image {
+        padding: 90px 0;
+    }
+}

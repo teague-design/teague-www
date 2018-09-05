@@ -16,46 +16,12 @@ class Taxi {
 
 
     bind () {
-        this.element.on( "click", ".js-taxi-show", ( e ) => {
+        this.element.on( "click", ".js-taxi-cat", ( e ) => {
             const targ = $( e.target );
-            const elem = targ.closest( ".js-taxi-select" );
-            const menu = elem.find( ".js-taxi-menu" );
+            const cats = this.element.find( ".js-taxi-cat" );
 
-            this.element.find( ".js-taxi-menu" ).not( menu ).removeClass( "is-active" );
-
-            menu.toggleClass( "is-active" );
-        });
-
-        this.element.on( "click", ".js-taxi-option", ( e ) => {
-            const targ = $( e.target );
-            const elem = targ.closest( ".js-taxi-select" );
-            const opts = elem.find( ".js-taxi-option" );
-            const show = elem.find( ".js-taxi-show" );
-            const data = elem.data();
-
-            // Toggle menu options
-            if ( targ.is( ".is-active" ) ) {
-                targ.removeClass( "is-active" );
-
-            } else if ( data.style === "single" ) {
-                opts.removeClass( "is-active" );
-                targ.addClass( "is-active" );
-
-            } else {
-                targ.addClass( "is-active" );
-            }
-
-            // Update show label
-            if ( data.style === "single" ) {
-                show[ 0 ].innerHTML = targ.is( ".is-active" ) ? targ.data().value : show.data().default;
-
-            } else {
-                show[ 0 ].innerHTML = `${show.data().default} (${opts.filter( ".is-active" ).length})`;
-            }
-        });
-
-        this.element.on( "click", ".js-taxi-sub", () => {
-            this.element.find( ".js-taxi-menu" ).removeClass( "is-active" );
+            cats.removeClass( "is-active" );
+            targ.addClass( "is-active" );
 
             this.getDocuments();
         });
@@ -63,16 +29,15 @@ class Taxi {
 
 
     getDocuments () {
-        const opts = this.element.find( ".js-taxi-option.is-active" );
-        const query = opts.map(( opt ) => {
-            const $opt = $( opt );
-            const data = $opt.data();
+        const cat = this.element.find( ".js-taxi-cat.is-active" );
+        const data = cat.data();
+        let apiUrl = `${this.data.url}?ajax=1`;
+        let webUrl = `${this.data.page}`;
 
-            return `${data.query}=${data.value}`;
-
-        }).join( "&" );
-        const apiUrl = `${this.data.url}?${query}`;
-        const webUrl = `${this.data.page}?${query}`;
+        if ( data.value ) {
+            apiUrl += `&category=${data.value}`;
+            webUrl += `?category=${data.value}`;
+        }
 
         $.ajax({
             url: apiUrl,

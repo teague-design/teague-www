@@ -3,18 +3,47 @@
 locals { item, slice, scope }
 */
 const config = locals.context.get( 'config' );
-const isImage = slice.primary.header_image.url;
+const isImage = locals.slice.primary.header_image.url;
+const isStory = locals.item.type === 'story';
 %>
-<div class="main__header <% if ( isImage ) { %>main__header--image<% } %> -pad-mast">
+<div class="main__header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory ) { %>main__header--story<% } %> -pad-mast">
+    <% if ( isStory ) { %>
+        <div class="main__header__cat cms -wrap">
+            <h6><%= locals.item.data.category %></h6>
+        </div>
+    <% } %>
     <div class="main__header__title cms -wrap">
-        <%- locals.context.get( 'dom' ).RichText.asHtml( slice.primary.header_title ) %>
+        <%- locals.context.get( 'dom' ).RichText.asHtml( locals.slice.primary.header_title ) %>
     </div>
     <% if ( isImage ) { %>
         <div class="main__header__image">
-            <%- include( '../partials/image.html', {image: slice.primary.header_image} ) %>
+            <%- include( '../partials/image.html', {image: locals.slice.primary.header_image} ) %>
         </div>
     <% } %>
-    <div class="main__header__desc cms -wrap">
-        <%- locals.context.get( 'dom' ).RichText.asHtml( slice.primary.header_description ) %>
-    </div>
+    <% if ( isStory ) { %>
+        <div class="main__header__deets cms -wrap">
+            <div class="main__header__deets__l">
+                <!-- <div class="main__header__tags">
+                    <% locals.item.tags.forEach(( tag ) => { %>
+                        <div class="main__header__tag p">
+                            <a href="/stories/?tag=<%= tag %>"><%= tag %></a>
+                        </div>
+                    <% }) %>
+                </div> -->
+                <div class="main__header__desc">
+                    <%- locals.context.get( 'dom' ).RichText.asHtml( locals.slice.primary.header_description ) %>
+                </div>
+            </div>
+            <div class="main__header__deets__r">
+                <h6>Project Authors</h6>
+                <% locals.item.data.authors.forEach(( author ) => { %>
+                    <div class="main__header__auth p"><%= author.author.data.name %></div>
+                <% }) %>
+            </div>
+        </div>
+    <% } else { %>
+        <div class="main__header__desc cms -wrap">
+            <%- locals.context.get( 'dom' ).RichText.asHtml( locals.slice.primary.header_description ) %>
+        </div>
+    <% } %>
 </div>

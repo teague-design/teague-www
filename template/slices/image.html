@@ -3,4 +3,4 @@
 locals { item, slice, scope }
 */
 %>
-<%- include( '../partials/image.html', {image: slice.primary.single_image} ) %>
+<%- include( '../partials/image.html', {image: locals.slice.primary.single_image} ) %>

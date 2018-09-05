@@ -2,6 +2,6 @@
 /* Filter feed
 locals { item, slice, scope }
 */
-const contentType = slice.primary.content.toLowerCase();
+const contentType = locals.slice.primary.content.toLowerCase();
 %>
-<div class="taxi js-taxi view js-view -wrap -exp -pad" data-uid="taxi" data-url="/api/<%= contentType %>/" data-clean="1" data-flags="nopaging" data-view="feed" data-page="/<%= item.uid %>/"></div>
+<div class="taxi js-taxi view js-view -wrap -exp -pad" data-uid="taxi" data-url="/api/<%= contentType %>/" data-clean="1" data-flags="nopaging" data-view="feed" data-page="/<%= locals.item.uid %>/"></div>

@@ -1,0 +1,69 @@
+<%
+/* CTAs
+locals { item, slice, scope }
+*/
+const config = locals.context.get( 'config' );
+const dom = locals.context.get( 'dom' );
+const mod = locals.slice.items.length > 1 ? 'ctas--multi' : 'ctas--oneup';
+%>
+<div class="ctas <%= mod %> -wrap">
+    <div class="ctas__wrap -exp">
+        <% locals.slice.items.forEach(( sliceItem ) => { %>
+            <%
+            const cta = sliceItem.cta;
+            const icon = cta.data.hubspot_form ? cta.data.hubspot_form.toLowerCase() : cta.data.page_link ? cta.data.page_link.value.document.uid : '';
+            const isNewsletter = icon === 'newsletter';
+            const docLink = cta.data.page_link ? cta.data.page_link.value.document : {};
+            const extLink = cta.data.hubspot_form ? {url: `#${cta.data.hubspot_form}`} : {};
+            const json = cta.data.page_link ? {title: dom.RichText.asText( cta.data.title ) } : null;
+            %>
+            <div class="cta cta--<%= icon %>">
+                <% if ( isNewsletter ) { %>
+                    <div class="cta__l cms">
+                        <div class="cta__title">
+                            <%- dom.RichText.asHtml( cta.data.title ) %>
+                        </div>
+                        <div class="cta__desc">
+                            <p><%= cta.data.description %></p>
+                        </div>
+                    </div>
+                    <div class="cta__r">
+                        <%- include( './form.html', {
+                            slice: {
+                                primary: {
+                                    submit_action: 'Newsletter'
+                                }
+                            }
+                        }) %>
+                    </div>
+
+                <% } else { %>
+                    <div class="cta__tout cms">
+                        <div class="cta__icon">
+                            <%- include( `../partials/svg/icon-${icon}.svg` ) %>
+                        </div>
+                        <div class="cta__title">
+                            <%- dom.RichText.asHtml( cta.data.title ) %>
+                        </div>
+                        <div class="cta__desc">
+                            <p><%= cta.data.description %></p>
+                        </div>
+                        <div class="cta__link">
+                            <%- include( './link.html', {
+                                json,
+                                slice: {
+                                    primary: {
+                                        document_link: docLink,
+                                        external_link: extLink,
+                                        text: cta.data.link_text,
+                                        icon: 'Arrow'
+                                    }
+                                }
+                            }) %>
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% }) %>
+    </div>
+</div>
