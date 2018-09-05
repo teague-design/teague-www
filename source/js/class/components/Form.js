@@ -11,6 +11,7 @@ class Form {
         this.view = null;
         this.elemData = data;
         this.formData = {};
+        this.action = this.elemData.action.toLowerCase();
 
         this.bind();
     }
@@ -63,10 +64,12 @@ class Form {
                 url: window.location.href,
                 title: document.title
             },
+            _action: this.action,
             _form: {}
         };
         this.fields.forEach(( field ) => {
             this.formData._form[ field.name ] = {
+                name: field.name,
                 type: field.type,
                 value: field.value
             };
@@ -76,7 +79,7 @@ class Form {
 
     postForm () {
         return $.ajax({
-            url: `/api/hubspot/form-${this.elemData.action.toLowerCase()}`,
+            url: `/api/hubspot/form-${this.action}`,
             dataType: "json",
             method: "POST",
             data: this.formData,

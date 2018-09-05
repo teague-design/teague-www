@@ -106,22 +106,29 @@ const getHubspotFormByGUID = ( req, res ) => {
 
 
 
-const postHubspotNewsletterForm = ( req, res ) => {
+const postHubspotForm = ( req, res ) => {
     // lager.data( req.body );
     const https = require( "https" );
     const querystring = require( "querystring" );
-    const postData = querystring.stringify({
-        email: req.body._form.email.value,
+    const bodyData = {
         hs_context: JSON.stringify({
             "hutk": req.cookies.hubspotutk,
             "ipAddress": req.ip,
             "pageUrl": req.body._page.url,
             "pageName": req.body._page.title
         })
-    });
+    };
+
+    for ( let i in req.body._form ) {
+        if ( req.body._form.hasOwnProperty( i ) ) {
+            bodyData[ req.body._form[ i ].name ] = req.body._form[ i ].value;
+        }
+    }
+
+    const postData = querystring.stringify( bodyData );
     const options = {
         hostname: "forms.hubspot.com",
-        path: `/uploads/form/v2/${authorization.config.portalId}/${authorization.config.forms.newsletter}`,
+        path: `/uploads/form/v2/${authorization.config.portalId}/${authorization.config.forms[ req.body._action ]}`,
         method: "POST",
         headers: {
             "Content-Type": "application/x-www-form-urlencoded",
@@ -150,12 +157,6 @@ const postHubspotNewsletterForm = ( req, res ) => {
     httpRequest.write( postData );
     httpRequest.end();
 };
-// const postHubspotContactForm = ( req, res ) => {
-//     lager.data( req.body );
-//     res.status( 200 ).json({
-//         form: "Contact"
-//     });
-// };
 
 
 
@@ -166,8 +167,9 @@ module.exports = {
         // Possibly use express validator
         // https://express-validator.github.io/docs/
         // https://developers.hubspot.com/docs/methods/forms/submit_form
-        // expressApp.post( "/api/hubspot/form-contact", checkCSRF, postHubspotContactForm );
-        expressApp.post( "/api/hubspot/form-newsletter", checkCSRF, postHubspotNewsletterForm );
+        expressApp.post( "/api/hubspot/form-newsletter", checkCSRF, postHubspotForm );
+        expressApp.post( "/api/hubspot/form-work", checkCSRF, postHubspotForm );
+        expressApp.post( "/api/hubspot/form-media", checkCSRF, postHubspotForm );
     },
 
 

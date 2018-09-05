@@ -4,7 +4,8 @@ locals { item, slice, scope }
 */
 const config = locals.context.get( 'config' );
 const dom = locals.context.get( 'dom' );
-const mod = locals.slice.items.length > 1 ? 'ctas--multi' : 'ctas--oneup';
+const isMulti = locals.slice.items.length > 1;
+const mod = isMulti ? 'ctas--multi' : 'ctas--oneup';
 %>
 <div class="ctas <%= mod %> -wrap">
     <div class="ctas__wrap -exp">
@@ -13,9 +14,10 @@ const mod = locals.slice.items.length > 1 ? 'ctas--multi' : 'ctas--oneup';
             const cta = sliceItem.cta;
             const icon = cta.data.hubspot_form ? cta.data.hubspot_form.toLowerCase() : cta.data.page_link ? cta.data.page_link.value.document.uid : '';
             const isNewsletter = icon === 'newsletter';
+            const isHubspot = cta.data.hubspot_form;
             const docLink = cta.data.page_link ? cta.data.page_link.value.document : {};
-            const extLink = cta.data.hubspot_form ? {url: `#${cta.data.hubspot_form}`} : {};
-            const json = cta.data.page_link ? {title: dom.RichText.asText( cta.data.title ) } : null;
+            const extLink = isHubspot ? {url: `#js-formover-${icon}`} : {};
+            const json = cta.data.page_link ? { title: dom.RichText.asText( cta.data.title ) } : { target: `js-formover-${icon}` };
             %>
             <div class="cta cta--<%= icon %>">
                 <% if ( isNewsletter ) { %>
@@ -58,7 +60,8 @@ const mod = locals.slice.items.length > 1 ? 'ctas--multi' : 'ctas--oneup';
                                         text: cta.data.link_text,
                                         icon: 'Arrow'
                                     }
-                                }
+                                },
+                                class: `js-formover-trigger`
                             }) %>
                         </div>
                     </div>
@@ -66,4 +69,55 @@ const mod = locals.slice.items.length > 1 ? 'ctas--multi' : 'ctas--oneup';
             </div>
         <% }) %>
     </div>
+    <% if ( isMulti ) { %>
+        <div class="screen screen--white formover js-formover">
+            <% locals.slice.items.forEach(( sliceItem ) => { %>
+                <%
+                const cta = sliceItem.cta;
+                const icon = cta.data.hubspot_form ? cta.data.hubspot_form.toLowerCase() : cta.data.page_link ? cta.data.page_link.value.document.uid : '';
+                %>
+                <% if ( cta.data.hubspot_form ) { %>
+                    <div class="formover__panel -wrap js-formover-panel js-formover-<%= icon %>">
+                        <div class="formover__info cms">
+                            <div class="formover__label">
+                                <h6><%= cta.data.label %></h6>
+                            </div>
+                            <div class="formover__title">
+                                <%- dom.RichText.asHtml( cta.data.title ).replace( /h5/g, 'h2' ) %>
+                            </div>
+                            <div class="formover__desc">
+                                <p><%= cta.data.description %></p>
+                            </div>
+                        </div>
+                        <div class="formover__form">
+                            <%- include( './form.html', {
+                                slice: {
+                                    primary: {
+                                        submit_action: cta.data.hubspot_form
+                                    }
+                                }
+                            }) %>
+                        </div>
+                    </div>
+                <% } %>
+            <% }) %>
+            <div class="formover__navis -wrap">
+                <% locals.slice.items.forEach(( sliceItem ) => { %>
+                    <%
+                    const cta = sliceItem.cta;
+                    const icon = cta.data.hubspot_form ? cta.data.hubspot_form.toLowerCase() : cta.data.page_link ? cta.data.page_link.value.document.uid : '';
+                    const json = { target: `js-formover-${icon}` };
+                    %>
+                    <% if ( cta.data.hubspot_form ) { %>
+                        <div class="formover__navi js-formover-navi js-formover-<%= icon %> h6" data-json="<%= JSON.stringify( json ) %>">
+                            <%- dom.RichText.asText( cta.data.title ) %>
+                        </div>
+                    <% } %>
+                <% }) %>
+            </div>
+            <div class="formover__ex js-formover-ex">
+                <%- include( '../partials/svg/icon-ex.svg' ) %>
+            </div>
+        </div>
+    <% } %>
 </div>

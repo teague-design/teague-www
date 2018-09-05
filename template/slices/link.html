@@ -9,7 +9,7 @@ const href = doc.id ? locals.context.getUrl( doc ) : ext.url;
 const targ = ext ? ext.target : '';
 const icon = locals.slice.primary.icon.toLowerCase();
 %>
-<a class="link" href="<%= href %>" target="<%= targ %>" <% if ( locals.json ) { %>data-json="<%= JSON.stringify( locals.json ) %>"<% } %>>
+<a class="link <% if ( locals.class ) { %><%= locals.class %><% } %>" href="<%= href %>" target="<%= targ %>" <% if ( locals.json ) { %>data-json="<%= JSON.stringify( locals.json ) %>"<% } %>>
     <div class="link__wrap">
         <div class="link__text"><%= locals.slice.primary.text %></div>
         <div class="link__icon icon icon--<%= icon %>">

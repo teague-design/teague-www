@@ -186,7 +186,16 @@
 /******************************************************************************
  * Forms
 *******************************************************************************/
-.form {}
+.form {
+    .form__input + .form__sub {
+        .is-hoverable &:hover {
+            color: $black;
+        }
+        .is-hoverable.is-theme-black &:hover {
+            color: $white;
+        }
+    }
+}
 .form__input {
     @include p();
     color: $grey2;
@@ -203,6 +212,7 @@
 
     &:focus {
         color: $black;
+        border-color: $spot;
     }
 
     .is-theme-black & {
@@ -218,7 +228,7 @@
         }
     }
 }
-.form__block + .form__block {
+.form__group + .form__group {
     margin-top: 24px;
 }
 .form__field {
@@ -226,6 +236,10 @@
     display: inline-block;
     width: $form-input-width;
     max-width: 100%;
+
+    .formover & {
+        width: 100%;
+    }
 }
 .form__sub {
     -webkit-appearance: none;
@@ -233,13 +247,6 @@
     background-color: transparent;
     border: 0;
     border-radius: 0;
-
-    .is-hoverable &:hover {
-        color: $spot;
-    }
-    .is-hoverable.is-theme-black &:hover {
-        color: $white;
-    }
 }
 .form__input + .form__sub {
     position: absolute;

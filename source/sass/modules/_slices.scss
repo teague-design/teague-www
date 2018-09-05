@@ -1,13 +1,4 @@
-.slice--form {
-    .form__input + .form__sub {
-        .is-hoverable &:hover {
-            color: $black;
-        }
-        .is-hoverable.is-theme-black &:hover {
-            color: $white;
-        }
-    }
-}
+.slice--form {}
 .slice--text {
     p + p,
     h4 + p {

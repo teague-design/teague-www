@@ -9,6 +9,7 @@ import View from "./components/View";
 import Taxi from "./components/Taxi";
 import Video from "./components/Video";
 import Slider from "./components/Slider";
+import FormOver from "./components/FormOver";
 
 
 
@@ -72,6 +73,7 @@ class Controllers {
         this.push( "taxi", core.dom.body.find( ".js-taxi" ), BaseController, Taxi );
         this.push( "video", core.dom.body.find( ".js-video" ), BaseController, Video );
         this.push( "slider", core.dom.body.find( ".js-slider" ), BaseController, Slider );
+        this.push( "formover", core.dom.body.find( ".js-formover" ), BaseController, FormOver );
 
         // Unique Controllers...
         this.push( "theme", core.dom.body.find( ".js-theme" ), ThemeController );

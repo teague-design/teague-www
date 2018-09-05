@@ -13,8 +13,10 @@
             padding-left: 0;
             padding-right: 0;
         }
-
-
+    }
+    .slice--text__node {
+        padding-bottom: $expander-1;
+        padding-top: $expander-1;
     }
 }
 .atoms__theme {

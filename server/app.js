@@ -22,7 +22,8 @@ const fetchFields = [
     "cta.page_link.title",
     "cta.title",
     "cta.description",
-    "cta.link_text"
+    "cta.link_text",
+    "cta.label"
 ];
 
 

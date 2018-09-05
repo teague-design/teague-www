@@ -13,10 +13,16 @@ export default ( view ) => {
             return `
                 <div class="form__group">
                     ${fieldGroup.fields.map(( field ) => {
+                        const isArea = (field.fieldType === "textarea");
+
                         return `
                             <div class="form__block">
                                 <div class="form__field">
-                                    <input name="${field.name}" type="${typeMap[ field.name ] || field.fieldType}" placeholder="${field.label}" class="form__input js-form-field" />
+                                    ${isArea ? `
+                                        <textarea name="${field.name}" placeholder="${field.label}" class="form__input form__area js-form-field"></textarea>
+                                    ` : `
+                                        <input name="${field.name}" type="${typeMap[ field.name ] || field.fieldType}" placeholder="${field.label}" class="form__input js-form-field" />
+                                    `}
                                     ${isOne ? `<button class="form__sub btn" type="submit">${view.json.submitText}</button>` : ``}
                                 </div>
                             </div>

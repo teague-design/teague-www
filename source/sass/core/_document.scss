@@ -13,6 +13,7 @@ html {
         background-color: $black;
     }
 
+    &.is-formover-open,
     &.is-navi-mobile-open {
         overflow: hidden;
     }
