@@ -9,6 +9,10 @@
         @include font-family-meta-medium();
     }
 }
+.pc {
+    font-size: $p-size;
+    color: $grey;
+}
 .li,
 .cms li {
     @include li();

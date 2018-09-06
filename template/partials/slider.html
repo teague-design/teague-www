@@ -12,6 +12,11 @@ const config = locals.context.get( 'config' );
             <% locals.items.forEach(( item, i ) => { %>
                 <div class="slider__item js-slider-item" data-index="<%= i %>">
                     <%- include( './image.html', {image: item.data.image} ) %>
+                    <% if ( item.data.caption ) { %>
+                        <div class="slider__cap">
+                            <div class="p pc"><%= item.data.caption %></div>
+                        </div>
+                    <% } %>
                 </div>
             <% })%>
         </div>

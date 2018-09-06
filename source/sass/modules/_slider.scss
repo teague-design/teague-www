@@ -19,6 +19,13 @@
 .slider--paddy {
     @include wrapl();
 }
+.slider__cap {
+    letter-spacing: normal;
+    padding-top: 20px;
+    width: 100%;
+    max-width: 450px;
+    white-space: normal;
+}
 .slider__pane {
     overflow: hidden;
     width: 100%;
