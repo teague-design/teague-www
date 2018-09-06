@@ -42,6 +42,16 @@
         z-index: $z_layer_header + 1;
     }
 }
+.formover__body {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
 .formover__navis {
     @include flex-left();
     height: $header-height;
@@ -49,9 +59,11 @@
     left: 0;
     top: 0;
     width: 100%;
+    z-index: 2;
 
     @include respond( $navi-break ) {
         height: $header-height-mobile;
+        @include padh();
     }
 }
 .formover__panel {
@@ -61,14 +73,13 @@
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
     pointer-events: none;
     opacity: 0;
     transition: opacity $base-duration $ease;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    z-index: 1;
 
     @include respond( $navi-break ) {
         display: block;
@@ -77,6 +88,12 @@
     &.is-active {
         opacity: 1;
         pointer-events: auto;
+        position: relative;
+        height: auto;
+
+        @include respond( $navi-break ) {
+            padding-bottom: 50px;
+        }
     }
 }
 .formover__info,
@@ -91,7 +108,7 @@
     }
 }
 .formover__title {
-    padding: 15px 0 40px;
+    padding: 40px 0 40px;
 }
 .formover__navi {
     cursor: pointer;
@@ -118,6 +135,10 @@
 }
 .formover__navi + .formover__navi {
     margin-left: 50px;
+
+    @include respond( $navi-break ) {
+        margin-left: 25px;
+    }
 }
 .formover__ex {
     position: absolute;
@@ -125,6 +146,7 @@
     transform: translate3d( 0, -50%, 0 );
     cursor: pointer;
     right: 20px;
+    z-index: 2;
 
     @include respond-min( $mobile-width ) {
         right: $padding-v;

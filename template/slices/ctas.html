@@ -102,52 +102,54 @@ const isPad = isNewsletter || isMulti;
     </div>
     <% if ( isMulti || (isSingle && !isNewsletter) ) { %>
         <div class="screen screen--white formover js-formover">
-            <% locals.slice.items.forEach(( sliceItem ) => { %>
-                <%
-                const cta = sliceItem.cta;
-                const icon = cta.data.hubspot_form ? cta.data.hubspot_form.toLowerCase() : cta.data.page_link ? cta.data.page_link.value.document.uid : '';
-                %>
-                <% if ( cta.data.hubspot_form ) { %>
-                    <div class="formover__panel -wrap js-formover-panel js-formover-<%= icon %>">
-                        <div class="formover__info cms">
-                            <div class="formover__label">
-                                <h6><%= cta.data.label %></h6>
+            <div class="formover__body">
+                <div class="formover__navis -wrap">
+                    <% locals.slice.items.forEach(( sliceItem ) => { %>
+                        <%
+                        const cta = sliceItem.cta;
+                        const icon = cta.data.hubspot_form ? cta.data.hubspot_form.toLowerCase() : cta.data.page_link ? cta.data.page_link.value.document.uid : '';
+                        const json = { target: `js-formover-${icon}` };
+                        %>
+                        <% if ( cta.data.hubspot_form ) { %>
+                            <div class="formover__navi js-formover-navi js-formover-<%= icon %> h6" data-json="<%= JSON.stringify( json ) %>">
+                                <%- dom.RichText.asText( cta.data.title ) %>
                             </div>
-                            <div class="formover__title">
-                                <%- dom.RichText.asHtml( cta.data.title ).replace( /h5/g, 'h2' ) %>
-                            </div>
-                            <div class="formover__desc">
-                                <p><%= cta.data.description %></p>
-                            </div>
-                        </div>
-                        <div class="formover__form">
-                            <%- include( './form.html', {
-                                slice: {
-                                    primary: {
-                                        submit_action: cta.data.hubspot_form
-                                    }
-                                }
-                            }) %>
-                        </div>
-                    </div>
-                <% } %>
-            <% }) %>
-            <div class="formover__navis -wrap">
+                        <% } %>
+                    <% }) %>
+                </div>
+                <div class="formover__ex js-formover-ex">
+                    <%- include( '../partials/svg/icon-ex.svg' ) %>
+                </div>
                 <% locals.slice.items.forEach(( sliceItem ) => { %>
                     <%
                     const cta = sliceItem.cta;
                     const icon = cta.data.hubspot_form ? cta.data.hubspot_form.toLowerCase() : cta.data.page_link ? cta.data.page_link.value.document.uid : '';
-                    const json = { target: `js-formover-${icon}` };
                     %>
                     <% if ( cta.data.hubspot_form ) { %>
-                        <div class="formover__navi js-formover-navi js-formover-<%= icon %> h6" data-json="<%= JSON.stringify( json ) %>">
-                            <%- dom.RichText.asText( cta.data.title ) %>
+                        <div class="formover__panel -wrap js-formover-panel js-formover-<%= icon %>">
+                            <div class="formover__info cms">
+                                <div class="formover__label">
+                                    <h6><%= cta.data.label %></h6>
+                                </div>
+                                <div class="formover__title">
+                                    <%- dom.RichText.asHtml( cta.data.title ).replace( /h5/g, 'h2' ) %>
+                                </div>
+                                <div class="formover__desc">
+                                    <p><%= cta.data.description %></p>
+                                </div>
+                            </div>
+                            <div class="formover__form">
+                                <%- include( './form.html', {
+                                    slice: {
+                                        primary: {
+                                            submit_action: cta.data.hubspot_form
+                                        }
+                                    }
+                                }) %>
+                            </div>
                         </div>
                     <% } %>
                 <% }) %>
-            </div>
-            <div class="formover__ex js-formover-ex">
-                <%- include( '../partials/svg/icon-ex.svg' ) %>
             </div>
         </div>
     <% } %>

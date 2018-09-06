@@ -23,8 +23,15 @@
     padding: 0 5vw;
     margin-bottom: 100px;
 
+    &:last-child {
+        @include respond( $break-tablet-small ) {
+            margin-bottom: 0;
+        }
+    }
+
     @include respond( $break-tablet-small ) {
         width: 100%;
+        margin-bottom: 50px;
     }
 }
 .authors__thumb {
