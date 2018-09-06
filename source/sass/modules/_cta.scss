@@ -102,7 +102,7 @@
     }
     .cta + .cta {
         @include respond( $break-tablet-small ) {
-            margin-top: $expander-2;
+            margin-top: 80px;
         }
     }
     .cta__desc {

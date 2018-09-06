@@ -5,19 +5,8 @@ $ui-margin: 22px;
 .image {
     max-width: 100%;
     width: 100%;
-
-    .is-touchable & {
-        @include respond( $break-tablet-small ) {
-            padding-bottom: $padding-img-mobile;
-        }
-    }
-
-    // &[data-imageloader="true"] {
-    //     padding-bottom: 0 !important;
-    // }
 }
 .image-wrap {
-    // background-color: #989898;
     position: relative;
     padding-bottom: $padding-img;
 
@@ -28,10 +17,6 @@ $ui-margin: 22px;
         width: 100%;
         height: 100%;
     }
-
-    // .is-theme-black & {
-        // background-color: #222;
-    // }
 }
 
 

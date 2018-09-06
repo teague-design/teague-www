@@ -55,7 +55,7 @@
     }
 }
 .formover__panel {
-    padding-top: $expander-2 * 2;
+    @include padh();
     position: absolute;
     left: 0;
     top: 0;
@@ -83,14 +83,11 @@
 .formover__form  {
     width: 100%;
     max-width: 38.513513514vw;
+    padding-top: 80px;
 
     @include respond( $navi-break ) {
         max-width: 100%;
-    }
-}
-.formover__form {
-    @include respond( $navi-break ) {
-        padding-top: $expander-2;
+        padding-top: 50px;
     }
 }
 .formover__title {
