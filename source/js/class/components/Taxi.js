@@ -39,6 +39,8 @@ class Taxi {
             webUrl += `?category=${data.value}`;
         }
 
+        this.viewInstance.element.find( core.config.lazyAnimSelector ).removeClass( "is-animated" );
+
         $.ajax({
             url: apiUrl,
             dataType: "json",

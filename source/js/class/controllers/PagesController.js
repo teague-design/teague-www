@@ -31,7 +31,7 @@ class PagesController {
 
 
     handle () {
-        this.slices = this.element.find( ".js-slice" ).not( ".is-paged" );
+        this.slices = this.element.find( ".js-slice" ).not( ".is-animated" );
 
         if ( !this.slices.length ) {
             this.scroller.stop();
@@ -43,7 +43,7 @@ class PagesController {
             const visible = core.util.getElementsInView( this.slices );
 
             if ( visible.length ) {
-                visible.addClass( "is-paged" );
+                visible.addClass( "is-animated" );
             }
         }
     }

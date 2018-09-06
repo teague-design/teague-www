@@ -17,6 +17,30 @@
     .cta--media {
         .cta__l {
             width: 600px;
+            overflow: hidden;
+            position: relative;
+
+            &:before {
+                content: "";
+                width: 100%;
+                height: 25px;
+                background-color: $white;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY( -50% );
+                z-index: 1;
+            }
+            &:after {
+                content: "";
+                width: 18%;
+                height: 50%;
+                background-color: $white;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                z-index: 1;
+            }
 
             @include respond( $break-tablet-small ) {
                 width: 100%;

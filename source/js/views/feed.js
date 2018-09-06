@@ -24,7 +24,7 @@ export default ( view ) => {
                 };
 
                 return `
-                    <div class="feed__item">
+                    <div class="feed__item js-lazy-anim">
                         <div class="feed__image">
                             <a href="/${doc.type}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
                                 ${viewImage( doc.data.image )}

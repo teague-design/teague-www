@@ -6,22 +6,6 @@
         pointer-events: none;
     }
 }
-.main__header__image,
-.main__header__desc,
-.main__header__cat,
-.main__header__title,
-.main__header__deets__l,
-.main__header__deets__r {
-    opacity: 0;
-    transform: translate3d( 0, 50%, 0 );
-    transition: opacity $base-duration $ease,
-                transform $base-duration $ease;
-
-    .is-paged & {
-        opacity: 1;
-        transform: translate3d( 0, 0, 0 );
-    }
-}
 .main__header__image {
     width: 90vw;
 

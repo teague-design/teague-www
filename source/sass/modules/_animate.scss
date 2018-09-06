@@ -1,26 +1,31 @@
 /******************************************************************************
  * Animations
 *******************************************************************************/
-.anim {
-    transition-delay: $base-duration / 2;
-    transition-duration: $base-duration;
-    transition-timing-function: $ease;
-}
-.anim--op {
+.taxi,
+.main__header__image,
+.main__header__desc,
+.main__header__cat,
+.main__header__title,
+.main__header__deets__l,
+.main__header__deets__r {
     opacity: 0;
-    transition-property: opacity;
+    transform: translate3d( 0, 50%, 0 );
+    transition: opacity $base-duration $ease,
+                transform $base-duration $ease;
 
-    &.is-animated {
+    .is-animated & {
         opacity: 1;
-        }
+        transform: translate3d( 0, 0, 0 );
+    }
 }
-.anim--tr {
+.feed__item {
     opacity: 0;
-    transform: translate3d( 0, $p-bump * 2, 0 );
-    transition-property: transform opacity;
+    transform: translate3d( 0, 25%, 0 );
+    transition: opacity $base-duration $ease,
+                transform $base-duration $ease;
 
     &.is-animated {
         opacity: 1;
         transform: translate3d( 0, 0, 0 );
-        }
+    }
 }

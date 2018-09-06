@@ -25,14 +25,6 @@ class AnimateController {
     }
 
 
-    /**
-     *
-     * @instance
-     * @description Initialize the animation frame
-     * @memberof AnimateController
-     * @method start
-     *
-     */
     start () {
         this.scroller = new ScrollController();
         this.scroller.on( "scroll", () => {
@@ -86,14 +78,6 @@ class AnimateController {
     }
 
 
-    /**
-     *
-     * @instance
-     * @description Stop the animation frame
-     * @memberof AnimateController
-     * @method destroy
-     *
-     */
     destroy () {
         if ( this.scroller ) {
             this.scroller.destroy();

@@ -1,6 +1,7 @@
 import * as core from "../../core";
 import $ from "properjs-hobo";
 import ImageController from "../controllers/ImageController";
+import AnimateController from "../controllers/AnimateController";
 import paramalama from "paramalama";
 
 
@@ -163,6 +164,8 @@ class View {
      */
     exec () {
         this.controllers.image = new ImageController( this.element.find( core.config.lazyImageSelector ) );
+        this.controllers.animate = new AnimateController( this.element, this.element.find( core.config.lazyAnimSelector ) );
+        this.controllers.animate.start();
     }
 
 
@@ -178,6 +181,11 @@ class View {
         if ( this.controllers.image ) {
             this.controllers.image.destroy();
             this.controllers.image = null;
+        }
+
+        if ( this.controllers.animate ) {
+            this.controllers.animate.destroy();
+            this.controllers.animate = null;
         }
     }
 }

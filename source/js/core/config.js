@@ -45,17 +45,6 @@ const config = {
     /**
      *
      * @public
-     * @member animSelector
-     * @memberof core.config
-     * @description The string selector used for animatables.
-     *
-     */
-    animSelector: ".js-animate",
-
-
-    /**
-     *
-     * @public
      * @member lazyImageAttr
      * @memberof core.config
      * @description The string attribute for lazy image source URLs.
