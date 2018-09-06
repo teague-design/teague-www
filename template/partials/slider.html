@@ -34,6 +34,11 @@ const config = locals.context.get( 'config' );
                     <%- dom.RichText.asHtml( item.data.title ).replace( /h1/g, 'h4' ) %>
                     <p><%= item.data.excerpt %></p>
                     <%- include( '../slices/link.html', {
+                        json: {
+                            title: dom.RichText.asText( item.data.title ),
+                            story: true,
+                            category: item.data.category
+                        },
                         slice: {
                             primary: {
                                 document_link: item,

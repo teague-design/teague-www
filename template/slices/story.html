@@ -17,6 +17,11 @@ const story = slice.primary.story;
                 </div>
                 <div class="cta__link">
                     <%- include( './link.html', {
+                        json: {
+                            title: dom.RichText.asText( story.data.title ),
+                            story: true,
+                            category: story.data.category
+                        },
                         slice: {
                             primary: {
                                 document_link: story,

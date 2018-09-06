@@ -12,6 +12,7 @@ const fetchFields = [
     "story.theme",
     "story.description",
     "story.excerpt",
+    "story.category",
     "taxonomy.name",
     "taxonomy.image",
     "taxonomy.description",

@@ -20,6 +20,11 @@ const dom = locals.context.get( 'dom' );
                     </div>
                     <div class="related__link">
                         <%- include( './link.html', {
+                            json: {
+                                title: dom.RichText.asText( sliceItem.story.data.title ),
+                                story: true,
+                                category: sliceItem.story.data.category
+                            },
                             slice: {
                                 primary: {
                                     document_link: sliceItem.story,

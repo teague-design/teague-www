@@ -19,6 +19,7 @@ const router = {
         this.blit = new Controller();
         this.bigpink = core.dom.body.find( ".js-bigpink" );
         this.bigpinkTitle = this.bigpink.find( ".js-bigpink-title" );
+        this.bigpinkCategory = this.bigpink.find( ".js-bigpink-category" );
         this.animDuration = 500;
         this.controllers = new Controllers({
             el: core.dom.main,
@@ -234,8 +235,18 @@ const router = {
         this.tweenContent( 0 );
     },
     transitionOutPink ( elem, data ) {
-        this.bigpinkTitle[ 0 ].innerHTML = `<h1>${data.json.title}</h1>`;
+        this.bigpinkTitle.forEach(( el ) => {
+            el.innerHTML = data.json.title;
+        });
         this.bigpink.removeClass( "is-hidden" ).addClass( "is-active" );
+
+        if ( data.json.category ) {
+            this.bigpinkCategory[ 0 ].innerHTML = data.json.category;
+        }
+
+        if ( data.json.story ) {
+            this.bigpink.addClass( "is-story" );
+        }
     },
 
 
@@ -246,7 +257,7 @@ const router = {
         this.bigpink.addClass( "is-inactive" );
 
         setTimeout(() => {
-            this.bigpink.addClass( "is-hidden" ).removeClass( "is-active is-inactive" );
+            this.bigpink.addClass( "is-hidden" ).removeClass( "is-active is-story is-inactive" );
 
         }, 500 );
     },

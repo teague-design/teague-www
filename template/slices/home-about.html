@@ -20,6 +20,9 @@ const dom = locals.context.get( 'dom' );
     <div class="home__about-cta">
         <%- dom.RichText.asHtml( slice.primary.about_cta ) %>
         <%- include( './link.html', {
+            json: {
+                title: dom.RichText.asText( slice.primary.about_page_link.data.title )
+            },
             slice: {
                 primary: {
                     document_link: slice.primary.about_page_link,

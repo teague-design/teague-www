@@ -14,6 +14,9 @@ const itemsMapped = slice.items.map(( item ) => {
 <div class="home__stories-desc cms -wrap">
     <%- dom.RichText.asHtml( slice.primary.stories_description ) %>
     <%- include( './link.html', {
+        json: {
+            title: dom.RichText.asText( slice.primary.stories_page_link.data.title )
+        },
         slice: {
             primary: {
                 document_link: slice.primary.stories_page_link,

@@ -17,10 +17,16 @@ export default ( view ) => {
     return `
         <div class="feed__grid">
             ${view.json.documents.map(( doc ) => {
+                const json = {
+                    title: dom.RichText.asText( doc.data.title ),
+                    story: true,
+                    category: doc.data.category
+                };
+
                 return `
                     <div class="feed__item">
                         <div class="feed__image">
-                            <a href="/${doc.type}/${doc.uid}/">
+                            <a href="/${doc.type}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
                                 ${viewImage( doc.data.image )}
                             </a>
                         </div>
@@ -30,7 +36,7 @@ export default ( view ) => {
                             </a>
                         </div>
                         <div class="feed__title cms">
-                            <a href="/${doc.type}/${doc.uid}/">
+                            <a href="/${doc.type}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
                                 ${dom.RichText.asHtml( doc.data.title ).replace( /h1/g, "h5" )}
                             </a>
                         </div>

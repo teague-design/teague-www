@@ -25,6 +25,22 @@
         visibility: hidden;
         transition: none;
     }
+
+    &.is-story {
+        .main__header:not( .main__header--story ) {
+            display: none;
+        }
+        .main__header--story {
+            display: block;
+        }
+    }
+
+    .main__header:not( .main__header--story ) {
+        display: block;
+    }
+    .main__header--story {
+        display: none;
+    }
 }
 .bigpink__title {
     position: relative;
