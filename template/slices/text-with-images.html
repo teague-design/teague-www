@@ -1,0 +1,55 @@
+<%
+/* Text with Images
+locals { item, slice, scope }
+*/
+const isCollage = slice.primary.layout === 'Process Collage';
+const isLefty = slice.primary.layout === 'Images on Left';
+%>
+<div class="twi <%= isCollage ? 'twi--collage' : isLefty ? 'twi--lefty' : 'twi--righty' %>">
+    <% if ( isCollage ) { %>
+        <div class="twi__primary">
+            <div class="twi__text">
+                <%- include( './text.html', {
+                    slice: {
+                        items: [
+                            {
+                                text: slice.primary.text
+                            }
+                        ]
+                    }
+                }) %>
+            </div>
+            <div class="twi__images">
+                <%- include( '../partials/image.html', {image: locals.slice.items[ 0 ].slice_image} ) %>
+            </div>
+        </div>
+        <div class="twi__extras">
+            <% locals.slice.items.forEach(( item, i ) => { %>
+                <% if ( i > 0 ) { %>
+                    <div class="twi__extra">
+                        <%- include( '../partials/image.html', {image: item.slice_image} ) %>
+                    </div>
+                <% } %>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="twi__primary">
+            <div class="twi__text">
+                <%- include( './text.html', {
+                    slice: {
+                        items: [
+                            {
+                                text: slice.primary.text
+                            }
+                        ]
+                    }
+                }) %>
+            </div>
+            <div class="twi__images">
+                <% locals.slice.items.forEach(( item ) => { %>
+                    <%- include( '../partials/image.html', {image: item.slice_image} ) %>
+                <% })%>
+            </div>
+        </div>
+    <% } %>
+</div>

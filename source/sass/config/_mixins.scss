@@ -195,3 +195,40 @@
         padding-right: $padding-v;
     }
 }
+@mixin wrapl() {
+    padding-left: 20px;
+
+    @include respond-min( $mobile-width ) {
+        padding-left: $padding-v;
+    }
+}
+@mixin wrapr() {
+    padding-right: 20px;
+
+    @include respond-min( $mobile-width ) {
+        padding-right: $padding-v;
+    }
+}
+@mixin exp() {
+    padding-bottom: $expander-2;
+    padding-top: $expander-2;
+
+    @include respond-min( $mobile-width ) {
+        padding-bottom: $expander-1;
+        padding-top: $expander-1;
+    }
+}
+@mixin padh() {
+    padding-top: $header-height;
+
+    @include respond( $navi-break ) {
+        padding-top: $header-height-mobile;
+    }
+}
+@mixin padm() {
+    padding-top: 21vw;
+
+    @include respond-min( $bind-width ) {
+        padding-top: 310px
+    }
+}

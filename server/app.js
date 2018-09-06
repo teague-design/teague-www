@@ -17,6 +17,7 @@ const fetchFields = [
     "taxonomy.description",
     "taxonomy.type",
     "author.name",
+    "author.image",
     "cta.hubspot_form",
     "cta.page_link",
     "cta.page_link.title",

@@ -3,8 +3,8 @@ const item = locals.context.get( 'item' );
 %>
 <%- include( '../partials/page.html' ) %>
 <% if ( item.uid === 'atoms' ) { %>
-    <div class="atoms__theme js-theme -exp -wrap">
-        <div class="swatch swatch--white js-theme-swatch" data-theme="white"></div>
-        <div class="swatch swatch--black js-theme-swatch" data-theme="black"></div>
+    <div class="atoms__theme js-theme -wrap">
+        <div class="swatch swatch--white js-theme-swatch <%= item.data.theme === 'White' ? 'is-active' : '' %>" data-theme="white"></div>
+        <div class="swatch swatch--black js-theme-swatch <%= item.data.theme === 'Black' ? 'is-active' : '' %>" data-theme="black"></div>
     </div>
 <% } %>

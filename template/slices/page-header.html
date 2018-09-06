@@ -6,7 +6,7 @@ const config = locals.context.get( 'config' );
 const isImage = locals.slice.primary.header_image.url;
 const isStory = locals.item.type === 'story';
 %>
-<div class="main__header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory ) { %>main__header--story<% } %> -pad-mast">
+<div class="main__header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory ) { %>main__header--story<% } %>">
     <% if ( isStory ) { %>
         <div class="main__header__cat cms -wrap">
             <h6><%= locals.item.data.category %></h6>
@@ -23,21 +23,16 @@ const isStory = locals.item.type === 'story';
     <% if ( isStory ) { %>
         <div class="main__header__deets cms -wrap">
             <div class="main__header__deets__l">
-                <!-- <div class="main__header__tags">
-                    <% locals.item.tags.forEach(( tag ) => { %>
-                        <div class="main__header__tag p">
-                            <a href="/stories/?tag=<%= tag %>"><%= tag %></a>
-                        </div>
-                    <% }) %>
-                </div> -->
                 <div class="main__header__desc">
                     <%- locals.context.get( 'dom' ).RichText.asHtml( locals.slice.primary.header_description ) %>
                 </div>
             </div>
-            <div class="main__header__deets__r">
+            <div class="main__header__deets__r main__header__authors">
                 <h6>Project Authors</h6>
                 <% locals.item.data.authors.forEach(( author ) => { %>
-                    <div class="main__header__auth p"><%= author.author.data.name %></div>
+                    <% if ( author.author.data ) { %>
+                        <div class="main__header__auth p"><%= author.author.data.name %></div>
+                    <% } %>
                 <% }) %>
             </div>
         </div>

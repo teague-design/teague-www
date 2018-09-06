@@ -1,12 +1,14 @@
-.feed {
-    margin: 0 (-$feed-padding);
-}
+.feed {}
 .feed__item {
     display: inline-block;
     vertical-align: top;
     width: 33.333333%;
-    padding: 0 $feed-padding;
     margin-bottom: $feed-margin;
+    padding: 0 $padding-1;
+
+    @include respond-min( $mobile-width ) {
+        padding: 0 $padding-v;
+    }
 
     @include respond( $break-tablet-medium ) {
         width: 50%;
@@ -16,11 +18,17 @@
         width: 100%;
     }
 }
+.feed__grid {
+    margin: 0 (-$padding-1);
+
+    @include respond-min( $mobile-width ) {
+        margin: 0 (-$padding-v);
+    }
+}
 .feed__cat {
     padding: 20px 0;
 }
 .feed__pagination {
-    padding: 0 $feed-padding;
     display: flex;
     align-items: center;
     justify-content: flex-end;

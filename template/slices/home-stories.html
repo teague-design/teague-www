@@ -4,6 +4,7 @@ locals { item, slice, scope }
 primary { stories_description, stories_cta, stories_page_link }
 */
 const dom = locals.context.get( 'dom' );
+const config = locals.context.get( 'config' );
 const itemsMapped = slice.items.map(( item ) => {
     const doc = item.story;
     doc.cta = item.story_cta;
@@ -24,5 +25,5 @@ const itemsMapped = slice.items.map(( item ) => {
     }) %>
 </div>
 <div class="home__stories-slider">
-    <%- include( '../partials/slider.html', {items: itemsMapped, options: {spawn: 'home', label: dom.RichText.asText( slice.primary.stories_page_link.data.title )} } ) %>
+    <%- include( '../partials/slider.html', {items: itemsMapped, options: {spawn: config.homepage, label: dom.RichText.asText( slice.primary.stories_page_link.data.title )} } ) %>
 </div>

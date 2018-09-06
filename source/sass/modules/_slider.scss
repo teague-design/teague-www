@@ -4,6 +4,21 @@
     width: 100%;
     user-select: none;
 }
+.slider--home {
+    position: absolute;
+    padding-left: 27.027027027vw;
+    bottom: 100px;
+
+    @include respond( $bind-width ) {
+        bottom: 40px;
+    }
+}
+.slider--edge {
+    letter-spacing: 0px;
+}
+.slider--paddy {
+    @include wrapl();
+}
 .slider__pane {
     overflow: hidden;
     width: 100%;
@@ -18,16 +33,31 @@
     vertical-align: top;
     cursor: pointer;
 
-    .image {
+    .image,
+    .image-wrap {
         pointer-events: none;
+    }
+
+    .slider--edge & {
+        width: 100vw;
+    }
+
+    .slider--paddy & {
+        width: 70vw;
     }
 }
 .slider__navi {
     white-space: nowrap;
     letter-spacing: 10px;
-    padding-top: $padding-1;
-    text-align: right;
+    padding-top: 20px;
+    text-align: center;
     padding-right: $padding-v;
+    padding-left: $padding-v;
+
+    .slider--home &,
+    .slider--paddy & {
+        text-align: right;
+    }
 }
 .slider__navi__next {
     display: inline-block;
@@ -48,9 +78,13 @@
     vertical-align: middle;
     height: 2px;
     width: 10px;
-    background-color: $white;
-    transition: width $base-duration $ease,
-                background-color $base-duration $ease;
+    background-color: $black;
+    transition: width $fast-duration $ease,
+                background-color $fast-duration $ease;
+
+    .is-theme-black & {
+        background-color: $white;
+    }
 
     &.is-active {
         width: 20px;

@@ -1,11 +1,12 @@
 <%
 /* Slider
 locals { items, options }
-options.spawn: home, careers, story, work
+options.spawn: home, careers, story( edge, paddy ), work
 */
 const dom = locals.context.get( 'dom' );
+const config = locals.context.get( 'config' );
 %>
-<div class="slider js-slider" data-spawn="<%= locals.options.spawn %>">
+<div class="slider slider--<%= locals.options.spawn %> js-slider" data-spawn="<%= locals.options.spawn %>">
     <div class="slider__pane">
         <div class="slider__belt js-slider-belt">
             <% locals.items.forEach(( item, i ) => { %>
@@ -17,16 +18,16 @@ const dom = locals.context.get( 'dom' );
     </div>
     <div class="slider__navi js-slider-navi">
         <div class="slider__navi__prev js-slider-prev">
-            <%- include( './svg/icon-prev.svg', {style: 'lite'} ) %>
+            <%- include( './svg/icon-prev.svg' ) %>
         </div>
         <% locals.items.forEach(( item, i ) => { %>
             <div class="slider__navi__curr js-slider-curr" data-index="<%= i %>"></div>
         <% })%>
         <div class="slider__navi__next js-slider-next">
-            <%- include( './svg/icon-prev.svg', {style: 'lite'} ) %>
+            <%- include( './svg/icon-prev.svg' ) %>
         </div>
     </div>
-    <% if ( locals.options.spawn === 'home' ) { %>
+    <% if ( locals.options.spawn === config.homepage ) { %>
         <div class="slider__splash js-slider-splash" data-label="<%= locals.options.label %>">
             <% locals.items.forEach(( item, i ) => { %>
                 <div class="slider__splash__item js-slider-splash-item cms -wrap" data-index="<%= i %>">

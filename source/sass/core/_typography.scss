@@ -9,9 +9,6 @@
         @include font-family-meta-medium();
     }
 }
-.cms p {
-    @include wrap-p();
-}
 .li,
 .cms li {
     @include li();
@@ -70,9 +67,9 @@
         For mobile breakpoint simply remove
         the new line by overriding display...
     */
-    @include respond( $navi-break ) {
-        display: inline;
-    }
+    // @include respond( $navi-break ) {
+    //     display: inline;
+    // }
 }
 
 

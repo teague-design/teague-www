@@ -2,6 +2,7 @@
 /* Slices iterator
 locals { item, slices, scope }
 */
+const config = locals.context.get( 'config' );
 %>
 <section class="slices <%= scope %>__slices">
     <% locals.slices.forEach(( slice, i ) => { %>
@@ -12,5 +13,8 @@ locals { item, slices, scope }
         <div class="slice slice--<%= sliceType %> js-slice" data-index="<%= i %>" data-prop="<%= slice.slice_type %>">
             <%- include( slicePartial, {item, slice, scope} ) %>
         </div>
+        <% if ( scope !== config.homepage ) { %>
+            <div class="spacer"></div>
+        <% } %>
     <% }) %>
 </section>

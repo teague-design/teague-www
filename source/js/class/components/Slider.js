@@ -24,6 +24,11 @@ class Slider {
             index: 0,
             length: this.currs.length
         };
+        this.offsets = {
+            home: "(-50vw - 10vw)",
+            edge: "-100vw",
+            paddy: "(-70vw - 10vw)"
+        };
         this.isPanning = false;
         this._spawnFunc = this[ `spawn_${this.elemData.spawn}` ].bind( this );
         this._swapFunc = this[ `swap_${this.elemData.spawn}` ].bind( this );
@@ -32,6 +37,14 @@ class Slider {
         this.bind();
         this._spawnFunc();
     }
+
+
+    spawn_edge () {}
+    swap_edge () {}
+
+
+    spawn_paddy () {}
+    swap_paddy () {}
 
 
     spawn_home () {
@@ -106,7 +119,7 @@ class Slider {
 
     transition () {
         this.isPanning = true;
-        this.calc = `calc(${this.data.index} * (-50vw - 10vw))`;
+        this.calc = `calc(${this.data.index} * ${this.offsets[ this.elemData.spawn ]})`;
 
         core.util.translate3d(
             this.belt[ 0 ],

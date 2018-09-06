@@ -1,0 +1,61 @@
+// Apply vertical spacing of modules
+.footer {
+    padding-top: 80px;
+}
+.main__header {
+    @include padm();
+}
+.main__header__cat {
+    padding-bottom: 50px;
+}
+.main__header__desc {
+    padding-top: 80px;
+}
+.main__header__image {
+    padding-top: 80px;
+}
+.main__header--story {
+    @include padh();
+}
+.main__header__authors {
+    padding-top: 80px;
+}
+.main__header__deets__r {
+    h6 {
+        padding-bottom: 50px;
+    }
+
+    .main__header__auth + .main__header__auth {
+        padding-top: 20px;
+    }
+}
+.slice--text__node {
+    > h6 {
+        padding-bottom: 40px;
+    }
+
+    h4 + p {
+        padding-top: 40px;
+    }
+
+    p + p {
+        padding-top: 25px;
+    }
+
+    h5 {
+        &:before,
+        &:after {
+            content: "";
+            height: 1px;
+            width: 25px;
+            background-color: $spot;
+            display: block;
+            margin: 25px 0;
+        }
+    }
+}
+.twi__images {
+    .image-wrap + .image-wrap {
+        margin-top: 60px;
+    }
+}

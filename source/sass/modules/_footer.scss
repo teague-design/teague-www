@@ -1,6 +1,4 @@
 .footer {
-    padding-top: $expander-2;
-
     .is-tranny & {
         opacity: 0;
         pointer-events: none;
@@ -20,8 +18,8 @@
 
     @include respond( $break-tablet-small ) {
         height: auto;
-        padding-top: $expander-1;
-        padding-bottom: $expander-1;
+        padding-top: $expander-2;
+        padding-bottom: $expander-2;
     }
 
     .footer__social {
@@ -42,7 +40,7 @@
         @include respond( $break-tablet-small ) {
             width: 100%;
             justify-content: center;
-            margin-top: $padding-1;
+            margin-top: 40px;
         }
     }
 }

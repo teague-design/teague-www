@@ -1,13 +1,14 @@
 .story {
-    .slice--page-header {
-        padding-bottom: $expander-2 * 2;
-    }
-
+    // .slice--page-header {
+    //     padding-bottom: $expander-2;
+    // }
+    // .slice--page-header + .slice {
+    //     padding-top: 0;
+    // }
+    // .slice:not( .slice--page-header ) {
+    //     @include exp();
+    // }
     .slice--text {
         @include wrap();
-    }
-
-    .slice--image {
-        padding: 90px 0;
     }
 }

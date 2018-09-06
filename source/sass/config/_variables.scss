@@ -35,9 +35,9 @@ $grid-columns: 12 11 10 9 8 7 6 5 4 3 2 1;
 /******************************************************************************
  * Spacing
 *******************************************************************************/
-$expander-1: 40px;
-$expander-2: 80px;
-$padding-1: 30px;
+$expander-1: 160px;
+$expander-2: 125px;
+$padding-1: 2.027027027vw;
 $padding-v: 4.25vw;
 $padding-img: 56.25%;
 $padding-img-mobile: 140%;
@@ -50,12 +50,9 @@ $padding-img-mobile: 140%;
 $header-height: 125px;
 $header-height-mobile: 85px;
 $bind-width: 1480px;
-$mobile-width: 480px;
-$taxi-break-width: 830px;
+$mobile-width: 640px;
 $form-input-width: 450px;
-$taxi-input-width: 330px;
-$feed-padding: 3.3783783784vw;
-$feed-margin: 17.837837838vw;
+$feed-margin: 13.5vw;
 $video-ui-padding: 8.1081081081vw;
 $navi-break: 700px;
 
@@ -67,10 +64,9 @@ $navi-break: 700px;
  * Fluid type calculation:
  * $h1-size-fluid: calc( #{$h1-size-mobile} + ???vw );
 *******************************************************************************/
-$p-bump: $padding-1;
 $p-size: 15px;
 $p-line: 24 / 15;
-$p-wrap: 530px;
+$p-wrap: 575px;
 
 $h1-size: 264px;
 $h1-size-mobile: 96px;

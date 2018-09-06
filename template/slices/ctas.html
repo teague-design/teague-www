@@ -8,7 +8,7 @@ const isMulti = locals.slice.items.length > 1;
 const mod = isMulti ? 'ctas--multi' : 'ctas--oneup';
 %>
 <div class="ctas <%= mod %> -wrap">
-    <div class="ctas__wrap -exp">
+    <div class="ctas__wrap">
         <% locals.slice.items.forEach(( sliceItem ) => { %>
             <%
             const cta = sliceItem.cta;

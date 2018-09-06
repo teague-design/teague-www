@@ -31,7 +31,12 @@
 .svg--play,
 .svg--pause,
 .svg--sound,
-.svg--fs {
+.svg--fs,
+.svg--prev,
+.svg--navi,
+.svg--careers,
+.svg--media,
+.svg--work {
     .is-theme-black & {
         fill: $white;
     }
@@ -55,10 +60,6 @@
 .svg--navi {
     width: 21px;
     height: 10px;
-
-    .is-theme-black & {
-        fill: $white;
-    }
 }
 .svg--ex-mobile {
     width: 17px;

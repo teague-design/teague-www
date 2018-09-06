@@ -6,10 +6,8 @@
     display: flex;
     justify-content: flex-start;
     align-items: center;
-
-    @include respond( $mobile-width ) {
-        flex-wrap: wrap;
-    }
+    white-space: nowrap;
+    overflow: auto;
 }
 .taxi__cat {
     position: relative;

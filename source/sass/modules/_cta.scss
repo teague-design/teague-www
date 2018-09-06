@@ -51,7 +51,7 @@
 
     .cta__r {
         @include respond( $break-tablet-medium ) {
-            padding-top: $expander-1;
+            padding-top: 40px;
         }
     }
 }

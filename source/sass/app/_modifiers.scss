@@ -2,9 +2,8 @@
  * Display
 *******************************************************************************/
 .-exp {
-    padding-bottom: $expander-1;
-    padding-top: $expander-1;
-    }
+    @include exp();
+}
 .-wrap {
     @include wrap();
 }
@@ -27,18 +26,10 @@
     display: block;
     }
 .-pad {
-    padding-top: $header-height;
-
-    @include respond( $navi-break ) {
-        padding-top: $header-height-mobile;
-    }
+    @include padh();
 }
 .-pad-mast {
-    padding-top: 21vw;
-
-    @include respond-min( $bind-width ) {
-        padding-top: 310px
-    }
+    @include padm();
 }
 
 
