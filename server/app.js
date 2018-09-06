@@ -18,13 +18,14 @@ const fetchFields = [
     "taxonomy.type",
     "author.name",
     "author.image",
+    "author.description",
     "cta.hubspot_form",
     "cta.page_link",
-    "cta.page_link.title",
     "cta.title",
     "cta.description",
     "cta.link_text",
-    "cta.label"
+    "cta.label",
+    "cta.image"
 ];
 
 

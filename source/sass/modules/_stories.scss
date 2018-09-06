@@ -1,14 +1,75 @@
 .story {
-    // .slice--page-header {
-    //     padding-bottom: $expander-2;
-    // }
-    // .slice--page-header + .slice {
-    //     padding-top: 0;
-    // }
-    // .slice:not( .slice--page-header ) {
-    //     @include exp();
-    // }
     .slice--text {
         @include wrap();
     }
+}
+
+
+
+.authors__list {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0 (-5vw);
+}
+.authors__label {
+    padding-bottom: 50px;
+}
+.authors__tile {
+    width: 50%;
+    display: inline-block;
+    display: flex;
+    align-items: flex-start;
+    padding: 0 5vw;
+    margin-bottom: 100px;
+
+    @include respond( $break-tablet-small ) {
+        width: 100%;
+    }
+}
+.authors__thumb {
+    width: 90px;
+}
+.authors__info {
+    padding-left: 25px;
+    width: calc( 100% - 90px );
+
+    p {
+        padding-top: 20px;
+    }
+}
+
+
+
+.related {
+    border-top: 1px solid $grey4;
+    border-bottom: 1px solid $grey4;
+}
+.related__banner {
+    padding-top: 50px;
+}
+.related__stories {
+    padding: 50px 0;
+    display: inline-block;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    margin: 0 (-5vw);
+}
+.related__story {
+    width: 50%;
+    padding: 0 5vw;
+
+    @include respond( $navi-break ) {
+        width: 100%;
+    }
+
+    & + .related__story {
+        @include respond( $navi-break ) {
+            padding-top: 80px;
+        }
+    }
+}
+.related__title {
+    padding: 25px 0;
 }

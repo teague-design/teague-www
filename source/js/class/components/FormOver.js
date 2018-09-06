@@ -6,6 +6,7 @@ import * as core from "../../core";
 class FormOver {
     constructor ( element, data ) {
         this.element = element;
+        this.context = this.element.parent();
         this.elemData = data;
         this.navis = this.element.find( ".js-formover-navi" );
         this.panels = this.element.find( ".js-formover-panel" );
@@ -32,7 +33,7 @@ class FormOver {
             targs.addClass( "is-active" );
         });
 
-        core.dom.body.on( "click", ".js-formover-trigger", this._onTriggerClick );
+        this.context.on( "click", ".js-formover-trigger", this._onTriggerClick );
     }
 
 
@@ -63,9 +64,7 @@ class FormOver {
         this.panels.removeClass( "is-active" );
     }
 
-    destroy () {
-        core.dom.body.off( "click", this._onTriggerClick );
-    }
+    destroy () {}
 }
 
 

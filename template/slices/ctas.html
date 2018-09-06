@@ -5,22 +5,28 @@ locals { item, slice, scope }
 const config = locals.context.get( 'config' );
 const dom = locals.context.get( 'dom' );
 const isMulti = locals.slice.items.length > 1;
+const isSingle = !isMulti;
 const mod = isMulti ? 'ctas--multi' : 'ctas--oneup';
+const firstCTA = locals.slice.items[ 0 ].cta;
+const firstIcon = firstCTA.data.hubspot_form ? firstCTA.data.hubspot_form.toLowerCase() : firstCTA.data.page_link ? firstCTA.data.page_link.value.document.uid : '';
+const isNewsletter = firstIcon === 'newsletter';
+const isBorder = isNewsletter || isMulti;
+const isWrap = isNewsletter || isMulti;
+const isPad = isNewsletter || isMulti;
 %>
-<div class="ctas <%= mod %> -wrap">
-    <div class="ctas__wrap">
+<div class="ctas <%= mod %> <% if ( isWrap ) { %>-wrap<% } %>">
+    <div class="ctas__wrap <% if ( isBorder ) { %>ctas__wrap--bored<% } %> <% if ( isPad ) { %>ctas__wrap--pad<% } %>">
         <% locals.slice.items.forEach(( sliceItem ) => { %>
             <%
             const cta = sliceItem.cta;
             const icon = cta.data.hubspot_form ? cta.data.hubspot_form.toLowerCase() : cta.data.page_link ? cta.data.page_link.value.document.uid : '';
-            const isNewsletter = icon === 'newsletter';
             const isHubspot = cta.data.hubspot_form;
             const docLink = cta.data.page_link ? cta.data.page_link.value.document : {};
             const extLink = isHubspot ? {url: `#js-formover-${icon}`} : {};
             const json = cta.data.page_link ? { title: dom.RichText.asText( cta.data.title ) } : { target: `js-formover-${icon}` };
             %>
             <div class="cta cta--<%= icon %>">
-                <% if ( isNewsletter ) { %>
+                <% if ( isSingle && isNewsletter ) { %>
                     <div class="cta__l cms">
                         <div class="cta__title">
                             <%- dom.RichText.asHtml( cta.data.title ) %>
@@ -38,7 +44,32 @@ const mod = isMulti ? 'ctas--multi' : 'ctas--oneup';
                             }
                         }) %>
                     </div>
-
+                <% } else if ( isSingle ) { %>
+                    <div class="cta__l">
+                        <%- include( `../partials/image.html`, {image: cta.data.image} ) %>
+                    </div>
+                    <div class="cta__r cms">
+                        <div class="cta__title">
+                            <%- dom.RichText.asHtml( cta.data.title ).replace( /h5/g, 'h3' ) %>
+                        </div>
+                        <div class="cta__desc">
+                            <p><%= cta.data.description %></p>
+                        </div>
+                        <div class="cta__link">
+                            <%- include( './link.html', {
+                                json,
+                                slice: {
+                                    primary: {
+                                        document_link: docLink,
+                                        external_link: extLink,
+                                        text: sliceItem.cta_text_link || cta.data.link_text,
+                                        icon: 'Arrow'
+                                    }
+                                },
+                                class: `js-formover-trigger`
+                            }) %>
+                        </div>
+                    </div>
                 <% } else { %>
                     <div class="cta__tout cms">
                         <div class="cta__icon">
@@ -57,7 +88,7 @@ const mod = isMulti ? 'ctas--multi' : 'ctas--oneup';
                                     primary: {
                                         document_link: docLink,
                                         external_link: extLink,
-                                        text: cta.data.link_text,
+                                        text: sliceItem.cta_text_link || cta.data.link_text,
                                         icon: 'Arrow'
                                     }
                                 },
@@ -69,7 +100,7 @@ const mod = isMulti ? 'ctas--multi' : 'ctas--oneup';
             </div>
         <% }) %>
     </div>
-    <% if ( isMulti ) { %>
+    <% if ( isMulti || (isSingle && !isNewsletter) ) { %>
         <div class="screen screen--white formover js-formover">
             <% locals.slice.items.forEach(( sliceItem ) => { %>
                 <%

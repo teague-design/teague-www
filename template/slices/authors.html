@@ -1,0 +1,25 @@
+<%
+/* Authors
+locals { item, slice, scope }
+*/
+%>
+<div class="authors cms -wrap">
+    <div class="authors__label">
+        <h6>Project Authors</h6>
+    </div>
+    <div class="authors__list">
+        <% locals.item.data.authors.forEach(( author ) => { %>
+            <% if ( author.author.data ) { %>
+                <div class="authors__tile">
+                    <div class="authors__thumb">
+                        <%- include( '../partials/image.html', {image: author.author.data.image} ) %>
+                    </div>
+                    <div class="authors__info">
+                        <h5><%= author.author.data.name %></h5>
+                        <p><%= author.author.data.description %></p>
+                    </div>
+                </div>
+            <% } %>
+        <% }) %>
+    </div>
+</div>

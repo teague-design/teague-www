@@ -1,6 +1,63 @@
 .ctas {
     text-align: center;
 }
+.ctas--oneup {
+    .cta--work,
+    .cta--media,
+    .cta--story {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+
+        @include respond( $break-tablet-small ) {
+            display: block;
+        }
+    }
+    .cta--work,
+    .cta--media {
+        .cta__l {
+            width: 600px;
+
+            @include respond( $break-tablet-small ) {
+                width: 100%;
+            }
+        }
+        .cta__r {
+            padding-left: 6.0810810811vw;
+            width: calc( 100% - 600px );
+            @include wrapr();
+
+            @include respond( $break-tablet-small ) {
+                @include wrap();
+                padding-top: 50px;
+                width: 100%;
+            }
+        }
+    }
+    .cta--story {
+        align-items: flex-start;
+
+        .cta__l {
+            width: 333px;
+
+            @include respond( $break-tablet-small ) {
+                width: 100%;
+            }
+        }
+        .cta__r {
+            padding-left: 10.135135135vw;
+            width: calc( 100% - 333px );
+            @include wrapr();
+
+            @include respond( $break-tablet-small ) {
+                width: 100%;
+                padding-left: 0;
+                padding-right: 0;
+                padding-top: 50px;
+            }
+        }
+    }
+}
 .ctas--multi {
     .ctas__wrap {
         display: flex;
@@ -33,11 +90,13 @@
     }
 }
 .ctas__wrap {
-    border-top: 1px solid $grey4;
-    border-bottom: 1px solid $grey4;
     display: inline-block;
     text-align: left;
     width: 100%;
+}
+.ctas__wrap--bored {
+    border-top: 1px solid $grey4;
+    border-bottom: 1px solid $grey4;
 }
 .cta {}
 .cta--newsletter {
@@ -57,6 +116,7 @@
 }
 .cta__desc {
     margin-top: 20px;
+    @include wrap-p();
 }
 .cta__icon {
     margin-bottom: 20px;

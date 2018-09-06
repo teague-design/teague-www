@@ -1,0 +1,33 @@
+<%
+/* Story
+locals { item, slice, scope }
+*/
+const dom = locals.context.get( 'dom' );
+const story = slice.primary.story;
+%>
+<div class="ctas ctas--oneup -wrap">
+    <div class="ctas__wrap ctas__wrap--bored ctas__wrap--pad">
+        <div class="cta cta--story">
+            <div class="cta__l">
+                <%- include( `../partials/image.html`, {image: story.data.image} ) %>
+            </div>
+            <div class="cta__r cms">
+                <div class="cta__title">
+                    <h4><%= story.data.excerpt %></h4>
+                </div>
+                <div class="cta__link">
+                    <%- include( './link.html', {
+                        slice: {
+                            primary: {
+                                document_link: story,
+                                external_link: {},
+                                text: slice.primary.cta_link_text,
+                                icon: 'Arrow'
+                            }
+                        }
+                    }) %>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

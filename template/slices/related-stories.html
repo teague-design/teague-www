@@ -1,0 +1,37 @@
+<%
+/* Related Stories
+locals { item, slice, scope }
+*/
+const dom = locals.context.get( 'dom' );
+%>
+<div class="cms -wrap">
+    <div class="related">
+        <div class="related__banner">
+            <h6>Related Stories</h6>
+        </div>
+        <div class="related__stories">
+            <% locals.slice.items.forEach(( sliceItem ) => { %>
+                <div class="related__story">
+                    <div class="related__image">
+                        <%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %>
+                    </div>
+                    <div class="related__title">
+                        <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h1/g, 'h4' ) %>
+                    </div>
+                    <div class="related__link">
+                        <%- include( './link.html', {
+                            slice: {
+                                primary: {
+                                    document_link: sliceItem.story,
+                                    external_link: {},
+                                    text: sliceItem.cta_text_link,
+                                    icon: 'Arrow'
+                                }
+                            }
+                        }) %>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>
