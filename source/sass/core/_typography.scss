@@ -25,6 +25,28 @@
 .cms ul li {
     @include ul-li();
 }
+.ac {
+    position: relative;
+
+    &:after {
+        content: "";
+        height: 1px;
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        background-color: $spot;
+        display: none;
+        right: 3px;
+    }
+
+    &.is-active {
+        color: $spot;
+
+        &:after {
+            display: block;
+        }
+    }
+}
 
 
 

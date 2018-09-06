@@ -12,25 +12,6 @@
 }
 .taxi__cat {
     position: relative;
-
-    &:after {
-        content: "";
-        height: 1px;
-        position: absolute;
-        left: 0;
-        bottom: -5px;
-        background-color: $spot;
-        display: none;
-        right: 3px;
-    }
-
-    &.is-active {
-        color: $spot;
-
-        &:after {
-            display: block;
-        }
-    }
 }
 .taxi__label + .taxi__cat {
     margin-left: 20px;

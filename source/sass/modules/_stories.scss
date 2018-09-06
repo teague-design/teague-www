@@ -54,6 +54,9 @@
 }
 .related__banner {
     padding-top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .related__stories {
     padding: 50px 0;

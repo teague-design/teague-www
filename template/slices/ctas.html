@@ -111,7 +111,7 @@ const isPad = isNewsletter || isMulti;
                         const json = { target: `js-formover-${icon}` };
                         %>
                         <% if ( cta.data.hubspot_form ) { %>
-                            <div class="formover__navi js-formover-navi js-formover-<%= icon %> h6" data-json="<%= JSON.stringify( json ) %>">
+                            <div class="formover__navi js-formover-navi js-formover-<%= icon %> h6 ac" data-json="<%= JSON.stringify( json ) %>">
                                 <%- dom.RichText.asText( cta.data.title ) %>
                             </div>
                         <% } %>

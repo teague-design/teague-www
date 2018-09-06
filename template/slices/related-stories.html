@@ -8,6 +8,7 @@ const dom = locals.context.get( 'dom' );
     <div class="related">
         <div class="related__banner">
             <h6>Related Stories</h6>
+            <a class="h6 ac is-active" href="<%= locals.context.getUrl( slice.primary.page_link ) %>"><%= slice.primary.link_label %></a>
         </div>
         <div class="related__stories">
             <% locals.slice.items.forEach(( sliceItem ) => { %>
