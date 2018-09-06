@@ -126,15 +126,18 @@
 .cta--newsletter {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
 
     @include respond( $break-tablet-medium ) {
         display: block;
     }
 
     .cta__r {
+        padding-left: 10.135135135vw;
+
         @include respond( $break-tablet-medium ) {
             padding-top: 40px;
+            padding-left: 0;
         }
     }
 }
