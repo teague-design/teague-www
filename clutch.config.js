@@ -24,7 +24,7 @@ const config = {
     notright: "500",
     // Pagination settings
     pagination: {
-        size: 1, // Change to 12 !!!
+        size: 12, // Change to 12 !!!
         allSize: 100
     },
     // Timestamp ( Stamp of instantiation )
