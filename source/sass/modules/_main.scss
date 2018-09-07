@@ -50,3 +50,10 @@
         width: 100vw;
     }
 }
+
+
+
+.terms,
+.privacy {
+    @include wrap();
+}

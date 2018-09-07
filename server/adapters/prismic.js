@@ -274,6 +274,12 @@ const getNavi = function ( type ) {
         }
     });
 
+    cache.site.data.legal_pages.forEach(( page ) => {
+        if ( page.legal_page.uid === type ) {
+            ret = page.legal_page;
+        }
+    });
+
     return ret;
 };
 

@@ -34,7 +34,14 @@
         padding-bottom: 40px;
     }
 
-    h4 + p {
+    p a {
+        color: $spot;
+    }
+
+    h4 + p,
+    h3 + p,
+    h2 + p,
+    h1 + p {
         padding-top: 40px;
     }
 
