@@ -1,4 +1,4 @@
-import dom from "prismic-dom";
+// import dom from "prismic-dom";
 import paramalama from "paramalama";
 
 
