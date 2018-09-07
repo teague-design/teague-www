@@ -1,15 +1,24 @@
-<div class="bigpink js-bigpink is-animated is-hidden -pad">
+<%
+const dom = locals.context.get( 'dom' );
+const item = locals.context.get( 'item' );
+const json = {
+    title: dom.RichText.asText( item.data.title ),
+    story: item.type === 'story',
+    category: item.data.category || null
+};
+%>
+<div class="bigpink js-bigpink is-animated is-hidden -pad" data-json="<%= JSON.stringify( json ) %>">
     <div class="bigpink__title main__header main__header--image">
         <div class="main__header__title cms -wrap">
-            <h1 class="js-bigpink-title">Big Pink Title</h1>
+            <h1 class="js-bigpink-title"></h1>
         </div>
     </div>
     <div class="bigpink__title main__header main__header--image main__header--story">
         <div class="main__header__cat cms -wrap">
-            <h6 class="js-bigpink-category">Big Pink Category</h6>
+            <h6 class="js-bigpink-category"></h6>
         </div>
         <div class="main__header__title cms -wrap">
-            <h2 class="js-bigpink-title">Big Pink Title</h2>
+            <h2 class="js-bigpink-title"></h2>
         </div>
     </div>
 </div>

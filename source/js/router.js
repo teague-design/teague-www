@@ -20,6 +20,7 @@ const router = {
         this.bigpink = core.dom.body.find( ".js-bigpink" );
         this.bigpinkTitle = this.bigpink.find( ".js-bigpink-title" );
         this.bigpinkCategory = this.bigpink.find( ".js-bigpink-category" );
+        this.bigpinkData = this.bigpink.data();
         this.animDuration = 500;
         this.controllers = new Controllers({
             el: core.dom.main,
@@ -39,6 +40,14 @@ const router = {
             white: "is-theme-white",
             black: "is-theme-black"
         };
+
+        // Popstate
+        this.history = {
+            states: {}
+        };
+        this.isPopstate = false;
+        this.popsUrl = null;
+        this.popsState = null;
 
         this.bindEmpty();
         this.prepPages();
@@ -62,19 +71,24 @@ const router = {
                 ":view/:uid"
             ]);
 
-            // this.controller.setModules( [] );
-
-            //this.controller.on( "page-controller-router-samepage", () => {} );
             this.controller.on( "page-controller-router-transition-out", this.changePageOut.bind( this ) );
             this.controller.on( "page-controller-router-refresh-document", this.changeContent.bind( this ) );
             this.controller.on( "page-controller-router-transition-in", this.changePageIn.bind( this ) );
             this.controller.on( "page-controller-initialized-page", ( data ) => {
                 this.initPage( data );
                 this.csrf = core.dom.main.data().csrf;
+                this.controller.getPusher().on( "popstate", this.handlePops.bind( this ) );
                 resolve();
             });
             this.controller.initPage();
         });
+    },
+
+
+    handlePops ( url, state ) {
+        this.isPopstate = true;
+        this.popsUrl = url;
+        this.popsState = state;
     },
 
 
@@ -94,6 +108,7 @@ const router = {
         this.setState( "future", data );
         this.setClass();
         navi.active( this.state.future.view );
+        this.history.states[ window.location.href ] = this.bigpinkData;
     },
 
 
@@ -176,6 +191,7 @@ const router = {
     changePageOut ( data ) {
         const activeEl = $( this.controller.getRouter().getActiveEl() );
         const activeData = activeEl.data();
+        let useData = activeData;
 
         this.setState( "future", data );
         this.unsetClass();
@@ -185,7 +201,11 @@ const router = {
         this.controllers.destroy();
 
         if ( activeData.json ) {
-            this.transitionOutPink( activeEl, activeData );
+            if ( this.isPopstate ) {
+                useData = this.history.states[ this.popsUrl ];
+            }
+
+            this.transitionOutPink( activeEl, useData );
 
         } else {
             this.transitionOut();
@@ -216,6 +236,14 @@ const router = {
             } else {
                 this.transitionIn();
             }
+
+            if ( !this.isPopstate ) {
+                this.history.states[ window.location.href ] = activeData;
+            }
+
+            this.isPopstate = false;
+            this.popsUrl = null;
+            this.popsState = null;
 
         }, this.animDuration );
     },
