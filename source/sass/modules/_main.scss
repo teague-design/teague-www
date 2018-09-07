@@ -43,6 +43,9 @@
 .main__header__desc {
     width: 90vw;
 
+    .taxonomy & {
+        max-width: $p-wrap;
+    }
     .main__header__deets & {
         width: 100%;
     }

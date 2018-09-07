@@ -70,6 +70,7 @@
 }
 .process__article {
     position: relative;
+    display: block;
 }
 .process__article__info {
     position: absolute;
@@ -81,4 +82,50 @@
     h6 {
         padding-bottom: 25px;
     }
+}
+
+
+
+.promo {
+    position: relative;
+}
+.promo--b {
+    text-align: left;
+}
+.promo--a {
+    text-align: right;
+}
+.promo__cat {
+    padding-bottom: 25px;
+}
+.promo__image {
+    display: inline-block;
+    width: 75vw;
+
+    .promo--large & {
+        @include respond( $mobile-width ) {
+            width: 85vw;
+        }
+    }
+
+    .promo--xl & {
+        width: 100vw;
+    }
+}
+.promo__info {
+    width: 75vw;
+    position: absolute;
+    top: 50%;
+    transform: translateY( -50% );
+    text-align: left;
+    left: 0;
+    @include wrapl();
+}
+.promo__desc {
+    max-width: 780px;
+    width: 100%;
+    padding-top: 30px;
+}
+.promo__link {
+    display: block;
 }

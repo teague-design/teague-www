@@ -1,0 +1,104 @@
+<%
+/* Promo
+locals { item, slice, scope }
+*/
+const dom = locals.context.get( 'dom' );
+const doc = slice.primary.story.id ? slice.primary.story : slice.primary.taxonomy;
+const isRelated = slice.primary.layout === 'Related';
+const isPromoLargeA = slice.primary.layout === 'Promo Large A';
+const isPromoLargeB = slice.primary.layout === 'Promo Large B';
+const isPromoXL = slice.primary.layout === 'Promo XL';
+const isTaxonomy = slice.primary.taxonomy.id;
+const isStory = slice.primary.story.id;
+let json = null;
+%>
+<% if ( isRelated ) { %>
+    <div class="ctas ctas--oneup -wrap">
+        <div class="ctas__wrap ctas__wrap--bored ctas__wrap--pad">
+            <div class="cta cta--story">
+                <div class="cta__l">
+                    <%- include( `../partials/image.html`, {image: doc.data.image} ) %>
+                </div>
+                <div class="cta__r cms">
+                    <div class="cta__title">
+                        <h4><%= story.data.excerpt %></h4>
+                    </div>
+                    <div class="cta__link">
+                        <%- include( './link.html', {
+                            json: {
+                                title: dom.RichText.asText( doc.data.title ),
+                                story: true,
+                                category: doc.data.category
+                            },
+                            slice: {
+                                primary: {
+                                    document_link: story,
+                                    external_link: {},
+                                    text: slice.primary.cta_link_text,
+                                    icon: 'Arrow'
+                                }
+                            }
+                        }) %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<% } else if ( isPromoLargeA || isPromoLargeB ) { %>
+    <%
+    json = {
+        title: dom.RichText.asText( doc.data.name || doc.data.title ),
+        story: isStory,
+        category: isStory ? doc.data.category : null
+    };
+    %>
+    <div class="promo promo--large <% if ( isPromoLargeA ) { %>promo--a<% } else { %>promo--b<% } %>">
+        <a href="<%= locals.context.getUrl( doc ) %>" class="promo__link" data-json="<%= JSON.stringify( json ) %>">
+            <div class="promo__image">
+                <%- include( '../partials/image.html', {image: doc.data.image} ) %>
+            </div>
+            <div class="promo__info cms">
+                <% if ( !isTaxonomy ) { %>
+                    <div class="promo__cat">
+                        <h6><%= doc.data.category %></h6>
+                    </div>
+                <% } %>
+                <div class="promo__title">
+                    <%- dom.RichText.asHtml( doc.data.name || doc.data.title ).replace( /h1/g, 'h2' ) %>
+                </div>
+            </div>
+        </a>
+    </div>
+
+<% } else if ( isPromoXL ) { %>
+    <%
+    json = {
+        title: dom.RichText.asText( doc.data.name || doc.data.title ),
+        story: isStory,
+        category: isStory ? doc.data.category : null
+    };
+    %>
+    <div class="promo promo--xl">
+        <a href="<%= locals.context.getUrl( doc ) %>" class="promo__link" data-json="<%= JSON.stringify( json ) %>">
+            <div class="promo__image">
+                <%- include( '../partials/image.html', {image: doc.data.image} ) %>
+            </div>
+            <div class="promo__info cms">
+                <% if ( !isTaxonomy ) { %>
+                    <div class="promo__cat">
+                        <h6><%= doc.data.category %></h6>
+                    </div>
+                <% } %>
+                <div class="promo__title">
+                    <%- dom.RichText.asHtml( doc.data.name || doc.data.title ).replace( /h1/g, 'h2' ) %>
+                </div>
+                <% if ( isTaxonomy ) { %>
+                    <div class="promo__desc">
+                        <%- dom.RichText.asHtml( doc.data.description ).replace( /h1/g, 'h2' ) %>
+                    </div>
+                <% } %>
+            </div>
+        </a>
+    </div>
+<% } %>

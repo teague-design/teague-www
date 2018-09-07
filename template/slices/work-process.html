@@ -12,6 +12,11 @@ const itemsMapped = slice.items.map(( item ) => {
         }
     };
 });
+const json = {
+    title: dom.RichText.asText( slice.primary.design_story_link.data.title ),
+    story: true,
+    category: slice.primary.design_story_link.data.category
+};
 %>
 <div class="process">
     <div class="process__story cms">
@@ -23,7 +28,7 @@ const itemsMapped = slice.items.map(( item ) => {
                 <%- dom.RichText.asHtml( slice.primary.cta_text ) %>
             </div>
         </div>
-        <div class="process__article">
+        <a href="<%= locals.context.getUrl( slice.primary.design_story_link ) %>" class="process__article" data-json="<%= JSON.stringify( json ) %>">
             <div class="process__article__img">
                 <%- include( '../partials/image.html', {image: slice.primary.design_story_link.data.image} ) %>
             </div>
@@ -31,7 +36,7 @@ const itemsMapped = slice.items.map(( item ) => {
                 <h6>Related Design Story</h6>
                 <%- dom.RichText.asHtml( slice.primary.design_story_link.data.title ).replace( /h1/g, 'h5' ) %>
             </div>
-        </div>
+        </a>
     </div>
     <div class="process__slider">
         <%- include( '../partials/slider.html', {
