@@ -1,7 +1,7 @@
 <%
 /* Slider
 locals { items, options }
-options.spawn: home, careers, story( edge, paddy ), work
+options.spawn: home, careers, story( edge, paddy )
 */
 const dom = locals.context.get( 'dom' );
 const config = locals.context.get( 'config' );
@@ -12,6 +12,11 @@ const config = locals.context.get( 'config' );
             <% locals.items.forEach(( item, i ) => { %>
                 <div class="slider__item js-slider-item" data-index="<%= i %>">
                     <%- include( './image.html', {image: item.data.image} ) %>
+                    <% if ( item.data.title ) { %>
+                        <div class="slider__title cms">
+                            <%- dom.RichText.asHtml( item.data.title ) %>
+                        </div>
+                    <% } %>
                     <% if ( item.data.caption ) { %>
                         <div class="slider__cap">
                             <div class="p pc"><%= item.data.caption %></div>

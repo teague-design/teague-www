@@ -26,8 +26,9 @@
     }
 }
 .main__header__deets__l {
-    max-width: 47vw;
+    max-width: $p-wrap;
     width: 100%;
+    @include wrapr();
 
     @include respond( $mobile-width ) {
         max-width: 100%;
@@ -40,8 +41,15 @@
     }
 }
 .main__header__desc {
-    max-width: 1048px;
-    width: 100%;
+    width: 90vw;
+
+    .main__header__deets & {
+        width: 100%;
+    }
+
+    @include respond( $mobile-width ) {
+        width: 100vw;
+    }
 }
 .main__header__title {
     width: 90vw;

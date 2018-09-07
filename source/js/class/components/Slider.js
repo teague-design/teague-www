@@ -25,9 +25,22 @@ class Slider {
             length: this.currs.length
         };
         this.offsets = {
-            home: "(-50vw - 10vw)",
-            edge: "-100vw",
-            paddy: "(-70vw - 10vw)"
+            home: {
+                move: "(-50vw - 10vw)"
+            },
+            edge: {
+                move: "-100vw"
+            },
+            paddy: {
+                move: "(-70vw - 10vw)"
+            },
+            work: {
+                move: "(-32vw - 10vw)",
+                noop: {
+                    move: "(-70vw - 10vw)",
+                    width: 1024
+                }
+            }
         };
         this.isPanning = false;
         this._spawnFunc = this[ `spawn_${this.elemData.spawn}` ].bind( this );
@@ -45,6 +58,10 @@ class Slider {
 
     spawn_paddy () {}
     swap_paddy () {}
+
+
+    spawn_work () {}
+    swap_work () {}
 
 
     spawn_home () {
@@ -118,8 +135,15 @@ class Slider {
 
 
     transition () {
+        const offset = this.offsets[ this.elemData.spawn ];
+        let movement = offset.move;
+
+        if ( offset.noop && (window.innerWidth <= offset.noop.width) ) {
+            movement = offset.noop.move;
+        }
+
         this.isPanning = true;
-        this.calc = `calc(${this.data.index} * ${this.offsets[ this.elemData.spawn ]})`;
+        this.calc = `calc(${this.data.index} * ${movement})`;
 
         core.util.translate3d(
             this.belt[ 0 ],

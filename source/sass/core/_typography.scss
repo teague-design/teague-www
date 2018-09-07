@@ -12,6 +12,10 @@
 .pc {
     font-size: $p-size;
     color: $grey;
+
+    .is-theme-black & {
+        color: $white;
+    }
 }
 .li,
 .cms li {

@@ -1,0 +1,44 @@
+<%
+/* Work Process
+locals { item, slice, scope }
+*/
+const dom = locals.context.get( 'dom' );
+const itemsMapped = slice.items.map(( item ) => {
+    return {
+        data: {
+            image: item.slider_image,
+            title: item.slider_title,
+            caption: item.slider_caption
+        }
+    };
+});
+%>
+<div class="process">
+    <div class="process__story cms">
+        <div class="process__info">
+            <div class="process__label">
+                <h6><%= slice.primary.label %></h6>
+            </div>
+            <div class="process__desc">
+                <%- dom.RichText.asHtml( slice.primary.cta_text ) %>
+            </div>
+        </div>
+        <div class="process__article">
+            <div class="process__article__img">
+                <%- include( '../partials/image.html', {image: slice.primary.design_story_link.data.image} ) %>
+            </div>
+            <div class="process__article__info cms">
+                <h6>Related Design Story</h6>
+                <%- dom.RichText.asHtml( slice.primary.design_story_link.data.title ).replace( /h1/g, 'h5' ) %>
+            </div>
+        </div>
+    </div>
+    <div class="process__slider">
+        <%- include( '../partials/slider.html', {
+            items: itemsMapped,
+            options: {
+                spawn: 'work'
+            }
+        }) %>
+    </div>
+</div>

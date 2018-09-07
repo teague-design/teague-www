@@ -69,7 +69,7 @@
             }
         }
         .cta__r {
-            padding-left: 10.135135135vw;
+            padding-left: 10vw;
             width: calc( 100% - 333px );
             @include wrapr();
 
@@ -133,7 +133,7 @@
     }
 
     .cta__r {
-        padding-left: 10.135135135vw;
+        padding-left: 10vw;
 
         @include respond( $break-tablet-medium ) {
             padding-top: 40px;

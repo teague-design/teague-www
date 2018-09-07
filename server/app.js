@@ -31,6 +31,30 @@ const fetchFields = [
 
 
 
+// Normalized fetch endpoints
+[
+    config.homepage,
+    "site",
+    "page",
+    "work",
+    "about",
+    "careers",
+    "stories",
+    "contact",
+    "privacy",
+    "terms",
+    "taxonomy"
+
+].forEach(( type ) => {
+    router.on( type, {
+        fetchLinks ( client, api, form, cache, req ) {
+            form.fetchLinks( fetchFields );
+        }
+    });
+});
+
+
+
 router.on( "authorizations", {
     query ( client, api, query, cache, req ) {
         return new Promise(( resolve, reject ) => {
@@ -45,21 +69,6 @@ router.on( "authorizations", {
                 })
             });
         });
-    }
-});
-router.on( config.homepage, {
-    fetchLinks ( client, api, form, cache, req ) {
-        form.fetchLinks( fetchFields );
-    }
-});
-router.on( "page", {
-    fetchLinks ( client, api, form, cache, req ) {
-        form.fetchLinks( fetchFields );
-    }
-});
-router.on( "site", {
-    fetchLinks ( client, api, form, cache, req ) {
-        form.fetchLinks( fetchFields );
     }
 });
 router.on( "story", {
@@ -86,11 +95,6 @@ router.on( "story", {
             form.pageSize( config.pagination.size );
             form.page( (req.query.page || 1) );
         }
-    }
-});
-router.on( "taxonomy", {
-    fetchLinks ( client, api, form, cache, req ) {
-        form.fetchLinks( fetchFields );
     }
 });
 

@@ -19,8 +19,8 @@
 .slider--paddy {
     @include wrapl();
 }
-.slider__cap {
-    letter-spacing: normal;
+.slider__cap,
+.slider__title {
     padding-top: 20px;
     width: 100%;
     max-width: 450px;
@@ -39,6 +39,7 @@
     display: inline-block;
     vertical-align: top;
     cursor: pointer;
+    letter-spacing: normal;
 
     .image,
     .image-wrap {
@@ -52,6 +53,10 @@
     .slider--paddy & {
         width: 70vw;
     }
+
+    .slider--work & {
+        width: 32vw;
+    }
 }
 .slider__navi {
     white-space: nowrap;
@@ -64,6 +69,10 @@
     .slider--home &,
     .slider--paddy & {
         text-align: right;
+    }
+    .slider--work & {
+        text-align: right;
+        padding-top: 40px;
     }
 }
 .slider__navi__next {
