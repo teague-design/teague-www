@@ -12,7 +12,7 @@ const config = locals.context.get( 'config' );
             <% locals.items.forEach(( item, i ) => { %>
                 <div class="slider__item js-slider-item" data-index="<%= i %>">
                     <%- include( './image.html', {image: item.data.image} ) %>
-                    <% if ( item.data.title ) { %>
+                    <% if ( item.data.title && locals.options.spawn === 'work' ) { %>
                         <div class="slider__title cms">
                             <%- dom.RichText.asHtml( item.data.title ) %>
                         </div>

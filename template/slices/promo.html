@@ -21,7 +21,7 @@ let json = null;
                 </div>
                 <div class="cta__r cms">
                     <div class="cta__title">
-                        <h4><%= story.data.excerpt %></h4>
+                        <h4><%= doc.data.excerpt %></h4>
                     </div>
                     <div class="cta__link">
                         <%- include( './link.html', {
@@ -32,7 +32,7 @@ let json = null;
                             },
                             slice: {
                                 primary: {
-                                    document_link: story,
+                                    document_link: doc,
                                     external_link: {},
                                     text: slice.primary.cta_link_text,
                                     icon: 'Arrow'

@@ -25,6 +25,10 @@
             left: 0;
             top: 67%;
             z-index: 1;
+
+            .is-theme-black & {
+                background-color: $black;
+            }
         }
         &:after {
             content: "";
@@ -35,6 +39,10 @@
             right: 0;
             top: 67%;
             z-index: 1;
+
+            .is-theme-black & {
+                background-color: $black;
+            }
         }
 
         @include respond( $break-tablet-small ) {

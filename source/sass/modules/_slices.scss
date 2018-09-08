@@ -1,9 +1,9 @@
 .spacer {
-    height: $expander-1;
+    height: $expander-2;
 
-    // @include respond-min( $mobile-width ) {
-    //     height: $expander-2;
-    // }
+    @include respond-min( $mobile-width ) {
+        height: $expander-1;
+    }
 }
 .slice--text__node {
     @include wrap-p();
