@@ -36,7 +36,7 @@ class View {
         // clean = no queryString
         // flags = queryString to add
         // skips = queryString to ignore
-        // tag|category = queryString to add
+        // category = queryString to add
         this.query.ajax = 1;
 
         if ( this.data.clean ) {

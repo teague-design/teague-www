@@ -4,4 +4,4 @@ locals { item, slice, scope }
 */
 const contentType = locals.slice.primary.content.toLowerCase();
 %>
-<div class="taxi js-taxi view js-view -wrap -pad" data-uid="taxi" data-url="/api/<%= contentType %>/" data-clean="1" data-flags="nopaging" data-view="feed" data-page="/<%= locals.item.uid %>/"></div>
+<div class="taxi js-taxi view js-view -wrap" data-uid="taxi" data-url="/api/<%= contentType %>/" data-clean="1" data-flags="nopaging" data-view="feed" data-page="/<%= locals.item.uid %>/"></div>

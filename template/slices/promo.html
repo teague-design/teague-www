@@ -3,12 +3,13 @@
 locals { item, slice, scope }
 */
 const dom = locals.context.get( 'dom' );
-const doc = slice.primary.story.id ? slice.primary.story : slice.primary.taxonomy;
+const doc = slice.primary.story.id ? slice.primary.story : slice.primary.page;
 const isRelated = slice.primary.layout === 'Related';
 const isPromoLargeA = slice.primary.layout === 'Promo Large A';
 const isPromoLargeB = slice.primary.layout === 'Promo Large B';
 const isPromoXL = slice.primary.layout === 'Promo XL';
-const isTaxonomy = slice.primary.taxonomy.id;
+const isPage = slice.primary.page.id;
+const isCategoryPage = isPage && doc.data.category !== null;
 const isStory = slice.primary.story.id;
 let json = null;
 %>
@@ -48,7 +49,7 @@ let json = null;
 <% } else if ( isPromoLargeA || isPromoLargeB ) { %>
     <%
     json = {
-        title: dom.RichText.asText( doc.data.name || doc.data.title ),
+        title: dom.RichText.asText( doc.data.title ),
         story: isStory,
         category: isStory ? doc.data.category : null
     };
@@ -59,13 +60,13 @@ let json = null;
                 <%- include( '../partials/image.html', {image: doc.data.image} ) %>
             </div>
             <div class="promo__info cms">
-                <% if ( !isTaxonomy ) { %>
+                <% if ( !isPage ) { %>
                     <div class="promo__cat">
                         <h6><%= doc.data.category %></h6>
                     </div>
                 <% } %>
                 <div class="promo__title">
-                    <%- dom.RichText.asHtml( doc.data.name || doc.data.title ).replace( /h1/g, 'h2' ) %>
+                    <%- dom.RichText.asHtml( doc.data.title ).replace( /h1/g, 'h2' ) %>
                 </div>
             </div>
         </a>
@@ -74,8 +75,8 @@ let json = null;
 <% } else if ( isPromoXL ) { %>
     <%
     json = {
-        title: dom.RichText.asText( doc.data.name || doc.data.title ),
-        story: isStory,
+        title: dom.RichText.asText( doc.data.title ),
+        story: isStory || isCategoryPage,
         category: isStory ? doc.data.category : null
     };
     %>
@@ -85,17 +86,17 @@ let json = null;
                 <%- include( '../partials/image.html', {image: doc.data.image} ) %>
             </div>
             <div class="promo__info cms">
-                <% if ( !isTaxonomy ) { %>
+                <% if ( !isPage ) { %>
                     <div class="promo__cat">
                         <h6><%= doc.data.category %></h6>
                     </div>
                 <% } %>
                 <div class="promo__title">
-                    <%- dom.RichText.asHtml( doc.data.name || doc.data.title ).replace( /h1/g, 'h2' ) %>
+                    <%- dom.RichText.asHtml( doc.data.title ).replace( /h1/g, 'h2' ) %>
                 </div>
-                <% if ( isTaxonomy ) { %>
+                <% if ( isPage ) { %>
                     <div class="promo__desc">
-                        <%- dom.RichText.asHtml( doc.data.description ).replace( /h1/g, 'h2' ) %>
+                        <h5><%- dom.RichText.asText( doc.data.description ) %></h5>
                     </div>
                 <% } %>
             </div>

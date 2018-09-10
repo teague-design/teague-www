@@ -16,6 +16,7 @@ const theme = item && item.data.theme ? item.data.theme.toLowerCase() : null;
         <meta name="description" content="<%= locals.context.get( 'site' ).data.description %>" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
         <meta name="google-site-verification" content="<%= locals.context.get( 'site' ).data.googleVerify %>" />
+        <link rel="canonical" href="<%= item ? locals.context.getUrlCanonical( item ) : null %>" />
         <link rel="shortcut icon" href="<%= locals.context.get( 'site' ).data.appFavicon.url %>" type="image/x-icon" />
         <link rel="apple-touch-icon-precomposed" sizes="57x57" href="<%= locals.context.get( 'site' ).data.appIOSIcon57x57.url %>" />
         <link rel="apple-touch-icon-precomposed" sizes="60x60" href="<%= locals.context.get( 'site' ).data.appIOSIcon60x60.url %>" />

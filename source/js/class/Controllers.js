@@ -1,7 +1,6 @@
 import * as core from "../core";
 import BaseController from "./controllers/BaseController";
 import ImageController from "./controllers/ImageController";
-import ThemeController from "./controllers/ThemeController";
 import HomeController from "./controllers/HomeController";
 import PagesController from "./controllers/PagesController";
 import Form from "./components/Form";
@@ -76,7 +75,6 @@ class Controllers {
         this.push( "formover", core.dom.body.find( ".js-formover" ), BaseController, FormOver );
 
         // Unique Controllers...
-        this.push( "theme", core.dom.body.find( ".js-theme" ), ThemeController );
         this.push( "home", core.dom.body.find( ".js-home" ), HomeController );
         this.push( "pages", core.dom.body.find( ".js-pages" ), PagesController );
 

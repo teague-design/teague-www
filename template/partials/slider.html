@@ -7,6 +7,31 @@ const dom = locals.context.get( 'dom' );
 const config = locals.context.get( 'config' );
 %>
 <div class="slider slider--<%= locals.options.spawn %> js-slider" data-spawn="<%= locals.options.spawn %>">
+    <% if ( locals.options.spawn === config.homepage ) { %>
+        <div class="slider__splash js-slider-splash" data-label="<%= locals.options.label %>">
+            <% locals.items.forEach(( item, i ) => { %>
+                <div class="slider__splash__item js-slider-splash-item cms -wrap" data-index="<%= i %>">
+                    <%- dom.RichText.asHtml( item.data.title ).replace( /h1/g, 'h4' ) %>
+                    <p><%= item.data.excerpt %></p>
+                    <%- include( '../slices/link.html', {
+                        json: {
+                            title: dom.RichText.asText( item.data.title ),
+                            story: true,
+                            category: item.data.category
+                        },
+                        slice: {
+                            primary: {
+                                document_link: item,
+                                external_link: {},
+                                text: item.cta,
+                                icon: 'Article'
+                            }
+                        }
+                    }) %>
+                </div>
+            <% })%>
+        </div>
+    <% } %>
     <div class="slider__pane">
         <div class="slider__belt js-slider-belt">
             <% locals.items.forEach(( item, i ) => { %>
@@ -37,29 +62,4 @@ const config = locals.context.get( 'config' );
             <%- include( './svg/icon-prev.svg' ) %>
         </div>
     </div>
-    <% if ( locals.options.spawn === config.homepage ) { %>
-        <div class="slider__splash js-slider-splash" data-label="<%= locals.options.label %>">
-            <% locals.items.forEach(( item, i ) => { %>
-                <div class="slider__splash__item js-slider-splash-item cms -wrap" data-index="<%= i %>">
-                    <%- dom.RichText.asHtml( item.data.title ).replace( /h1/g, 'h4' ) %>
-                    <p><%= item.data.excerpt %></p>
-                    <%- include( '../slices/link.html', {
-                        json: {
-                            title: dom.RichText.asText( item.data.title ),
-                            story: true,
-                            category: item.data.category
-                        },
-                        slice: {
-                            primary: {
-                                document_link: item,
-                                external_link: {},
-                                text: item.cta,
-                                icon: 'Article'
-                            }
-                        }
-                    }) %>
-                </div>
-            <% })%>
-        </div>
-    <% } %>
 </div>

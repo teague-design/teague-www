@@ -5,6 +5,13 @@
         height: $expander-1;
     }
 }
+.spacer--stories {
+    height: $header-height;
+
+    @include respond( $navi-break ) {
+        height: $header-height-mobile;
+    }
+}
 .slice--text__node {
     @include wrap-p();
     text-align: left;

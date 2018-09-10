@@ -1,9 +1,9 @@
 <%
 const dom = locals.context.get( 'dom' );
 const item = locals.context.get( 'item' );
-const json = !item ? {} : {
+const json = {
     title: dom.RichText.asText( item.data.title ),
-    story: item.type === 'story',
+    story: item.type === 'story' || item.type === 'page' && item.data.category !== null,
     category: item.data.category || null
 };
 %>

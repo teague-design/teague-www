@@ -3,5 +3,6 @@
 locals { item, slice, scope }
 */
 const contentType = locals.slice.primary.content.toLowerCase();
+const contentCat = item.data.category || null;
 %>
-<div class="feed js-feed view js-view -wrap -pad" data-uid="feed" data-url="/api/<%= contentType %>/" data-page="/<%= locals.item.uid %>/"></div>
+<div class="feed js-feed view js-view -wrap" data-uid="feed" data-url="/api/<%= contentType %>/" data-page="/<%= locals.item.uid %>/" <% if ( contentCat ) { %>data-category="<%= contentCat %>"<% } %>></div>

@@ -32,6 +32,16 @@
         top: 0;
     }
 }
+.home--mobilized {
+    height: auto;
+
+    .slice {
+        position: relative;
+        opacity: 1;
+        pointer-events: auto;
+            // outline: 1px solid red;
+    }
+}
 
 
 
@@ -67,6 +77,10 @@
     .svg {
         transform: translate3d( -100%, 0, 0 );
         transition: transform $long-duration $ease;
+
+        .home--mobilized & {
+            transform: translate3d( -55%, 0, 0 );
+        }
     }
 
     &.is-full .svg {
@@ -93,6 +107,11 @@
         transform: translate3d( 0, -75%, 0 );
         opacity: 0;
     }
+
+    .home--mobilized & {
+        transform: translate3d( 0, -50%, 0 );
+        opacity: 1;
+    }
 }
 .home__reel-cta {
     position: absolute;
@@ -106,6 +125,12 @@
     &.is-anim {
         transform: translate3d( 0, 0, 0 );
         opacity: 1;
+    }
+
+    .home--mobilized & {
+        transform: translate3d( 0, 0, 0 );
+        opacity: 1;
+        bottom: 40px;
     }
 
     @include respond( $navi-break ) {
@@ -138,6 +163,10 @@
     .svg {
         transform: translate3d( -50%, 0, 0 );
     }
+
+    .home--mobilized & {
+        display: none;
+    }
 }
 .home__about-image {
     left: 0;
@@ -145,6 +174,12 @@
     top: 12vw;
     position: absolute;
     width: 100vw;
+
+    .home--mobilized & {
+        top: 0;
+        height: 70vh;
+        width: 60vw;
+    }
 
     .image {
         position: absolute;
@@ -156,6 +191,20 @@
         transition: clip-path $base-duration $ease;
         background-position: 0 0;
         background-size: cover;
+    }
+    .image:last-child {
+        .home--mobilized & {
+            display: none;
+        }
+    }
+    .image:first-child {
+        .home--mobilized & {
+            width: 60vw;
+            height: 70vh;
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: 10% 0;
+        }
     }
 }
 .home__about-desc {
@@ -175,6 +224,16 @@
         transform: translate3d( 0, -25%, 0 );
         opacity: 0;
     }
+
+    .home--mobilized & {
+        height: 100vh;
+        transform: translate3d( 0, 0, 0 );
+        opacity: 1;
+        top: 0;
+        left: 0;
+        @include wrap();
+        padding-top: 25vw;
+    }
 }
 .home__about-cta {
     padding-left: 10vw;
@@ -182,6 +241,13 @@
 
     .link {
         margin-top: 20px;
+    }
+
+    .home--mobilized & {
+        padding-left: 0;
+        position: absolute;
+        bottom: 0;
+        padding-bottom: 40px;
     }
 }
 .home__about-label {
@@ -191,6 +257,12 @@
 
 
 // DISCOVER
+.slice--home-discover {
+    .home--mobilized & {
+        background-color: $black;
+        color: $white;
+    }
+}
 .home__about-mark {
     visibility: hidden;
     pointer-events: none;
@@ -203,7 +275,7 @@
     width: 100%;
 
     .image {
-        position: fixed;
+        position: absolute;
         left: 20vw;
         top: 12vw;
         width: calc( 100vw - 20vw );
@@ -216,6 +288,15 @@
                     top $base-duration $ease;
         background-position: 50% 50%;
         background-size: cover;
+
+        .home--mobilized & {
+            top: 32vw;
+            left: auto;
+            right: 0;
+            width: 90vw;
+            height: 90vw;
+            transform: translate3d( 0, 0, 0 );
+        }
     }
 }
 .home__discover-desc {
@@ -234,6 +315,12 @@
     &.is-animo {
         transform: translate3d( 0, -75%, 0 );
         opacity: 0;
+    }
+
+    .home--mobilized & {
+        transform: translate3d( 0, -50%, 0 );
+        opacity: 1;
+        padding-top: 32vw;
     }
 }
 .home__discover-cta {
@@ -266,4 +353,49 @@
     width: 100%;
     height: 100%;
     z-index: 1;
+
+    .home--mobilized & {
+        position: relative;
+        padding-top: 40px;
+    }
+
+    .slider--home {
+        .home--mobilized & {
+            padding-left: 0;
+            bottom: auto;
+            position: relative;
+        }
+    }
+
+    .slider__splash {
+        .home--mobilized & {
+            position: relative;
+            width: 100%;
+        }
+    }
+    .slider__splash__item {
+        .home--mobilized & {
+            padding-bottom: 40px;
+        }
+    }
+    .slider__splash__item.is-active {
+        .home--mobilized & {
+            position: relative;
+        }
+    }
+    .slider__splash__item p {
+        .home--mobilized & {
+            width: 100%;
+        }
+    }
+    .slider__item {
+        .home--mobilized & {
+            width: 100%;
+        }
+    }
+    .slider__pane {
+        .home--mobilized & {
+            @include wrap();
+        }
+    }
 }

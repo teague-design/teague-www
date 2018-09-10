@@ -29,9 +29,15 @@ class HomeController {
         this._resizer = new ResizeController();
         this._scroller = new ScrollController();
 
-        this.bindWheelF();
-        this.bindWheel();
-        this.transition();
+        if ( core.detect.isDevice() ) {
+            core.log( "HomeController::Mobile" );
+            this.element.addClass( "home--mobilized" );
+
+        } else {
+            this.bindWheelF();
+            this.bindWheel();
+            this.transition();
+        }
     }
 
 

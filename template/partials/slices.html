@@ -3,7 +3,7 @@
 locals { item, slices, scope }
 */
 const config = locals.context.get( 'config' );
-const isSpacer = (scope !== config.homepage && scope !== 'stories');
+const isSpacer = (scope !== config.homepage);
 %>
 <section class="slices <%= scope %>__slices">
     <% locals.slices.forEach(( slice, i ) => { %>
@@ -14,8 +14,8 @@ const isSpacer = (scope !== config.homepage && scope !== 'stories');
         <div class="slice slice--<%= sliceType %> js-slice" data-index="<%= i %>" data-prop="<%= slice.slice_type %>">
             <%- include( slicePartial, {item, slice, scope} ) %>
         </div>
-        <% if ( isSpacer ) { %>
-            <div class="spacer"></div>
+        <% if ( isSpacer && i !== (locals.slices.length - 1) ) { %>
+            <div class="spacer spacer--<%= item.type %> spacer--<%= item.uid %>"></div>
         <% } %>
     <% }) %>
 </section>
