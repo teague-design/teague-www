@@ -98,7 +98,7 @@ const getKey = ( type ) => {
 const getApi = ( req, res ) => {
     const key = getKey( req.params.type );
 
-    core.query.getApi( req, res, listeners[ key ] ).then(( result ) => {
+    core.query.getApi( req, res, listeners[ key ] || listeners[ "all" ] ).then(( result ) => {
         if ( req.query.format === "html" ) {
             res.status( 200 ).send( result );
 
@@ -118,7 +118,7 @@ const getApi = ( req, res ) => {
 const getPage = ( req, res ) => {
     const key = getKey( req.params.type );
 
-    core.content.getPage( req, res, listeners[ key ] ).then(( callback ) => {
+    core.content.getPage( req, res, listeners[ key ] || listeners[ "all" ] ).then(( callback ) => {
         // Handshake callback :-P
         callback(( status, html ) => {
             res.status( status ).send( html );

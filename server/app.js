@@ -7,16 +7,14 @@ const fetchFields = [
     "page.image",
     "page.theme",
     "page.description",
+    "page.category",
+    "story.canonical_url",
     "story.title",
     "story.image",
     "story.theme",
     "story.description",
     "story.excerpt",
     "story.category",
-    "taxonomy.name",
-    "taxonomy.image",
-    "taxonomy.description",
-    "taxonomy.type",
     "author.name",
     "author.image",
     "author.description",
@@ -31,30 +29,11 @@ const fetchFields = [
 
 
 
-// Normalized fetch endpoints
-[
-    config.homepage,
-    "site",
-    "page",
-    "work",
-    "about",
-    "careers",
-    "stories",
-    "contact",
-    "privacy",
-    "terms",
-    "taxonomy"
-
-].forEach(( type ) => {
-    router.on( type, {
-        fetchLinks ( client, api, form, cache, req ) {
-            form.fetchLinks( fetchFields );
-        }
-    });
+router.on( "all", {
+    fetchLinks ( client, api, form, cache, req ) {
+        form.fetchLinks( fetchFields );
+    }
 });
-
-
-
 router.on( "authorizations", {
     query ( client, api, query, cache, req ) {
         return new Promise(( resolve, reject ) => {

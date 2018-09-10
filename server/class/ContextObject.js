@@ -97,6 +97,13 @@ class ContextObject {
 
         return resolvedUrl;
     }
+    getUrlCanonical ( doc ) {
+        const type = (config.generate.mappings[ doc.type ] || doc.type);
+        const resolvedUrl = doc.uid === config.homepage ? "/" : ((type === "page") ? `/${doc.uid}/` : `/${type}/${doc.uid}/`);
+        const canonicalUrl = doc.data.canonical_url ? doc.data.canonical_url : `${config.url}${resolvedUrl}`;
+
+        return canonicalUrl;
+    }
 
     getMediaAspect ( media ) {
         return `${media.height / media.width * 100}%`;

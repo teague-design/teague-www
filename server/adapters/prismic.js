@@ -32,7 +32,8 @@ const prismic = require( "prismic-javascript" );
 const cache = {
     api: null,
     site: null,
-    navi: null
+    navi: null,
+    footer: null
 };
 const core = {
     config: require( "../../clutch.config" ),
@@ -274,9 +275,17 @@ const getNavi = function ( type ) {
         }
     });
 
+    // Legal pages like `Privacy`
     cache.site.data.legal_pages.forEach(( page ) => {
         if ( page.legal_page.uid === type ) {
             ret = page.legal_page;
+        }
+    });
+
+    // Category pages like `Aviation`
+    cache.site.data.category_pages.forEach(( page ) => {
+        if ( page.category_page.uid === type ) {
+            ret = page.category_page;
         }
     });
 
