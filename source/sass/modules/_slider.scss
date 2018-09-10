@@ -125,6 +125,7 @@
     left: 0;
     top: 0;
     width: 38.716216216vw;
+    z-index: 1;
 
     &:before {
         content: attr(data-label);

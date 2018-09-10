@@ -286,6 +286,8 @@ const router = {
 
         setTimeout(() => {
             this.bigpink.addClass( "is-hidden" ).removeClass( "is-active is-story is-inactive" );
+            this.bigpinkCategory[ 0 ].innerHTML = "&nbsp;";
+            this.bigpinkTitle[ 0 ].innerHTML = "&nbsp;";
 
         }, 500 );
     },

@@ -106,8 +106,9 @@ class Slider {
     onHitItem ( e ) {
         const target = $( e.target );
         const index = parseInt( target.data().index, 10 );
+        const canGo = index >= 0 && index < this.data.length && index !== this.data.index;
 
-        if ( index !== 0 && index !== (this.data.length - 1) ) {
+        if ( canGo ) {
             this.goto( index );
         }
     }
