@@ -24,10 +24,12 @@
     }
 .screen--black {
     background-color: $black;
-    }
+    color: $white;
+}
 .screen--white {
     background-color: $white;
-    }
+    color: $black;
+}
 
 
 

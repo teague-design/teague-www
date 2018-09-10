@@ -248,6 +248,11 @@
         border-color: $white;
     }
 
+    .screen--white & {
+        color: $black;
+        border-color: $black;
+    }
+
     &::-webkit-input-placeholder {
         color: $grey2;
 

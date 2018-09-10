@@ -120,6 +120,11 @@
     text-align: left;
     left: 0;
     @include wrapl();
+
+    @include respond( $mobile-width ) {
+        width: 100vw;
+        @include wrap();
+    }
 }
 .promo__desc {
     max-width: 780px;

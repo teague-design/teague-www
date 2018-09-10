@@ -76,7 +76,9 @@
             white-space: nowrap;
             display: block;
             overflow-x: auto;
+            overflow-y: hidden;
             letter-spacing: 30px;
+            -webkit-overflow-scrolling: touch;
         }
     }
     .twi__extra {

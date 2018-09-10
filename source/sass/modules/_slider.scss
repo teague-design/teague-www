@@ -1,6 +1,5 @@
 .slider {
     white-space: nowrap;
-    letter-spacing: 10vw;
     width: 100%;
     user-select: none;
 }
@@ -40,6 +39,11 @@
     vertical-align: top;
     cursor: pointer;
     letter-spacing: normal;
+    white-space: normal;
+
+    &:not( :first-child ) {
+        margin-left: 10vw;
+    }
 
     .image,
     .image-wrap {
@@ -60,7 +64,6 @@
 }
 .slider__navi {
     white-space: nowrap;
-    letter-spacing: 10px;
     padding-top: 20px;
     text-align: center;
     padding-right: $padding-v;
@@ -97,6 +100,10 @@
     background-color: $black;
     transition: width $fast-duration $ease,
                 background-color $fast-duration $ease;
+
+    & + .slider__navi__curr {
+        margin-left: 10px;
+    }
 
     .is-theme-black & {
         background-color: $white;
