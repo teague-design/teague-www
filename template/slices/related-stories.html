@@ -43,16 +43,27 @@ const isStory = item.type === 'story';
                             </div>
                         </div>
                     <% } else { %>
+                        <%
+                        const json = {
+                            title: dom.RichText.asText( sliceItem.story.data.title ),
+                            story: true,
+                            category: sliceItem.story.category
+                        };
+                        %>
                         <div class="related__info">
                             <div class="related__cat">
                                 <h6><%= sliceItem.story.data.category %></h6>
                             </div>
                             <div class="related__title">
-                                <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h1/g, 'h3' ) %>
+                                <a class="" href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
+                                    <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h1/g, 'h3' ) %>
+                                </a>
                             </div>
                         </div>
                         <div class="related__image">
-                            <%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %>
+                            <a class="" href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
+                                <%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %>
+                            </a>
                         </div>
                     <% } %>
                 </div>
