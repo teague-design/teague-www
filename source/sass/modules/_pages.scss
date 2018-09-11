@@ -86,6 +86,156 @@
 
 
 
+.highs {
+    user-select: none;
+}
+.highs__info {
+    text-align: left;
+}
+.highs__desc {
+    padding: 30px 0 50px;
+    max-width: 680px;
+    width: 100%;
+}
+.highs__pane {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    text-align: left;
+}
+.highs__belt {
+    transition: transform $base-duration $ease;
+    transform: translate3d( -15vw, 0, 0 );
+    position: absolute;
+    left: 50%;
+
+    @include respond( $break-tablet-medium ) {
+        transform: translate3d( -25vw, 0, 0 );
+    }
+
+    @include respond( $break-tablet-small ) {
+        transform: translate3d( -32.5vw, 0, 0 );
+    }
+}
+.highs__item {
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    white-space: normal;
+    width: 30vw;
+    text-align: center;
+
+    @include respond( $break-tablet-medium ) {
+        width: 50vw;
+    }
+
+    @include respond( $break-tablet-small ) {
+        width: 65vw;
+    }
+
+    &:not( :first-child ) {
+        margin-left: 10vw;
+
+        @include respond( $break-tablet-medium ) {
+            margin-left: 0;
+        }
+    }
+}
+.highs__icon {
+    padding-bottom: 20px;
+    pointer-events: none;
+}
+.highs__data {
+    pointer-events: none;
+    max-width: 320px;
+    display: inline-block;
+    text-align: left;
+    color: #454545;
+    transition: color $base-duration $ease;
+
+    .highs__item.is-active & {
+        color: $white;
+    }
+
+    h5 {
+        padding: 20px 0;
+    }
+}
+.highs__timeline {
+    margin-top: 100px;
+    position: relative;
+    width: 100%;
+}
+.highs__notches {
+    display: flex;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    justify-content: space-between;
+    align-items: center;
+}
+.highs__notch {
+    display: inline-block;
+    vertical-align: center;
+    width: 1px;
+    height: 8px;
+    background-color: #454545;
+    color: #454545;
+    position: relative;
+    transition: background-color $base-duration $ease;
+
+    &.is-ellapsed {
+        background-color: $spot;
+    }
+
+    &.is-active:before {
+        color: $white;
+    }
+
+    &:before {
+        content: attr( data-label );
+        position: absolute;
+        left: 50%;
+        transform: translateX( -50% ) translateY( -200% );
+        transition: color $base-duration $ease;
+        @include h6();
+    }
+}
+.highs__line {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    top: 50%;
+    left: 50%;
+    transform: translate3d( -50%, -50%, 0 );
+    background-color: #454545;
+    width: 100%;
+    max-width: 800px;
+}
+.highs__ellapsed {
+    position: absolute;
+    left: 0;
+    width: 0;
+    height: 100%;
+    top: 0;
+    background-color: $spot;
+    transform: translate3d( 0, 0, 0 );
+    transition: width $base-duration $ease;
+}
+.highs__scrubber {
+    position: absolute;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    top: 50%;
+    background-color: $spot;
+    transform: translate3d( 50%, -50%, 0 );
+    border-radius: 10px;
+}
+
+
+
 .promo {
     position: relative;
 }
@@ -189,10 +339,6 @@
     .map {
         padding-bottom: 56.25%;
         width: 100%;
-
-        // @include respond( $break-tablet-full ) {
-        //     padding-bottom: 75%;
-        // }
 
         @include respond( $break-tablet-small ) {
             padding-bottom: 56.25%;

@@ -422,8 +422,8 @@ class HomeController {
         this.unbindWheelF();
         this.unbindWheel();
 
-        this._resizer.off( "resize" );
-        this._scroller.off( "scroll" );
+        this._resizer.destroy();
+        this._scroller.destroy();
     }
 }
 

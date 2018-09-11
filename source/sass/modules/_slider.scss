@@ -1,5 +1,4 @@
 .slider {
-    white-space: nowrap;
     width: 100%;
     user-select: none;
 }
@@ -26,6 +25,7 @@
     white-space: normal;
 }
 .slider__pane {
+    white-space: nowrap;
     overflow: hidden;
     width: 100%;
     position: relative;
@@ -38,7 +38,6 @@
     display: inline-block;
     vertical-align: top;
     cursor: pointer;
-    letter-spacing: normal;
     white-space: normal;
 
     &:not( :first-child ) {

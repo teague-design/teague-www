@@ -1,5 +1,6 @@
 import * as core from "../../core";
 import $ from "properjs-hobo";
+import ResizeController from "properjs-resizecontroller";
 
 
 /**
@@ -16,10 +17,10 @@ class Slider {
         this.element = element;
         this.elemData = this.element.data();
         this.belt = this.element.find( ".js-slider-belt" );
-        this.prev = this.element.find( ".js-slider-prev" );
-        this.next = this.element.find( ".js-slider-next" );
         this.currs = this.element.find( ".js-slider-curr" );
         this.items = this.element.find( ".js-slider-item" );
+        this.prev = this.element.find( ".js-slider-prev" );
+        this.next = this.element.find( ".js-slider-next" );
         this.data = {
             index: 0,
             length: this.currs.length
@@ -39,6 +40,23 @@ class Slider {
                 noop: {
                     move: "(-70vw - 10vw)",
                     width: 1024
+                }
+            },
+            highs: {
+                move: ( idx ) => {
+                    return `calc(-15vw - ${idx * 30}vw - ${idx * 10}vw)`;
+                },
+                noop: {
+                    move: ( idx ) => {
+                        return `calc(-25vw - ${idx * 50}vw - ${idx * 0}vw)`;
+                    },
+                    width: 1024
+                },
+                moop: {
+                    move: ( idx ) => {
+                        return `calc(-32.5vw - ${idx * 65}vw - ${idx * 0}vw)`;
+                    },
+                    width: 768
                 }
             }
         };
@@ -62,6 +80,39 @@ class Slider {
 
     spawn_work () {}
     swap_work () {}
+
+
+    spawn_highs () {
+        this.ellapsed = this.element.find( ".js-slider-ellapsed" );
+        this.pane = this.element.find( ".js-slider-pane" );
+        this.timeline = this.element.find( ".js-slider-timeline" );
+        this.onResizer = () => {
+            this.pane[ 0 ].style.height = `${this.items[ 0 ].getBoundingClientRect().height}px`;
+            this.swap_highs();
+        };
+        this.resizer = new ResizeController();
+        this.resizer.on( "resize", this.onResizer );
+        this.onResizer();
+    }
+    swap_highs () {
+        const notch = this.currs.filter( ".is-active" );
+        const notches = notch.parent();
+        const notchBounds = notch[ 0 ].getBoundingClientRect();
+        const notchesBounds = notches[ 0 ].getBoundingClientRect();
+        const offsetLeft = notchBounds.x - notchesBounds.x;
+
+        this.ellapsed[ 0 ].style.width = `calc(${offsetLeft}px)`;
+        this.currs.forEach(( el, i ) => {
+            const curr = this.currs.eq( i );
+
+            if ( i < this.data.index ) {
+                curr.addClass( "is-ellapsed" );
+
+            } else {
+                curr.removeClass( "is-ellapsed" );
+            }
+        });
+    }
 
 
     spawn_home () {
@@ -88,16 +139,18 @@ class Slider {
 
 
     bind () {
-        this.prev.on( "click", () => {
-            if ( this.data.index !== 0 ) {
-                this.rewind();
-            }
-        });
-        this.next.on( "click", () => {
-            if ( this.data.index !== (this.data.length - 1) ) {
-                this.advance();
-            }
-        });
+        if ( this.prev.length && this.next.length ) {
+            this.prev.on( "click", () => {
+                if ( this.data.index !== 0 ) {
+                    this.rewind();
+                }
+            });
+            this.next.on( "click", () => {
+                if ( this.data.index !== (this.data.length - 1) ) {
+                    this.advance();
+                }
+            });
+        }
         this.currs.on( "click", this.onHitItem.bind( this ));
         this.items.on( "click", this.onHitItem.bind( this ));
     }
@@ -115,9 +168,9 @@ class Slider {
 
 
     updateUI () {
-        this._swapFunc();
         this.currs.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
         this.items.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
+        this._swapFunc();
     }
 
 
@@ -139,12 +192,15 @@ class Slider {
         const offset = this.offsets[ this.elemData.spawn ];
         let movement = offset.move;
 
-        if ( offset.noop && (window.innerWidth <= offset.noop.width) ) {
+        if ( offset.moop && (window.innerWidth <= offset.moop.width) ) {
+            movement = offset.moop.move;
+
+        } else if ( offset.noop && (window.innerWidth <= offset.noop.width) ) {
             movement = offset.noop.move;
         }
 
         this.isPanning = true;
-        this.calc = `calc(${this.data.index} * ${movement})`;
+        this.calc = (typeof movement === "function" ? movement( this.data.index ) : `calc(${this.data.index} * ${movement})`);
 
         core.util.translate3d(
             this.belt[ 0 ],
@@ -201,7 +257,11 @@ class Slider {
 
 
 
-    destroy () {}
+    destroy () {
+        if ( this.resizer ) {
+            this.resizer.destroy();
+        }
+    }
 }
 
 

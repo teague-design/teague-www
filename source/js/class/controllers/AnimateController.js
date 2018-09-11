@@ -81,7 +81,6 @@ class AnimateController {
     destroy () {
         if ( this.scroller ) {
             this.scroller.destroy();
-            this.scroller = null;
         }
     }
 }

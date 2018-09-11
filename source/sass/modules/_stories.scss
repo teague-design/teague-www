@@ -49,10 +49,11 @@
 
 
 .related--page {
+    // $break-tablet-small
     padding-top: $expander-2;
 
-    @include respond( $break-tablet-small ) {
-        padding-top: 0;
+    @include respond-min( $mobile-width ) {
+        padding-top: $expander-1;
     }
 }
 .related--story {
@@ -92,6 +93,13 @@
 }
 .related__title {
     padding: 25px 0;
+
+    h3 {
+        @include respond( $break-tablet-medium ) {
+            font-size: $h4-size-mobile;
+            @include wrapr();
+        }
+    }
 }
 .related__image {
     position: relative;

@@ -1,0 +1,44 @@
+<%
+/* Work Highlights
+locals { item, slice, scope }
+*/
+const dom = locals.context.get( 'dom' );
+%>
+<div class="highs js-slider -wrap" data-spawn="highs">
+    <div class="highs__info cms">
+        <div class="highs__label">
+            <h6><%= locals.slice.primary.label %></h6>
+        </div>
+        <div class="highs__desc">
+            <h5><%= locals.slice.primary.text %></h5>
+        </div>
+    </div>
+    <div class="highs__pane js-slider-pane">
+        <div class="highs__belt js-slider-belt">
+            <% locals.slice.items.forEach(( sliceItem, i ) => { %>
+                <div class="highs__item js-slider-item" data-index="<%= i %>">
+                    <div class="highs__icon">
+                        <%- include( '../partials/image.html', {image: sliceItem.icon} ) %>
+                    </div>
+                    <div class="highs__data cms">
+                        <h6><%= sliceItem.year %></h6>
+                        <h5><%= sliceItem.label %></h5>
+                        <p><%= sliceItem.text %></p>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+    <div class="highs__timeline">
+        <div class="highs__notches">
+            <% locals.slice.items.forEach(( sliceItem, i ) => { %>
+                <div class="highs__notch js-slider-curr" data-label="<%= sliceItem.year %>" data-index="<%= i %>"></div>
+            <% }) %>
+        </div>
+        <div class="highs__line js-slider-timeline">
+            <div class="highs__ellapsed js-slider-ellapsed">
+                <div class="highs__scrubber"></div>
+            </div>
+        </div>
+    </div>
+</div>
