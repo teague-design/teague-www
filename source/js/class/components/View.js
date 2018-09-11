@@ -33,26 +33,32 @@ class View {
         // Store View instance for update(s)
         this.element.data( "View", this );
 
-        // clean = no queryString
-        // flags = queryString to add
-        // skips = queryString to ignore
-        // category = queryString to add
+        // ajax = well, duh...
         this.query.ajax = 1;
 
+        // clean = no queryString
         if ( this.data.clean ) {
             this.query = { clean: 1 };
         }
 
-        if ( this.data.category ) {
-            this.query.category = this.data.category;
+        // tag = queryString to add
+        if ( this.data.tag ) {
+            this.query.tag = this.data.tag;
         }
 
+        // viz = show visible OR hidden
+        if ( this.data.viz ) {
+            this.query.viz = this.data.viz;
+        }
+
+        // skips = queryString to ignore
         this.skips.forEach(( skip ) => {
             if ( this.query[ skip ] ) {
                 delete this.query[ skip ];
             }
         });
 
+        // flags = queryString to add
         this.flags.forEach(( flag ) => {
             this.query[ flag ] = 1;
         });

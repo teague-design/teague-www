@@ -15,7 +15,7 @@ const itemsMapped = slice.items.map(( item ) => {
 const json = {
     title: dom.RichText.asText( slice.primary.design_story_link.data.title ),
     story: true,
-    category: slice.primary.design_story_link.data.category
+    tag: slice.primary.design_story_link.tags[ 0 ]
 };
 %>
 <div class="process">

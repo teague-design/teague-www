@@ -2,7 +2,7 @@
     @include p();
     line-height: 1;
 }
-.taxi__cats {
+.taxi__tags {
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -10,12 +10,12 @@
     overflow: auto;
     padding-bottom: 1px;
 }
-.taxi__cat {
+.taxi__tag {
     position: relative;
 }
-.taxi__label + .taxi__cat {
+.taxi__label + .taxi__tag {
     margin-left: 20px;
 }
-.taxi__cat + .taxi__cat {
+.taxi__tag + .taxi__tag {
     margin-left: 40px;
 }

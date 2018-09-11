@@ -1,10 +1,10 @@
 <%
 const dom = locals.context.get( 'dom' );
 const item = locals.context.get( 'item' );
-const json = {
+const json = !item ? {} : {
     title: dom.RichText.asText( item.data.title ),
-    story: item.type === 'story' || item.type === 'page' && item.data.category !== null,
-    category: item.data.category || null
+    story: (item.type === 'story') || (item.type === 'page') && (item.tags.length !== 0),
+    tag: item.tags.length ? item.tags[ 0 ] : null
 };
 %>
 <div class="bigpink js-bigpink is-animated is-hidden -pad" data-json="<%= JSON.stringify( json ) %>">
@@ -14,8 +14,8 @@ const json = {
         </div>
     </div>
     <div class="bigpink__title main__header main__header--image main__header--story">
-        <div class="main__header__cat cms -wrap">
-            <h6 class="js-bigpink-category"></h6>
+        <div class="main__header__tag cms -wrap">
+            <h6 class="js-bigpink-tag"></h6>
         </div>
         <div class="main__header__title cms -wrap">
             <h2 class="js-bigpink-title"></h2>

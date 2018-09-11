@@ -20,7 +20,7 @@ export default ( view ) => {
                 const json = {
                     title: dom.RichText.asText( doc.data.title ),
                     story: true,
-                    category: doc.data.category
+                    tag: doc.tags[ 0 ]
                 };
 
                 return `
@@ -30,9 +30,9 @@ export default ( view ) => {
                                 ${viewImage( doc.data.image )}
                             </a>
                         </div>
-                        <div class="feed__cat cms">
-                            <a href="${view.data.page}?category=${doc.data.category}">
-                                <h6>${doc.data.category}</h6>
+                        <div class="feed__tag cms">
+                            <a href="${view.data.page}?tag=${doc.tags[ 0 ]}">
+                                <h6>${doc.tags[ 0 ]}</h6>
                             </a>
                         </div>
                         <div class="feed__title cms">

@@ -55,12 +55,14 @@ router.on( "story", {
         form.fetchLinks( fetchFields );
     },
     query ( client, api, query, cache, req ) {
-        // if ( req.query.tag ) {
-        //     query.push( client.Predicates.any( "document.tags", Array.isArray( req.query.tag ) ? req.query.tag : [req.query.tag] ) );
-        // }
+        if ( req.query.tag ) {
+            query.push( client.Predicates.any( "document.tags", Array.isArray( req.query.tag ) ? req.query.tag : [req.query.tag] ) );
+        }
 
-        if ( req.query.category ) {
-            query.push( client.Predicates.at( "my.story.category", req.query.category ) );
+        if ( req.query.viz ) {
+            req.query.viz = parseInt( req.query.viz, 10 );
+
+            query.push( client.Predicates.at( "my.story.hidden", req.query.viz ? "Keep it Visible" : "Keep it Hidden" ) );
         }
 
         return query;

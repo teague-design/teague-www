@@ -4,14 +4,14 @@ locals { item, slice, scope }
 */
 const config = locals.context.get( 'config' );
 const isImage = locals.slice.primary.header_image.url;
-const isStory = locals.item.type === 'story';
-const isPage = locals.item.type === 'page';
-const isCategoryPage = isPage && locals.item.data.category !== null;
+const isStory = (locals.item.type === 'story');
+const isPage = (locals.item.type === 'page');
+const isCategoryPage = isPage && (locals.item.tags.length !== 0);
 %>
 <div class="main__header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory || isCategoryPage ) { %>main__header--story<% } %>">
     <% if ( isStory || isCategoryPage ) { %>
-        <div class="main__header__cat cms -wrap">
-            <h6><%- isCategoryPage ? '&nbsp;' : locals.item.data.category %></h6>
+        <div class="main__header__tag cms -wrap">
+            <h6><%- isCategoryPage ? '&nbsp;' : locals.item.tags[ 0 ] %></h6>
         </div>
     <% } %>
     <div class="main__header__title cms -wrap">

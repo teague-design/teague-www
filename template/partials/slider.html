@@ -17,7 +17,7 @@ const config = locals.context.get( 'config' );
                         json: {
                             title: dom.RichText.asText( item.data.title ),
                             story: true,
-                            category: item.data.category
+                            tag: item.tags[ 0 ]
                         },
                         slice: {
                             primary: {

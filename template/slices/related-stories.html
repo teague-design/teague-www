@@ -29,7 +29,7 @@ const isStory = item.type === 'story';
                                     json: {
                                         title: dom.RichText.asText( sliceItem.story.data.title ),
                                         story: true,
-                                        category: sliceItem.story.data.category
+                                        tag: sliceItem.story.tags[ 0 ]
                                     },
                                     slice: {
                                         primary: {
@@ -47,12 +47,12 @@ const isStory = item.type === 'story';
                         const json = {
                             title: dom.RichText.asText( sliceItem.story.data.title ),
                             story: true,
-                            category: sliceItem.story.category
+                            tag: sliceItem.story.tags[ 0 ]
                         };
                         %>
                         <div class="related__info">
-                            <div class="related__cat">
-                                <h6><%= sliceItem.story.data.category %></h6>
+                            <div class="related__tag">
+                                <h6><%= sliceItem.story.tags[ 0 ] %></h6>
                             </div>
                             <div class="related__title">
                                 <a class="" href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">

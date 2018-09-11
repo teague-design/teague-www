@@ -16,9 +16,9 @@ class Taxi {
 
 
     bind () {
-        this.element.on( "click", ".js-taxi-cat", ( e ) => {
+        this.element.on( "click", ".js-taxi-tag", ( e ) => {
             const targ = $( e.target );
-            const cats = this.element.find( ".js-taxi-cat" );
+            const cats = this.element.find( ".js-taxi-tag" );
 
             cats.removeClass( "is-active" );
             targ.addClass( "is-active" );
@@ -29,14 +29,14 @@ class Taxi {
 
 
     getDocuments () {
-        const cat = this.element.find( ".js-taxi-cat.is-active" );
+        const cat = this.element.find( ".js-taxi-tag.is-active" );
         const data = cat.data();
         let apiUrl = `${this.data.url}?ajax=1`;
         let webUrl = `${this.data.page}`;
 
         if ( data.value ) {
-            apiUrl += `&category=${data.value}`;
-            webUrl += `?category=${data.value}`;
+            apiUrl += `&tag=${data.value}`;
+            webUrl += `?tag=${data.value}`;
         }
 
         this.viewInstance.element.find( core.config.lazyAnimSelector ).removeClass( "is-animated" );

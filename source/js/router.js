@@ -19,7 +19,7 @@ const router = {
         this.blit = new Controller();
         this.bigpink = core.dom.body.find( ".js-bigpink" );
         this.bigpinkTitle = this.bigpink.find( ".js-bigpink-title" );
-        this.bigpinkCategory = this.bigpink.find( ".js-bigpink-category" );
+        this.bigpinkTag = this.bigpink.find( ".js-bigpink-tag" );
         this.bigpinkData = this.bigpink.data();
         this.animDuration = 500;
         this.controllers = new Controllers({
@@ -144,7 +144,7 @@ const router = {
             raw: data,
             uid: data.request.params.uid || null,
             view: data.request.params.view || core.config.homepage,
-            cat: data.request.query.category || null
+            tag: data.request.query.tag || null
         };
     },
 
@@ -167,8 +167,8 @@ const router = {
             core.dom.html.addClass( `is-uid-page` );
         }
 
-        if ( this.state.future.cat ) {
-            core.dom.html.addClass( `is-cat-page` );
+        if ( this.state.future.tag ) {
+            core.dom.html.addClass( `is-tag-page` );
         }
     },
 
@@ -182,8 +182,8 @@ const router = {
             core.dom.html.removeClass( `is-uid-page` );
         }
 
-        if ( this.state.now.cat && !this.state.future.cat ) {
-            core.dom.html.removeClass( `is-cat-page` );
+        if ( this.state.now.tag && !this.state.future.tag ) {
+            core.dom.html.removeClass( `is-tag-page` );
         }
     },
 
@@ -268,8 +268,8 @@ const router = {
         });
         this.bigpink.removeClass( "is-hidden" ).addClass( "is-active" );
 
-        if ( data.json.category ) {
-            this.bigpinkCategory[ 0 ].innerHTML = data.json.category;
+        if ( data.json.tag ) {
+            this.bigpinkTag[ 0 ].innerHTML = data.json.tag;
         }
 
         if ( data.json.story ) {
@@ -286,7 +286,7 @@ const router = {
 
         setTimeout(() => {
             this.bigpink.addClass( "is-hidden" ).removeClass( "is-active is-story is-inactive" );
-            this.bigpinkCategory[ 0 ].innerHTML = "&nbsp;";
+            this.bigpinkTag[ 0 ].innerHTML = "&nbsp;";
             this.bigpinkTitle[ 0 ].innerHTML = "&nbsp;";
 
         }, 500 );

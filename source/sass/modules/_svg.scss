@@ -92,4 +92,9 @@
 .svg--map-marker {
     height: 22px;
     width: 22px;
+    transition: transform $base-duration $ease;
+
+    .is-hoverable &:hover {
+        transform: scale( 1.5 );
+    }
 }
