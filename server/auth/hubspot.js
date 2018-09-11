@@ -107,7 +107,7 @@ const getHubspotFormByGUID = ( req, res ) => {
 
 
 const postHubspotForm = ( req, res ) => {
-    // lager.data( req.body );
+    lager.data( req.body );
     const https = require( "https" );
     const querystring = require( "querystring" );
     const bodyData = {

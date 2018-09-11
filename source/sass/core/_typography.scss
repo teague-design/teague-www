@@ -273,8 +273,94 @@
 }
 .form__button {
     text-align: right;
+    z-index: 1;
 
     .form__sub {
         margin-right: 7px;
+    }
+}
+
+
+
+@mixin form-field() {
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    padding: 0 13px;
+}
+.form__select {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+    user-select: none;
+    z-index: 2;
+    @include p();
+}
+.form__show {
+    @include form-field();
+    position: relative;
+    background-color: transparent;
+    border: 1px solid $black;
+
+    &:after {
+        content: "";
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-top: 5px solid $black;
+        transform: translate3d( -20px, -50%, 0 );
+        position: absolute;
+        top: 50%;
+        right: 0;
+    }
+}
+.form__menu {
+    border-left: 1px solid $black;
+    border-right: 1px solid $black;
+    border-bottom: 1px solid $black;
+    background-color: $white;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translate3d( 0, 40px, 0 );
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity $fast-duration $ease;
+
+    &.is-active {
+        opacity: 1;
+        pointer-events: auto;
+    }
+}
+.form__option {
+    @include form-field();
+    color: $black;
+    padding: 0 26px;
+    transition: color $fast-duration $ease;
+
+    &.is-active {
+        color: $spot;
+
+        &:before {
+            border-color: $spot;
+            background-color: $spot;
+        }
+    }
+
+    &:before {
+        margin-right: 20px;
+        content: "";
+        height: 9px;
+        width: 9px;
+        border-radius: 9px;
+        border: 1px solid $black;
+        transition: border-color $fast-duration $ease,
+                    background-color $fast-duration $ease;
     }
 }

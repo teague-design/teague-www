@@ -3,9 +3,33 @@
 
 
 export default ( view ) => {
+    const buildText = ( field ) => {
+        return `<input name="${field.name}" type="${typeMap[ field.name ] || field.fieldType}" placeholder="${field.label}" class="form__input js-form-field" />`;
+    };
+    const buildArea = ( field ) => {
+        return `<textarea name="${field.name}" placeholder="${field.label}" class="form__input form__area js-form-field"></textarea>`;
+    };
+    const buildSelect = ( field ) => {
+        return `
+            <div class="form__select js-form-select js-form-field" data-name="${field.name}">
+                <div class="form__show js-form-show" data-default="${field.label}">${field.label}</div>
+                <div class="form__menu js-form-menu">
+                    ${field.options.map(( opt ) => {
+                        return `<div class="form__option js-form-option" data-value="${opt.value}">${opt.label}</div>`;
+
+                    }).join( "" )}
+                </div>
+            </div>
+        `;
+    };
     const isOne = ((view.json.formFieldGroups.length === 1) && (view.json.formFieldGroups[ 0 ].fields.length === 1));
     const typeMap = {
         email: "email"
+    };
+    const buildMap = {
+        text: buildText,
+        textarea: buildArea,
+        select: buildSelect
     };
 
     return `
@@ -13,20 +37,16 @@ export default ( view ) => {
             return `
                 <div class="form__group">
                     ${fieldGroup.fields.map(( field ) => {
-                        const isArea = (field.fieldType === "textarea");
+                        const build = buildMap[ field.fieldType ];
 
-                        return `
+                        return (typeof build === "function") ? `
                             <div class="form__block">
                                 <div class="form__field">
-                                    ${isArea ? `
-                                        <textarea name="${field.name}" placeholder="${field.label}" class="form__input form__area js-form-field"></textarea>
-                                    ` : `
-                                        <input name="${field.name}" type="${typeMap[ field.name ] || field.fieldType}" placeholder="${field.label}" class="form__input js-form-field" />
-                                    `}
+                                    ${build( field )}
                                     ${isOne ? `<button class="form__sub btn" type="submit">${view.json.submitText}</button>` : ``}
                                 </div>
                             </div>
-                        `;
+                        ` : ``;
 
                     }).join( "" )}
                 </div>

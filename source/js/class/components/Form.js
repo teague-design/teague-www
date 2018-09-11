@@ -14,6 +14,7 @@ class Form {
         this.action = this.elemData.action.toLowerCase();
 
         this.bind();
+        this.bindDropdown();
     }
 
 
@@ -33,6 +34,33 @@ class Form {
                 this.processForm();
                 return false;
             }
+        });
+    }
+
+
+    bindDropdown () {
+        this.element.on( "click", ".js-form-show", ( e ) => {
+            const targ = $( e.target );
+            const elem = targ.closest( ".js-form-select" );
+            const menu = elem.find( ".js-form-menu" );
+
+            menu.toggleClass( "is-active" );
+        });
+
+        this.element.on( "click", ".js-form-option", ( e ) => {
+            const targ = $( e.target );
+            const elem = targ.closest( ".js-form-select" );
+            const menu = elem.find( ".js-form-menu" );
+            const opts = elem.find( ".js-form-option" );
+            const show = elem.find( ".js-form-show" );
+
+            // Toggle menu options
+            opts.removeClass( "is-active" );
+            targ.addClass( "is-active" );
+            menu.removeClass( "is-active" );
+
+            // Update show label
+            show[ 0 ].innerHTML = targ.is( ".is-active" ) ? targ.data().value : show.data().default;
         });
     }
 
@@ -67,12 +95,26 @@ class Form {
             _action: this.action,
             _form: {}
         };
-        this.fields.forEach(( field ) => {
-            this.formData._form[ field.name ] = {
-                name: field.name,
-                type: field.type,
-                value: field.value
-            };
+        this.fields.forEach(( el, i ) => {
+            const field = this.fields.eq( i );
+
+            if ( field.is( ".js-form-select" ) ) {
+                const active = field.find( ".js-form-option.is-active" );
+                const data = field.data();
+
+                this.formData._form[ data.name ] = {
+                    name: data.name,
+                    type: "select",
+                    value: active.length ? active.data().value : ""
+                };
+
+            } else {
+                this.formData._form[ el.name ] = {
+                    name: el.name,
+                    type: el.type,
+                    value: el.value
+                };
+            }
         });
     }
 
@@ -92,8 +134,20 @@ class Form {
 
     clearForm () {
         this.formData = {};
-        this.fields.forEach(( field ) => {
-            field.value = "";
+        this.fields.forEach(( el, i ) => {
+            const field = this.fields.eq( i );
+
+            if ( field.is( ".js-form-select" ) ) {
+                const show = field.find( ".js-form-show" );
+
+                field.find( ".js-form-menu" ).removeClass( "is-active" );
+                field.find( ".js-form-option" ).removeClass( "is-active" );
+
+                show[ 0 ].innerHTML = show.data().default;
+
+            } else {
+                el.value = "";
+            }
         });
     }
 
