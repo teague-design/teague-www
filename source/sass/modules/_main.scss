@@ -26,8 +26,9 @@
     }
 }
 .main__header__deets__l {
-    max-width: $p-wrap;
+    max-width: 860px;
     width: 100%;
+    box-sizing: content-box;
     @include wrapr();
 
     @include respond( $mobile-width ) {

@@ -1,0 +1,25 @@
+<%
+/* Location
+locals { item, slice, scope }
+*/
+const dom = locals.context.get( 'dom' );
+%>
+<div class="location">
+    <div class="location__l">
+        <div class="location__addy cms">
+            <%- dom.RichText.asHtml( slice.primary.text ) %>
+        </div>
+        <a class="location__map" href="<%= slice.primary.google_maps_url %>" target="_blank">
+            <div class="map dark js-mapbox" data-latlng="[<%= slice.primary.geo.latitude %>,<%= slice.primary.geo.longitude %>]">
+                <div class="map__marker js-mapbox-marker">
+                    <%- include( '../partials/svg/map-marker.svg' ) %>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="location__r">
+        <a class="location__image" href="<%= slice.primary.google_maps_url %>" target="_blank">
+            <%- include( '../partials/image.html', {image: slice.primary.studio_image} ) %>
+        </a>
+    </div>
+</div>

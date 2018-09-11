@@ -5,7 +5,8 @@ locals { item, slice, scope }
 const config = locals.context.get( 'config' );
 const isImage = locals.slice.primary.header_image.url;
 const isStory = locals.item.type === 'story';
-const isCategoryPage = locals.item.type === 'page' && locals.item.data.category !== null;
+const isPage = locals.item.type === 'page';
+const isCategoryPage = isPage && locals.item.data.category !== null;
 %>
 <div class="main__header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory || isCategoryPage ) { %>main__header--story<% } %>">
     <% if ( isStory || isCategoryPage ) { %>
@@ -21,14 +22,14 @@ const isCategoryPage = locals.item.type === 'page' && locals.item.data.category 
             <%- include( '../partials/image.html', {image: locals.slice.primary.header_image} ) %>
         </div>
     <% } %>
-    <% if ( isStory || isCategoryPage ) { %>
+    <% if ( isStory || isPage ) { %>
         <div class="main__header__deets cms -wrap">
             <div class="main__header__deets__l">
                 <div class="main__header__desc">
                     <%- locals.context.get( 'dom' ).RichText.asHtml( locals.slice.primary.header_description ) %>
                 </div>
             </div>
-            <% if ( !isCategoryPage ) { %>
+            <% if ( !isPage ) { %>
                 <div class="main__header__deets__r main__header__authors">
                     <h6>Project Authors</h6>
                     <% locals.item.data.authors.forEach(( author ) => { %>

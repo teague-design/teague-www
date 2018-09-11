@@ -134,3 +134,101 @@
 .promo__link {
     display: block;
 }
+
+
+
+.location {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    position: relative;
+
+    @include respond( $break-tablet-full ) {
+        display: block;
+    }
+
+    .mapboxgl-ctrl-logo,
+    .mapboxgl-ctrl-attrib {
+        display: none;
+    }
+}
+.location__l {
+    width: 35%;
+
+    @include respond( $break-tablet-full ) {
+        width: 100%;
+    }
+}
+.location__r {
+    width: 65%;
+
+    @include respond( $break-tablet-full ) {
+        width: 100%;
+    }
+}
+.location__map {
+    display: block;
+    position: absolute;
+    left: 0;
+    width: 35%;
+    bottom: 0;
+
+    @include respond( $break-tablet-full ) {
+        width: 50%;
+        position: relative;
+        left: auto;
+        bottom: auto;
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    @include respond( $break-tablet-small ) {
+        width: 100%;
+    }
+
+    .map {
+        padding-bottom: 56.25%;
+        width: 100%;
+
+        // @include respond( $break-tablet-full ) {
+        //     padding-bottom: 75%;
+        // }
+
+        @include respond( $break-tablet-small ) {
+            padding-bottom: 56.25%;
+        }
+    }
+}
+.location__addy {
+    width: 100%;
+    @include wrapl();
+
+    @include respond( $break-tablet-full ) {
+        width: 50%;
+        display: inline-block;
+        vertical-align: middle;
+        @include wrap();
+    }
+
+    @include respond( $break-tablet-small ) {
+        width: 100%;
+        padding-bottom: 40px;
+    }
+
+    p {
+        line-height: 2;
+    }
+
+    h4 {
+        padding-bottom: 20px;
+    }
+}
+
+
+
+.terms,
+.privacy {
+    p a {
+        color: $spot;
+    }
+}

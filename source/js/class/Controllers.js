@@ -9,6 +9,7 @@ import Taxi from "./components/Taxi";
 import Video from "./components/Video";
 import Slider from "./components/Slider";
 import FormOver from "./components/FormOver";
+import Mapbox from "./components/Mapbox";
 
 
 
@@ -73,6 +74,7 @@ class Controllers {
         this.push( "video", core.dom.body.find( ".js-video" ), BaseController, Video );
         this.push( "slider", core.dom.body.find( ".js-slider" ), BaseController, Slider );
         this.push( "formover", core.dom.body.find( ".js-formover" ), BaseController, FormOver );
+        this.push( "mapbox", core.dom.body.find( ".js-mapbox" ), BaseController, Mapbox );
 
         // Unique Controllers...
         this.push( "home", core.dom.body.find( ".js-home" ), HomeController );
