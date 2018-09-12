@@ -65,7 +65,21 @@
             z-index: 1;
             pointer-events: auto;
         }
+        .home__reel-overlay {
+            opacity: 0;
+        }
     }
+}
+.home__reel-overlay {
+    background-color: $black;
+    opacity: 0.2;
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    transition: opacity $base-duration $ease;
+    pointer-events: none;
 }
 .home__reel-mark {
     position: absolute;

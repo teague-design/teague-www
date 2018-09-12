@@ -145,7 +145,7 @@ class HomeController {
         const videoInstance = video.find( ".js-video" ).data().Video;
 
         mark.addClass( "is-full" );
-        core.dom.html.removeClass( "is-theme-black" ).addClass( "is-theme-white" );
+        core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
 
         cta.on( "click", () => {
             this.isDisabled = true;

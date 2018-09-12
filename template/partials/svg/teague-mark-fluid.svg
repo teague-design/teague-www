@@ -1,6 +1,6 @@
-<svg class="svg svg--mark-fluid <% if ( locals.style ) { %>svg--<%= locals.style %><% } %>" x="0px" y="0px" viewBox="0 0 1416 835" style="enable-background:new 0 0 1416 835;">
-    <rect x="0" y="0" width="1140.9" height="134.8" />
-    <rect x="275.1" y="232.5" width="698" height="134.8" />
-    <rect x="275.1" y="466.4" width="1140.9" height="134.8" />
-    <rect x="275.1" y="700.2" width="866.3" height="134.8" />
+<svg class="svg svg--mark-fluid <% if ( locals.style ) { %>svg--<%= locals.style %><% } %>" x="0px" y="0px" viewBox="0 0 374.9 213.8" style="enable-background:new 0 0 374.9 213.8;">
+    <rect width="297.4" height="34.5"/>
+    <rect x="77.5" y="59.8" width="188.7" height="34.5"/>
+    <rect x="77.5" y="119.5" width="297.4" height="34.5"/>
+    <rect x="77.5" y="179.3" width="219.8" height="34.5"/>
 </svg>

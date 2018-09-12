@@ -15,9 +15,10 @@ if ( slice.primary.reel_vimeo_url ) {
 %>
 <div class="home__reel-video js-home-reel-video">
     <%- include( '../partials/video-fs.html', {media} ) %>
+    <div class="home__reel-overlay"></div>
 </div>
 <div class="home__reel-mark js-home-reel-mark">
-    <%- include( '../partials/svg/teague-mark-fluid.svg', {style: 'lite'} ) %>
+    <%- include( '../partials/svg/teague-mark-fluid.svg' ) %>
 </div>
 <div class="home__reel-desc js-home-reel-desc cms -wrap">
     <%- dom.RichText.asHtml( slice.primary.reel_description ) %>
