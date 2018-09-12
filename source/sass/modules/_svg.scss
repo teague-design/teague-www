@@ -95,6 +95,21 @@
         transform: scale( 1.5 );
     }
 }
+.svg--play-button {
+    height: 94px;
+    width: 94px;
+
+    @include respond( $mobile-width ) {
+        transform: scale( 0.75 );
+    }
+
+    circle {
+        fill: $white;
+    }
+    polygon {
+        fill: $spot;
+    }
+}
 
 
 

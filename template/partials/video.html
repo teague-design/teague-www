@@ -12,6 +12,9 @@ Poster: prismic image object
         <% if ( media.poster ) { %>
             <div class="video__poster">
                 <%- include( './image.html', {image: media.poster} ) %>
+                <div class="video__playbutton">
+                    <%- include( './svg/play-button.svg' ) %>
+                </div>
             </div>
         <% } %>
     </div>
