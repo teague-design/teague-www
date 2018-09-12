@@ -67,6 +67,10 @@ class Controllers {
     exec () {
         this.controllers = [];
 
+        // Unique Controllers...
+        this.push( "home", core.dom.body.find( ".js-home" ), HomeController );
+        this.push( "pages", core.dom.body.find( ".js-pages" ), PagesController );
+
         // Uses BaseController
         this.push( "form", core.dom.body.find( ".js-form" ), BaseController, Form );
         this.push( "view", core.dom.body.find( ".js-view" ), BaseController, View );
@@ -75,10 +79,6 @@ class Controllers {
         this.push( "slider", core.dom.body.find( ".js-slider" ), BaseController, Slider );
         this.push( "formover", core.dom.body.find( ".js-formover" ), BaseController, FormOver );
         this.push( "mapbox", core.dom.body.find( ".js-mapbox" ), BaseController, Mapbox );
-
-        // Unique Controllers...
-        this.push( "home", core.dom.body.find( ".js-home" ), HomeController );
-        this.push( "pages", core.dom.body.find( ".js-pages" ), PagesController );
 
         this.images = this.element.find( core.config.lazyImageSelector );
         this.imageController = new ImageController( this.images );

@@ -50,7 +50,7 @@
 
 .related--page {
     // $break-tablet-small
-    padding-top: $expander-2;
+    padding-top: 0;
 
     @include respond-min( $mobile-width ) {
         padding-top: $expander-1;

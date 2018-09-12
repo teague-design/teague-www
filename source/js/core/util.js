@@ -206,6 +206,69 @@ const getElementDuration = function ( el, key ) {
 };
 
 
+/**
+ *
+ * @method getDefaultHammerOptions
+ * @memberof core.util
+ * @description The default options for Hammer JS.
+ *              Disables cssProps for non-touch experiences.
+ * @returns {object}
+ *
+ */
+const getDefaultHammerOptions = () => {
+    return detect.isDevice() ? {} : {
+        cssProps: {
+            contentZoomingString: false,
+            tapHighlightColorString: false,
+            touchCalloutString: false,
+            touchSelectString: false,
+            userDragString: false,
+            userSelectString: false
+        }
+    };
+};
+
+
+/**
+ *
+ * Get the applied transform values from CSS
+ * @method getTransformValues
+ * @param {object} el The DOMElement
+ * @memberof util
+ * @returns {object}
+ *
+ */
+const getTransformValues = ( el ) => {
+    if ( !el ) {
+        return null;
+    }
+
+    const transform = window.getComputedStyle( el )[ detect.getPrefixed( "transform" ) ];
+    const values = transform.replace( /matrix|3d|\(|\)|\s/g, "" ).split( "," );
+    const ret = {};
+
+    // No Transform
+    if ( values[ 0 ] === "none" ) {
+        ret.x = 0;
+        ret.y = 0;
+        ret.z = 0;
+
+    // Matrix 3D
+    } else if ( values.length === 16 ) {
+        ret.x = parseFloat( values[ 12 ] );
+        ret.y = parseFloat( values[ 13 ] );
+        ret.z = parseFloat( values[ 14 ] );
+
+    } else {
+        ret.x = parseFloat( values[ 4 ] );
+        ret.y = parseFloat( values[ 5 ] );
+        ret.z = 0;
+    }
+
+    return ret;
+};
+
+
 
 /******************************************************************************
  * Export
@@ -218,5 +281,7 @@ export {
     isElementLoadable,
     isElementVisible,
     getElementsInView,
-    getElementDuration
+    getElementDuration,
+    getDefaultHammerOptions,
+    getTransformValues
 };

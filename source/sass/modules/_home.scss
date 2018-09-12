@@ -419,12 +419,8 @@
     }
     .slider__splash__item {
         .home--mobilized & {
-            padding-bottom: 40px;
-        }
-    }
-    .slider__splash__item.is-active {
-        .home--mobilized & {
-            position: relative;
+            padding-bottom: $padding-1 * 2;
+            padding-top: $padding-1 * 4;
         }
     }
     .slider__splash__item p {
@@ -435,6 +431,15 @@
     .slider__item {
         .home--mobilized & {
             width: 100%;
+        }
+    }
+    .slider__item:not( :first-child ) {
+        .home--mobilized & {
+            margin-left: 20px;
+
+            @include respond-min( $mobile-width ) {
+                margin-left: $padding-v;
+            }
         }
     }
     .slider__pane {

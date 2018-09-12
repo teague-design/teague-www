@@ -1,6 +1,7 @@
 import * as core from "../../core";
 import $ from "properjs-hobo";
 import ResizeController from "properjs-resizecontroller";
+import Swiper from "./Swiper";
 
 
 /**
@@ -27,7 +28,15 @@ class Slider {
         };
         this.offsets = {
             home: {
-                move: "(-50vw - 10vw)"
+                move: "(-50vw - 10vw)",
+                coup: {
+                    move: ( idx ) => {
+                        return `calc(-${100 * idx}vw + ${parseInt( window.getComputedStyle( this.items[ idx ] )[ "margin-left" ], 10 ) * idx}px)`;
+                    },
+                    exec: () => {
+                        return this.isHomeMobilized;
+                    }
+                }
             },
             edge: {
                 move: "-100vw"
@@ -48,25 +57,33 @@ class Slider {
                 },
                 noop: {
                     move: ( idx ) => {
-                        return `calc(-25vw - ${idx * 50}vw - ${idx * 0}vw)`;
+                        return `calc(-25vw - ${idx * 50}vw - ${idx * 10}vw)`;
                     },
                     width: 1024
                 },
                 moop: {
                     move: ( idx ) => {
-                        return `calc(-32.5vw - ${idx * 65}vw - ${idx * 0}vw)`;
+                        return `calc(0vw - ${idx * 65}vw - ${idx * 10}vw)`;
                     },
                     width: 768
                 }
             }
         };
+        this.isHomeMobilized = core.dom.body.find( ".js-home--mobilized" ).length;
         this.isPanning = false;
+        this.isMoving = false;
         this._spawnFunc = this[ `spawn_${this.elemData.spawn}` ].bind( this );
         this._swapFunc = this[ `swap_${this.elemData.spawn}` ].bind( this );
+        this.swiper = new Swiper( this );
 
         this.init();
         this.bind();
         this._spawnFunc();
+    }
+
+
+    inMotion () {
+        return (this.isMoving || this.isPanning);
     }
 
 
@@ -115,11 +132,25 @@ class Slider {
     }
 
 
+    spawn_home_mobile () {
+        this.splashHeight = 0;
+        this.splashItems.forEach(( el ) => {
+            const bounds = el.getBoundingClientRect();
+
+            if ( bounds.height > this.splashHeight ) {
+                this.splashHeight = bounds.height;
+            }
+        });
+        this.splash[ 0 ].style.height = `${this.splashHeight}px`;
+    }
     spawn_home () {
         this.splash = this.element.find( ".js-slider-splash" );
         this.splashItems = this.element.find( ".js-slider-splash-item" );
-
         this.splashItems.first().addClass( "is-active" );
+
+        if ( core.detect.isDevice() ) {
+            this.spawn_home_mobile();
+        }
     }
     swap_home () {
         this.splashItems.filter( ".is-active" ).addClass( "is-exit" );
@@ -192,14 +223,17 @@ class Slider {
         const offset = this.offsets[ this.elemData.spawn ];
         let movement = offset.move;
 
-        if ( offset.moop && (window.innerWidth <= offset.moop.width) ) {
+        if ( offset.coup && offset.coup.exec() ) {
+            movement = offset.coup.move;
+
+        } else if ( offset.moop && (window.innerWidth <= offset.moop.width) ) {
             movement = offset.moop.move;
 
         } else if ( offset.noop && (window.innerWidth <= offset.noop.width) ) {
             movement = offset.noop.move;
         }
 
-        this.isPanning = true;
+        this.isMoving = true;
         this.calc = (typeof movement === "function" ? movement( this.data.index ) : `calc(${this.data.index} * ${movement})`);
 
         core.util.translate3d(
@@ -212,7 +246,7 @@ class Slider {
 
 
     goto ( idx ) {
-        if ( this.isPanning ) {
+        if ( this.inMotion() ) {
             return this;
         }
 
@@ -225,7 +259,7 @@ class Slider {
 
 
     advance () {
-        if ( this.isPanning ) {
+        if ( this.inMotion() ) {
             return this;
         }
 
@@ -237,7 +271,7 @@ class Slider {
 
 
     rewind () {
-        if ( this.isPanning ) {
+        if ( this.inMotion() ) {
             return this;
         }
 
@@ -250,6 +284,7 @@ class Slider {
 
     timeout () {
         setTimeout( () => {
+            this.isMoving = false;
             this.isPanning = false;
 
         }, 500 );
@@ -260,6 +295,10 @@ class Slider {
     destroy () {
         if ( this.resizer ) {
             this.resizer.destroy();
+        }
+
+        if ( this.swiper ) {
+            this.swiper.destroy();
         }
     }
 }

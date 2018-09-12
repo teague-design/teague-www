@@ -30,7 +30,7 @@ class HomeController {
         this._scroller = new ScrollController();
 
         if ( core.detect.isDevice() /*&& window.innerWidth <= 768 */) {
-            this.element.addClass( "home--mobilized" );
+            this.element.addClass( "home--mobilized js-home--mobilized" );
             this.handleMobile();
 
         } else {

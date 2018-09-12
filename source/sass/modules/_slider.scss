@@ -32,6 +32,10 @@
 }
 .slider__belt {
     transition: transform $base-duration $ease;
+
+    &.is-panning {
+        transition: none;
+    }
 }
 .slider__item {
     width: 50vw;
@@ -42,6 +46,10 @@
 
     &:not( :first-child ) {
         margin-left: 10vw;
+
+        .slider--edge & {
+            margin-left: 0;
+        }
     }
 
     .image,

@@ -115,7 +115,8 @@
     }
 
     @include respond( $break-tablet-small ) {
-        transform: translate3d( -32.5vw, 0, 0 );
+        left: 0;
+        transform: translate3d( 0, 0, 0 );
     }
 }
 .highs__item {
@@ -137,9 +138,9 @@
     &:not( :first-child ) {
         margin-left: 10vw;
 
-        @include respond( $break-tablet-medium ) {
-            margin-left: 0;
-        }
+        // @include respond( $break-tablet-medium ) {
+        //     margin-left: 0;
+        // }
     }
 }
 .highs__icon {
@@ -166,6 +167,10 @@
     margin-top: 100px;
     position: relative;
     width: 100%;
+
+    @include respond( $mobile-width ) {
+        display: none;
+    }
 }
 .highs__notches {
     display: flex;
