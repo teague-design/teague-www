@@ -10,6 +10,7 @@ const authorization = {
     store: path.join( __dirname, "../../sandbox/authorizations/hubspot.auth.json" )
 };
 const lager = require( "properjs-lager" );
+const validator = require( "validator" );
 
 
 
@@ -106,8 +107,7 @@ const getHubspotFormByGUID = ( req, res ) => {
 
 
 
-const postHubspotForm = ( req, res ) => {
-    // lager.data( req.body );
+const handleHubspotValid = ( req, res ) => {
     const https = require( "https" );
     const querystring = require( "querystring" );
     const bodyData = {
@@ -145,7 +145,6 @@ const postHubspotForm = ( req, res ) => {
 
         if ( response.statusCode === 204 ) {
             res.status( 200 ).json({
-                errors: null,
                 success: true
             });
         }
@@ -156,6 +155,56 @@ const postHubspotForm = ( req, res ) => {
     });
     httpRequest.write( postData );
     httpRequest.end();
+};
+
+
+
+const handleHubspotErrors = ( req, res ) => {
+    res.status( 200 ).json({
+        success: false
+    });
+};
+
+
+
+const validateHubspotForm = ( req, res ) => {
+    return new Promise(( resolve, reject ) => {
+        let isResolve = true;
+
+        for ( let i in req.body._form ) {
+            if ( req.body._form.hasOwnProperty( i ) ) {
+                const checkEmpty = /^text|^select/.test( req.body._form[ i ].type );
+                const checkEmail = /^email/.test( req.body._form[ i ].type );
+
+                if ( checkEmpty && validator.isEmpty( req.body._form[ i ].value ) ) {
+                    isResolve = false;
+                }
+
+                if ( checkEmail && !validator.isEmail( req.body._form[ i ].value ) ) {
+                    isResolve = false;
+                }
+            }
+        }
+
+        if ( isResolve ) {
+            resolve();
+
+        } else {
+            reject();
+        }
+    });
+};
+
+
+
+const postHubspotForm = ( req, res ) => {
+    // lager.data( req.body );
+    validateHubspotForm( req, res ).then(() => {
+        handleHubspotValid( req, res );
+
+    }).catch(() => {
+        handleHubspotErrors( req, res );
+    });
 };
 
 

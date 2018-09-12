@@ -195,6 +195,15 @@
  * Forms
 *******************************************************************************/
 .form {
+    &.is-success {
+        .form__group {
+            display: none;
+        }
+        .form__message {
+            display: block;
+        }
+    }
+
     .form__input + .form__sub {
         .is-hoverable &:hover {
             color: $black;
@@ -203,6 +212,9 @@
             color: $white;
         }
     }
+}
+.form__message {
+    display: none;
 }
 .form__input {
     @include p();
@@ -219,6 +231,11 @@
                 border-color $base-duration $ease-before;
 
     &:focus {
+        color: $black;
+        border-color: $spot;
+    }
+
+    .screen--white &:focus {
         color: $black;
         border-color: $spot;
     }

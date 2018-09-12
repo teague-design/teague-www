@@ -1,6 +1,6 @@
 import $ from "properjs-hobo";
 import router from "../../router";
-import * as core from "../../core";
+// import * as core from "../../core";
 
 
 
@@ -65,16 +65,26 @@ class Form {
     }
 
 
+    handleErrors () {
+        this.element.removeClass( "is-success" );
+    }
+
+
+    handleSuccess () {
+        this.element.addClass( "is-success" );
+        this.clearForm();
+    }
+
+
     processForm () {
         this.getFields();
         this.parseForm();
         this.postForm().then(( json ) => {
-            if ( json.error ) {
-                core.log( "warn", json.error );
+            if ( json.success ) {
+                this.handleSuccess( json );
 
             } else {
-                this.clearForm();
-                core.log( json );
+                this.handleErrors( json );
             }
         });
     }

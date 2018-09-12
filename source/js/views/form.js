@@ -65,5 +65,8 @@ export default ( view ) => {
                 </div>
             </div>
         ` : ``}
+        <div class="form__message cms">
+            <h5>${view.json.inlineMessage}</h5>
+        </div>
     `;
 };
