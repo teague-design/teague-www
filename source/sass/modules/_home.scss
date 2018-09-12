@@ -46,6 +46,12 @@
 
 
 // REEL
+.slice--home-reel {
+    .home--mobilized & {
+        background-color: $black;
+        color: $white;
+    }
+}
 .home__reel-video {
     .video__ui {
         position: absolute;
@@ -176,6 +182,12 @@
 
 
 // ABOUT
+.slice--home-about {
+    .home--mobilized & {
+        background-color: $white;
+        color: $black;
+    }
+}
 .home__about-mark {
     visibility: hidden;
     pointer-events: none;
@@ -363,6 +375,8 @@
 .slice--home-stories {
     .home--mobilized & {
         height: auto;
+        background-color: $black;
+        color: $white;
     }
 }
 .home__stories-desc {

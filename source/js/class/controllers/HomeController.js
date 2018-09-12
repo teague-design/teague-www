@@ -29,15 +29,42 @@ class HomeController {
         this._resizer = new ResizeController();
         this._scroller = new ScrollController();
 
-        if ( core.detect.isDevice() ) {
-            core.log( "HomeController::Mobile" );
+        if ( core.detect.isDevice() /*&& window.innerWidth <= 768 */) {
             this.element.addClass( "home--mobilized" );
+            this.handleMobile();
 
         } else {
             this.bindWheelF();
             this.bindWheel();
             this.transition();
         }
+    }
+
+
+    handleMobile () {
+        const onMobileScroll = () => {
+            let isHit = false;
+
+            this.slices.forEach(( el, i ) => {
+                if ( !isHit ) {
+                    const slice = this.slices.eq( i );
+                    const data = slice.data();
+                    const loadFunc = this[ `${data.prop}_load_mobile` ].bind( this );
+                    const unloadFunc = this[ `${data.prop}_unload_mobile` ].bind( this );
+
+                    if ( core.util.isElementVisible( el ) ) {
+                        isHit = true;
+                        loadFunc();
+
+                    } else {
+                        unloadFunc();
+                    }
+                }
+            });
+        };
+
+        this._scroller.on( "scroll", onMobileScroll );
+        onMobileScroll();
     }
 
 
@@ -135,6 +162,10 @@ class HomeController {
     }
 
 
+    home_reel_load_mobile () {
+        core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
+    }
+    home_reel_unload_mobile () {}
     home_reel_load () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const mark = slice.find( ".js-home-reel-mark" );
@@ -207,6 +238,10 @@ class HomeController {
     }
 
 
+    home_about_load_mobile () {
+        core.dom.html.removeClass( "is-theme-black" ).addClass( "is-theme-white" );
+    }
+    home_about_unload_mobile () {}
     home_about_load () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-about-desc" );
@@ -318,6 +353,10 @@ class HomeController {
     }
 
 
+    home_discover_load_mobile () {
+        core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
+    }
+    home_discover_unload_mobile () {}
     home_discover_load () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-discover-desc" );
@@ -398,6 +437,10 @@ class HomeController {
     }
 
 
+    home_stories_load_mobile () {
+        core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
+    }
+    home_stories_unload_mobile () {}
     home_stories_load () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-stories-desc" );
