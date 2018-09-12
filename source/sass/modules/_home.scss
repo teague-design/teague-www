@@ -163,6 +163,10 @@
     transition: opacity $base-duration $ease;
     cursor: pointer;
 
+    .svg--ex {
+        fill: $white;
+    }
+
     &.is-anim {
         opacity: 1;
         pointer-events: auto;
