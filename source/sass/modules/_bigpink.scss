@@ -6,20 +6,24 @@
     width: 100%;
     height: 100%;
     transform: translate3d( 0, 0, 0 );
-    transition: clip-path $base-duration $ease;
+    transition: clip-path $base-duration $ease,
+                -webkit-clip-path $base-duration $ease;
     z-index: $z_layer_header + 1;
     overflow: hidden;
     color: $white;
     /* values are from-top, from-right, from-bottom, from-left */
     clip-path: inset( 0 100vw 0 0 );
+    -webkit-clip-path: inset( 0 100vw 0 0 );
 
     &.is-active {
         /* values are from-top, from-right, from-bottom, from-left */
         clip-path: inset( 0 0 0 0 );
+        -webkit-clip-path: inset( 0 0 0 0 );
     }
     &.is-inactive {
         /* values are from-top, from-right, from-bottom, from-left */
         clip-path: inset( 0 0 0 100vw );
+        -webkit-clip-path: inset( 0 0 0 100vw );
     }
     &.is-hidden {
         visibility: hidden;
