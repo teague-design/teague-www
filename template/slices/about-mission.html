@@ -1,0 +1,20 @@
+<%
+/* About Mission
+locals { item, slice, scope }
+*/
+const dom = locals.context.get( 'dom' );
+%>
+<div class="mission">
+    <div class="mission__media">
+        <%- include( '../partials/video.html', {
+            media: {
+                vimeo: slice.primary.vimeo_url,
+                poster: slice.primary.video_poster
+            }
+        }) %>
+    </div>
+    <div class="mission__text cms">
+        <h6><%= slice.primary.label %></h6>
+        <%- dom.RichText.asHtml( slice.primary.text ) %>
+    </div>
+</div>

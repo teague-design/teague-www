@@ -309,6 +309,51 @@
 
 
 
+.mission {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.mission__media {
+    width: 60vw;
+    @include wrapr();
+
+    @include respond( $break-tablet-medium ) {
+        width: 50vw;
+    }
+
+    @include respond( $mobile-width ) {
+        width: 100vw;
+        order: 2;
+        padding-right: 0;
+    }
+
+    .video__ui {
+        @include wrap();
+    }
+}
+.mission__text {
+    width: 40vw;
+    @include wrap();
+
+    @include respond( $break-tablet-medium ) {
+        width: 50vw;
+    }
+
+    @include respond( $mobile-width ) {
+        width: 100vw;
+        order: 1;
+        padding-bottom: 50px;
+    }
+
+    h4 {
+        padding: 30px 0;
+    }
+}
+
+
+
 // CONTACT
 .location {
     display: flex;
