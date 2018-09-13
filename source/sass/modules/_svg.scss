@@ -24,6 +24,15 @@
 .svg--arrow {
     width: 27px;
     height: 5px;
+    transition: width $fast-duration $ease;
+    transform: translateY( -2px );
+
+    rect {
+        transition: width $fast-duration $ease;
+    }
+    polygon {
+        transition: transform $fast-duration $ease;
+    }
 }
 .svg--play,
 .svg--pause,

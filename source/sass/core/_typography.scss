@@ -152,27 +152,8 @@
     cursor: pointer;
     padding: 5px 0;
 
-    .svg--arrow {
-        transition: width $fast-duration $ease;
-        transform: translateY( -2px );
-
-        rect {
-            transition: width $fast-duration $ease;
-        }
-        polygon {
-            transition: transform $fast-duration $ease;
-        }
-    }
-
     .is-hoverable &:hover .svg--arrow {
-        width: 38px;
-
-        rect {
-            width: 35px;
-        }
-        polygon {
-            transform: translate3d( 11px, 0, 0 );
-        }
+        @include arrow-hover();
     }
 }
 .link__wrap {

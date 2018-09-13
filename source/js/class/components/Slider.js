@@ -44,6 +44,19 @@ class Slider {
             paddy: {
                 move: "(-70vw - 10vw)"
             },
+            about: {
+                move: "(-30vw - 10vw)",
+                noop: {
+                    move: "(-50vw - 10vw)",
+                    width: 1024
+                },
+                moop: {
+                    move: ( idx ) => {
+                        return `calc(-${this.element[ 0 ].getBoundingClientRect().width * idx}px - ${idx * 10}vw)`;
+                    },
+                    width: 640
+                }
+            },
             work: {
                 move: "(-32vw - 10vw)",
                 noop: {
@@ -97,6 +110,10 @@ class Slider {
 
     spawn_work () {}
     swap_work () {}
+
+
+    spawn_about () {}
+    swap_about () {}
 
 
     spawn_highs () {

@@ -36,16 +36,43 @@ const config = locals.context.get( 'config' );
         <div class="slider__belt js-slider-belt">
             <% locals.items.forEach(( item, i ) => { %>
                 <div class="slider__item js-slider-item" data-index="<%= i %>">
-                    <%- include( './image.html', {image: item.data.image} ) %>
-                    <% if ( item.data.title && locals.options.spawn === 'work' ) { %>
-                        <div class="slider__title cms">
-                            <%- dom.RichText.asHtml( item.data.title ) %>
+                    <% if ( locals.options.spawn === 'about' ) { %>
+                        <div class="slider__person">
+                            <%- include( './image.html', {image: item.data.image} ) %>
+                            <div class="slider__about cms">
+                                <h5><%= item.data.name %></h5>
+                                <p><%= item.data.title %></p>
+                            </div>
                         </div>
-                    <% } %>
-                    <% if ( item.data.caption ) { %>
-                        <div class="slider__cap">
-                            <div class="p pc"><%= item.data.caption %></div>
-                        </div>
+                        <%
+                        const json = {
+                            title: dom.RichText.asText( item.data.story.data.title ),
+                            story: true,
+                            tag: item.data.story.tags[ 0 ]
+                        };
+                        %>
+                        <a href="<%= locals.context.getUrl( item.data.story ) %>" data-json="<%= JSON.stringify( json ) %>" class="slider__badge cms">
+                            <div class="slider__badge__meta">
+                                <%- include( './svg/icon-article.svg', {style: 'lite'} ) %>
+                                <h6>Design Story</h6>
+                            </div>
+                            <div class="slider__badge__story">
+                                <h6><%= dom.RichText.asText( item.data.story.data.title ) %></h6>
+                                <%- include( './svg/icon-arrow.svg', {style: 'lite'} ) %>
+                            </div>
+                        </a>
+                    <% } else { %>
+                        <%- include( './image.html', {image: item.data.image} ) %>
+                        <% if ( item.data.title && locals.options.spawn === 'work' ) { %>
+                            <div class="slider__title cms">
+                                <%- dom.RichText.asHtml( item.data.title ) %>
+                            </div>
+                        <% } %>
+                        <% if ( item.data.caption ) { %>
+                            <div class="slider__cap">
+                                <div class="p pc"><%= item.data.caption %></div>
+                            </div>
+                        <% } %>
                     <% } %>
                 </div>
             <% })%>

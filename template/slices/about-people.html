@@ -1,0 +1,34 @@
+<%
+/* About People
+locals { item, slice, scope }
+*/
+const dom = locals.context.get( 'dom' );
+const itemsMapped = slice.items.map(( item ) => {
+    return {
+        data: {
+            image: item.person_image,
+            name: item.person_name,
+            title: item.person_title,
+            story: item.design_story_link
+        }
+    };
+});
+%>
+<div class="people -wrap">
+    <div class="people__info cms">
+        <div class="people__label">
+            <h6><%= locals.slice.primary.label %></h6>
+        </div>
+        <div class="people__desc">
+            <h5><%= locals.slice.primary.text %></h5>
+        </div>
+    </div>
+    <div class="people__slider">
+        <%- include( '../partials/slider.html', {
+            items: itemsMapped,
+            options: {
+                spawn: 'about'
+            }
+        }) %>
+    </div>
+</div>

@@ -68,6 +68,19 @@
     .slider--work & {
         width: 32vw;
     }
+
+    .slider--about & {
+        width: 30vw;
+        text-align: right;
+
+        @include respond( $break-tablet-medium ) {
+            width: 50vw;
+        }
+
+        @include respond( $mobile-width ) {
+            width: 100%;
+        }
+    }
 }
 .slider__navi {
     white-space: nowrap;
@@ -75,14 +88,20 @@
     text-align: center;
     padding-right: $padding-v;
     padding-left: $padding-v;
+    margin: 0 -10px;
 
     .slider--home &,
-    .slider--paddy & {
+    .slider--paddy &,
+    .slider--about & {
         text-align: right;
     }
     .slider--work & {
         text-align: right;
         padding-top: 40px;
+    }
+    .slider--about & {
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 .slider__navi__next {
@@ -119,6 +138,58 @@
     &.is-active {
         width: 20px;
         background-color: $spot;
+    }
+}
+
+
+
+// ABOUT
+.slider__person {
+    position: relative;
+    pointer-events: none;
+}
+.slider__about {
+    position: absolute;
+    left: 20px;
+    bottom: 40px;
+    color: $white;
+    text-align: left;
+
+    p {
+        padding-top: 10px;
+    }
+}
+.slider__badge {
+    padding: 20px;
+    position: relative;
+    background-color: $spot;
+    width: 67%;
+    color: $white;
+    display: inline-block;
+    text-align: left;
+    transform: translate3d( 0, -30px, 0 );
+
+    @include respond( $mobile-width ) {
+        width: 80%;
+    }
+
+    .is-hoverable &:hover .svg--arrow {
+        @include arrow-hover();
+    }
+}
+.slider__badge__meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+    h6 {
+        padding-left: 25px;
+    }
+}
+.slider__badge__story {
+    h6 {
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 }
 
