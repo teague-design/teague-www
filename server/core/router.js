@@ -56,7 +56,11 @@ const setRoutes = () => {
 
     // AUTHORIZATIONS
     core.config.authorizations.apps.forEach(( app ) => {
-        require( `../auth/${app}` ).init( expressApp, checkCSRF );
+        const auth = require( `../auth/${app}` );
+
+        if ( auth.init ) {
+            auth.init( expressApp, checkCSRF );
+        }
     });
 
     // API => JSON
@@ -166,19 +170,6 @@ const getSitemap = ( req, res ) => {
 
 /**
  *
- * :GET CSRF
- *
- */
-// const getCSRF = ( req, res ) => {
-//     res.status( 200 ).json({
-//         csrf: req.csrfToken()
-//     });
-// };
-
-
-
-/**
- *
  * Middleware checks
  *
  */
@@ -261,7 +252,7 @@ module.exports = {
         // Init routes
         setRoutes();
 
-        // Fetch ./template/pages listing
+        // Fetch Pages JSON
         core.template.getPages().then(() => {
             // Fetch Site JSON
             core.query.getSite().then(() => {

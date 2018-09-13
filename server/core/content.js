@@ -27,7 +27,7 @@ const getPage = function ( req, res, listener ) {
             // 0.1 => Single ContentItem
             // 0.2 => Multiple ContentItems(s)
             const isNoNamePage = (core.template.cache.pages.indexOf( `${page}.html` ) === -1);
-            const isNoTypePage = (core.template.cache.pages.indexOf( `${data.item.type}.html` ) === -1);
+            const isNoTypePage = data.item ? (core.template.cache.pages.indexOf( `${data.item.type}.html` ) === -1) : true;
 
             if ( isNoNamePage && isNoTypePage ) {
                 const file = path.join( core.config.template.pagesDir, `${page}.html` );

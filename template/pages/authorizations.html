@@ -3,14 +3,20 @@ const items = locals.context.get( 'items' );
 const config = locals.context.get( 'config' );
 %>
 <div class="authorizations -pad">
-    <div class="-wrap -exp">
-        <h3 class="h3">Authorizations</h3>
-        <div class="-exp">
+    <div class="main__header main__header--story is-animated">
+        <div class="main__header__tag cms -wrap">
+            <h6>Clutch</h6>
+        </div>
+        <div class="main__header__title cms -wrap">
+            <h2>Authorizations</h2>
+        </div>
+        <div class="main__header__desc cms -wrap">
             <% items.forEach(( item ) => { %>
-                <p class="p">
+                <h5>
                     <a href="/authorizations/<%= item.app %>/?token=<%= config.authorizations.token %>" class="js-router--ignore -spot"><%= item.app %></a> / authorized: <%- item.authorized %>
-                </p>
+                </h5>
             <% }) %>
         </div>
     </div>
 </div>
+<div class="spacer"></div>

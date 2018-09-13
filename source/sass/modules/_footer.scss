@@ -3,10 +3,17 @@
         opacity: 0;
         pointer-events: none;
     }
+    .is-authorizations-page & {
+        display: none;
+    }
 }
 .footer__newsletter {
     .form {
         padding-top: $padding-1;
+
+        @include respond( $mobile-width ) {
+            padding-top: 20px;
+        }
     }
 }
 .footer__navi {
