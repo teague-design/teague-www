@@ -56,9 +56,6 @@ let json = null;
     %>
     <div class="promo promo--large <% if ( isPromoLargeA ) { %>promo--a<% } else { %>promo--b<% } %>">
         <a href="<%= locals.context.getUrl( doc ) %>" class="promo__link" data-json="<%= JSON.stringify( json ) %>">
-            <div class="promo__image">
-                <%- include( '../partials/image.html', {image: doc.data.image} ) %>
-            </div>
             <div class="promo__info cms">
                 <% if ( !isPage ) { %>
                     <div class="promo__tag">
@@ -68,6 +65,9 @@ let json = null;
                 <div class="promo__title">
                     <%- dom.RichText.asHtml( doc.data.title ).replace( /h1/g, 'h2' ) %>
                 </div>
+            </div>
+            <div class="promo__image">
+                <%- include( '../partials/image.html', {image: doc.data.image} ) %>
             </div>
         </a>
     </div>
@@ -82,9 +82,6 @@ let json = null;
     %>
     <div class="promo promo--xl">
         <a href="<%= locals.context.getUrl( doc ) %>" class="promo__link" data-json="<%= JSON.stringify( json ) %>">
-            <div class="promo__image">
-                <%- include( '../partials/image.html', {image: doc.data.image} ) %>
-            </div>
             <div class="promo__info cms">
                 <% if ( !isPage ) { %>
                     <div class="promo__tag">
@@ -99,6 +96,9 @@ let json = null;
                         <h5><%- dom.RichText.asText( doc.data.description ) %></h5>
                     </div>
                 <% } %>
+            </div>
+            <div class="promo__image">
+                <%- include( '../partials/image.html', {image: doc.data.image} ) %>
             </div>
         </a>
     </div>

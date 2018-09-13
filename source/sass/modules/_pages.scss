@@ -256,10 +256,12 @@
 .promo__image {
     display: inline-block;
     width: 75vw;
+    position: relative;
+    z-index: 1;
 
     .promo--large & {
         @include respond( $mobile-width ) {
-            width: 85vw;
+            width: 100vw;
         }
     }
 
@@ -274,10 +276,15 @@
     transform: translateY( -50% );
     text-align: left;
     left: 0;
+    z-index: 2;
     @include wrapl();
 
     @include respond( $mobile-width ) {
         width: 100vw;
+        position: relative;
+        top: auto;
+        transform: none;
+        padding-bottom: 20px;
         @include wrap();
     }
 }
