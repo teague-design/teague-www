@@ -1,5 +1,6 @@
 .main {
     transition: opacity $base-duration $ease;
+    overflow: hidden;
 
     .is-tranny & {
         opacity: 0;

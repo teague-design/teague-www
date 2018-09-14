@@ -9,6 +9,7 @@
     white-space: nowrap;
     overflow: auto;
     padding-bottom: 1px;
+    -webkit-overflow-scrolling: touch;
 }
 .taxi__tag {
     position: relative;
