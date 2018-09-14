@@ -8,7 +8,7 @@ let _initialized = false;
 // Session Storage
 let _cache = {};
 const _access = "app-cache";
-const _session = window.sessionStorage;
+const _session = window.localStorage;
 
 
 /**
@@ -64,8 +64,14 @@ class Store {
      *
      */
     flush () {
+        const cache = _session.getItem( _access );
+
         // New empty cache
         _cache = {};
+
+        if ( cache ) {
+            _cache = JSON.parse( cache );
+        }
 
         // Store the new cache object
         this.save();
@@ -95,24 +101,6 @@ class Store {
      *
      * @public
      * @instance
-     * @method slug
-     * @param {string} uri The string to slugify
-     * @memberof Store
-     * @description Slug a uri string
-     * @returns {string}
-     *
-     */
-    slug ( uri ) {
-        uri = uri.replace( /^\/|\/$/g, "" ).replace( /\/|\?|\&|=|\s/g, "-" ).toLowerCase();
-
-        return uri;
-    }
-
-
-    /**
-     *
-     * @public
-     * @instance
      * @method set
      * @param {string} id The index key
      * @param {mixed} val The value to store
@@ -121,8 +109,6 @@ class Store {
      *
      */
     set ( id, val ) {
-        id = this.slug( id );
-
         _cache[ id ] = val;
 
         this.save();
@@ -141,27 +127,7 @@ class Store {
      *
      */
     get ( id ) {
-        id = (id && this.slug( id ));
-
-        return (id ? this.getValue( _cache[ id ] ) : _cache);
-    }
-
-
-    /**
-     *
-     * @public
-     * @instance
-     * @method getValue
-     * @param {mixed} val The accessed value
-     * @memberof Store
-     * @description Get a value so cache is non-mutable from outside
-     * @returns {mixed}
-     *
-     */
-    getValue ( val ) {
-        const ret = val;
-
-        return ret;
+        return (id ? _cache[ id ] : _cache);
     }
 
 

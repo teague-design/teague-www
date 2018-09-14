@@ -76,12 +76,14 @@ class View {
      *
      */
     init () {
-        this.load().then( ( json ) => {
-            this.json = json;
-            this.render();
-            this.exec();
-            this.done();
-        });
+        this.load().then( this.done.bind( this ) );
+    }
+
+
+    done ( json ) {
+        this.json = json;
+        this.render();
+        this.exec();
     }
 
 
@@ -91,19 +93,7 @@ class View {
         this.destroy();
         this.render();
         this.exec();
-        this.done();
     }
-
-
-    /**
-     *
-     * @instance
-     * @description Fire callback when init stack is done
-     * @memberof View
-     * @method done
-     *
-     */
-    done () {}
 
 
     /**
@@ -117,29 +107,33 @@ class View {
      */
     load () {
         return new Promise(( resolve ) => {
-            const cache = core.cache.get( `partial--${this.id}` );
+            const cache = core.cache.get( this.id );
             const query = this.query || {};
 
             // Set these for Clutch API partial rendering
             // query.format = "html";
             // query.template = this.id;
 
-            if ( cache ) {
-                resolve( cache );
-
-            } else {
-                $.ajax({
-                    url: this.endpoint,
-                    dataType: this.dataType,
-                    method: this.method,
-                    data: query
-
-                }).then(( json ) => {
-                    // core.cache.set( `partial--${this.id}`, json );
-
-                    resolve( json );
-                });
+            // Pre-render from cache
+            if ( cache && this.data.cache ) {
+                this.done( cache );
             }
+
+            // Update render from AJAX
+            $.ajax({
+                url: this.endpoint,
+                dataType: this.dataType,
+                method: this.method,
+                data: query
+
+            }).then(( json ) => {
+                // Update the cache from AJAX
+                if ( this.data.cache ) {
+                    core.cache.set( this.id, json );
+                }
+
+                resolve( json );
+            });
         });
     }
 

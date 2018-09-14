@@ -81,16 +81,19 @@ const getICIMSCareers = ( req, res ) => {
             json.searchResults.forEach(( result ) => {
                 getICIMSJob( req, res, result.id ).then(( job ) => {
                     const root = parser.parse( job.overview );
-
-                    job.result = result;
-                    job.excerpt = root.firstChild.rawText.substring( 0, 300 );
-
-                    delete job.overview;
+                    const sendJob = {
+                        title: job.jobtitle,
+                        excerpt: root.firstChild.rawText.substring( 0, 300 ),
+                        portalUrl: result.portalUrl,
+                        city: null,
+                        state: null
+                    };
 
                     getICIMSCompany( req, res, job.joblocation.companyid ).then(( company ) => {
-                        job.company = company;
+                        sendJob.city = company.addresses[ 0 ].addresscity;
+                        sendJob.state = company.addresses[ 0 ].addressstate.abbrev;
 
-                        jobs.push( job );
+                        jobs.push( sendJob );
 
                         if ( jobs.length === total ) {
                             res.status( 200 ).json({
