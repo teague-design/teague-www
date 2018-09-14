@@ -1,4 +1,3 @@
-import ScrollController from "properjs-scrollcontroller";
 import * as core from "../../core";
 
 
@@ -21,11 +20,11 @@ class PagesController {
 
 
     init () {
-        this.scroller = new ScrollController();
-        this.scroller.on( "scroll", () => {
+        this.onScroller = () => {
             this.handle();
-        });
-
+        };
+        this._onScroller = this.onScroller.bind( this );
+        core.emitter.on( "app--scroll", this._onScroller );
         this.handle();
     }
 
@@ -34,9 +33,7 @@ class PagesController {
         this.slices = this.element.find( ".js-slice" ).not( ".is-animated" );
 
         if ( !this.slices.length ) {
-            this.scroller.stop();
-            this.scroller = null;
-
+            this.destroy();
             core.log( "[PagesController] Done!" );
 
         } else {
@@ -50,8 +47,8 @@ class PagesController {
 
 
     destroy () {
-        if ( this.scroller ) {
-            this.scroller.destroy();
+        if ( this._onScroller ) {
+            core.emitter.off( "app--scroll", this._onScroller );
         }
     }
 }

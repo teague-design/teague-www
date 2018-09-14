@@ -1,5 +1,5 @@
 import $ from "properjs-hobo";
-import Controller from "properjs-controller";
+// import Controller from "properjs-controller";
 import PageController from "properjs-pagecontroller";
 import Controllers from "./class/Controllers";
 import * as core from "./core";
@@ -16,7 +16,6 @@ import navi from "./modules/navi";
  */
 const router = {
     init () {
-        this.blit = new Controller();
         this.bigpink = core.dom.body.find( ".js-bigpink" );
         this.bigpinkTitle = this.bigpink.find( ".js-bigpink-title" );
         this.bigpinkTag = this.bigpink.find( ".js-bigpink-tag" );

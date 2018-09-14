@@ -7,11 +7,34 @@
     width: 100%;
     z-index: $z_layer_header;
     pointer-events: none;
+    transition: height $fast-duration $ease,
+                background-color $fast-duration $ease;
+    transform: translate3d( 0, 0, 0 );
 
     .logo,
     .navi,
     .menu {
         pointer-events: auto;
+    }
+
+    .is-scroll-down & {
+        height: $header-height-scrolling;
+
+        @include respond( $navi-break ) {
+            height: $header-height-scrolling-mobile;
+        }
+    }
+
+    .is-theme-black & {
+        background-color: $black;
+    }
+
+    .is-theme-white & {
+        background-color: $white;
+    }
+
+    .is-navi-mobile-open & {
+        background-color: $white;
     }
 
     @include respond( $navi-break ) {

@@ -1,4 +1,3 @@
-import ScrollController from "properjs-scrollcontroller";
 import * as core from "../../core";
 import Controller from "properjs-controller";
 
@@ -26,11 +25,11 @@ class AnimateController {
 
 
     start () {
-        this.scroller = new ScrollController();
-        this.scroller.on( "scroll", () => {
+        this.onScroller = () => {
             this.handle();
-        });
-
+        };
+        this._onScroller = this.onScroller.bind( this );
+        core.emitter.on( "app--scroll", this._onScroller );
         this.handle();
     }
 
@@ -39,9 +38,7 @@ class AnimateController {
         this.elements = this.container.find( core.config.lazyAnimSelector ).not( "[data-animate='true']" );
 
         if ( !this.elements.length ) {
-            this.scroller.stop();
-            this.scroller = null;
-
+            this.destroy();
             core.log( "[AnimateController] Done!" );
 
         } else {
@@ -79,8 +76,8 @@ class AnimateController {
 
 
     destroy () {
-        if ( this.scroller ) {
-            this.scroller.destroy();
+        if ( this._onScroller ) {
+            core.emitter.off( "app--scroll", this._onScroller );
         }
     }
 }

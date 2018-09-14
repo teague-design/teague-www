@@ -17,8 +17,13 @@
             position: absolute;
             left: 0;
             bottom: 0;
-            transform: translate3d( 0, 10px, 0 );
-            transition: background-color $base-duration $ease;
+            transform: translate3d( 0, 6px, 0 );
+            transition: transform $fast-duration $ease,
+                        background-color $base-duration $ease;
+
+            .is-scroll-down & {
+                transform: translate3d( 0, 24px, 0 );
+            }
         }
     }
 }
