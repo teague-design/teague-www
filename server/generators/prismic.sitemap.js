@@ -56,7 +56,7 @@ const getDocuments = ( api ) => {
                 .then(( json ) => {
                     json.results.forEach(( doc ) => {
                         // Explicit `false` to exclude content-type
-                        if ( config.generate.sitemap[ doc.type ] !== false ) {
+                        if ( !(config.generate.sitemap[ doc.type ] === false) ) {
                             docs.push( doc );
                         }
                     });
@@ -96,9 +96,9 @@ const createSitemap = () => {
                     nodes.push(
                         xmlNode
                             .replace( "@loc", loc )
-                            .replace( "@changefreq", "monthly" )
+                            .replace( "@changefreq", "yearly" )
                             .replace( "@priority", "0.5" )
-                            .replace( "@lastmod", getLastmod( doc.lastPublicationDate ) )
+                            .replace( "@lastmod", getLastmod( doc.data.sort_date || doc.last_publication_date ) )
                     );
                 });
 

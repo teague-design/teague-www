@@ -82,11 +82,15 @@ const config = {
     // Generators config ( sitemap, robots, cache manifest )
     generate: {
         sitemap: {
-            site: false
+            site: false,
+            author: false,
+            cta: false
         },
         robots: {
             site: false,
-            page: false
+            page: false,
+            author: false,
+            cta: false
         },
         mappings: {
             // Useful for prismic collection forms
