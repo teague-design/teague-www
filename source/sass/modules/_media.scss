@@ -145,6 +145,13 @@ $ui-margin: 22px;
     left: 50%;
     top: 50%;
     transform: translate3d( -50%, -50%, 0 );
+    transition: opacity $base-duration $ease;
+
+    .is-paused &,
+    .is-playing & {
+        opacity: 0;
+        pointer-events: none;
+    }
 }
 
 

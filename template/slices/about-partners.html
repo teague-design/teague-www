@@ -4,3 +4,76 @@ locals { item, slice, scope }
 */
 const dom = locals.context.get( 'dom' );
 %>
+<div class="partners js-triggers -wrap">
+    <div class="partners__info cms">
+        <div class="partners__label">
+            <h6><%= locals.slice.primary.label %></h6>
+        </div>
+        <div class="partners__desc">
+            <h5><%= locals.slice.primary.text %></h5>
+        </div>
+    </div>
+    <div class="partners__layout">
+        <div class="partners__logos">
+            <% slice.items.forEach(( sliceItem, i ) => { %>
+                <div class="partners__logo js-triggers-trigger" data-index="<%= i %>">
+                    <div class="partners__logo__aspect">
+                        <div class="partners__image partners__image--main">
+                            <%- include( '../partials/image.html', {image: sliceItem.partner_logo_image} ) %>
+                        </div>
+                        <div class="partners__image partners__image--hover">
+                            <%- include( '../partials/image.html', {image: sliceItem.partner_logo_image.hover} ) %>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+        <div class="partners__active">
+            <% slice.items.forEach(( sliceItem, i ) => { %>
+                <div class="partners__active__content js-triggers-active" data-index="<%= i %>">
+                    <% if ( sliceItem.design_story_link.id ) { %>
+                        <div class="partners__story">
+                            <%- include( '../partials/image.html', {image: sliceItem.design_story_link.data.image} ) %>
+                            <div class="partners__story__meta cms">
+                                <div class="partners__story__title">
+                                    <h6><%= sliceItem.design_story_link.tags[ 0 ] %></h6>
+                                    <h5><%= dom.RichText.asText( sliceItem.design_story_link.data.title ) %></h5>
+                                </div>
+                                <div class="partners__story__link">
+                                    <%- include( './link.html', {
+                                        json: {
+                                            title: dom.RichText.asText( sliceItem.design_story_link.data.title ),
+                                            story: true,
+                                            tag: sliceItem.design_story_link.tags[ 0 ]
+                                        },
+                                        slice: {
+                                            primary: {
+                                                document_link: sliceItem.design_story_link,
+                                                external_link: {},
+                                                text: 'Learn More',
+                                                icon: 'Arrow'
+                                            }
+                                        }
+                                    }) %>
+                                </div>
+                            </div>
+                        </div>
+                    <% } else if ( sliceItem.vimeo_url ) { %>
+                        <div class="partners__video">
+                            <%- include( '../partials/video.html', {
+                                media: {
+                                    vimeo: sliceItem.vimeo_url
+                                }
+                            })%>
+                        </div>
+                    <% } else if ( sliceItem.quote ) { %>
+                        <div class="partners__quote cms">
+                            <h4><%= sliceItem.quote %></h4>
+                            <p><%= sliceItem.quote_source %></p>
+                        </div>
+                    <% } %>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</div>

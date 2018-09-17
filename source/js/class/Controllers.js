@@ -10,6 +10,7 @@ import Video from "./components/Video";
 import Slider from "./components/Slider";
 import FormOver from "./components/FormOver";
 import Mapbox from "./components/Mapbox";
+import Triggers from "./components/Triggers";
 
 
 
@@ -79,6 +80,7 @@ class Controllers {
         this.push( "slider", core.dom.body.find( ".js-slider" ), BaseController, Slider );
         this.push( "formover", core.dom.body.find( ".js-formover" ), BaseController, FormOver );
         this.push( "mapbox", core.dom.body.find( ".js-mapbox" ), BaseController, Mapbox );
+        this.push( "triggers", core.dom.body.find( ".js-triggers" ), BaseController, Triggers );
 
         this.images = this.element.find( core.config.lazyImageSelector );
         this.imageController = new ImageController( this.images );

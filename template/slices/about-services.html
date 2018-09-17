@@ -15,10 +15,10 @@ const dom = locals.context.get( 'dom' );
     </div>
     <div class="services__grid cms">
         <% slice.items.forEach(( sliceItem ) => { %>
-                <div class="services__item">
-                    <h5><%= sliceItem.service_name %></h5>
-                    <p><%= sliceItem.service_description %></p>
-                </div>
+            <div class="services__item">
+                <h5><%= sliceItem.service_name %></h5>
+                <p><%= sliceItem.service_description %></p>
+            </div>
         <% }) %>
     </div>
 </div>
