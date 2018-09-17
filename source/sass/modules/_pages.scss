@@ -309,6 +309,48 @@
 
 
 
+.services {}
+.services__info {
+    text-align: left;
+}
+.services__desc {
+    padding: 30px 0 80px;
+    max-width: 680px;
+    width: 100%;
+}
+.services__grid {
+    margin: 0 -5vw;
+
+    @include respond( $mobile-width ) {
+        margin: 0;
+    }
+}
+.services__item {
+    width: 33.333333%;
+    display: inline-block;
+    vertical-align: top;
+    padding-bottom: 80px;
+    padding-left: 5vw;
+    padding-right: 5vw;
+
+    @include respond( $break-tablet-medium ) {
+        width: 50%;
+    }
+
+    @include respond( $mobile-width ) {
+        width: 100%;
+        padding-left: 0;
+        padding-right: 0;
+        padding-bottom: 40px;
+    }
+
+    p {
+        padding-top: 20px;
+    }
+}
+
+
+
 .mission {
     display: flex;
     align-items: flex-start;
@@ -460,6 +502,7 @@
 
     @include respond( $mobile-width ) {
         display: block;
+        padding: 40px 0;
     }
 
     &:last-child {
