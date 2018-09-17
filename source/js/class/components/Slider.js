@@ -57,6 +57,11 @@ class Slider {
                     width: 640
                 }
             },
+            logos: {
+                move: ( idx ) => {
+                    return `calc(-${100 * idx}%)`;
+                }
+            },
             work: {
                 move: "(-32vw - 10vw)",
                 noop: {
@@ -114,6 +119,12 @@ class Slider {
 
     spawn_about () {}
     swap_about () {}
+
+
+    spawn_logos () {
+        this.items.off( "click" );
+    }
+    swap_logos () {}
 
 
     spawn_highs () {

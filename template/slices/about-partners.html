@@ -3,8 +3,17 @@
 locals { item, slice, scope }
 */
 const dom = locals.context.get( 'dom' );
+const sliceItems = slice.items;
+const sliceMaps = [];
+let increment = 0;
+
+while ( (increment * 9) < sliceItems.length ) {
+    sliceMaps.push( sliceItems.slice( (increment * 9), ((increment + 1) * 9) ) );
+
+    increment++;
+}
 %>
-<div class="partners js-triggers -wrap">
+<div class="partners js-triggers">
     <div class="partners__info cms">
         <div class="partners__label">
             <h6><%= locals.slice.primary.label %></h6>
@@ -15,18 +24,53 @@ const dom = locals.context.get( 'dom' );
     </div>
     <div class="partners__layout">
         <div class="partners__logos">
-            <% slice.items.forEach(( sliceItem, i ) => { %>
-                <div class="partners__logo js-triggers-trigger" data-index="<%= i %>">
-                    <div class="partners__logo__aspect">
-                        <div class="partners__image partners__image--main">
-                            <%- include( '../partials/image.html', {image: sliceItem.partner_logo_image} ) %>
-                        </div>
-                        <div class="partners__image partners__image--hover">
-                            <%- include( '../partials/image.html', {image: sliceItem.partner_logo_image.hover} ) %>
-                        </div>
+            <div class="partners__slider slider slider--logos js-slider" data-spawn="logos">
+                <div class="partners__slider__pane slider__pane">
+                    <div class="partners__slider__belt slider__belt js-slider-belt">
+                        <% sliceMaps.forEach(( logos, ia ) => { %>
+                            <div class="partners__logos__slide js-slider-item">
+                                <% logos.forEach(( logo, ib ) => { %>
+                                    <div class="partners__logo js-triggers-trigger" data-index="<%= (ia * 9) + ib %>">
+                                        <div class="partners__logo__aspect">
+                                            <div class="partners__image partners__image--main">
+                                                <%- include( '../partials/image.html', {image: logo.partner_logo_image} ) %>
+                                            </div>
+                                            <div class="partners__image partners__image--hover">
+                                                <%- include( '../partials/image.html', {image: logo.partner_logo_image.hover} ) %>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <% }) %>
+                            </div>
+                        <% }) %>
                     </div>
                 </div>
-            <% }) %>
+                <div class="partners__slider__navi slider__navi js-slider-navi">
+                    <div class="slider__navi__prev js-slider-prev">
+                        <%- include( '../partials/svg/icon-prev.svg' ) %>
+                    </div>
+                    <% sliceMaps.forEach(( logos, i ) => { %>
+                        <div class="slider__navi__curr js-slider-curr" data-index="<%= i %>"></div>
+                    <% })%>
+                    <div class="slider__navi__next js-slider-next">
+                        <%- include( '../partials/svg/icon-prev.svg' ) %>
+                    </div>
+                </div>
+            </div>
+            <div class="partners__slider--mobile">
+                <% slice.items.forEach(( sliceItem, i ) => { %>
+                    <div class="partners__logo js-triggers-trigger" data-index="<%= i %>">
+                        <div class="partners__logo__aspect">
+                            <div class="partners__image partners__image--main">
+                                <%- include( '../partials/image.html', {image: sliceItem.partner_logo_image} ) %>
+                            </div>
+                            <div class="partners__image partners__image--hover">
+                                <%- include( '../partials/image.html', {image: sliceItem.partner_logo_image.hover} ) %>
+                            </div>
+                        </div>
+                    </div>
+                <% }) %>
+            </div>
         </div>
         <div class="partners__active">
             <% slice.items.forEach(( sliceItem, i ) => { %>

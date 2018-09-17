@@ -25,8 +25,8 @@ class Triggers {
 
 
     init () {
-        this.triggers.first().addClass( "is-active" );
-        this.contents.first().addClass( "is-active" );
+        this.triggers.filter( `[data-index="0"]` ).addClass( "is-active" );
+        this.contents.eq( 0 ).addClass( "is-active" );
     }
 
 
@@ -62,7 +62,7 @@ class Triggers {
             this.contents.removeClass( "is-active" );
             this.contents.eq( index ).addClass( "is-active" );
             this.triggers.removeClass( "is-active" );
-            this.triggers.eq( index ).addClass( "is-active" );
+            this.triggers.filter( `[data-index="${index}"]` ).addClass( "is-active" );
         });
     }
 

@@ -351,9 +351,19 @@
 
 
 
-.partners {}
+.partners {
+    @include wrap();
+
+    @include respond( $break-tablet-medium ) {
+        padding: 0;
+    }
+}
 .partners__info {
     text-align: left;
+
+    @include respond( $break-tablet-medium ) {
+        @include wrap();
+    }
 }
 .partners__desc {
     padding: 30px 0 50px;
@@ -382,11 +392,43 @@
 
     @include respond( $break-tablet-medium ) {
         margin: 0;
-        white-space: nowrap;
-        overflow-y: hidden;
-        overflow-x: auto;
-        width: 100%;
-        -webkit-overflow-scrolling: touch;
+    }
+}
+.partners__slider {
+    user-select: none;
+    width: 100%;
+
+    @include respond( $break-tablet-medium ) {
+        display: none;
+    }
+}
+.partners__slider__pane {
+    white-space: nowrap;
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+}
+.partners__slider__belt {}
+.partners__logos__slide {
+    white-space: normal;
+    display: inline-block;
+    vertical-align: top;
+    width: 100%;
+}
+.partners__slider--mobile {
+    white-space: nowrap;
+    width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    display: none;
+
+    @include respond( $break-tablet-medium ) {
+        display: block;
+    }
+
+    .partners__logo {
+        width: 35vw;
     }
 }
 .partners__active {
@@ -405,6 +447,10 @@
     pointer-events: none;
     opacity: 0;
 
+    @include respond( $break-tablet-medium ) {
+        @include wrap();
+    }
+
     &.is-active {
         position: relative;
         opacity: 1;
@@ -413,15 +459,11 @@
 }
 .partners__logo {
     display: inline-block;
-    vertical-align: center;
+    vertical-align: middle;
     width: 33.333333%;
     position: relative;
     cursor: pointer;
     transition: background-color $base-duration $ease;
-
-    @include respond( $break-tablet-medium ) {
-        width: 35vw;
-    }
 
     &.is-active {
         background-color: $spot;

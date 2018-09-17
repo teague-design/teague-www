@@ -226,7 +226,7 @@
     }
 }
 @mixin padm() {
-    padding-top: 21vw;
+    padding-top: 16vw;
 
     @include respond-min( $bind-width ) {
         padding-top: 310px
