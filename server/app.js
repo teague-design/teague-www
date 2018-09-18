@@ -7,14 +7,14 @@ const fetchFields = [
     "page.image",
     "page.theme",
     "page.description",
-    "page.category",
+    "page.industry_category",
     "story.canonical_url",
     "story.title",
     "story.image",
     "story.theme",
     "story.description",
     "story.excerpt",
-    "story.category",
+    "story.industry_category",
     "author.name",
     "author.image",
     "author.description",
@@ -59,12 +59,6 @@ router.on( "story", {
             query.push( client.Predicates.any( "document.tags", Array.isArray( req.query.tag ) ? req.query.tag : [req.query.tag] ) );
         }
 
-        if ( req.query.viz ) {
-            req.query.viz = parseInt( req.query.viz, 10 );
-
-            query.push( client.Predicates.at( "my.story.hidden", req.query.viz ? "Keep it Visible" : "Keep it Hidden" ) );
-        }
-
         return query;
     },
     orderings ( client, api, form, cache, req ) {
@@ -76,6 +70,34 @@ router.on( "story", {
             form.pageSize( config.pagination.size );
             form.page( (req.query.page || 1) );
         }
+    },
+    filterResults ( client, api, json, cache, req ) {
+        let docs = json.results;
+
+        // Industry category?
+        if ( !req.params.uid && !req.query.industry_category ) {
+            docs = docs.filter(( doc ) => {
+                if ( doc.data.industry_category ) {
+                    return false;
+
+                } else {
+                    return true;
+                }
+            });
+
+        } else if ( req.query.industry_category ) {
+            docs = docs.filter(( doc ) => {
+                if ( doc.data.industry_category && (doc.data.industry_category === req.query.industry_category) ) {
+                    return true;
+
+                } else {
+                    return false;
+                }
+            });
+        }
+
+        // Must return json.results at least
+        return docs;
     }
 });
 

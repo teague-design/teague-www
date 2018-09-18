@@ -60,7 +60,13 @@ const getApi = function ( req, res, listener ) {
 
             // All documents for /:type
             } else {
-                data.documents = json.results;
+                // @hook: filterResults
+                if ( listener && listener.handlers.filterResults ) {
+                    data.documents = listener.handlers.filterResults( prismic, cache.api, json, cache, req );
+
+                } else {
+                    data.documents = json.results;
+                }
             }
 
             // Pagination information

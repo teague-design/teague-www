@@ -80,7 +80,7 @@ while ( (increment * 9) < sliceItems.length ) {
                             <%- include( '../partials/image.html', {image: sliceItem.design_story_link.data.image} ) %>
                             <div class="partners__story__meta cms">
                                 <div class="partners__story__title">
-                                    <h6><%= sliceItem.design_story_link.tags[ 0 ] %></h6>
+                                    <h6><%= sliceItem.design_story_link.data.industry_category || sliceItem.design_story_link.tags[ 0 ] %></h6>
                                     <h5><%= dom.RichText.asText( sliceItem.design_story_link.data.title ) %></h5>
                                 </div>
                                 <div class="partners__story__link">

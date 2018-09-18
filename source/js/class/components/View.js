@@ -41,14 +41,9 @@ class View {
             this.query = { clean: 1 };
         }
 
-        // tag = queryString to add
-        if ( this.data.tag ) {
-            this.query.tag = this.data.tag;
-        }
-
-        // viz = show visible OR hidden
-        if ( this.data.viz ) {
-            this.query.viz = this.data.viz;
+        // category = queryString to add
+        if ( this.data.category ) {
+            this.query.industry_category = this.data.category;
         }
 
         // skips = queryString to ignore

@@ -51,7 +51,7 @@ let json = null;
     json = {
         title: dom.RichText.asText( doc.data.title ),
         story: isStory,
-        tag: isStory ? doc.tags[ 0 ] : null
+        tag: doc.data.industry_category || doc.tags[ 0 ]
     };
     %>
     <div class="promo promo--large <% if ( isPromoLargeA ) { %>promo--a<% } else { %>promo--b<% } %>">
@@ -59,7 +59,7 @@ let json = null;
             <div class="promo__info cms">
                 <% if ( !isPage ) { %>
                     <div class="promo__tag">
-                        <h6><%= doc.tags[ 0 ] %></h6>
+                        <h6><%= doc.data.industry_category || doc.tags[ 0 ] %></h6>
                     </div>
                 <% } %>
                 <div class="promo__title">
@@ -77,7 +77,7 @@ let json = null;
     json = {
         title: dom.RichText.asText( doc.data.title ),
         story: isStory || isCategoryPage,
-        tag: isStory ? doc.tags[ 0 ] : null
+        tag: isCategoryPage ? null : doc.tags[ 0 ]
     };
     %>
     <div class="promo promo--xl">
@@ -85,7 +85,7 @@ let json = null;
             <div class="promo__info cms">
                 <% if ( !isPage ) { %>
                     <div class="promo__tag">
-                        <h6><%= doc.tags[ 0 ] %></h6>
+                        <h6><%= doc.data.industry_category || doc.tags[ 0 ] %></h6>
                     </div>
                 <% } %>
                 <div class="promo__title">

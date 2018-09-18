@@ -92,13 +92,18 @@
     }
 }
 .related__title {
-    padding: 25px 0;
+    padding: 20px 0;
 
     h3 {
         @include respond( $break-tablet-medium ) {
             font-size: $h4-size-mobile;
             @include wrapr();
         }
+    }
+}
+.related__tag {
+    .related--story & {
+        padding-top: 20px;
     }
 }
 .related__image {

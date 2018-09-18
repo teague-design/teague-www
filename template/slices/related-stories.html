@@ -21,6 +21,9 @@ const isStory = item.type === 'story';
                             <%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %>
                         </div>
                         <div class="related__info">
+                            <div class="related__tag">
+                                <h6><%= sliceItem.story.data.industry_category || sliceItem.story.tags[ 0 ] %></h6>
+                            </div>
                             <div class="related__title">
                                 <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h1/g, 'h4' ) %>
                             </div>
@@ -47,12 +50,12 @@ const isStory = item.type === 'story';
                         const json = {
                             title: dom.RichText.asText( sliceItem.story.data.title ),
                             story: true,
-                            tag: sliceItem.story.tags[ 0 ]
+                            tag: sliceItem.story.data.industry_category || sliceItem.story.tags[ 0 ]
                         };
                         %>
                         <div class="related__info">
                             <div class="related__tag">
-                                <h6><%= sliceItem.story.tags[ 0 ] %></h6>
+                                <h6><%= sliceItem.story.data.industry_category || sliceItem.story.tags[ 0 ] %></h6>
                             </div>
                             <div class="related__title">
                                 <a class="" href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">

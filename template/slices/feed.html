@@ -3,7 +3,6 @@
 locals { item, slice, scope }
 */
 const contentType = locals.slice.primary.content.toLowerCase();
-const contentTag = locals.item.tags.length ? locals.item.tags[ 0 ] : null;
-const isCategoryPage = (locals.item.type === 'page') && (contentTag !== null);
+const isCategoryPage = (locals.item.type === 'page') && (locals.item.data.industry_category);
 %>
-<div class="feed js-feed view js-view -wrap" data-uid="feed" data-url="/api/<%= contentType %>/" data-page="/<%= locals.item.uid %>/" <% if ( contentTag ) { %>data-tag="<%= contentTag %>"<% } %> data-viz="<%= isCategoryPage ? 0 : 1 %>"></div>
+<div class="feed js-feed view js-view -wrap" data-uid="feed" data-url="/api/<%= contentType %>/" data-page="/<%= locals.item.uid %>/" <% if ( isCategoryPage ) { %>data-category="<%= locals.item.data.industry_category %>"<% } %>></div>
