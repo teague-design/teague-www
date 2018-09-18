@@ -54,7 +54,11 @@ class App {
         this.core.detect.init();
         this.router.init();
         this.navi.init();
-        this.router.load().then( () => {} ).catch(( error ) => {
+        this.router.load().then( () => {
+            this.core.dom.html.removeClass( "is-not-ready" );
+            this.core.dom.body.removeClass( "is-not-ready" );
+
+        }).catch(( error ) => {
             this.core.log( "warn", error );
         });
     }

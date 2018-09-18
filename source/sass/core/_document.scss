@@ -30,6 +30,14 @@ body {
         overflow: hidden;
     }
 }
+html,
+body {
+    &.is-not-ready {
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+    }
+}
 pre {
     font-family: monospace;
     font-size: $p-size;

@@ -5,7 +5,7 @@ const theme = item && item.data.theme ? item.data.theme.toLowerCase() : null;
 const tag = item && item.tags.length ? item.tags[ 0 ] : null;
 %>
 <!DOCTYPE html>
-<html lang="en" class="<%= theme ? `is-theme-${theme}` : '' %> <%= tag ? `is-tag-page` : '' %>" manifest="<% if ( locals.context.get( 'config' ).browser.appcache ) { %>/cache.manifest<% } %>">
+<html lang="en" class="is-not-ready <%= theme ? `is-theme-${theme}` : '' %> <%= tag ? `is-tag-page` : '' %>" manifest="<% if ( locals.context.get( 'config' ).browser.appcache ) { %>/cache.manifest<% } %>">
     <head>
         <meta charset="utf-8" />
         <title><%= locals.context.getPageTitle() %></title>
@@ -51,7 +51,7 @@ const tag = item && item.tags.length ? item.tags[ 0 ] : null;
         <meta itemprop="image" content="<%= locals.context.getPageImage() %>" />
         <link href="<%= locals.context.get( 'stylesheet' ) + '?v=' + locals.context.get( 'timestamp' ) %>" rel="stylesheet" />
     </head>
-    <body class="-fzero">
+    <body class="is-not-ready -fzero">
         <%- include( 'site/header.html' ) %>
         <main class="main js-main" data-title="<%= locals.context.getPageTitle() %>" data-csrf="<%= locals.context.get( 'csrf' ) %>" <% if ( theme ) { %>data-theme="<%= theme %>"<% } %>>
             <%- include( locals.context.getTemplate() ) %>

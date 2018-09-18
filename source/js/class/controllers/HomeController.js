@@ -1,8 +1,6 @@
 import * as core from "../../core";
 import ResizeController from "properjs-resizecontroller";
 import ScrollController from "properjs-scrollcontroller";
-import scroll2 from "properjs-scroll2";
-import Easing from "properjs-easing";
 
 
 
@@ -17,25 +15,35 @@ import Easing from "properjs-easing";
 class HomeController {
     constructor ( element ) {
         this.element = element;
+        this.footer = core.dom.body.find( ".js-footer" );
         this.slices = this.element.find( ".js-slice" );
         this.index = 0;
         this.length = this.slices.length;
-        this.inMotion = true;
         this.isDisabled = false;
+        this.isWheel = false;
+        this.wheelTime = 200;
         this._onMouseWheel = this.onMouseWheel.bind( this );
         this._onMouseWheelF = this.onMouseWheelF.bind( this );
         this._loadFunc = null;
         this._unloadFunc = null;
         this._resizer = new ResizeController();
         this._scroller = new ScrollController();
+        this._loaded = {
+            reel: false,
+            about: false,
+            discover: false,
+            stories: false
+        };
+        this._timeout = null;
 
         core.dom.html.addClass( "is-home-controller" );
 
-        if ( core.detect.isDevice() /*&& window.innerWidth <= 768 */) {
+        if ( core.detect.isDevice() ) {
             this.element.addClass( "home--mobilized js-home--mobilized" );
             this.handleMobile();
 
         } else {
+            // Always bind "EFF" first
             this.bindWheelF();
             this.bindWheel();
             this.transition();
@@ -70,44 +78,35 @@ class HomeController {
     }
 
 
+    clearTimeout () {
+        try {
+            clearTimeout( this._timeout );
+
+        } catch ( err ) {
+            core.log( "warn", err );
+        }
+    }
     onMouseWheelF ( e ) {
+        this.clearTimeout();
+        this._timeout = setTimeout(() => {
+            this.isWheel = false;
+
+        }, this.wheelTime );
+
         e.preventDefault();
         return false;
     }
     onMouseWheel ( e ) {
-        if ( !this.inMotion && !this.isDisabled ) {
+        if ( !this.isWheel && !this.isDisabled ) {
+            this.isWheel = true;
             this.handleWheel( e );
         }
-    }
-    bindScroll () {
-        this.unbindWheel();
-
-        scroll2({
-            y: this._scroller.getScrollMax(),
-            ease: Easing.easeOutCubic,
-            duration: 500,
-            complete: () => {
-                this.unbindWheelF();
-                this._scroller.on( "scroll", () => {
-                    const scrollY = this._scroller.getScrollY();
-
-                    if ( scrollY <= 0 ) {
-                        this.unbindScroll();
-                    }
-                });
-            }
-        });
     }
     bindWheelF () {
         core.dom.doc.on( "DOMMouseScroll mousewheel", this._onMouseWheelF );
     }
     bindWheel () {
         core.dom.doc.on( "DOMMouseScroll mousewheel", this._onMouseWheel );
-    }
-    unbindScroll () {
-        this._scroller.off( "scroll" );
-        this.bindWheelF();
-        this.bindWheel();
     }
     unbindWheelF () {
         core.dom.doc.off( "DOMMouseScroll mousewheel", this._onMouseWheelF );
@@ -117,6 +116,7 @@ class HomeController {
     }
     handleWheel ( e ) {
         // Scroll up ( rewind )
+        // Could check deltaY === -1
         if ( e.deltaY < 0 ) {
             if ( this.index !== 0 ) {
                 if ( this._unloadFunc ) {
@@ -127,6 +127,7 @@ class HomeController {
             }
 
         // Scroll down ( advance )
+        // Could check deltaY === 1
         } else if ( e.deltaY > 0 ) {
             if ( this.index !== (this.length - 1) ) {
                 if ( this._unloadFunc ) {
@@ -141,19 +142,38 @@ class HomeController {
             }
         }
     }
-    resetWheel () {
-        this.bindWheel();
-        this.inMotion = false;
-    }
+    bindScroll () {
+        let isFooter = false;
 
-
-    unload () {
-        this.slices.removeClass( "is-active" );
-    }
-    transition () {
-        this.inMotion = true;
+        this.isWheel = false;
         this.unbindWheel();
-        this.unload();
+        this.unbindWheelF();
+
+        this._scroller.on( "scroll", () => {
+            const isZero = (this._scroller.getScrollY() <= 0);
+            const boundsF = this.footer[ 0 ].getBoundingClientRect();
+
+            if ( ((boundsF.height + boundsF.y) >= window.innerHeight) && !isFooter ) {
+                isFooter = true;
+            }
+
+            if ( isZero && isFooter ) {
+                this.unbindScroll();
+                this._timeout = setTimeout(() => {
+                    this.bindWheelF();
+                    this.bindWheel();
+
+                }, 1000 );
+            }
+        });
+    }
+    unbindScroll () {
+        this._scroller.off( "scroll" );
+    }
+
+
+    transition () {
+        this.slices.removeClass( "is-active" );
 
         const slice = this.slices.eq( this.index );
         const data = slice.data();
@@ -169,6 +189,17 @@ class HomeController {
     }
     home_reel_unload_mobile () {}
     home_reel_load () {
+        this.home_reel_load_mobile();
+
+        if ( !this._loaded.reel ) {
+            this._loaded.reel = true;
+            this.home_reel_load_();
+
+        } else {
+            this.slices.eq( this.index ).addClass( "is-active" );
+        }
+    }
+    home_reel_load_ () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const mark = slice.find( ".js-home-reel-mark" );
         const desc = slice.find( ".js-home-reel-desc" );
@@ -178,7 +209,6 @@ class HomeController {
         const videoInstance = video.find( ".js-video" ).data().Video;
 
         mark.addClass( "is-full" );
-        core.dom.html.removeClass( "is-theme-black" ).addClass( "is-theme-white" );
 
         cta.on( "click", () => {
             this.isDisabled = true;
@@ -213,30 +243,14 @@ class HomeController {
             cta.addClass( "is-anim" );
 
         }, 2500 );
-
-        setTimeout(() => {
-            this.resetWheel();
-
-        }, 3000 );
     }
     home_reel_unload () {
         const slice = this.slices.eq( this.index );
-        const mark = slice.find( ".js-home-reel-mark" );
-        const desc = slice.find( ".js-home-reel-desc" );
-        const cta = slice.find( ".js-home-reel-cta" );
         const ex = slice.find( ".js-home-reel-ex" );
         const video = slice.find( ".js-home-reel-video" );
 
-        desc.addClass( "is-animo" );
-        cta.removeClass( "is-anim" ).off( "click" );
         ex.removeClass( "is-anim" ).off( "click" );
-        mark.removeClass( "is-full is-half" );
         video.removeClass( "is-fs" );
-
-        setTimeout(() => {
-            desc.removeClass( "is-anim is-animo" );
-
-        }, 1000 );
     }
 
 
@@ -245,6 +259,17 @@ class HomeController {
     }
     home_about_unload_mobile () {}
     home_about_load () {
+        this.home_about_load_mobile();
+
+        if ( !this._loaded.about ) {
+            this._loaded.about = true;
+            this.home_about_load_();
+
+        } else {
+            this.slices.eq( this.index ).addClass( "is-active" );
+        }
+    }
+    home_about_load_ () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-about-desc" );
         const image1 = slice.find( ".js-lazy-image" ).first();
@@ -292,67 +317,13 @@ class HomeController {
         )`;
 
         desc.addClass( "is-anim" );
-        core.dom.html.removeClass( "is-theme-black" ).addClass( "is-theme-white" );
 
         setTimeout(() => {
             onResize();
 
         }, 10 );
-
-        setTimeout(() => {
-            this.resetWheel();
-
-        }, 2000 );
     }
-    home_about_unload () {
-        const slice = this.slices.eq( this.index );
-        const desc = slice.find( ".js-home-about-desc" );
-        const image1 = slice.find( ".image:nth-child(1)" );
-        const image2 = slice.find( ".image:nth-child(2)" );
-        const rect1 = slice.find( "rect:nth-child(3)" );
-        const rect2 = slice.find( "rect:nth-child(4)" );
-        const image2Bounds = image2[ 0 ].getBoundingClientRect();
-        const image1Bounds = image1[ 0 ].getBoundingClientRect();
-        const rect1Bounds = rect1[ 0 ].getBoundingClientRect();
-        const rect2Bounds = rect2[ 0 ].getBoundingClientRect();
-
-        this._resizer.off( "resize" );
-
-        /* values are from-top, from-right, from-bottom, from-left */
-        image1[ 0 ].style.clipPath = `inset(
-            ${0}px
-            100vw
-            ${window.innerHeight - rect1Bounds.bottom - (window.innerWidth * 0.03)}px
-            ${0}px
-        )`;
-        image2[ 0 ].style.clipPath = `inset(
-            ${rect2Bounds.top - image2Bounds.top}px
-            ${0}px
-            ${window.innerHeight - rect2Bounds.bottom}px
-            20vw
-        )`;
-
-        desc.addClass( "is-animo" );
-
-        setTimeout(() => {
-            /* values are from-top, from-right, from-bottom, from-left */
-            image1[ 0 ].style.clipPath = `inset(
-                ${rect1Bounds.top - image1Bounds.top}px
-                ${window.innerWidth - rect1Bounds.width - rect1Bounds.left}px
-                ${window.innerHeight - rect1Bounds.bottom}px
-                ${0}px
-            )`;
-            image2[ 0 ].style.clipPath = `inset(
-                ${rect2Bounds.top - image2Bounds.top}px
-                ${window.innerWidth - rect2Bounds.width - rect2Bounds.left}px
-                ${window.innerHeight - rect2Bounds.bottom}px
-                ${0}px
-            )`;
-
-            desc.removeClass( "is-anim is-animo" );
-
-        }, 1000 );
-    }
+    home_about_unload () {}
 
 
     home_discover_load_mobile () {
@@ -360,6 +331,17 @@ class HomeController {
     }
     home_discover_unload_mobile () {}
     home_discover_load () {
+        this.home_discover_load_mobile();
+
+        if ( !this._loaded.discover ) {
+            this._loaded.discover = true;
+            this.home_discover_load_();
+
+        } else {
+            this.slices.eq( this.index ).addClass( "is-active" );
+        }
+    }
+    home_discover_load_ () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-discover-desc" );
         const image = slice.find( ".image" );
@@ -389,54 +371,8 @@ class HomeController {
             )`;
 
         }, 10 );
-
-        setTimeout(() => {
-            this.resetWheel();
-
-        }, 2000 );
     }
-    home_discover_unload () {
-        const slice = this.slices.eq( this.index );
-        const desc = slice.find( ".js-home-discover-desc" );
-        const image = slice.find( ".image" );
-        const storiesSlice = this.slices.filter( "[data-prop='home_stories']" );
-        const storiesImage = storiesSlice.find( ".js-slider-item.is-active" );
-        const storiesImageBounds = storiesImage[ 0 ].getBoundingClientRect();
-        const aboutSlice = this.slices.filter( "[data-prop='home_about']" );
-        const aboutRect2 = aboutSlice.find( "rect:nth-child(4)" );
-        const aboutRect2Bounds = aboutRect2[ 0 ].getBoundingClientRect();
-
-        image[ 0 ].style.width = `${storiesImageBounds.width}px`;
-        image[ 0 ].style.height = `${storiesImageBounds.height}px`;
-        image[ 0 ].style.top = `${storiesImageBounds.top}px`;
-        image[ 0 ].style.left = `${storiesImageBounds.left}px`;
-
-        desc.addClass( "is-animo" );
-
-        setTimeout(() => {
-            image[ 0 ].style.width = null;
-            image[ 0 ].style.height = null;
-            image[ 0 ].style.top = null;
-            image[ 0 ].style.left = null;
-
-        }, 500 );
-
-        setTimeout(() => {
-            const imageBounds = image[ 0 ].getBoundingClientRect();
-
-            /* values are from-top, from-right, from-bottom, from-left */
-            image[ 0 ].style.clipPath = `inset(
-                ${aboutRect2Bounds.top - imageBounds.top}px
-                0px
-                0px
-                0px
-            )`;
-
-            image.removeClass( "is-animno" );
-            desc.removeClass( "is-anim is-animo" );
-
-        }, 1000 );
-    }
+    home_discover_unload () {}
 
 
     home_stories_load_mobile () {
@@ -444,28 +380,30 @@ class HomeController {
     }
     home_stories_unload_mobile () {}
     home_stories_load () {
+        this.home_stories_load_mobile();
+
+        if ( !this._loaded.stories ) {
+            this._loaded.stories = true;
+            this.home_stories_load_();
+
+        } else {
+            this.slices.eq( this.index ).addClass( "is-active" );
+        }
+    }
+    home_stories_load_ () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-stories-desc" );
 
         desc.addClass( "is-anim" );
         core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
-
-        setTimeout(() => {
-            this.resetWheel();
-
-        }, 2000 );
     }
-    home_stories_unload () {
-        const slice = this.slices.eq( this.index );
-        const desc = slice.find( ".js-home-stories-desc" );
-
-        desc.removeClass( "is-anim" );
-    }
+    home_stories_unload () {}
 
 
     destroy () {
         this.unbindWheelF();
         this.unbindWheel();
+        this.unbindScroll();
 
         this._resizer.destroy();
         this._scroller.destroy();
