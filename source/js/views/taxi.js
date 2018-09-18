@@ -20,7 +20,7 @@ export default ( view ) => {
             <div class="taxi__label p">Filter by</div>
             <a class="taxi__tag js-taxi-tag h6 ac ${params.tag ? "" : "is-active"}" href="${view.data.page}">All</a>
             ${tags.map(( tag ) => {
-                return `<a class="taxi__tag js-taxi-tag h6 ac ${params.tag === tag ? "is-active" : ""}" href="#${view.data.page}?tag=${tag}" data-value="${tag}">${tag}</a>`;
+                return `<a class="taxi__tag js-taxi-tag h6 ac ${params.tag === tag ? "is-active" : ""}" href="#${view.data.page}?tag=${encodeURIComponent( tag )}" data-value="${encodeURIComponent( tag )}">${tag}</a>`;
 
             }).join( "" )}
         </div>
