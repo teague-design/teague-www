@@ -11,7 +11,7 @@ const isCategoryPage = isPage && (locals.item.tags.length !== 0);
 <div class="main__header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory || isCategoryPage ) { %>main__header--story<% } %>">
     <% if ( isStory || isCategoryPage ) { %>
         <div class="main__header__tag cms -wrap">
-            <h6><%- isCategoryPage ? '&nbsp;' : locals.item.tags[ 0 ] %></h6>
+            <h6><%- locals.item.data.industry_category || locals.item.tags[ 0 ] %></h6>
         </div>
     <% } %>
     <div class="main__header__title cms -wrap">
