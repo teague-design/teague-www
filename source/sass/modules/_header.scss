@@ -37,6 +37,10 @@
         background-color: $white;
     }
 
+    .is-home-controller & {
+        background-color: transparent;
+    }
+
     @include respond( $navi-break ) {
         justify-content: space-between;
         height: $header-height-mobile;

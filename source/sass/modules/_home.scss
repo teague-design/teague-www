@@ -77,8 +77,8 @@
     }
 }
 .home__reel-overlay {
-    background-color: $black;
-    opacity: 0.2;
+    background-color: $white;
+    opacity: 0.25;
     position: absolute;
     left: 0;
     top: 0;
@@ -168,10 +168,6 @@
     pointer-events: none;
     transition: opacity $base-duration $ease;
     cursor: pointer;
-
-    .svg--ex {
-        fill: $white;
-    }
 
     &.is-anim {
         opacity: 1;

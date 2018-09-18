@@ -29,6 +29,8 @@ class HomeController {
         this._resizer = new ResizeController();
         this._scroller = new ScrollController();
 
+        core.dom.html.addClass( "is-home-controller" );
+
         if ( core.detect.isDevice() /*&& window.innerWidth <= 768 */) {
             this.element.addClass( "home--mobilized js-home--mobilized" );
             this.handleMobile();
@@ -163,7 +165,7 @@ class HomeController {
 
 
     home_reel_load_mobile () {
-        core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
+        core.dom.html.removeClass( "is-theme-black" ).addClass( "is-theme-white" );
     }
     home_reel_unload_mobile () {}
     home_reel_load () {
@@ -176,7 +178,7 @@ class HomeController {
         const videoInstance = video.find( ".js-video" ).data().Video;
 
         mark.addClass( "is-full" );
-        core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
+        core.dom.html.removeClass( "is-theme-black" ).addClass( "is-theme-white" );
 
         cta.on( "click", () => {
             this.isDisabled = true;
@@ -467,6 +469,8 @@ class HomeController {
 
         this._resizer.destroy();
         this._scroller.destroy();
+
+        core.dom.html.removeClass( "is-home-controller" );
     }
 }
 
