@@ -37,6 +37,11 @@ class App {
         this.scroller.on( "scrollup", () => {
             const scrollY = this.scroller.getScrollY();
 
+            // Safari allows negative scroll event
+            if ( scrollY < 0 ) {
+                return false;
+            }
+
             if ( scrollY <= 125 ) {
                 this.core.dom.html.addClass( "is-scroll-up" ).removeClass( "is-scroll-down" );
             }
@@ -44,6 +49,14 @@ class App {
             this.core.emitter.fire( "app--scrollup" );
         });
         this.scroller.on( "scrolldown", () => {
+            const scrollY = this.scroller.getScrollY();
+            const scrollMax = this.scroller.getScrollMax();
+
+            // Safari allows overscroll past max, just like negative below zero
+            if ( scrollY <= 0 || scrollY > scrollMax ) {
+                return false;
+            }
+
             this.core.dom.html.addClass( "is-scroll-down" ).removeClass( "is-scroll-up" );
             this.core.emitter.fire( "app--scrolldown" );
         });
