@@ -37,7 +37,7 @@ class HomeController {
         this._timeout = null;
         this._clipPath = ("-webkit-clip-path" in this.element[ 0 ].style ? "-webkit-clip-path" : "clipPath");
 
-        core.dom.html.addClass( "is-home-controller" );
+        core.dom.html.addClass( "is-not-ready is-home-controller" );
 
         if ( core.detect.isDevice() ) {
             this.element.addClass( "home--mobilized js-home--mobilized" );
@@ -116,9 +116,11 @@ class HomeController {
         core.dom.doc.off( "DOMMouseScroll mousewheel", this._onMouseWheel );
     }
     handleWheel ( e ) {
+        const delta = e.deltaY || e.detail;
+
         // Scroll up ( rewind )
         // Could check deltaY === -1
-        if ( e.deltaY < 0 ) {
+        if ( delta < 0 ) {
             if ( this.index !== 0 ) {
                 if ( this._unloadFunc ) {
                     this._unloadFunc();
@@ -129,7 +131,7 @@ class HomeController {
 
         // Scroll down ( advance )
         // Could check deltaY === 1
-        } else if ( e.deltaY > 0 ) {
+        } else if ( delta > 0 ) {
             if ( this.index !== (this.length - 1) ) {
                 if ( this._unloadFunc ) {
                     this._unloadFunc();
@@ -149,6 +151,7 @@ class HomeController {
         this.isWheel = false;
         this.unbindWheel();
         this.unbindWheelF();
+        core.dom.html.removeClass( "is-not-ready" );
 
         this._scroller.on( "scroll", () => {
             const isZero = (this._scroller.getScrollY() <= 0);
@@ -161,6 +164,7 @@ class HomeController {
             if ( isZero && isFooter ) {
                 this.unbindScroll();
                 this._timeout = setTimeout(() => {
+                    core.dom.html.addClass( "is-not-ready" );
                     this.bindWheelF();
                     this.bindWheel();
 
@@ -409,7 +413,7 @@ class HomeController {
         this._resizer.destroy();
         this._scroller.destroy();
 
-        core.dom.html.removeClass( "is-home-controller" );
+        core.dom.html.removeClass( "is-not-ready is-home-controller" );
     }
 }
 

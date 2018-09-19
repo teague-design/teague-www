@@ -12,18 +12,18 @@
     overflow: hidden;
     color: $white;
     /* values are from-top, from-right, from-bottom, from-left */
-    clip-path: inset( 0 100vw 0 0 );
     -webkit-clip-path: inset( 0 100vw 0 0 );
+    clip-path: inset( 0 100vw 0 0 );
 
     &.is-active {
         /* values are from-top, from-right, from-bottom, from-left */
-        clip-path: inset( 0 0 0 0 );
         -webkit-clip-path: inset( 0 0 0 0 );
+        clip-path: inset( 0 0 0 0 );
     }
     &.is-inactive {
         /* values are from-top, from-right, from-bottom, from-left */
-        clip-path: inset( 0 0 0 100vw );
         -webkit-clip-path: inset( 0 0 0 100vw );
+        clip-path: inset( 0 0 0 100vw );
     }
     &.is-hidden {
         visibility: hidden;

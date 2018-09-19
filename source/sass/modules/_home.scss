@@ -216,8 +216,8 @@
         width: 100%;
         height: 100%;
         transform: translate3d( 0, 0, 0 );
-        transition: clip-path $base-duration $ease;
-        transition: -webkit-clip-path $base-duration $ease;
+        transition: -webkit-clip-path $base-duration $ease,
+                    clip-path $base-duration $ease;
         background-position: 0 0;
         background-size: cover;
     }
@@ -311,8 +311,8 @@
         width: calc( 100vw - 20vw );
         height: calc( 100vh - 12vw );
         transform: translate3d( 0, 0, 0 );
-        transition: clip-path $base-duration $ease,
-                    -webkit-clip-path $base-duration $ease,
+        transition: -webkit-clip-path $base-duration $ease,
+                    clip-path $base-duration $ease,
                     width $base-duration $ease,
                     height $base-duration $ease,
                     left $base-duration $ease,
