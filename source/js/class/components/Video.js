@@ -72,7 +72,8 @@ class Video {
     load () {
         this.controller = new Controller();
         this.controller.go(() => {
-            if ( this.node[ 0 ].readyState === 4 && !this.isReadyState ) {
+            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
+            if ( this.node[ 0 ].readyState > 1 && !this.isReadyState ) {
                 this.isReadyState = true;
                 this.controller.stop();
 
