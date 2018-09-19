@@ -29,7 +29,7 @@ export default ( view ) => {
                                 <div class="link__icon icon icon--arrow">
                                     <svg class="svg svg--arrow svg--spot">
                                         <polygon points="24,0 24,5 27,2.5" />
-                                        <rect y="2" width="24" height="1" />
+                                        <rect y="2" width="35" height="1" />
                                     </svg>
                                 </div>
                             </div>
