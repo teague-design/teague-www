@@ -104,7 +104,7 @@ while ( (increment * 9) < sliceItems.length ) {
                         </div>
                     <% } else if ( sliceItem.vimeo_url ) { %>
                         <div class="partners__video">
-                            <%- include( '../partials/video.html', {
+                            <%- include( '../partials/video-auto.html', {
                                 media: {
                                     vimeo: sliceItem.vimeo_url
                                 }

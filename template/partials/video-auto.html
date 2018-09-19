@@ -1,0 +1,12 @@
+<%
+/* Video Autoplay
+locals media { vimeo?, video? }
+Vimeo: string vimeo url
+Video: prismic media object
+*/
+%>
+<div class="video video--auto js-video" data-auto="1" data-json="<%= JSON.stringify( media ) %>">
+    <div class="video__wrap js-video-wrap">
+        <video class="video__node js-video-node" playsinline loop muted></video>
+    </div>
+</div>

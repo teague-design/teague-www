@@ -89,7 +89,12 @@ class Video {
                 }
 
                 // Basic events
-                this.events();
+                if ( !this.elemData.auto ) {
+                    this.events();
+
+                } else {
+                    this.play( "Autoplay" );
+                }
             }
         });
 
@@ -147,53 +152,7 @@ class Video {
     fallbackHandler () {
         this.destroy();
         this.isFallback = true;
-
-        // this.getVideoFallback().then(( imgData ) => {
-        //     this.elem[ 0 ].innerHTML = `
-        //         <div class="video__wrap js-video-wrap" style="padding-bottom:${imgData.height / imgData.width * 100}%;">
-        //             <img class="image js-lazy-image js-fallback-image" data-img-src="${imgData.url}" />
-        //         </div>
-        //     `;
-        //
-        //     core.util.loadImages( this.elem.find( ".js-fallback-image" ) );
-        // });
     }
-    //
-    //
-    // getVideoFallback () {
-    //     return new Promise(( resolve ) => {
-    //         let imgData = null;
-    //
-    //         // CMS image
-    //         if ( this.elemData.json.fallback ) {
-    //             resolve({
-    //                 url: this.elemData.json.fallback.url,
-    //                 width: this.elemData.json.fallback.dimensions.width,
-    //                 height: this.elemData.json.fallback.dimensions.height
-    //             });
-    //
-    //         // Vimeo image ( already fetched )
-    //         } else if ( this.elemData.json.vimeo && this.vimeoData ) {
-    //             imgData = this.getVimeoImage( this.vimeoData.pictures );
-    //             resolve({
-    //                 url: imgData.link,
-    //                 width: imgData.width,
-    //                 height: imgData.height
-    //             });
-    //
-    //         // Vimeo image ( not fetched )
-    //         } else if ( this.elemData.json.vimeo ) {
-    //             this.fetch().then(( json ) => {
-    //                 imgData = this.getVimeoImage( json.pictures );
-    //                 resolve({
-    //                     url: imgData.link,
-    //                     width: imgData.width,
-    //                     height: imgData.height
-    //                 });
-    //             });
-    //         }
-    //     });
-    // }
 
 
     getVideoSource () {
