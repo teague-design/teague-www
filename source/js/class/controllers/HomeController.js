@@ -35,6 +35,7 @@ class HomeController {
             stories: false
         };
         this._timeout = null;
+        this._clipPath = ("-webkit-clip-path" in this.element[ 0 ].style ? "-webkit-clip-path" : "clipPath")
 
         core.dom.html.addClass( "is-home-controller" );
 
@@ -286,13 +287,13 @@ class HomeController {
             rect1Bounds = rect1[ 0 ].getBoundingClientRect();
             rect2Bounds = rect2[ 0 ].getBoundingClientRect();
 
-            image1[ 0 ].style.clipPath = `inset(
+            image1[ 0 ].style[ this._clipPath ] = `inset(
                 ${0}px
                 42vw
                 ${window.innerHeight - rect1Bounds.bottom - (window.innerWidth * 0.03)}px
                 ${0}px
             )`;
-            image2[ 0 ].style.clipPath = `inset(
+            image2[ 0 ].style[ this._clipPath ] = `inset(
                 ${rect2Bounds.top - image2Bounds.top}px
                 ${0}px
                 ${window.innerHeight - rect2Bounds.bottom}px
@@ -303,13 +304,13 @@ class HomeController {
         this._resizer.on( "resize", onResize );
 
         /* values are from-top, from-right, from-bottom, from-left */
-        image1[ 0 ].style.clipPath = `inset(
+        image1[ 0 ].style[ this._clipPath ] = `inset(
             ${rect1Bounds.top - image1Bounds.top}px
             ${window.innerWidth - rect1Bounds.width - rect1Bounds.left}px
             ${window.innerHeight - rect1Bounds.bottom}px
             ${0}px
         )`;
-        image2[ 0 ].style.clipPath = `inset(
+        image2[ 0 ].style[ this._clipPath ] = `inset(
             ${rect2Bounds.top - image2Bounds.top}px
             ${window.innerWidth - rect2Bounds.width - rect2Bounds.left}px
             ${window.innerHeight - rect2Bounds.bottom}px
@@ -351,7 +352,7 @@ class HomeController {
         const aboutRect2Bounds = aboutRect2[ 0 ].getBoundingClientRect();
 
         /* values are from-top, from-right, from-bottom, from-left */
-        image[ 0 ].style.clipPath = `inset(
+        image[ 0 ].style[ this._clipPath ] = `inset(
             ${aboutRect2Bounds.top - imageBounds.top}px
             0px
             0px
@@ -363,7 +364,7 @@ class HomeController {
 
         setTimeout(() => {
             /* values are from-top, from-right, from-bottom, from-left */
-            image[ 0 ].style.clipPath = `inset(
+            image[ 0 ].style[ this._clipPath ] = `inset(
                 0px
                 0px
                 0px
