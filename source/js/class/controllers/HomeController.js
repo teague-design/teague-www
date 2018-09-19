@@ -35,7 +35,7 @@ class HomeController {
             stories: false
         };
         this._timeout = null;
-        this._clipPath = ("-webkit-clip-path" in this.element[ 0 ].style ? "-webkit-clip-path" : "clipPath")
+        this._clipPath = ("-webkit-clip-path" in this.element[ 0 ].style ? "-webkit-clip-path" : "clipPath");
 
         core.dom.html.addClass( "is-home-controller" );
 
