@@ -5,7 +5,7 @@ const theme = item && item.data.theme ? item.data.theme.toLowerCase() : null;
 const tag = item && item.tags.length ? item.tags[ 0 ] : null;
 %>
 <!DOCTYPE html>
-<html lang="en" class="is-not-ready <%= theme ? `is-theme-${theme}` : '' %> <%= tag ? `is-tag-page` : '' %>" manifest="<% if ( locals.context.get( 'config' ).browser.appcache ) { %>/cache.manifest<% } %>">
+<html lang="en" class="is-not-ready <%= theme ? `is-theme-${theme}` : '' %> <%= tag ? `is-tag-page` : '' %>" <% if ( locals.context.get( 'config' ).browser.appcache ) { %>manifest="/cache.manifest"<% } %>>
     <head>
         <meta charset="utf-8" />
         <title><%= locals.context.getPageTitle() %></title>

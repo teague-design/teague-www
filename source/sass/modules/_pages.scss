@@ -672,6 +672,10 @@
 
 
 // CAREERS
+.jobs {
+    position: relative;
+    min-height: 10px;
+}
 .jobs__job {
     display: flex;
     justify-content: space-between;
