@@ -41,9 +41,9 @@ class View {
             this.query = { clean: 1 };
         }
 
-        // category = queryString to add
-        if ( this.data.category ) {
-            this.query.industry_category = this.data.category;
+        // tag = queryString to add
+        if ( this.data.tag ) {
+            this.query.tag = this.data.tag;
         }
 
         // skips = queryString to ignore

@@ -9,7 +9,7 @@ const isPromoLargeA = slice.primary.layout === 'Promo Large A';
 const isPromoLargeB = slice.primary.layout === 'Promo Large B';
 const isPromoXL = slice.primary.layout === 'Promo XL';
 const isPage = slice.primary.page.id;
-const isCategoryPage = isPage && doc.tags.lenth !== 0;
+const isIndustryPage = isPage && doc.tags.lenth !== 0;
 const isStory = slice.primary.story.id;
 let json = null;
 %>
@@ -51,7 +51,7 @@ let json = null;
     json = {
         title: dom.RichText.asText( doc.data.title ),
         story: isStory,
-        tag: doc.data.industry_category || doc.tags[ 0 ]
+        tag: doc.tags[ 0 ]
     };
     %>
     <div class="promo promo--large <% if ( isPromoLargeA ) { %>promo--a<% } else { %>promo--b<% } %>">
@@ -59,7 +59,7 @@ let json = null;
             <div class="promo__info cms">
                 <% if ( !isPage ) { %>
                     <div class="promo__tag">
-                        <h6><%= doc.data.industry_category || doc.tags[ 0 ] %></h6>
+                        <h6><%= doc.tags[ 0 ] %></h6>
                     </div>
                 <% } %>
                 <div class="promo__title">
@@ -76,8 +76,8 @@ let json = null;
     <%
     json = {
         title: dom.RichText.asText( doc.data.title ),
-        story: isStory || isCategoryPage,
-        tag: isCategoryPage ? null : doc.tags[ 0 ]
+        story: isStory || isIndustryPage,
+        tag: isIndustryPage ? null : doc.tags[ 0 ]
     };
     %>
     <div class="promo promo--xl">
@@ -85,7 +85,7 @@ let json = null;
             <div class="promo__info cms">
                 <% if ( !isPage ) { %>
                     <div class="promo__tag">
-                        <h6><%= doc.data.industry_category || doc.tags[ 0 ] %></h6>
+                        <h6><%= doc.tags[ 0 ] %></h6>
                     </div>
                 <% } %>
                 <div class="promo__title">

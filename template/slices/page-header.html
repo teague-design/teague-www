@@ -5,13 +5,14 @@ locals { item, slice, scope }
 const config = locals.context.get( 'config' );
 const isImage = locals.slice.primary.header_image.url;
 const isStory = (locals.item.type === 'story');
+const isCasestudy = (locals.item.type === 'casestudy');
 const isPage = (locals.item.type === 'page');
-const isCategoryPage = isPage && (locals.item.tags.length !== 0);
+const isIndustryPage = isPage && (locals.item.tags.length !== 0);
 %>
-<div class="main__header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory || isCategoryPage ) { %>main__header--story<% } %>">
-    <% if ( isStory ) { %>
+<div class="main__header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory || isCasestudy || isIndustryPage ) { %>main__header--story<% } %>">
+    <% if ( isStory || isCasestudy ) { %>
         <div class="main__header__tag cms -wrap">
-            <h6><%- locals.item.data.industry_category || locals.item.tags[ 0 ] %></h6>
+            <h6><%- locals.item.tags[ 0 ] %></h6>
         </div>
     <% } %>
     <div class="main__header__title cms -wrap">
@@ -22,7 +23,7 @@ const isCategoryPage = isPage && (locals.item.tags.length !== 0);
             <%- include( '../partials/image.html', {image: locals.slice.primary.header_image} ) %>
         </div>
     <% } %>
-    <% if ( isStory || isPage ) { %>
+    <% if ( isStory || isCasestudy || isPage ) { %>
         <div class="main__header__deets cms -wrap">
             <div class="main__header__deets__l">
                 <div class="main__header__desc">

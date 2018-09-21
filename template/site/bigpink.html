@@ -3,7 +3,7 @@ const dom = locals.context.get( 'dom' );
 const item = locals.context.get( 'item' );
 const json = !item ? {} : {
     title: dom.RichText.asText( item.data.title ),
-    story: (item.type === 'story') || (item.type === 'page') && (item.tags.length !== 0),
+    story: (item.type === 'story') || (item.type === 'casestudy') || ((item.type === 'page') && (item.tags.length !== 0)),
     tag: item.tags.length ? item.tags[ 0 ] : null
 };
 %>

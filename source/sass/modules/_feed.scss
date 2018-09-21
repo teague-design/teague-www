@@ -1,4 +1,7 @@
-.feed {}
+.feed {
+    position: relative;
+    min-height: 10px;
+}
 .feed__item {
     display: inline-block;
     vertical-align: top;

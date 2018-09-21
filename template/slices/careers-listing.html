@@ -4,12 +4,5 @@ locals { item, slice, scope }
 */
 %>
 <div class="jobs view js-view cms -wrap" data-uid="jobs" data-url="/api/icims/jobs/" data-cache="1">
-    <div class="loading js-loading">
-        <div class="loading__icons">
-            <div class="loading__icon"></div>
-            <div class="loading__icon"></div>
-            <div class="loading__icon"></div>
-            <div class="loading__icon"></div>
-        </div>
-    </div>
+    <%- include( '../partials/loading.html' ) %>
 </div>

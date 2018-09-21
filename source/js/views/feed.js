@@ -32,7 +32,7 @@ export default ( view ) => {
                         </div>
                         <div class="feed__tag cms">
                             <a href="/${doc.type}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
-                                <h6>${doc.data.industry_category || doc.tags[ 0 ]}</h6>
+                                <h6>${doc.tags[ 0 ]}</h6>
                             </a>
                         </div>
                         <div class="feed__title cms">

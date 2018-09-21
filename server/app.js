@@ -7,14 +7,18 @@ const fetchFields = [
     "page.image",
     "page.theme",
     "page.description",
-    "page.industry_category",
     "story.canonical_url",
     "story.title",
     "story.image",
     "story.theme",
     "story.description",
     "story.excerpt",
-    "story.industry_category",
+    "casestudy.canonical_url",
+    "casestudy.title",
+    "casestudy.image",
+    "casestudy.theme",
+    "casestudy.description",
+    "casestudy.excerpt",
     "author.name",
     "author.image",
     "author.description",
@@ -26,6 +30,28 @@ const fetchFields = [
     "cta.label",
     "cta.image"
 ];
+const pubMethods = {
+    fetchLinks ( client, api, form, cache, req ) {
+        form.fetchLinks( fetchFields );
+    },
+    query ( client, api, query, cache, req ) {
+        if ( req.query.tag ) {
+            query.push( client.Predicates.any( "document.tags", Array.isArray( req.query.tag ) ? req.query.tag : [req.query.tag] ) );
+        }
+
+        return query;
+    },
+    orderings ( client, api, form, cache, req ) {
+        form.orderings( ["my.story.sort_date desc"] );
+    },
+    pagination ( client, api, form, cache, req ) {
+        // Only handle paging for AJAX API requests...
+        if ( req.query.ajax && !req.query.nopaging ) {
+            form.pageSize( config.pagination.size );
+            form.page( (req.query.page || 1) );
+        }
+    }
+};
 
 
 
@@ -50,56 +76,8 @@ router.on( "authorizations", {
         });
     }
 });
-router.on( "story", {
-    fetchLinks ( client, api, form, cache, req ) {
-        form.fetchLinks( fetchFields );
-    },
-    query ( client, api, query, cache, req ) {
-        if ( req.query.tag ) {
-            query.push( client.Predicates.any( "document.tags", Array.isArray( req.query.tag ) ? req.query.tag : [req.query.tag] ) );
-        }
-
-        return query;
-    },
-    orderings ( client, api, form, cache, req ) {
-        form.orderings( ["my.story.sort_date desc"] );
-    },
-    pagination ( client, api, form, cache, req ) {
-        // Only handle paging for AJAX API requests...
-        if ( req.query.ajax && !req.query.nopaging ) {
-            form.pageSize( config.pagination.size );
-            form.page( (req.query.page || 1) );
-        }
-    },
-    filterResults ( client, api, json, cache, req ) {
-        let docs = json.results;
-
-        // Industry category?
-        if ( !req.params.uid && !req.query.industry_category ) {
-            docs = docs.filter(( doc ) => {
-                if ( doc.data.industry_category ) {
-                    return false;
-
-                } else {
-                    return true;
-                }
-            });
-
-        } else if ( req.query.industry_category ) {
-            docs = docs.filter(( doc ) => {
-                if ( doc.data.industry_category && (doc.data.industry_category === req.query.industry_category) ) {
-                    return true;
-
-                } else {
-                    return false;
-                }
-            });
-        }
-
-        // Must return json.results at least
-        return docs;
-    }
-});
+router.on( "story", pubMethods );
+router.on( "casestudy", pubMethods );
 
 
 
