@@ -144,7 +144,7 @@ class Slider {
         const notches = notch.parent();
         const notchBounds = notch[ 0 ].getBoundingClientRect();
         const notchesBounds = notches[ 0 ].getBoundingClientRect();
-        const offsetLeft = notchBounds.x - notchesBounds.x;
+        const offsetLeft = notchBounds.left - notchesBounds.left;
 
         this.ellapsed[ 0 ].style.width = `calc(${offsetLeft}px)`;
         this.currs.forEach(( el, i ) => {
