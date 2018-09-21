@@ -537,15 +537,15 @@
     flex-wrap: wrap;
 }
 .mission__media {
-    width: 60vw;
+    width: 60%;
     @include wrapr();
 
     @include respond( $break-tablet-medium ) {
-        width: 50vw;
+        width: 50%;
     }
 
     @include respond( $mobile-width ) {
-        width: 100vw;
+        width: 100%;
         order: 2;
         padding-right: 0;
     }
@@ -555,11 +555,11 @@
     }
 }
 .mission__text {
-    width: 40vw;
+    width: 40%;
     @include wrap();
 
     @include respond( $break-tablet-medium ) {
-        width: 50vw;
+        width: 50%;
     }
 
     @include respond( $mobile-width ) {
