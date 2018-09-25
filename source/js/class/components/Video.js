@@ -156,9 +156,11 @@ class Video {
 
         const picture = this.getVimeoPicture( this.vimeoData.pictures );
 
-        this.elem[ 0 ].innerHTML = `<div class="video__pic js-video-pic -cover" data-img-src="${picture.link}"></div>`;
+        this.elem[ 0 ].innerHTML = this.elemData.fs ? `<div class="video__pic js-video-pic -cover" data-img-src="${picture.link}"></div>` : `<img class="video__img js-video-pic" data-img-src="${picture.link}" />`;
 
         core.util.loadImages( this.elem.find( ".js-video-pic" ), core.util.noop );
+
+        core.dom.body.find( ".js-home-reel-cta" ).remove();
     }
 
 
