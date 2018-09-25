@@ -396,7 +396,7 @@
 
     .home--mobilized & {
         position: relative;
-        padding-top: 40px;
+        padding-top: 80px;
     }
 
     .slider--home {
@@ -417,6 +417,12 @@
         .home--mobilized & {
             padding-bottom: $padding-1 * 2;
             padding-top: $padding-1 * 4;
+        }
+
+        .link {
+            .home--mobilized & {
+                margin-top: 30px;
+            }
         }
     }
     .slider__splash__item p {
