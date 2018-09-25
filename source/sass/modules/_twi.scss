@@ -77,7 +77,6 @@
             display: block;
             overflow-x: auto;
             overflow-y: hidden;
-            letter-spacing: 30px;
             -webkit-overflow-scrolling: touch;
         }
     }
@@ -86,6 +85,7 @@
         display: inline-block;
 
         @include respond( $break-tablet-small ) {
+            margin-left: 20px;
             width: 70vw;
         }
     }
