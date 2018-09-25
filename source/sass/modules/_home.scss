@@ -39,7 +39,6 @@
         position: relative;
         opacity: 1;
         pointer-events: auto;
-            // outline: 1px solid red;
     }
 }
 
@@ -49,7 +48,6 @@
 .slice--home-reel {
     .home--mobilized & {
         background-color: $black;
-        color: $white;
     }
 }
 .home__reel-video {
