@@ -21,7 +21,7 @@
     }
 
     @include respond( $mobile-width ) {
-        display: block;
+        display: none;
     }
 }
 .process__info,
@@ -46,6 +46,10 @@
     @include respond( $break-tablet-medium ) {
         padding-top: 10vw;
         width: 100%;
+    }
+
+    @include respond( $mobile-width ) {
+        padding-top: 0;
     }
 
     .slider {
