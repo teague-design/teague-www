@@ -96,10 +96,18 @@
 .related__title {
     padding: 20px 0;
 
+    @include respond( $mobile-width ) {
+        padding-bottom: 40px;
+    }
+
     h3 {
         @include respond( $break-tablet-medium ) {
             font-size: $h4-size-mobile;
             @include wrapr();
+        }
+
+        @include respond( $mobile-width ) {
+            @include h3();
         }
     }
 }
