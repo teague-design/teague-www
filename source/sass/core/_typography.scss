@@ -264,6 +264,10 @@
     top: 50%;
     right: 0;
     transform: translate3d( -13px, -50%, 0 );
+
+    @include respond( $mobile-width ) {
+        transform: translate3d( -13px, calc( -50% - 2px ), 0 );
+    }
 }
 .form__area {
     height: 170px;
