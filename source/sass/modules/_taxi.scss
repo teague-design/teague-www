@@ -1,5 +1,6 @@
 .taxi {
     @include p();
+    @include wrapl();
     line-height: 1;
 }
 .taxi__tags {
@@ -10,6 +11,7 @@
     overflow: auto;
     padding-bottom: 1px;
     -webkit-overflow-scrolling: touch;
+
 }
 .taxi__tag {
     position: relative;
