@@ -19,15 +19,17 @@ class Video {
         this.elemData = data;
         this.wrap = this.elem.find( ".js-video-wrap" );
         this.node = this.elem.find( ".js-video-node" );
+        this.uiEl = this.elem.find( ".js-video-ui" );
         this.ui = {
-            pp: this.elem.find( ".js-video-pp" ),
-            fs: this.elem.find( ".js-video-fs" ),
-            sound: this.elem.find( ".js-video-sound" ),
-            ellapsed: this.elem.find( ".js-video-ellapsed" )
+            pp: this.uiEl.find( ".js-video-pp" ),
+            fs: this.uiEl.find( ".js-video-fs" ),
+            sound: this.uiEl.find( ".js-video-sound" ),
+            ellapsed: this.uiEl.find( ".js-video-ellapsed" )
         };
         this.isFallback = false;
         this.isPlaying = false;
         this.isReadyState = false;
+        this.videoFS = null;
 
         // Store instance with element...
         this.elem.data( "Video", this );
@@ -72,8 +74,10 @@ class Video {
     load () {
         this.controller = new Controller();
         this.controller.go(() => {
+            const isReadyState = core.detect.isDevice() ? (this.node[ 0 ].readyState >= 0) : (this.node[ 0 ].readyState > 1);
+
             // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
-            if ( this.node[ 0 ].readyState > 1 && !this.isReadyState ) {
+            if ( isReadyState && !this.isReadyState ) {
                 this.isReadyState = true;
                 this.controller.stop();
 
@@ -84,16 +88,12 @@ class Video {
                     this.wrapit();
                 }
 
-                // FS ?
-                if ( this.elemData.fs ) {
-                    this.videoFS = new VideoFS( this );
+                // Basic events
+                if ( this.uiEl.length ) {
+                    this.events();
                 }
 
-                // Basic events
-                if ( !this.elemData.auto ) {
-                    this.events();
-
-                } else {
+                if ( this.elemData.auto ) {
                     this.play( "Autoplay" );
                 }
             }
@@ -153,6 +153,12 @@ class Video {
     fallbackHandler () {
         this.destroy();
         this.isFallback = true;
+
+        const picture = this.getVimeoPicture( this.vimeoData.pictures );
+
+        this.elem[ 0 ].innerHTML = `<div class="video__pic js-video-pic -cover" data-img-src="${picture.link}"></div>`;
+
+        core.util.loadImages( this.elem.find( ".js-video-pic" ), core.util.noop );
     }
 
 
@@ -161,7 +167,7 @@ class Video {
     }
 
 
-    getVimeoImage ( pictures ) {
+    getVimeoPicture ( pictures ) {
         const min = 640;
         const pics = pictures.sizes.filter(( size ) => {
             return (size.width >= min);
@@ -282,9 +288,16 @@ class Video {
             return this;
         }
 
-        this.node[ 0 ].play().catch(() => {
-            this.fallbackHandler();
-        });
+        this.node[ 0 ].play()
+            .then(() => {
+                // FS ?
+                if ( this.elemData.fs && !this.videoFS ) {
+                    this.videoFS = new VideoFS( this );
+                }
+
+            }).catch(() => {
+                this.fallbackHandler();
+            });
         core.log( msg || "PLAY VIDEO" );
     }
 

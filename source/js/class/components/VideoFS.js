@@ -18,13 +18,6 @@ class VideoFS {
         this.resizer = new ResizeController();
 
         this.bind();
-        this.auto();
-    }
-
-
-    auto () {
-        this.video.togglePlay();
-        this.video.toggleSound();
     }
 
 
