@@ -210,6 +210,7 @@ class Video {
         sd = sds[ 0 ];
 
         // core.log( "Video HD", hd.width, hd );
+        // core.log( "Video SD", sd.width, sd );
 
         return (core.detect.isDevice() ? sd : hd);
     }

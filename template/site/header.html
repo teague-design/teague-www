@@ -7,7 +7,7 @@ const navi = locals.context.get( 'navi' );
     </a>
     <nav class="navi js-navi">
         <% navi.items.forEach(( item ) => { %>
-            <a class="navi__a navi__a--<%= item.uid %> js-navi-a js-navi--<%= item.uid %> <%= item.uid === 'stories' ? 'js-navi--story' : '' %> p" href="<%= item.slug %>" data-json="<%= JSON.stringify( item ) %>"><%= item.title %></a>
+            <a class="navi__a navi__a--<%= item.uid %> js-navi-a js-navi--<%= item.uid %> p" href="<%= item.slug %>" data-json="<%= JSON.stringify( item ) %>"><%= item.title %></a>
         <% }) %>
     </nav>
     <menu class="menu js-menu">

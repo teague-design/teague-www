@@ -50,35 +50,17 @@ class ContextObject {
     }
 
     getPageTitle () {
-        const page = this.get( "page" );;
         const site = this.get( "site" );
-        const navi = this.get( "navi" );
-        const items = this.get( "items" );
-        let item = this.get( "item" );
-        let title = site.data.title;
-        let navItem = null;
+        const item = this.get( "item" );
+        let title = null;
 
-        if ( typeof title === "object" ) {
-            title = prismicDOM.RichText.asText( title );
+
+        if ( item ) {
+            title = `${prismicDOM.RichText.asText( item.data.title )} — ${prismicDOM.RichText.asText( site.data.title )}`;
+
+        } else {
+            title = prismicDOM.RichText.asText( site.data.title );
         }
-
-        // Supports collection mapping to content-type
-        if ( items ) {
-            item = navi.items.find(( nav ) => {
-                return (nav.uid === page);
-            });
-
-            if ( item ) {
-                item.data = {
-                    title: item.title
-                };
-            }
-
-        } else if ( item && (typeof item.data.title === "object") ) {
-            item.data.title = prismicDOM.RichText.asText( item.data.title );
-        }
-
-        title = (item ? `${item.data.title} — ${title}` : title);
 
         return title;
     }

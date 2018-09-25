@@ -6,6 +6,13 @@ import paramalama from "paramalama";
 
 
 export default ( view ) => {
+    const typeMap = {
+        story: "stories",
+        casestudy: "work"
+    };
+    const getType = ( doc ) => {
+        return (typeMap[ doc.type ] || doc.type);
+    };
     const getPagedQuery = ( page ) => {
         const query = paramalama( window.location.search );
 
@@ -26,17 +33,17 @@ export default ( view ) => {
                 return `
                     <div class="feed__item js-lazy-anim">
                         <div class="feed__image">
-                            <a href="/${doc.type}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
+                            <a href="/${getType( doc )}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
                                 ${viewImage( doc.data.image )}
                             </a>
                         </div>
                         <div class="feed__tag cms">
-                            <a href="/${doc.type}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
+                            <a href="/${getType( doc )}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
                                 <h6>${doc.tags[ 0 ]}</h6>
                             </a>
                         </div>
                         <div class="feed__title cms">
-                            <a href="/${doc.type}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
+                            <a href="/${getType( doc )}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
                                 ${dom.RichText.asHtml( doc.data.title ).replace( /h1/g, "h5" )}
                             </a>
                         </div>

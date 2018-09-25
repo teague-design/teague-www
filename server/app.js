@@ -1,35 +1,9 @@
 const config = require( "../clutch.config" );
 const router = require( "./core/router" );
+const query = require( "./core/query" );
 const path = require( "path" );
 const fs = require( "fs" );
-const fetchFields = [
-    "page.title",
-    "page.image",
-    "page.theme",
-    "page.description",
-    "story.canonical_url",
-    "story.title",
-    "story.image",
-    "story.theme",
-    "story.description",
-    "story.excerpt",
-    "casestudy.canonical_url",
-    "casestudy.title",
-    "casestudy.image",
-    "casestudy.theme",
-    "casestudy.description",
-    "casestudy.excerpt",
-    "author.name",
-    "author.image",
-    "author.description",
-    "cta.hubspot_form",
-    "cta.page_link",
-    "cta.title",
-    "cta.description",
-    "cta.link_text",
-    "cta.label",
-    "cta.image"
-];
+const fetchFields = require( "./fetchFields" );
 const pubMethods = {
     fetchLinks ( client, api, form, cache, req ) {
         form.fetchLinks( fetchFields );

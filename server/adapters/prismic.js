@@ -41,6 +41,7 @@ const core = {
 };
 const ContextObject = require( "../class/ContextObject" );
 const apiOptions = (core.config.api.token ? { accessToken: core.config.api.token } : null);
+const fetchFields = require( "../fetchFields" );
 
 
 
@@ -53,6 +54,9 @@ const getApi = function ( req, res, listener ) {
     return new Promise(( resolve, reject ) => {
         getDataForApi( req, listener ).then(( json ) => {
             const data = {};
+            const collection = cache.collections.find(( collection ) => {
+                return (collection.uid === req.params.type);
+            });
 
             // Single document for /:type/:uid
             if ( req.params.uid ) {
@@ -60,12 +64,11 @@ const getApi = function ( req, res, listener ) {
 
             // All documents for /:type
             } else {
-                // @hook: filterResults
-                if ( listener && listener.handlers.filterResults ) {
-                    data.documents = listener.handlers.filterResults( prismic, cache.api, json, cache, req );
+                data.documents = json.results;
 
-                } else {
-                    data.documents = json.results;
+                // If collection page exists
+                if ( collection ) {
+                    data.document = collection;
                 }
             }
 
@@ -204,7 +207,13 @@ const getPartial = function ( req, data, listener ) {
 const getSite = function ( req ) {
     return new Promise(( resolve, reject ) => {
         prismic.api( core.config.api.access, apiOptions ).then(( api ) => {
-            api.getSingle( "site", {fetchLinks: ["page.title", "page.image", "page.description"]} ).then(( document ) => {
+            getForm( req, api, "clutch" ).fetchLinks( fetchFields ).submit().then(( json ) => {
+                const document = json.results.find(( doc ) => {
+                    return (doc.type === "site");
+                });
+                const pages = json.results.filter(( doc ) => {
+                    return (doc.type === "page");
+                });
                 const navi = {
                     items: []
                 };
@@ -246,8 +255,7 @@ const getSite = function ( req ) {
                         uid: slice.primary.page.uid || slice.primary.slug,
                         type: slice.primary.page.type || slice.primary.slug,
                         slug,
-                        title: slice.primary.name,
-                        label: slice.primary.label
+                        title: slice.primary.name
                     });
                 });
 
@@ -258,6 +266,9 @@ const getSite = function ( req ) {
                 cache.site = site;
                 cache.navi = navi;
                 cache.footer = footer;
+                cache.collections = pages.filter(( doc ) => {
+                    return cache.api.data.forms[ doc.uid ];
+                });
 
                 resolve();
             });
@@ -385,6 +396,9 @@ const getDataForPage = function ( req, listener ) {
             const form = getForm( req, cache.api, type );
             const isHeadlessHome = (type === core.config.homepage);
             const isNaviNoForm = (navi && !cache.api.data.forms[ type ]);
+            const collection = cache.collections.find(( collection ) => {
+                return (collection.uid === type);
+            });
             const done = function ( json ) {
                 if ( !json.results.length ) {
                     // Static page with no CMS data attached to it...
@@ -396,15 +410,21 @@ const getDataForPage = function ( req, listener ) {
                     }
 
                 } else {
-                    // all
-                    data.items = json.results;
-
                     // uid
                     if ( uid || isNaviNoForm || isHeadlessHome ) {
                         data.item = getDoc( (isHeadlessHome ? core.config.homepage : (isNaviNoForm ? navi.uid : uid)), json.results );
 
                         if ( !data.item ) {
                             reject( `The document with UID "${isNaviNoForm ? navi.uid : uid}" could not be found by Prismic.` );
+                        }
+
+                    } else {
+                        // all
+                        data.items = json.results;
+
+                        // collection
+                        if ( collection ) {
+                            data.item = collection;
                         }
                     }
 
