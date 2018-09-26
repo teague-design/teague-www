@@ -21,7 +21,7 @@
     }
 
     @include respond( $mobile-width ) {
-        display: none;
+        display: block;
     }
 }
 .process__info,

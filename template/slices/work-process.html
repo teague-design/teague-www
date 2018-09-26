@@ -3,6 +3,7 @@
 locals { item, slice, scope }
 */
 const dom = locals.context.get( 'dom' );
+const isStory = slice.primary.design_story_link.id ? true : false;
 const itemsMapped = slice.items.map(( item ) => {
     return {
         data: {
@@ -12,11 +13,13 @@ const itemsMapped = slice.items.map(( item ) => {
         }
     };
 });
-const json = {
-    title: dom.RichText.asText( slice.primary.design_story_link.data.title ),
-    story: true,
-    tag: slice.primary.design_story_link.tags[ 0 ]
-};
+if ( isStory ) {
+    const json = {
+        title: dom.RichText.asText( slice.primary.design_story_link.data.title ),
+        story: true,
+        tag: slice.primary.design_story_link.tags[ 0 ]
+    };
+}
 %>
 <div class="process">
     <div class="process__story cms">
@@ -28,15 +31,17 @@ const json = {
                 <%- dom.RichText.asHtml( slice.primary.cta_text ) %>
             </div>
         </div>
-        <a href="<%= locals.context.getUrl( slice.primary.design_story_link ) %>" class="process__article" data-json="<%= JSON.stringify( json ) %>">
-            <div class="process__article__img">
-                <%- include( '../partials/image.html', {image: slice.primary.design_story_link.data.image} ) %>
-            </div>
-            <div class="process__article__info cms">
-                <h6>Related Design Story</h6>
-                <%- dom.RichText.asHtml( slice.primary.design_story_link.data.title ).replace( /h1/g, 'h5' ) %>
-            </div>
-        </a>
+        <% if ( isStory ) { %>
+            <a href="<%= locals.context.getUrl( slice.primary.design_story_link ) %>" class="process__article" data-json="<%= JSON.stringify( json ) %>">
+                <div class="process__article__img">
+                    <%- include( '../partials/image.html', {image: slice.primary.design_story_link.data.image} ) %>
+                </div>
+                <div class="process__article__info cms">
+                    <h6>Related Design Story</h6>
+                    <%- dom.RichText.asHtml( slice.primary.design_story_link.data.title ).replace( /h1/g, 'h5' ) %>
+                </div>
+            </a>
+        <% } %>
     </div>
     <div class="process__slider">
         <%- include( '../partials/slider.html', {
