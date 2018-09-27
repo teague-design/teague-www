@@ -306,7 +306,9 @@
 
 
 // ABOUT
-.people {}
+.people {
+    @include wrapl();
+}
 .people__info {
     text-align: left;
 }
