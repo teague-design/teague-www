@@ -2,17 +2,19 @@
 /* Video
 locals { item, slice, scope }
 */
+let partial = 'video';
 const media = {};
 
 if ( locals.slice.primary.vimeo_url ) {
     media.vimeo = locals.slice.primary.vimeo_url;
-
-} else if ( locals.slice.primary.video_file ) {
-    media.video = locals.slice.primary.video_file;
 }
 
 if ( locals.slice.primary.poster_image ) {
     media.poster = locals.slice.primary.poster_image;
 }
+
+if ( locals.slice.primary.autoplay && (locals.slice.primary.autoplay === "Yes") ) {
+    partial = 'video-auto';
+}
 %>
-<%- include( '../partials/video.html', {media} ) %>
+<%- include( `../partials/${partial}.html`, {media} ) %>

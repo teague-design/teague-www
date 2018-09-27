@@ -46,10 +46,6 @@ class Video {
                 this.wrapit();
                 this.load();
             });
-
-        } else if ( this.elemData.json.video ) {
-            this.source = this.getVideoSource();
-            this.load();
         }
     }
 
@@ -89,12 +85,15 @@ class Video {
                 }
 
                 // Basic events
+                this.events();
+
+                // UI only events
                 if ( this.uiEl.length ) {
-                    this.events();
+                    this.uiEvents();
                 }
 
                 if ( this.elemData.auto ) {
-                    this.play( "Autoplay" );
+                    this.automate();
                 }
             }
         });
@@ -107,7 +106,37 @@ class Video {
     }
 
 
+    automate () {
+        this.controller.go(() => {
+            if ( core.util.isElementVisible( this.elem[ 0 ] ) && !this.isPlaying ) {
+                this.play( "Autoplay" );
+
+            } else if ( !core.util.isElementVisible( this.elem[ 0 ] ) && this.isPlaying ) {
+                this.pause( "Autopause" );
+            }
+        });
+    }
+
+
     events () {
+        this.node.on( "play", () => {
+            this.isPlaying = true;
+            this.elem.addClass( "is-playing" ).removeClass( "is-paused" );
+        });
+
+        this.node.on( "pause", () => {
+            this.isPlaying = false;
+            this.elem.addClass( "is-paused" ).removeClass( "is-playing" );
+        });
+
+        this.node.on( "ended", () => {
+            this.isPlaying = false;
+            this.elem.removeClass( "is-playing is-paused" );
+        });
+    }
+
+
+    uiEvents () {
         this.wrap.on( "click", () => {
             this.togglePlay();
         });
@@ -129,21 +158,6 @@ class Video {
             }
         });
 
-        this.node.on( "play", () => {
-            this.isPlaying = true;
-            this.elem.addClass( "is-playing" ).removeClass( "is-paused" );
-        });
-
-        this.node.on( "pause", () => {
-            this.isPlaying = false;
-            this.elem.addClass( "is-paused" ).removeClass( "is-playing" );
-        });
-
-        this.node.on( "ended", () => {
-            this.isPlaying = false;
-            this.elem.removeClass( "is-playing is-paused" );
-        });
-
         this.node.on( "timeupdate", () => {
             this.ui.ellapsed[ 0 ].style.width = `${this.node[ 0 ].currentTime / this.node[ 0 ].duration * 100}%`;
         });
@@ -161,11 +175,6 @@ class Video {
         core.util.loadImages( this.elem.find( ".js-video-pic" ), core.util.noop );
 
         core.dom.body.find( ".js-home-reel-cta" ).remove();
-    }
-
-
-    getVideoSource () {
-        return this.elemData.json.video.url;
     }
 
 

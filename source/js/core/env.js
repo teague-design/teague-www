@@ -19,7 +19,7 @@ const env = {
      *              Looks at IP, localhost and staging for DEV, otherwise PROD
      *
      */
-    ENV: (/^localhost|^[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}/g.test( document.domain ) ? DEV : PROD),
+    ENV: (/^localhost|^staging|^[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}\.[0-9]{0,3}/g.test( document.domain ) ? DEV : PROD),
 
 
     /**
