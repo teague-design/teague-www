@@ -386,6 +386,13 @@
     left: 50%;
     transform: translate3d( -50%, -50%, 0 );
     width: 100%;
+
+    .home--mobilized & {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+    }
 }
 .home__stories-desc {
     padding-top: 10vw;

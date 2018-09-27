@@ -38,6 +38,7 @@ class HomeController {
         this._clipPath = ("-webkit-clip-path" in this.element[ 0 ].style ? "-webkit-clip-path" : "clipPath");
 
         if ( core.detect.isDevice() ) {
+            core.dom.html.addClass( "is-home-controller" );
             this.element.addClass( "home--mobilized js-home--mobilized" );
             this.handleMobile();
 
