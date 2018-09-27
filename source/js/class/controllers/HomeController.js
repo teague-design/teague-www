@@ -37,13 +37,12 @@ class HomeController {
         this._timeout = null;
         this._clipPath = ("-webkit-clip-path" in this.element[ 0 ].style ? "-webkit-clip-path" : "clipPath");
 
-        core.dom.html.addClass( "is-not-ready is-home-controller" );
-
         if ( core.detect.isDevice() ) {
             this.element.addClass( "home--mobilized js-home--mobilized" );
             this.handleMobile();
 
         } else {
+            core.dom.html.addClass( "is-not-ready is-home-controller" );
             // Always bind "EFF" first
             this.bindWheelF();
             this.bindWheel();

@@ -110,32 +110,32 @@
 }
 .home__reel-desc {
     width: 100%;
-    max-width: 790px;
+    max-width: 900px;
     position: absolute;
-    left: 0;
+    left: 50%;
     top: 50%;
-    transform: translate3d( 0, -25%, 0 );
+    transform: translate3d( -50%, -25%, 0 );
     opacity: 0;
     transition: opacity $base-duration $ease,
                 transform $base-duration $ease;
 
     &.is-anim {
-        transform: translate3d( 0, -50%, 0 );
+        transform: translate3d( -50%, -50%, 0 );
         opacity: 1;
     }
     &.is-animo {
-        transform: translate3d( 0, -75%, 0 );
+        transform: translate3d( -50%, -75%, 0 );
         opacity: 0;
     }
 
     .home--mobilized & {
-        transform: translate3d( 0, -50%, 0 );
+        transform: translate3d( -50%, -50%, 0 );
         opacity: 1;
     }
 }
 .home__reel-cta {
     position: absolute;
-    left: 16.216216216vw;
+    left: 0;
     bottom: 50px;
     transform: translate3d( 0, 100%, 0 );
     opacity: 0;
