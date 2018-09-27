@@ -92,6 +92,7 @@
 
 .highs {
     user-select: none;
+    @include wrapl();
 }
 .highs__info {
     text-align: left;
