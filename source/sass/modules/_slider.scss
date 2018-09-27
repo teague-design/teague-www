@@ -2,15 +2,7 @@
     width: 100%;
     user-select: none;
 }
-.slider--home {
-    position: absolute;
-    padding-left: 27.027027027vw;
-    bottom: 100px;
-
-    @include respond( $bind-width ) {
-        bottom: 40px;
-    }
-}
+.slider--home {}
 .slider--edge {
     letter-spacing: 0px;
 }
@@ -205,8 +197,12 @@
     width: 38.716216216vw;
     z-index: 1;
 
+    @include respond( $break-tablet-medium ) {
+        width: 50vw;
+    }
+
     &:before {
-        content: attr(data-label);
+        content: attr( data-label );
         @include h6();
         @include wrap();
     }

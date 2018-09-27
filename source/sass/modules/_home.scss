@@ -380,6 +380,13 @@
         color: $white;
     }
 }
+.home__stories-posit {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate3d( -50%, -50%, 0 );
+    width: 100%;
+}
 .home__stories-desc {
     padding-top: 10vw;
     position: relative;
@@ -392,23 +399,23 @@
     }
 }
 .home__stories-slider {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
+    .home--mobilized & {}
 
-    .home--mobilized & {
-        position: relative;
-        padding-top: 80px;
+    .image-wrap {
+        padding-bottom: 56.25% !important;
     }
 
     .slider--home {
+        margin-top: 80px;
+        padding-left: 27.027027027vw;
+        position: relative;
+
+        @include respond( $break-tablet-medium ) {
+            padding-left: 40vw;
+        }
+
         .home--mobilized & {
             padding-left: 0;
-            bottom: auto;
-            position: relative;
         }
     }
 

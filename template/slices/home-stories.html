@@ -11,22 +11,24 @@ const itemsMapped = slice.items.map(( item ) => {
     return doc;
 });
 %>
-<div class="home__stories-desc cms -wrap">
-    <%- dom.RichText.asHtml( slice.primary.stories_description ) %>
-    <%- include( './link.html', {
-        json: {
-            title: dom.RichText.asText( slice.primary.stories_page_link.data.title )
-        },
-        slice: {
-            primary: {
-                document_link: slice.primary.stories_page_link,
-                external_link: {},
-                text: slice.primary.stories_cta,
-                icon: 'Arrow'
+<div class="home__stories-posit">
+    <div class="home__stories-desc cms -wrap">
+        <%- dom.RichText.asHtml( slice.primary.stories_description ) %>
+        <%- include( './link.html', {
+            json: {
+                title: dom.RichText.asText( slice.primary.stories_page_link.data.title )
+            },
+            slice: {
+                primary: {
+                    document_link: slice.primary.stories_page_link,
+                    external_link: {},
+                    text: slice.primary.stories_cta,
+                    icon: 'Arrow'
+                }
             }
-        }
-    }) %>
-</div>
-<div class="home__stories-slider">
-    <%- include( '../partials/slider.html', {items: itemsMapped, options: {spawn: config.homepage, label: dom.RichText.asText( slice.primary.stories_page_link.data.title )} } ) %>
+        }) %>
+    </div>
+    <div class="home__stories-slider">
+        <%- include( '../partials/slider.html', {items: itemsMapped, options: {spawn: config.homepage, label: dom.RichText.asText( slice.primary.stories_page_link.data.title )} } ) %>
+    </div>
 </div>
