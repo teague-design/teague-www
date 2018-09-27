@@ -55,7 +55,15 @@
     .twi__text {
         z-index: 2;
         order: 1;
-        @include wrapl();
+        @include wrap();
+
+        p {
+            padding-right: 20vw;
+
+            @include respond( $break-tablet-small ) {
+                padding-right: 0;
+            }
+        }
 
         @include respond( $break-tablet-small ) {
             width: 100%;
@@ -73,6 +81,7 @@
 
         @include respond( $break-tablet-small ) {
             padding-left: 0;
+            padding-top: 80px;
             white-space: nowrap;
             display: block;
             overflow-x: auto;
