@@ -7,7 +7,6 @@
 
     @include respond( $break-tablet-medium ) {
         display: block;
-        @include wrap();
     }
 }
 .process__story {
