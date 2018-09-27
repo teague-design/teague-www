@@ -261,7 +261,7 @@
     }
 
     .promo--large & {
-        @include respond( $mobile-width ) {
+        @include respond( $break-tablet-small ) {
             width: 100vw;
         }
     }
@@ -280,7 +280,7 @@
     z-index: 2;
     @include wrapl();
 
-    @include respond( $mobile-width ) {
+    @include respond( $break-tablet-small ) {
         width: 100vw;
         position: relative;
         top: auto;
