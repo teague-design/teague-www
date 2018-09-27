@@ -98,19 +98,29 @@
         }
     }
 }
-.formover__info,
-.formover__form  {
-    width: 100%;
-    max-width: 38.513513514vw;
+.formover__info {
+    width: 60%;
     padding-top: 80px;
 
     @include respond( $navi-break ) {
-        max-width: 100%;
+        width: 100%;
+        padding-top: 50px;
+    }
+}
+.formover__form {
+    width: 40%;
+    padding-top: 80px;
+
+    @include respond( $navi-break ) {
+        width: 100%;
         padding-top: 50px;
     }
 }
 .formover__title {
     padding: 40px 0 40px;
+}
+.formover__desc {
+    padding-right: 20vw;
 }
 .formover__navi {
     cursor: pointer;
