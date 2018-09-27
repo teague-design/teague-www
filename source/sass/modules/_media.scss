@@ -3,15 +3,7 @@ $ui-margin: 22px;
 
 
 .media-overlay {
-    background-color: $white;
-    opacity: 0.25;
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    transition: opacity $base-duration $ease;
-    pointer-events: none;
+    @include media-overlay();
 }
 
 

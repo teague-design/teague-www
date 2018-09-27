@@ -10,6 +10,11 @@
 .main__header__image {
     width: 90vw;
 
+    .work & .image-wrap:after {
+        content: "";
+        @include media-overlay( $black );
+    }
+
     @include respond( $mobile-width ) {
         width: 100vw;
     }

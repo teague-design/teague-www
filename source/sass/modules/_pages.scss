@@ -259,6 +259,11 @@
     position: relative;
     z-index: 1;
 
+    .work & .image-wrap:after {
+        content: "";
+        @include media-overlay( $black );
+    }
+
     .promo--large & {
         @include respond( $mobile-width ) {
             width: 100vw;
