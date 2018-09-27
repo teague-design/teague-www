@@ -102,10 +102,12 @@
     }
 
     .cta {
-        width: 33.333333%;
+        width: 100%;
+        max-width: 23.648648649vw;
 
         @include respond( $break-tablet-small ) {
-            width: 100%;
+            max-width: 100%;
+            display: block;
         }
     }
     .cta + .cta {
@@ -114,10 +116,8 @@
         }
     }
     .cta__desc {
-        max-width: 23.648648649vw;
-
         @include respond( $break-tablet-small ) {
-            max-width: 100%;
+            padding-right: 10vw;
         }
     }
 }
