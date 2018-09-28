@@ -68,6 +68,15 @@
 }
 .main__header__title {
     width: 90vw;
+    transition: color $fast-duration $ease;
+
+    &.is-textchange {
+        color: $white;
+
+        .is-theme-black & {
+            color: $black;
+        }
+    }
 
     @include respond( $mobile-width ) {
         width: 100vw;

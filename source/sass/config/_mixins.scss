@@ -219,10 +219,10 @@
     }
 }
 @mixin padh() {
-    padding-top: $header-height;
+    padding-top: $header-height + $header-height;
 
     @include respond( $navi-break ) {
-        padding-top: $header-height-mobile;
+        padding-top: $header-height-mobile + $header-height-mobile;
     }
 }
 @mixin padm() {

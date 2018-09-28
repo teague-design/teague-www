@@ -10,12 +10,12 @@ const isPage = (locals.item.type === 'page');
 const isIndustryPage = isPage && (locals.item.tags.length !== 0);
 %>
 <div class="main__header js-page-header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory || isCasestudy || isIndustryPage ) { %>main__header--story<% } %>">
-    <% if ( isStory || isCasestudy ) { %>
-        <div class="main__header__tag cms -wrap">
-            <h6><%- locals.item.tags[ 0 ] %></h6>
-        </div>
-    <% } %>
     <div class="main__header__title js-page-header-title cms -wrap">
+        <% if ( isStory || isCasestudy ) { %>
+            <div class="main__header__tag js-page-header-tag">
+                <h6><%- locals.item.tags[ 0 ] %></h6>
+            </div>
+        <% } %>
         <%- locals.context.get( 'dom' ).RichText.asHtml( locals.slice.primary.header_title ) %>
     </div>
     <% if ( isImage ) { %>

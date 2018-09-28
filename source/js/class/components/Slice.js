@@ -32,15 +32,15 @@ class Slice {
 
     page_header () {
         this.isFixedImage = false;
+        this.page = this.element.find( ".js-page-header" );
+        this.title = this.element.find( ".js-page-header-title" );
         this.image = this.element.find( ".js-page-header-image" );
+        this.deets = this.element.find( ".js-page-header-deets" );
+        this.tag = this.element.find( ".js-page-header-tag" );
 
         if ( this.image.length ) {
             this.controller = new Controller();
             this.controller.go(() => {
-                this.page = this.element.find( ".js-page-header" );
-                this.title = this.element.find( ".js-page-header-title" );
-                this.image = this.element.find( ".js-page-header-image" );
-                this.deets = this.element.find( ".js-page-header-deets" );
                 this.titleBounds = this.title[ 0 ].getBoundingClientRect();
                 this.imageBounds = this.image[ 0 ].getBoundingClientRect();
                 this.deetsBounds = this.deets[ 0 ].getBoundingClientRect();
@@ -102,7 +102,13 @@ class Slice {
 
                 // Transform image accordingly
                 if ( !this.isFixedImage ) {
-                    this.title[ 0 ].style.opacity = "1";
+                    if ( !this.tag.length ) {
+                        this.title[ 0 ].style.opacity = "1";
+
+                    } else {
+                        this.title.removeClass( "is-textchange" );
+                    }
+
                     core.util.translate3d(
                         this.image[ 0 ],
                         0,
@@ -111,8 +117,13 @@ class Slice {
                     );
 
                 } else if ( this.isFixedImage ) {
-                    // Figure out opacity equation here...?
-                    this.title[ 0 ].style.opacity = (1 - (this.viewport.height - this.deetsBounds.top) / (this.viewport.height - this.titleBounds.top));
+                    if ( !this.tag.length ) {
+                        this.title[ 0 ].style.opacity = (1 - (this.viewport.height - this.deetsBounds.top) / (this.viewport.height - this.titleBounds.top));
+
+                    } else {
+                        this.title.addClass( "is-textchange" );
+                    }
+
                     core.util.translate3d(
                         this.image[ 0 ],
                         0,

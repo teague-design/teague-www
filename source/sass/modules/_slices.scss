@@ -30,3 +30,19 @@
     @include wrap-p();
     text-align: left;
 }
+.slice--page-header {
+    &:after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 100%;
+        bottom: 0;
+        height: 80px;
+        background-color: $white;
+        // outline: 1px solid red;
+
+        .is-theme-black & {
+            background-color: $black;
+        }
+    }
+}
