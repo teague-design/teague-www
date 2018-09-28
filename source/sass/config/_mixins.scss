@@ -226,10 +226,10 @@
     }
 }
 @mixin padm() {
-    padding-top: 16vw;
+    padding-top: calc( 16vw + #{$header-height} );
 
     @include respond-min( $bind-width ) {
-        padding-top: 310px
+        padding-top: calc( 310px + #{$header-height} );
     }
 }
 @mixin arrow-hover() {

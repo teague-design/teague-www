@@ -1,5 +1,11 @@
 .spacer {
     height: $expander-2;
+    position: relative;
+    background-color: $white;
+
+    .is-theme-black & {
+        background-color: $black;
+    }
 
     @include respond-min( $mobile-width ) {
         height: $expander-1;
@@ -10,6 +16,14 @@
 
     @include respond( $navi-break ) {
         height: $header-height-mobile;
+    }
+}
+.slices:not( .home__slices ) .slice {
+    position: relative;
+    background-color: $white;
+
+    .is-theme-black & {
+        background-color: $black;
     }
 }
 .slice--text__node {

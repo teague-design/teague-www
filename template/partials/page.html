@@ -5,6 +5,6 @@ const slices = item.data.slices;
 const scope = item.type !== 'page' ? item.type : item.uid;
 const isPages = scope !== locals.context.get( 'config' ).homepage;
 %>
-<div class="<%= scope %> js-<%= scope %> <%= isPages ? 'js-pages' : '' %> -pad">
+<div class="<%= scope %> js-<%= scope %>">
     <%- include( './slices.html', {item, slices, scope} ) %>
 </div>

@@ -2,7 +2,8 @@ import * as core from "../core";
 import BaseController from "./controllers/BaseController";
 import ImageController from "./controllers/ImageController";
 import HomeController from "./controllers/HomeController";
-import PagesController from "./controllers/PagesController";
+import AnimateController from "./controllers/AnimateController";
+import Slice from "./components/Slice";
 import Form from "./components/Form";
 import View from "./components/View";
 import Taxi from "./components/Taxi";
@@ -70,9 +71,9 @@ class Controllers {
 
         // Unique Controllers...
         this.push( "home", core.dom.body.find( ".js-home" ), HomeController );
-        this.push( "pages", core.dom.body.find( ".js-pages" ), PagesController );
 
         // Uses BaseController
+        this.push( "slice", core.dom.body.find( ".js-slice" ), BaseController, Slice );
         this.push( "form", core.dom.body.find( ".js-form" ), BaseController, Form );
         this.push( "view", core.dom.body.find( ".js-view" ), BaseController, View );
         this.push( "taxi", core.dom.body.find( ".js-taxi" ), BaseController, Taxi );
@@ -91,12 +92,21 @@ class Controllers {
                 this.callback();
             }
         });
+
+        this.animates = this.element.find( core.config.lazyAnimSelector );
+        if ( this.animates.length ) {
+            this.animateController = new AnimateController( this.animates );
+        }
     }
 
 
     destroy () {
         if ( this.imageController ) {
             this.imageController.destroy();
+        }
+
+        if ( this.animateController ) {
+            this.animateController.destroy();
         }
 
         this.kill();

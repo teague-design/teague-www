@@ -7,7 +7,7 @@ const json = !item ? {} : {
     tag: item.tags.length ? item.tags[ 0 ] : null
 };
 %>
-<div class="bigpink js-bigpink is-animated is-hidden -pad" data-json="<%= JSON.stringify( json ) %>">
+<div class="bigpink js-bigpink is-hidden" data-json="<%= JSON.stringify( json ) %>">
     <div class="bigpink__title main__header main__header--image">
         <div class="main__header__title cms -wrap">
             <h1 class="js-bigpink-title"></h1>

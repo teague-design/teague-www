@@ -159,8 +159,11 @@ class View {
      */
     exec () {
         this.controllers.image = new ImageController( this.element.find( core.config.lazyImageSelector ) );
-        this.controllers.animate = new AnimateController( this.element, this.element.find( core.config.lazyAnimSelector ) );
-        this.controllers.animate.start();
+
+        this.animates = this.element.find( core.config.lazyAnimSelector );
+        if ( this.animates.length ) {
+            this.controllers.animate = new AnimateController( this.animates );
+        }
     }
 
 
@@ -175,12 +178,10 @@ class View {
     destroy () {
         if ( this.controllers.image ) {
             this.controllers.image.destroy();
-            this.controllers.image = null;
         }
 
         if ( this.controllers.animate ) {
             this.controllers.animate.destroy();
-            this.controllers.animate = null;
         }
     }
 }

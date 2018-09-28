@@ -16,7 +16,7 @@ export default ( view ) => {
     });
 
     return `
-        <div class="taxi__tags">
+        <div class="taxi__tags js-lazy-anim">
             <div class="taxi__label p">Filter by</div>
             <a class="taxi__tag js-taxi-tag h6 ac ${params.tag ? "" : "is-active"}" href="${view.data.page}">All</a>
             ${tags.map(( tag ) => {

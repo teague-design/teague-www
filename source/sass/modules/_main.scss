@@ -24,6 +24,11 @@
     display: flex;
     justify-content: space-between;
     padding-right: 0;
+    background-color: $white;
+
+    .is-theme-black & {
+        background-color: $black;
+    }
 
     @include respond( $mobile-width ) {
         width: 100vw;

@@ -1,26 +1,10 @@
 /******************************************************************************
  * Animations
 *******************************************************************************/
-.taxi,
-.main__header__image,
-.main__header__desc,
-.main__header__tag,
-.main__header__title,
-.main__header__deets__l,
-.main__header__deets__r {
-    opacity: 0;
-    transform: translate3d( 0, 50%, 0 );
-    transition: opacity $base-duration $ease,
-                transform $base-duration $ease;
-
-    .is-animated & {
-        opacity: 1;
-        transform: translate3d( 0, 0, 0 );
-    }
-}
+.taxi__tags,
 .feed__item {
     opacity: 0;
-    transform: translate3d( 0, 25%, 0 );
+    transform: translate3d( 0, 50%, 0 );
     transition: opacity $base-duration $ease,
                 transform $base-duration $ease;
 
