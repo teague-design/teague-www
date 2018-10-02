@@ -20,8 +20,11 @@ const relatedTexts = {
         <% } %>
         <div class="related__stories">
             <% locals.slice.items.forEach(( sliceItem ) => { %>
+                <%
+                const isBroken = !sliceItem.story.id || sliceItem.story.isBroken;
+                %>
                 <div class="related__story">
-                    <% if ( isStory || isCasestudy ) { %>
+                    <% if ( (isStory || isCasestudy) && !isBroken ) { %>
                         <div class="related__image">
                             <%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %>
                         </div>
@@ -50,7 +53,7 @@ const relatedTexts = {
                                 }) %>
                             </div>
                         </div>
-                    <% } else { %>
+                    <% } else if ( !isBroken ) { %>
                         <%
                         const json = {
                             title: dom.RichText.asText( sliceItem.story.data.title ),

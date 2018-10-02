@@ -10,25 +10,27 @@ const config = locals.context.get( 'config' );
     <% if ( locals.options.spawn === config.homepage ) { %>
         <div class="slider__splash js-slider-splash" data-label="<%= locals.options.label %>">
             <% locals.items.forEach(( item, i ) => { %>
-                <div class="slider__splash__item js-slider-splash-item cms -wrap" data-index="<%= i %>">
-                    <%- dom.RichText.asHtml( item.data.title ).replace( /h1/g, 'h4' ) %>
-                    <p><%= item.data.excerpt %></p>
-                    <%- include( '../slices/link.html', {
-                        json: {
-                            title: dom.RichText.asText( item.data.title ),
-                            story: true,
-                            tag: item.tags[ 0 ]
-                        },
-                        slice: {
-                            primary: {
-                                document_link: item,
-                                external_link: {},
-                                text: item.cta,
-                                icon: 'Article'
+                <% if ( !item.isBroken ) { %>
+                    <div class="slider__splash__item js-slider-splash-item cms -wrap" data-index="<%= i %>">
+                        <%- dom.RichText.asHtml( item.data.title ).replace( /h1/g, 'h4' ) %>
+                        <p><%= item.data.excerpt %></p>
+                        <%- include( '../slices/link.html', {
+                            json: {
+                                title: dom.RichText.asText( item.data.title ),
+                                story: true,
+                                tag: item.tags[ 0 ]
+                            },
+                            slice: {
+                                primary: {
+                                    document_link: item,
+                                    external_link: {},
+                                    text: item.cta,
+                                    icon: 'Article'
+                                }
                             }
-                        }
-                    }) %>
-                </div>
+                        }) %>
+                    </div>
+                <% } %>
             <% })%>
         </div>
     <% } %>
@@ -44,34 +46,38 @@ const config = locals.context.get( 'config' );
                                 <p><%= item.data.title %></p>
                             </div>
                         </div>
-                        <%
-                        const json = {
-                            title: dom.RichText.asText( item.data.story.data.title ),
-                            story: true,
-                            tag: item.data.story.tags[ 0 ]
-                        };
-                        %>
-                        <a href="<%= locals.context.getUrl( item.data.story ) %>" data-json="<%= JSON.stringify( json ) %>" class="slider__badge cms">
-                            <div class="slider__badge__meta">
-                                <%- include( './svg/icon-article.svg', {style: 'lite'} ) %>
-                                <h6>Design Story</h6>
-                            </div>
-                            <div class="slider__badge__story">
-                                <h6><%= dom.RichText.asText( item.data.story.data.title ) %></h6>
-                                <%- include( './svg/icon-arrow.svg', {style: 'lite'} ) %>
-                            </div>
-                        </a>
-                    <% } else { %>
-                        <%- include( './image.html', {image: item.data.image} ) %>
-                        <% if ( item.data.title && locals.options.spawn === 'work' ) { %>
-                            <div class="slider__title cms">
-                                <%- dom.RichText.asHtml( item.data.title ) %>
-                            </div>
+                        <% if ( item.data.story.id && !item.data.story.isBroken ) { %>
+                            <%
+                            const json = {
+                                title: dom.RichText.asText( item.data.story.data.title ),
+                                story: true,
+                                tag: item.data.story.tags[ 0 ]
+                            };
+                            %>
+                            <a href="<%= locals.context.getUrl( item.data.story ) %>" data-json="<%= JSON.stringify( json ) %>" class="slider__badge cms">
+                                <div class="slider__badge__meta">
+                                    <%- include( './svg/icon-article.svg', {style: 'lite'} ) %>
+                                    <h6>Design Story</h6>
+                                </div>
+                                <div class="slider__badge__story">
+                                    <h6><%= dom.RichText.asText( item.data.story.data.title ) %></h6>
+                                    <%- include( './svg/icon-arrow.svg', {style: 'lite'} ) %>
+                                </div>
+                            </a>
                         <% } %>
-                        <% if ( item.data.caption ) { %>
-                            <div class="slider__cap">
-                                <div class="p pc"><%= item.data.caption %></div>
-                            </div>
+                    <% } else { %>
+                        <% if ( !item.isBroken ) { %>
+                            <%- include( './image.html', {image: item.data.image} ) %>
+                            <% if ( item.data.title && locals.options.spawn === 'work' ) { %>
+                                <div class="slider__title cms">
+                                    <%- dom.RichText.asHtml( item.data.title ) %>
+                                </div>
+                            <% } %>
+                            <% if ( item.data.caption ) { %>
+                                <div class="slider__cap">
+                                    <div class="p pc"><%= item.data.caption %></div>
+                                </div>
+                            <% } %>
                         <% } %>
                     <% } %>
                 </div>

@@ -29,6 +29,12 @@ const itemsMapped = slice.items.map(( item ) => {
         }) %>
     </div>
     <div class="home__stories-slider">
-        <%- include( '../partials/slider.html', {items: itemsMapped, options: {spawn: config.homepage, label: dom.RichText.asText( slice.primary.stories_page_link.data.title )} } ) %>
+        <%- include( '../partials/slider.html', {
+            items: itemsMapped,
+            options: {
+                spawn: config.homepage,
+                label: dom.RichText.asText( slice.primary.stories_page_link.data.title )
+            }
+        }) %>
     </div>
 </div>

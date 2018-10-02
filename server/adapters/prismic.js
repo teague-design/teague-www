@@ -400,7 +400,7 @@ const getDataForPage = function ( req, listener ) {
                 return (collection.uid === type);
             });
             const done = function ( json ) {
-                if ( !json.results.length ) {
+                if ( !json.results.length && !collection ) {
                     // Static page with no CMS data attached to it...
                     if ( core.template.cache.pages.indexOf( `${type}.html` ) !== -1 ) {
                         resolve( data );

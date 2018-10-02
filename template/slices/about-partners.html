@@ -75,7 +75,7 @@ while ( (increment * 9) < sliceItems.length ) {
         <div class="partners__active">
             <% slice.items.forEach(( sliceItem, i ) => { %>
                 <div class="partners__active__content js-triggers-active" data-index="<%= i %>">
-                    <% if ( sliceItem.design_story_link.id ) { %>
+                    <% if ( sliceItem.design_story_link.id && !sliceItem.design_story_link.isBroken ) { %>
                         <div class="partners__story">
                             <%- include( '../partials/image.html', {image: sliceItem.design_story_link.data.image} ) %>
                             <div class="partners__story__meta cms">

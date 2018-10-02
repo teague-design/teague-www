@@ -3,7 +3,7 @@
 locals { item, slice, scope }
 */
 const dom = locals.context.get( 'dom' );
-const doc = slice.primary.story.id ? slice.primary.story : slice.primary.page;
+const doc = slice.primary.story.id ? slice.primary.story : slice.primary.page.id ? slice.primary.page : null;
 const isRelated = slice.primary.layout === 'Related';
 const isPromoLargeA = slice.primary.layout === 'Promo Large A';
 const isPromoLargeB = slice.primary.layout === 'Promo Large B';
@@ -11,9 +11,10 @@ const isPromoXL = slice.primary.layout === 'Promo XL';
 const isPage = slice.primary.page.id;
 const isIndustryPage = isPage && doc.tags.lenth !== 0;
 const isStory = slice.primary.story.id;
+const isBroken = !doc.id || doc.isBroken;
 let json = null;
 %>
-<% if ( isRelated ) { %>
+<% if ( isRelated && !isBroken ) { %>
     <div class="ctas ctas--oneup -wrap">
         <div class="ctas__wrap ctas__wrap--bored ctas__wrap--pad">
             <div class="cta cta--story">
@@ -46,7 +47,7 @@ let json = null;
         </div>
     </div>
 
-<% } else if ( isPromoLargeA || isPromoLargeB ) { %>
+<% } else if ( (isPromoLargeA || isPromoLargeB) && !isBroken ) { %>
     <%
     json = {
         title: dom.RichText.asText( doc.data.title ),
@@ -72,7 +73,7 @@ let json = null;
         </a>
     </div>
 
-<% } else if ( isPromoXL ) { %>
+<% } else if ( isPromoXL && !isBroken ) { %>
     <%
     json = {
         title: dom.RichText.asText( doc.data.title ),
