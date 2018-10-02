@@ -26,6 +26,9 @@
         background-color: $black;
     }
 }
+.slice--text {
+    @include wrap();
+}
 .slice--text__node {
     @include wrap-p();
     text-align: left;
@@ -43,6 +46,10 @@
 
         .is-theme-black & {
             background-color: $black;
+        }
+
+        .stories__slices & {
+            display: none;
         }
     }
 }

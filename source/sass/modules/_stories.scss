@@ -1,11 +1,3 @@
-.story {
-    .slice--text {
-        @include wrap();
-    }
-}
-
-
-
 .authors__list {
     display: flex;
     align-items: flex-start;

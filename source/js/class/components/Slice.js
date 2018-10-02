@@ -26,7 +26,7 @@ class Slice {
 
 
     init () {
-        this.element[ 0 ].style.zIndex = this.data.index;
+        // this.element[ 0 ].style.zIndex = this.data.index;
     }
 
 
