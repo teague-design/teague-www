@@ -83,7 +83,8 @@
 
     .svg {
         transform: translate3d( -100%, 0, 0 );
-        transition: transform $long-duration $ease;
+        transition: fill $long-duration $ease,
+                    transform $long-duration $ease;
 
         .home--mobilized & {
             transform: translate3d( -55%, 0, 0 );
@@ -94,6 +95,7 @@
         transform: translate3d( 0, 0, 0 );
     }
     &.is-half .svg {
+        fill: $white;
         transform: translate3d( -50%, 0, 0 );
     }
 }
