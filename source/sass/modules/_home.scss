@@ -55,7 +55,8 @@
     transition: filter $long-duration $ease;
     filter: grayscale( 100% );
 
-    .is-cta & {
+    .is-cta &,
+    .home--mobilized & {
         filter: grayscale( 0% );
     }
 
@@ -99,6 +100,7 @@
                     transform $long-duration $ease;
 
         .home--mobilized & {
+            fill: $white;
             transform: translate3d( -55%, 0, 0 );
         }
     }
@@ -224,7 +226,8 @@
     transition: filter $long-duration $ease;
     filter: grayscale( 100% );
 
-    .is-cta & {
+    .is-cta &,
+    .home--mobilized & {
         filter: grayscale( 0% );
     }
 
@@ -351,7 +354,8 @@
     transition: filter $long-duration $ease;
     filter: grayscale( 100% );
 
-    .is-cta & {
+    .is-cta &,
+    .home--mobilized & {
         filter: grayscale( 0% );
     }
 
