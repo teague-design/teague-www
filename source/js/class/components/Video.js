@@ -29,6 +29,7 @@ class Video {
         this.isFallback = false;
         this.isPlaying = false;
         this.isReadyState = false;
+        this.isToggledPlayback = false;
         this.videoFS = null;
 
         // Store instance with element...
@@ -108,6 +109,11 @@ class Video {
 
     automate () {
         this.controller.go(() => {
+            if ( this.isToggledPlayback ) {
+                this.controller.stop();
+                return;
+            }
+
             if ( core.util.isElementVisible( this.elem[ 0 ] ) && !this.isPlaying ) {
                 this.play( "Autoplay" );
 
@@ -240,6 +246,8 @@ class Video {
 
 
     togglePlay () {
+        this.isToggledPlayback = true;
+
         if ( !this.isPlaying ) {
             this.play( "CLICK PLAY VIDEO" );
 

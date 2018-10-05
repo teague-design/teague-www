@@ -13,7 +13,7 @@ const dom = locals.context.get( 'dom' );
         <h6><%= slice.primary.discover_label %></h6>
     </div>
     <%- dom.RichText.asHtml( slice.primary.discover_description ) %>
-    <div class="home__discover-cta">
+    <div class="home__discover-cta js-home-discover-cta">
         <%- dom.RichText.asHtml( slice.primary.discover_cta ) %>
         <%- include( './link.html', {
             json: {

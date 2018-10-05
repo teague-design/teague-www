@@ -223,6 +223,12 @@ class HomeController {
             mark.removeClass( "is-half" );
             video.addClass( "is-fs" );
             videoInstance.toggleSound();
+
+        }).on( "mouseenter", () => {
+            slice.addClass( "is-cta" );
+
+        }).on( "mouseleave", () => {
+            slice.removeClass( "is-cta" );
         });
 
         ex.on( "click", () => {
@@ -277,6 +283,7 @@ class HomeController {
     home_about_load_ () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-about-desc" );
+        const cta = slice.find( ".js-home-about-cta .link" );
         const image1 = slice.find( ".js-lazy-image" ).first();
         const image2 = slice.find( ".js-lazy-image" ).last();
         const rect1 = slice.find( "rect:nth-child(3)" );
@@ -321,6 +328,13 @@ class HomeController {
             ${0}px
         )`;
 
+        cta.on( "mouseenter", () => {
+            slice.addClass( "is-cta" );
+
+        }).on( "mouseleave", () => {
+            slice.removeClass( "is-cta" );
+        });
+
         desc.addClass( "is-anim" );
 
         setTimeout(() => {
@@ -349,6 +363,7 @@ class HomeController {
     home_discover_load_ () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
         const desc = slice.find( ".js-home-discover-desc" );
+        const cta = slice.find( ".js-home-discover-cta .link" );
         const image = slice.find( ".image" );
         const aboutSlice = this.slices.filter( "[data-prop='home_about']" );
         const aboutRect2 = aboutSlice.find( "rect:nth-child(4)" );
@@ -362,6 +377,13 @@ class HomeController {
             0px
             0px
         )`;
+
+        cta.on( "mouseenter", () => {
+            slice.addClass( "is-cta" );
+
+        }).on( "mouseleave", () => {
+            slice.removeClass( "is-cta" );
+        });
 
         desc.addClass( "is-anim" );
         core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
