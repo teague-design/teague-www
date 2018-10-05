@@ -30,7 +30,7 @@ const isIndustryPage = isPage && (locals.item.tags.length !== 0);
                     <%- locals.context.get( 'dom' ).RichText.asHtml( locals.slice.primary.header_description ) %>
                 </div>
             </div>
-            <% if ( !isPage ) { %>
+            <% if ( !isPage && !isCasestudy ) { %>
                 <div class="main__header__deets__r main__header__authors">
                     <h6>Project Authors</h6>
                     <% locals.item.data.authors.forEach(( author ) => { %>
