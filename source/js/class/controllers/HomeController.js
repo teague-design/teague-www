@@ -28,12 +28,6 @@ class HomeController {
         this._unloadFunc = null;
         this._resizer = new ResizeController();
         this._scroller = new ScrollController();
-        this._loaded = {
-            reel: false,
-            about: false,
-            discover: false,
-            stories: false
-        };
         this._timeout = null;
         this._clipPath = ("-webkit-clip-path" in this.element[ 0 ].style ? "-webkit-clip-path" : "clipPath");
 
@@ -195,14 +189,7 @@ class HomeController {
     home_reel_unload_mobile () {}
     home_reel_load () {
         this.home_reel_load_mobile();
-
-        if ( !this._loaded.reel ) {
-            this._loaded.reel = true;
-            this.home_reel_load_();
-
-        } else {
-            this.slices.eq( this.index ).addClass( "is-active" );
-        }
+        this.home_reel_load_();
     }
     home_reel_load_ () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
@@ -257,11 +244,23 @@ class HomeController {
     }
     home_reel_unload () {
         const slice = this.slices.eq( this.index );
+        const mark = slice.find( ".js-home-reel-mark" );
+        const desc = slice.find( ".js-home-reel-desc" );
+        const cta = slice.find( ".js-home-reel-cta" );
         const ex = slice.find( ".js-home-reel-ex" );
         const video = slice.find( ".js-home-reel-video" );
 
+        desc.addClass( "is-animo" );
+        cta.removeClass( "is-anim" ).off( "click" );
         ex.removeClass( "is-anim" ).off( "click" );
+        mark.removeClass( "is-full is-half" );
         video.removeClass( "is-fs" );
+
+        setTimeout(() => {
+            desc.removeClass( "is-anim is-animo" );
+
+        }, 1000 );
+
     }
 
 
@@ -271,14 +270,7 @@ class HomeController {
     home_about_unload_mobile () {}
     home_about_load () {
         this.home_about_load_mobile();
-
-        if ( !this._loaded.about ) {
-            this._loaded.about = true;
-            this.home_about_load_();
-
-        } else {
-            this.slices.eq( this.index ).addClass( "is-active" );
-        }
+        this.home_about_load_();
     }
     home_about_load_ () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
@@ -342,7 +334,55 @@ class HomeController {
 
         }, 10 );
     }
-    home_about_unload () {}
+    home_about_unload () {
+        const slice = this.slices.eq( this.index );
+        const desc = slice.find( ".js-home-about-desc" );
+        const image1 = slice.find( ".image:nth-child(1)" );
+        const image2 = slice.find( ".image:nth-child(2)" );
+        const rect1 = slice.find( "rect:nth-child(3)" );
+        const rect2 = slice.find( "rect:nth-child(4)" );
+        const image2Bounds = image2[ 0 ].getBoundingClientRect();
+        const image1Bounds = image1[ 0 ].getBoundingClientRect();
+        const rect1Bounds = rect1[ 0 ].getBoundingClientRect();
+        const rect2Bounds = rect2[ 0 ].getBoundingClientRect();
+
+        this._resizer.off( "resize" );
+
+        /* values are from-top, from-right, from-bottom, from-left */
+        image1[ 0 ].style.clipPath = `inset(
+            ${0}px
+            100vw
+            ${window.innerHeight - rect1Bounds.bottom - (window.innerWidth * 0.03)}px
+            ${0}px
+        )`;
+        image2[ 0 ].style.clipPath = `inset(
+            ${rect2Bounds.top - image2Bounds.top}px
+            ${0}px
+            ${window.innerHeight - rect2Bounds.bottom}px
+            20vw
+        )`;
+
+        desc.addClass( "is-animo" );
+
+        setTimeout(() => {
+            /* values are from-top, from-right, from-bottom, from-left */
+            image1[ 0 ].style.clipPath = `inset(
+                ${rect1Bounds.top - image1Bounds.top}px
+                ${window.innerWidth - rect1Bounds.width - rect1Bounds.left}px
+                ${window.innerHeight - rect1Bounds.bottom}px
+                ${0}px
+            )`;
+            image2[ 0 ].style.clipPath = `inset(
+                ${rect2Bounds.top - image2Bounds.top}px
+                ${window.innerWidth - rect2Bounds.width - rect2Bounds.left}px
+                ${window.innerHeight - rect2Bounds.bottom}px
+                ${0}px
+            )`;
+
+            desc.removeClass( "is-anim is-animo" );
+
+        }, 1000 );
+    }
 
 
     home_discover_load_mobile () {
@@ -351,14 +391,7 @@ class HomeController {
     home_discover_unload_mobile () {}
     home_discover_load () {
         this.home_discover_load_mobile();
-
-        if ( !this._loaded.discover ) {
-            this._loaded.discover = true;
-            this.home_discover_load_();
-
-        } else {
-            this.slices.eq( this.index ).addClass( "is-active" );
-        }
+        this.home_discover_load_();
     }
     home_discover_load_ () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
@@ -399,7 +432,48 @@ class HomeController {
 
         }, 10 );
     }
-    home_discover_unload () {}
+    home_discover_unload () {
+        const slice = this.slices.eq( this.index );
+        const desc = slice.find( ".js-home-discover-desc" );
+        const image = slice.find( ".image" );
+        const storiesSlice = this.slices.filter( "[data-prop='home_stories']" );
+        const storiesImage = storiesSlice.find( ".js-slider-item.is-active" );
+        const storiesImageBounds = storiesImage[ 0 ].getBoundingClientRect();
+        const aboutSlice = this.slices.filter( "[data-prop='home_about']" );
+        const aboutRect2 = aboutSlice.find( "rect:nth-child(4)" );
+        const aboutRect2Bounds = aboutRect2[ 0 ].getBoundingClientRect();
+
+        image[ 0 ].style.width = `${storiesImageBounds.width}px`;
+        image[ 0 ].style.height = `${storiesImageBounds.height}px`;
+        image[ 0 ].style.top = `${storiesImageBounds.top}px`;
+        image[ 0 ].style.left = `${storiesImageBounds.left}px`;
+
+        desc.addClass( "is-animo" );
+
+        setTimeout(() => {
+            image[ 0 ].style.width = null;
+            image[ 0 ].style.height = null;
+            image[ 0 ].style.top = null;
+            image[ 0 ].style.left = null;
+
+        }, 500 );
+
+        setTimeout(() => {
+            const imageBounds = image[ 0 ].getBoundingClientRect();
+
+            /* values are from-top, from-right, from-bottom, from-left */
+            image[ 0 ].style.clipPath = `inset(
+                ${aboutRect2Bounds.top - imageBounds.top}px
+                0px
+                0px
+                0px
+            )`;
+
+            image.removeClass( "is-animno" );
+            desc.removeClass( "is-anim is-animo" );
+
+        }, 1000 );
+    }
 
 
     home_stories_load_mobile () {
@@ -408,14 +482,7 @@ class HomeController {
     home_stories_unload_mobile () {}
     home_stories_load () {
         this.home_stories_load_mobile();
-
-        if ( !this._loaded.stories ) {
-            this._loaded.stories = true;
-            this.home_stories_load_();
-
-        } else {
-            this.slices.eq( this.index ).addClass( "is-active" );
-        }
+        this.home_stories_load_();
     }
     home_stories_load_ () {
         const slice = this.slices.eq( this.index ).addClass( "is-active" );
@@ -424,7 +491,12 @@ class HomeController {
         desc.addClass( "is-anim" );
         core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
     }
-    home_stories_unload () {}
+    home_stories_unload () {
+        const slice = this.slices.eq( this.index );
+        const desc = slice.find( ".js-home-stories-desc" );
+
+        desc.removeClass( "is-anim" );
+    }
 
 
     destroy () {

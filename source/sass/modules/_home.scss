@@ -271,6 +271,10 @@
     transition: opacity $base-duration $ease,
                 transform $base-duration $ease;
 
+    h3 {
+        @include font-family-main-semibold();
+    }
+
     @include respond( $break-tablet-medium ) {
         left: 0;
         max-width: 768px;
@@ -387,6 +391,10 @@
     opacity: 0;
     transition: opacity $base-duration $ease,
                 transform $base-duration $ease;
+
+    h3 {
+        @include font-family-main-semibold();
+    }
 
     &.is-anim {
         transform: translate3d( 0, -50%, 0 );
