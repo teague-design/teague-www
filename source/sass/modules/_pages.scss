@@ -721,3 +721,36 @@
 .jobs__desc {
     padding-bottom: 20px;
 }
+
+
+
+.inline-quote {
+    padding-left: 24vw;
+    padding-right: 24vw;
+    text-align: center;
+    &::before {
+        content: '“';
+        @include font-family-main-semibold();
+        font-size: 86pt;
+    }
+    @include respond( $break-tablet-medium ) {
+        padding-left: 16vw;
+        padding-right: 16vw;
+    }
+    @include respond( $break-tablet-small ) {
+        padding-left: 8vw;
+        padding-right: 8vw;
+    }
+    @include respond( $break-mobile-medium ) {
+        @include wrap();
+    }
+}
+.inline-quote__text {
+    margin-top: -45px;
+    margin-bottom: 20px;
+}
+.inline-quote__person {
+    &__title {
+        color: #c4c4c4;
+    }
+}

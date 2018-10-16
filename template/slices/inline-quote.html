@@ -1,0 +1,19 @@
+<%
+/* Inline Quote
+locals { item, slice, scope }
+*/
+%>
+<div class="cms inline-quote">
+  <h4 class="inline-quote__text">
+    <%- slice.primary.quote %>
+  </h4>
+  <p class="inline-quote__person">
+    <span class="inline-quote__person__title">
+      <%- slice.primary.person_title %>
+    </span>
+    <br>
+    <span class="inline-quote__person__name">
+      <%- slice.primary.person_name %>
+    </span>
+  </p>
+</div>
