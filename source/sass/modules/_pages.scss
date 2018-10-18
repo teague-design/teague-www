@@ -791,3 +791,33 @@
         }
     }
 }
+
+
+
+.two-images-up__image {
+    display: inline-block;
+    width: 100vw;
+    min-width: none;
+
+    @include respond-min( $break-mobile-medium ) {
+        width: calc(100vw - #{$expander-1});
+    }
+
+    @include respond-min( $break-tablet-medium ) {
+        width: 44vw;
+        min-width: calc(calc(#{$break-tablet-medium} / 2) - calc(#{$expander-1} / 2));
+    }
+}
+
+.image--right {
+    margin-top: $expander-1;
+
+    @include respond-min( $break-mobile-medium ) {
+        float: right;
+        margin-left: calc(#{$expander-1});
+    }
+
+    @include respond-min( $break-tablet-medium ) {
+        margin-top: 0;
+    }
+}

@@ -1,0 +1,11 @@
+<%
+/* Two Images Up
+locals { item, slice, scope }
+*/
+%>
+<div class="two-images-up__image image--left">
+  <%- include( '../partials/image.html', {image: slice.primary.left_image} ) %>
+</div>
+<div class="two-images-up__image image--right">
+  <%- include( '../partials/image.html', {image: slice.primary.right_image} ) %>
+</div>
