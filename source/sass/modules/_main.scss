@@ -66,6 +66,14 @@
         width: 100vw;
     }
 }
+.main__header__desc-shim {
+    height: 1px;
+    width: 100%;
+    visibility: hidden;
+    pointer-events: none;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+}
 .main__header__title {
     width: 90vw;
     transition: color $fast-duration $ease;

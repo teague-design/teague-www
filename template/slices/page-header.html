@@ -2,12 +2,14 @@
 /* Page Header
 locals { item, slice, scope }
 */
+const dom = locals.context.get( 'dom' );
 const config = locals.context.get( 'config' );
 const isImage = locals.slice.primary.header_image.url;
 const isStory = (locals.item.type === 'story');
 const isCasestudy = (locals.item.type === 'casestudy');
 const isPage = (locals.item.type === 'page');
 const isIndustryPage = isPage && (locals.item.tags.length !== 0);
+const isDescText = dom.RichText.asText( locals.slice.primary.header_description ) !== "";
 %>
 <div class="main__header js-page-header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory || isCasestudy || isIndustryPage ) { %>main__header--story<% } %>">
     <div class="main__header__title js-page-header-title cms -wrap">
@@ -16,18 +18,18 @@ const isIndustryPage = isPage && (locals.item.tags.length !== 0);
                 <h6><%- locals.item.tags[ 0 ] %></h6>
             </div>
         <% } %>
-        <%- locals.context.get( 'dom' ).RichText.asHtml( locals.slice.primary.header_title ) %>
+        <%- dom.RichText.asHtml( locals.slice.primary.header_title ) %>
     </div>
     <% if ( isImage ) { %>
         <div class="main__header__image js-page-header-image">
             <%- include( '../partials/image.html', {image: locals.slice.primary.header_image} ) %>
         </div>
     <% } %>
-    <% if ( isStory || isCasestudy || isPage ) { %>
+    <% if ( (isStory || isCasestudy || isPage) && isDescText ) { %>
         <div class="main__header__deets js-page-header-deets cms -wrap">
             <div class="main__header__deets__l">
                 <div class="main__header__desc">
-                    <%- locals.context.get( 'dom' ).RichText.asHtml( locals.slice.primary.header_description ) %>
+                    <%- dom.RichText.asHtml( locals.slice.primary.header_description ) %>
                 </div>
             </div>
             <% if ( !isPage && !isCasestudy && locals.item.data.authors.length ) { %>
@@ -41,9 +43,11 @@ const isIndustryPage = isPage && (locals.item.tags.length !== 0);
                 </div>
             <% } %>
         </div>
-    <% } else { %>
+    <% } else if ( isDescText ) { %>
         <div class="main__header__desc js-page-header-deets cms -wrap">
-            <%- locals.context.get( 'dom' ).RichText.asHtml( locals.slice.primary.header_description ) %>
+            <%- dom.RichText.asHtml( locals.slice.primary.header_description ) %>
         </div>
+    <% } else { %>
+        <div class="main__header__desc-shim js-page-header-deets"></div>
     <% } %>
 </div>
