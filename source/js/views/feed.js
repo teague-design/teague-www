@@ -2,6 +2,7 @@ import dom from "prismic-dom";
 import viewImage from "./image";
 import $ from "properjs-hobo";
 import paramalama from "paramalama";
+import smartypants from "smartypants";
 
 
 
@@ -20,6 +21,11 @@ export default ( view ) => {
 
         return `?${decodeURIComponent( $.utils.serializeData( query ) )}`;
     };
+    const getStringJSON = ( json ) => {
+        json.title = smartypants( json.title );
+
+        return JSON.stringify( json );
+    };
 
     return `
         <div class="feed__grid">
@@ -33,18 +39,18 @@ export default ( view ) => {
                 return `
                     <div class="feed__item js-lazy-anim">
                         <div class="feed__image">
-                            <a href="/${getType( doc )}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
+                            <a href="/${getType( doc )}/${doc.uid}/" data-json='${getStringJSON( json )}'>
                                 ${viewImage( doc.data.image )}
                             </a>
                         </div>
                         <div class="feed__tag cms">
-                            <a href="/${getType( doc )}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
+                            <a href="/${getType( doc )}/${doc.uid}/" data-json='${getStringJSON( json )}'>
                                 <h6>${doc.tags[ 0 ]}</h6>
                             </a>
                         </div>
                         <div class="feed__title cms">
-                            <a href="/${getType( doc )}/${doc.uid}/" data-json='${JSON.stringify( json )}'>
-                                ${dom.RichText.asHtml( doc.data.title ).replace( /h1/g, "h5" )}
+                            <a class="h5" href="/${getType( doc )}/${doc.uid}/" data-json='${getStringJSON( json )}'>
+                                ${dom.RichText.asText( doc.data.title )}
                             </a>
                         </div>
                     </div>

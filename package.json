@@ -39,6 +39,8 @@
     "eslint": "^4.19.1",
     "eslint-loader": "^2.0.0",
     "expose-loader": "^0.7.5",
+    "fg-loadcss": "^0.2.4",
+    "fg-loadjs": "^1.0.0",
     "file-loader": "^1.1.11",
     "hammerjs": "^2.0.8",
     "node-sass": "^4.9.3",
@@ -66,10 +68,9 @@
     "properjs-throttle": "^0.3.0",
     "properjs-tween": "~0.2",
     "sass-loader": "^7.0.3",
+    "smartypants": "^0.1.0",
     "webpack": "^4.12.0",
-    "webpack-cli": "^3.0.4",
-    "fg-loadcss": "^0.2.4",
-    "fg-loadjs": "^1.0.0"
+    "webpack-cli": "^3.0.4"
   },
   "repository": {
     "type": "git",
@@ -93,5 +94,6 @@
       "url": "http://kitajchuk.com"
     }
   ],
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {}
 }
