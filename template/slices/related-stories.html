@@ -23,18 +23,20 @@ const relatedTexts = {
                 <%
                 const isBroken = !sliceItem.story.id || sliceItem.story.isBroken;
                 %>
-                <div class="related__story">
+                <div class="related__story hover-link">
                     <% if ( (isStory || isCasestudy) && !isBroken ) { %>
                         <div class="related__image">
-                            <%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %>
+                            <a href="<%= locals.context.getUrl( sliceItem.story ) %>"><%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %></a>
                         </div>
                         <div class="related__info">
-                            <div class="related__tag">
-                                <h6><%= sliceItem.story.tags[ 0 ] %></h6>
-                            </div>
-                            <div class="related__title">
-                                <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h\d/g, 'h4' ) %>
-                            </div>
+                            <a href="<%= locals.context.getUrl( sliceItem.story ) %>">
+                                <div class="related__tag">
+                                    <h6><%= sliceItem.story.tags[ 0 ] %></h6>
+                                </div>
+                                <div class="related__title">
+                                    <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h\d/g, 'h4' ) %>
+                                </div>
+                            </a>
                             <div class="related__link">
                                 <%- include( './link.html', {
                                     json: {

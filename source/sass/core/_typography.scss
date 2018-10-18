@@ -155,6 +155,12 @@
     .is-hoverable &:hover .svg--arrow {
         @include arrow-hover();
     }
+
+    .svg--arrow {
+        .is-hoverable .hover-link:hover & {
+            @include arrow-hover();
+        }
+    }
 }
 .link__wrap {
     @include flex-center();
