@@ -185,11 +185,14 @@
     color: #454545;
     position: relative;
     transition: background-color $base-duration $ease;
+    cursor: pointer;
 
+    .is-hoverable &:hover,
     &.is-ellapsed {
         background-color: $spot;
     }
 
+    .is-hoverable &:hover,
     &.is-active:before {
         color: $white;
     }
