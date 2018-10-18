@@ -33,7 +33,7 @@ const relatedTexts = {
                                 <h6><%= sliceItem.story.tags[ 0 ] %></h6>
                             </div>
                             <div class="related__title">
-                                <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h1/g, 'h4' ) %>
+                                <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h\d/g, 'h4' ) %>
                             </div>
                             <div class="related__link">
                                 <%- include( './link.html', {
@@ -67,7 +67,7 @@ const relatedTexts = {
                             </div>
                             <div class="related__title">
                                 <a class="" href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
-                                    <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h1/g, 'h3' ) %>
+                                    <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h\d/g, 'h3' ) %>
                                 </a>
                             </div>
                         </div>

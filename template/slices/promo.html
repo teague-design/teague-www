@@ -64,7 +64,7 @@ let json = null;
                     </div>
                 <% } %>
                 <div class="promo__title">
-                    <%- dom.RichText.asHtml( doc.data.title ).replace( /h1/g, 'h2' ) %>
+                    <%- dom.RichText.asHtml( doc.data.title ).replace( /h\d/g, 'h2' ) %>
                 </div>
             </div>
             <div class="promo__image">
@@ -90,7 +90,7 @@ let json = null;
                     </div>
                 <% } %>
                 <div class="promo__title">
-                    <%- dom.RichText.asHtml( doc.data.title ).replace( /h1/g, 'h2' ) %>
+                    <%- dom.RichText.asHtml( doc.data.title ).replace( /h\d/g, 'h2' ) %>
                 </div>
                 <% if ( isPage ) { %>
                     <div class="promo__desc">

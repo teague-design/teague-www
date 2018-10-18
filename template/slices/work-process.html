@@ -38,7 +38,7 @@ if ( isStory ) {
                 </div>
                 <div class="process__article__info cms">
                     <h6>Related Design Story</h6>
-                    <%- dom.RichText.asHtml( slice.primary.design_story_link.data.title ).replace( /h1/g, 'h5' ) %>
+                    <%- dom.RichText.asHtml( slice.primary.design_story_link.data.title ).replace( /h\d/g, 'h5' ) %>
                 </div>
             </a>
         <% } %>

@@ -12,7 +12,7 @@ const config = locals.context.get( 'config' );
             <% locals.items.forEach(( item, i ) => { %>
                 <% if ( !item.isBroken ) { %>
                     <div class="slider__splash__item js-slider-splash-item cms -wrap" data-index="<%= i %>">
-                        <%- dom.RichText.asHtml( item.data.title ).replace( /h1/g, 'h4' ) %>
+                        <%- dom.RichText.asHtml( item.data.title ).replace( /h\d/g, 'h4' ) %>
                         <p><%= item.data.excerpt %></p>
                         <%- include( '../slices/link.html', {
                             json: {
