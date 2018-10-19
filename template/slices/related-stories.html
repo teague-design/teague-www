@@ -25,11 +25,18 @@ const relatedTexts = {
                 %>
                 <div class="related__story hover-link">
                     <% if ( (isStory || isCasestudy) && !isBroken ) { %>
+                        <%
+                        const json = {
+                            title: dom.RichText.asText( sliceItem.story.data.title ),
+                            story: true,
+                            tag: sliceItem.story.tags[ 0 ]
+                        };
+                        %>
                         <div class="related__image">
-                            <a href="<%= locals.context.getUrl( sliceItem.story ) %>"><%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %></a>
+                            <a href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>"><%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %></a>
                         </div>
                         <div class="related__info">
-                            <a href="<%= locals.context.getUrl( sliceItem.story ) %>">
+                            <a href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
                                 <div class="related__tag">
                                     <h6><%= sliceItem.story.tags[ 0 ] %></h6>
                                 </div>
@@ -39,11 +46,7 @@ const relatedTexts = {
                             </a>
                             <div class="related__link">
                                 <%- include( './link.html', {
-                                    json: {
-                                        title: dom.RichText.asText( sliceItem.story.data.title ),
-                                        story: true,
-                                        tag: sliceItem.story.tags[ 0 ]
-                                    },
+                                    json: json,
                                     slice: {
                                         primary: {
                                             document_link: sliceItem.story,
