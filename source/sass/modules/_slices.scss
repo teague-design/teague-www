@@ -32,4 +32,17 @@
 .slice--text__node {
     @include wrap-p();
     text-align: left;
+
+    h5 em,
+    h5 strong {
+        &:before,
+        &:after {
+            content: "";
+            height: 1px;
+            width: 25px;
+            background-color: $spot;
+            display: block;
+            margin: 25px 0;
+        }
+    }
 }
