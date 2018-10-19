@@ -821,3 +821,74 @@
         margin-top: 0;
     }
 }
+
+
+
+.employee-testimonial {
+    @include wrap();
+    display: flex;
+    flex-direction: column;
+
+    @include respond-min( $break-mobile-full ) {
+        @include flex-left();
+        flex-direction: row;
+    }
+}
+
+.employee-testimonial--right {
+    @include respond-min( $break-mobile-full ) {
+        @include flex-right();
+    }
+}
+
+
+.employee-testimonial__photo {
+    width: 100%;
+    margin-bottom: 20px;
+
+    @include respond-min( $break-mobile-full ) {
+        width: 46vw;
+        margin-top: -15vh;
+    }
+
+    @include respond-min( $break-tablet-small ) {
+        width: 38vw;
+    }
+
+    @include respond-min( $break-tablet-medium ) {
+        width: 30vw;
+    }
+}
+
+.employee-testimonial__text {
+    order: 1;
+
+    @include respond-min( $break-mobile-full ) {
+        order: 0;
+        width: 32vw;
+        margin-right: -10vw;
+        z-index: 1;
+    }
+}
+
+h5.employee-testimonial__text__quote {
+    margin-bottom: 42px;
+    position: relative;
+
+    &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -20px;
+        height: 2px;
+        width: 30px;
+        background-color: #FF00A8;
+    }
+
+    @include respond-min( $break-mobile-full ) {
+        font-size: calc( 16px + 0.54vw)
+    }
+}
+
+.employee-testimonial__text__name {}
+
