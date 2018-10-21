@@ -762,32 +762,55 @@
 
 .full-image-text {
     position: relative;
+
+    @include respond( $break-mobile-medium ) {
+        min-height: 80vh;
+    }
+
     &__layer {
         position: absolute;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
+        object-fit: cover;
+        object-position: center;
         background-color: rgba(0, 0, 0, 0.2);
+    }
+
+    .image-wrap {
+        height: 100%;
+        position: unset;
+        img {
+            object-fit: cover;
+            object-position: center;
+        }
     }
 
     &__text {
         position: absolute;
-        top: 5vw;
-        width: 50vw;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        text-align: center;
         color: #fff;
-        @include wrapl();
-        @include respond( $break-tablet-medium ) {
-            width: 70vw;
+        @include wrap();
+
+        @include respond-min( $break-mobile-full ) {
+            width: 80%;
         }
-        @include respond( $break-mobile-full ) {
-            &__main {
-                @include h5();
-            }
+
+        @include respond-min( $break-tablet-small ) {
+            width: 70%;
         }
-        @include respond( 550px ) {
-            top: 10px;
-            width: 90vw;
+
+        @include respond-min( $break-tablet-full ) {
+            width: 60%;
+        }
+
+        &--main {
+            margin-bottom: 24px;
         }
     }
 }

@@ -3,14 +3,14 @@
 locals { item, slice, scope }
 */
 %>
-<div class="cms">
+<div class="full-image-text cms">
   <%- include( '../partials/image.html', {image: slice.primary.full_image} ) %>
   <div class="full-image-text__layer"></div>
   <div class="full-image-text__text">
-    <h4 class="full-image-text__main">
+    <h4 class="full-image-text__text--main">
       <%- slice.primary.main_text %>
     </h4>
-    <p class="full-image-text__sub">
+    <p class="full-image-text__text--sub">
       <%- slice.primary.sub_text %>
     </p>
   </div>
