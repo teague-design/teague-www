@@ -1,0 +1,61 @@
+<%
+/* Principles Slider
+locals { item, slice, scope }
+*/
+const dom = locals.context.get( 'dom' );
+const itemsMapped = slice.items.map(( item ) => {
+    return {
+        data: {
+            image: item.slider_image,
+            title: item.slider_title,
+            caption: item.slider_caption,
+            enum: item.slider_enumeration
+        }
+    };
+});
+%>
+<div class="enumerated-slider">
+    <div class="home__stories-slider">
+        <div class="slider slider--home slider--enumerated js-slider" data-spawn="home">
+
+            <div class="slider__splash js-slider-splash" data-label="">
+                <% itemsMapped.forEach(( item, i ) => { %>
+                    <% if ( !item.isBroken ) { %>
+                        <div class="slider__splash__item js-slider-splash-item cms -wrap" data-label="<%= item.data.enum %>" data-index="<%= i %>">
+                            <h5><%= item.data.title %></h5>
+                            <p><%= item.data.caption %></p>
+                        </div>
+                    <% } %>
+                <% })%>
+            </div>
+
+            <div class="slider__pane">
+                <div class="slider__belt js-slider-belt">
+                    <% itemsMapped.forEach(( item, i ) => { %>
+                        <div class="slider__item js-slider-item" data-index="<%= i %>">
+                            <% if ( !item.isBroken ) { %>
+                                <%- include( '../partials/image.html', {image: item.data.image} ) %>
+                            <% } %>
+                        </div>
+                    <% })%>
+                </div>
+            </div>
+
+            <div class="slider__navi js-slider-navi">
+                <div class="slider__navi__prev js-slider-prev">
+                    <%- include( '../partials/svg/icon-prev.svg' ) %>
+                </div>
+                <% itemsMapped.forEach(( item, i ) => { %>
+                    <div class="slider__navi__curr js-slider-curr" data-index="<%= i %>"></div>
+                <% })%>
+                <div class="slider__navi__next js-slider-next">
+                    <%- include( '../partials/svg/icon-prev.svg' ) %>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
