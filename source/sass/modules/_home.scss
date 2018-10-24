@@ -86,6 +86,7 @@
         }
     }
 }
+
 .home__reel-mark {
     position: absolute;
     left: 0;
@@ -196,6 +197,15 @@
     }
 }
 
+.slice--home-reel,
+.slice--home-about,
+.slice--home-discover {
+    @include respond( $break-mobile-full ) {
+        .media-overlay {
+            opacity: 0.5;
+        }
+    }
+}
 
 
 // ABOUT
@@ -232,9 +242,8 @@
     }
 
     .home--mobilized & {
-        top: 0;
         height: 70vh;
-        width: 60vw;
+        width: calc(100vw - 50px);
     }
 
     .image {
@@ -307,6 +316,14 @@
         left: 0;
         @include wrap();
         padding-top: 25vw;
+        
+        @include respond( $break-mobile-full ) {
+            padding-top: 55vw;
+        }
+
+        @include respond( $break-mobile-small ) {
+            padding-top: 35vw;
+        }
     }
 }
 .home__about-cta {
@@ -339,6 +356,23 @@
     .home--mobilized & {
         background-color: $black;
         color: $white;
+    }
+    .media-overlay {
+        position: absolute;
+        left: 20vw;
+        top: 12vw;
+        width: calc( 100vw - 20vw);
+        height: calc( 100vh - 12vw);
+        transform: translate3d(0, 0, 0);
+        transition: -webkit-clip-path 500ms ease,clip-path 500ms ease,width 500ms ease,height 500ms ease,left 500ms ease,top 500ms ease;
+        background-color: #000;
+
+        @include respond( $break-mobile-full ) {
+            left: auto;
+            top: 50px;
+            width: 100vw;
+            height: calc( 100vh - 50px );
+        }
     }
 }
 .home__about-mark {
@@ -376,10 +410,10 @@
         background-size: cover;
 
         .home--mobilized & {
-            top: 32vw;
+            top: 50px;
             left: auto;
             right: 0;
-            width: 77.5vw;
+            width: calc(77.5vw + 50px);
             height: 90vw;
             transform: translate3d( 0, 0, 0 );
         }

@@ -7,10 +7,13 @@ const dom = locals.context.get( 'dom' );
 %>
 <div class="home__discover-image js-home-discover-image">
     <%- include( '../partials/image.html', {image: slice.primary.discover_image, options: {bg: true, home: true}} ) %>
+    <div class="media-overlay"></div>
 </div>
 <div class="home__discover-desc js-home-discover-desc cms -wrap">
     <div class="home__discover-label">
-        <h6><%= slice.primary.discover_label %></h6>
+        <h6>
+            <%= slice.primary.discover_label %>
+        </h6>
     </div>
     <%- dom.RichText.asHtml( slice.primary.discover_description ) %>
     <div class="home__discover-cta js-home-discover-cta">
