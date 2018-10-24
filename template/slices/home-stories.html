@@ -13,6 +13,7 @@ const itemsMapped = slice.items.map(( item ) => {
 %>
 <div class="home__stories-posit">
     <div class="home__stories-desc cms -wrap">
+        <span class="key-line"></span>
         <%- dom.RichText.asHtml( slice.primary.stories_description ) %>
         <%- include( './link.html', {
             json: {
