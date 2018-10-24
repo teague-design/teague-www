@@ -23,7 +23,7 @@
         display: block;
     }
 }
-.process__info,
+
 .process__article {
     @include respond( $break-tablet-medium ) {
         width: 50%;
@@ -36,7 +36,8 @@
 .process__info {
     @include respond( $break-tablet-medium ) {
         padding-left: 0;
-        padding-right: 10vw;
+        padding-right: 5vw;
+        width: 100%;
     }
 }
 .process__slider {
@@ -549,11 +550,11 @@
     width: 60%;
     @include wrapr();
 
-    @include respond( $break-tablet-medium ) {
-        width: 50%;
-    }
+    // @include respond( $break-tablet-medium ) {
+    //     width: 50%;
+    // }
 
-    @include respond( $mobile-width ) {
+    @include respond( $break-tablet-medium ) {
         width: 100%;
         order: 2;
         padding-right: 0;
@@ -567,11 +568,11 @@
     width: 40%;
     @include wrap();
 
-    @include respond( $break-tablet-medium ) {
-        width: 50%;
-    }
+    // @include respond( $break-tablet-medium ) {
+    //     width: 50%;
+    // }
 
-    @include respond( $mobile-width ) {
+    @include respond( $break-tablet-medium ) {
         width: 100vw;
         order: 1;
         padding-bottom: 50px;

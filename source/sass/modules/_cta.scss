@@ -9,7 +9,7 @@
         align-items: center;
         justify-content: flex-start;
 
-        @include respond( $break-tablet-small ) {
+        @include respond( $break-tablet-medium ) {
             display: block;
         }
     }
@@ -50,7 +50,7 @@
                 }
             }
 
-            @include respond( $break-tablet-small ) {
+            @include respond( $break-tablet-medium ) {
                 width: 100%;
             }
         }
@@ -59,7 +59,7 @@
             width: calc( 100% - 600px );
             @include wrapr();
 
-            @include respond( $break-tablet-small ) {
+            @include respond( $break-tablet-medium ) {
                 @include wrap();
                 padding-top: 50px;
                 width: 100%;
