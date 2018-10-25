@@ -5,13 +5,13 @@
 .main__header {
     @include padm();
 }
+.main__header__title {
+    @include padbm();
+}
 .main__header__tag {
     padding-bottom: 50px;
 }
 .main__header__desc {
-    padding-top: 80px;
-}
-.main__header__image {
     padding-top: 80px;
 }
 .main__header--story {

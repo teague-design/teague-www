@@ -58,6 +58,7 @@ const tag = item && item.tags.length ? item.tags[ 0 ] : null;
         </main>
         <%- include( 'site/footer.html' ) %>
         <%- include( 'site/bigpink.html' ) %>
+        <script src="https://polyfill.io/v2/polyfill.js?features=IntersectionObserver"></script>
         <script src="<%= locals.context.get( 'javascript' ) + '?v=' + locals.context.get( 'timestamp' ) %>"></script>
         <%- include( 'site/analytics.html' ) %>
     </body>

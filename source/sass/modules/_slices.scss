@@ -2,6 +2,8 @@
     height: $expander-2;
     position: relative;
     background-color: $white;
+    z-index: 3;
+    transform: translateZ(0px);
 
     .is-theme-black & {
         background-color: $black;
@@ -21,6 +23,8 @@
 .slices:not( .home__slices ) .slice {
     position: relative;
     background-color: $white;
+    z-index: 3;
+    transform: translateZ(0px);
 
     .is-theme-black & {
         background-color: $black;
