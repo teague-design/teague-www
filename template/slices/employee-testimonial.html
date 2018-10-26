@@ -4,6 +4,9 @@ locals { item, slice, scope }
 */
 %>
 <div class="cms employee-testimonial <% if( slice.primary.alignment == 'right' ) { %>employee-testimonial--right<% } %>">
+  <div class="employee-testimonial__photo">
+    <%- include( '../partials/image.html', {image: slice.primary.photo} ) %>
+  </div>
   <div class="employee-testimonial__text">
     <h5 class="employee-testimonial__text__quote">
       <%- slice.primary.quote %>
@@ -11,8 +14,5 @@ locals { item, slice, scope }
     <p class="employee-testimonial__text__name">
       <%- slice.primary.name_and_title %>
     </p>
-  </div>
-  <div class="employee-testimonial__photo">
-    <%- include( '../partials/image.html', {image: slice.primary.photo} ) %>
   </div>
 </div>

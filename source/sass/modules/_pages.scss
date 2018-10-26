@@ -854,12 +854,19 @@
     @include respond-min( $break-mobile-full ) {
         @include flex-left();
         flex-direction: row;
+        align-items: flex-start;
     }
 }
 
-.employee-testimonial--right {
+.employee-testimonial--right {  
     @include respond-min( $break-mobile-full ) {
+        @include flex-left();
+        align-items: flex-start;
+    }
+
+    @include respond-min( $break-tablet-small ) {
         @include flex-right();
+        align-items: flex-start;
     }
 }
 
@@ -870,7 +877,6 @@
 
     @include respond-min( $break-mobile-full ) {
         width: 46vw;
-        margin-top: -15vh;
     }
 
     @include respond-min( $break-tablet-small ) {
@@ -883,13 +889,18 @@
 }
 
 .employee-testimonial__text {
-    order: 1;
-
     @include respond-min( $break-mobile-full ) {
-        order: 0;
-        width: 32vw;
-        margin-right: -10vw;
+        width: 44vw;
+        margin-left: 20px;
         z-index: 1;
+    }
+
+    @include respond-min( $break-tablet-small ) {
+        width: 36vw;
+    }
+
+    @include respond-min( $break-tablet-medium ) {
+        width: 28vw;
     }
 }
 
