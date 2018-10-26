@@ -97,12 +97,11 @@
 
     .svg {
         transform: translate3d( -100%, 0, 0 );
-        transition: fill $long-duration $ease,
-                    transform $long-duration $ease;
+        transition: transform 4000ms $ease;
 
         .home--mobilized & {
             fill: $white;
-            transform: translate3d( -55%, 0, 0 );
+            transform: translate3d( 100%, 0, 0 );
         }
     }
 
