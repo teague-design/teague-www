@@ -2,8 +2,7 @@
     width: 100%;
     user-select: none;
 }
-.slider--home,
-.slider--enumerated {
+.slider--home {
     margin-bottom: 80px;
 }
 .slider--edge {
@@ -264,12 +263,11 @@
 }
 
 
-.slice--enumerated-slider {
-    padding-top: 80px;
-    padding-bottom: 80px;
-}
-
 .enumerated-slider {
+    .slider {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
     .slider__splash:before {
         display: none;
     }

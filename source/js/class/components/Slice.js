@@ -72,7 +72,7 @@ class Slice {
                 this.page[ 0 ].style.top = "0";
 
                 // Handle image visibility scenario
-                if ( this.deetsBounds.top <= this.imageBounds.top ) {
+                if ( (this.deetsBounds.top <= this.imageBounds.top) || !core.util.isElementVisible( this.element[ 0 ] ) ) {
                     this.image[ 0 ].style.visibility = "hidden";
 
                 } else {

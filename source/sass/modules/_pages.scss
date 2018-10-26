@@ -870,6 +870,13 @@
     }
 }
 
+.employee-testimonial + .employee-testimonial {
+    margin-top: calc( #{$expander-2} / 2 );
+
+    @include respond-min( $mobile-width ) {
+        margin-top: calc( #{$expander-1} / 2 );
+    }
+}
 
 .employee-testimonial__photo {
     width: 100%;
