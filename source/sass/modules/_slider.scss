@@ -319,7 +319,7 @@
             @include wrap();
         }
         .slider__belt {
-            transform: translate3d(calc(-100vw), 0px, 0px);
+            transform: none;
         }
     }
 }

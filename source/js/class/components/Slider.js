@@ -38,6 +38,15 @@ class Slider {
                     }
                 }
             },
+            enum: {
+                move: "(-50vw - 10vw)",
+                noop: {
+                    move: ( idx ) => {
+                        return `calc(-${this.items[ idx ].getBoundingClientRect().width * idx}px - ${idx * 10}vw)`;
+                    },
+                    width: 768
+                }
+            },
             edge: {
                 move: "-100vw"
             },
@@ -102,6 +111,17 @@ class Slider {
 
     inMotion () {
         return (this.isMoving || this.isPanning);
+    }
+
+
+    spawn_enum_mobile () {
+        this.spawn_home_mobile();
+    }
+    spawn_enum () {
+        this.spawn_home();
+    }
+    swap_enum () {
+        this.swap_home();
     }
 
 
