@@ -13,39 +13,43 @@ const relatedTexts = {
 <div class="cms <% if ( isStory || isCasestudy ) { %>-wrap<% } %>">
     <div class="related related--<%= item.type %>">
         <% if ( isStory || isCasestudy ) { %>
-            <div class="related__banner">
-                <h6>Related <%= relatedTexts[ item.type ] %></h6>
-                <a class="h6 ac is-active" href="<%= locals.context.getUrl( slice.primary.page_link ) %>"><%= slice.primary.link_label %></a>
-            </div>
+        <div class="related__banner">
+            <h6>Up Next</h6>
+            <a class="h6 ac is-active" href="<%= locals.context.getUrl( slice.primary.page_link ) %>">
+                <%= slice.primary.link_label %></a>
+        </div>
         <% } %>
         <div class="related__stories">
             <% locals.slice.items.forEach(( sliceItem ) => { %>
-                <%
+            <%
                 const isBroken = !sliceItem.story.id || sliceItem.story.isBroken;
                 %>
-                <div class="related__story hover-link">
-                    <% if ( (isStory || isCasestudy) && !isBroken ) { %>
-                        <%
+            <div class="related__story hover-link">
+                <% if ( (isStory || isCasestudy) && !isBroken ) { %>
+                <%
                         const json = {
                             title: dom.RichText.asText( sliceItem.story.data.title ),
                             story: true,
                             tag: sliceItem.story.tags[ 0 ]
                         };
                         %>
-                        <div class="related__image">
-                            <a href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>"><%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %></a>
+                <div class="related__image">
+                    <a href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
+                        <%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %></a>
+                </div>
+                <div class="related__info">
+                    <a href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
+                        <div class="related__tag">
+                            <h6>
+                                <%= sliceItem.story.tags[ 0 ] %>
+                            </h6>
                         </div>
-                        <div class="related__info">
-                            <a href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
-                                <div class="related__tag">
-                                    <h6><%= sliceItem.story.tags[ 0 ] %></h6>
-                                </div>
-                                <div class="related__title">
-                                    <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h\d/g, 'h4' ) %>
-                                </div>
-                            </a>
-                            <div class="related__link">
-                                <%- include( './link.html', {
+                        <div class="related__title">
+                            <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h\d/g, 'h4' ) %>
+                        </div>
+                    </a>
+                    <div class="related__link">
+                        <%- include( './link.html', {
                                     json: json,
                                     slice: {
                                         primary: {
@@ -56,33 +60,35 @@ const relatedTexts = {
                                         }
                                     }
                                 }) %>
-                            </div>
-                        </div>
-                    <% } else if ( !isBroken ) { %>
-                        <%
+                    </div>
+                </div>
+                <% } else if ( !isBroken ) { %>
+                <%
                         const json = {
                             title: dom.RichText.asText( sliceItem.story.data.title ),
                             story: true,
                             tag: sliceItem.story.tags[ 0 ]
                         };
                         %>
-                        <div class="related__info">
-                            <div class="related__tag">
-                                <h6><%= sliceItem.story.tags[ 0 ] %></h6>
-                            </div>
-                            <div class="related__title">
-                                <a class="" href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
-                                    <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h\d/g, 'h3' ) %>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="related__image">
-                            <a class="" href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
-                                <%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %>
-                            </a>
-                        </div>
-                    <% } %>
+                <div class="related__info">
+                    <div class="related__tag">
+                        <h6>
+                            <%= sliceItem.story.tags[ 0 ] %>
+                        </h6>
+                    </div>
+                    <div class="related__title">
+                        <a class="" href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
+                            <%- dom.RichText.asHtml( sliceItem.story.data.title ).replace( /h\d/g, 'h3' ) %>
+                        </a>
+                    </div>
                 </div>
+                <div class="related__image">
+                    <a class="" href="<%= locals.context.getUrl( sliceItem.story ) %>" data-json="<%= JSON.stringify( json ) %>">
+                        <%- include( '../partials/image.html', {image: sliceItem.story.data.image} ) %>
+                    </a>
+                </div>
+                <% } %>
+            </div>
             <% }) %>
         </div>
     </div>
