@@ -181,6 +181,10 @@
     @include respond( $navi-break ) {
         left: 0;
     }
+
+    @include respond( $mobile-width ) {
+        display: none;
+    }
 }
 .home__reel-ex {
     position: absolute;

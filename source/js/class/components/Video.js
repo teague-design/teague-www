@@ -69,33 +69,25 @@ class Video {
 
 
     load () {
-        this.controller = new Controller();
-        this.controller.go(() => {
-            const isReadyState = core.detect.isDevice() ? (this.node[ 0 ].readyState >= 0) : (this.node[ 0 ].readyState > 1);
+        this.node.on( "loadedmetadata", () => {
+            this.isReadyState = true;
+            
+            if ( !this.width || !this.height ) {
+                this.width = this.node[ 0 ].videoWidth;
+                this.height = this.node[ 0 ].videoHeight;
+                this.wrapit();
+            }
 
-            // https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement/readyState
-            if ( isReadyState && !this.isReadyState ) {
-                this.isReadyState = true;
-                this.controller.stop();
+            // Basic events
+            this.events();
 
-                // Width / Height
-                if ( !this.width || !this.height ) {
-                    this.width = this.node[ 0 ].videoWidth;
-                    this.height = this.node[ 0 ].videoHeight;
-                    this.wrapit();
-                }
+            // UI only events
+            if ( this.uiEl.length ) {
+                this.uiEvents();
+            }
 
-                // Basic events
-                this.events();
-
-                // UI only events
-                if ( this.uiEl.length ) {
-                    this.uiEvents();
-                }
-
-                if ( this.elemData.auto ) {
-                    this.automate();
-                }
+            if ( this.elemData.auto ) {
+                this.automate();
             }
         });
 
@@ -108,6 +100,7 @@ class Video {
 
 
     automate () {
+        this.controller = new Controller();
         this.controller.go(() => {
             if ( this.isToggledPlayback ) {
                 this.controller.stop();
