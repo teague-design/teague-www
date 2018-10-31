@@ -41,4 +41,15 @@ const dom = locals.context.get( 'dom' );
             </div>
         </div>
     </div>
+    <div class="highs__navi slider__navi js-slider-navi">
+        <div class="slider__navi__prev js-slider-prev">
+            <%- include( '../partials/svg/icon-prev.svg' ) %>
+        </div>
+        <% locals.slice.items.forEach(( sliceItem, i ) => { %>
+        <div class="slider__navi__curr js-slider-extra-curr" data-index="<%= i %>"></div>
+        <% })%>
+        <div class="slider__navi__next js-slider-next">
+            <%- include( '../partials/svg/icon-prev.svg' ) %>
+        </div>
+    </div>
 </div>

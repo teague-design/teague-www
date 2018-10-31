@@ -19,6 +19,7 @@ class Slider {
         this.elemData = this.element.data();
         this.belt = this.element.find( ".js-slider-belt" );
         this.currs = this.element.find( ".js-slider-curr" );
+        this.extraCurrs = this.element.find( ".js-slider-extra-curr" );
         this.items = this.element.find( ".js-slider-item" );
         this.prev = this.element.find( ".js-slider-prev" );
         this.next = this.element.find( ".js-slider-next" );
@@ -214,6 +215,10 @@ class Slider {
     init () {
         this.currs.first().addClass( "is-active" );
         this.items.first().addClass( "is-active" );
+
+        if (this.extraCurrs.length) {
+            this.extraCurrs.first().addClass( "is-active" );
+        }
     }
 
 
@@ -228,6 +233,10 @@ class Slider {
         }
         this.currs.on( "click", this.onHitItem.bind( this ));
         this.items.on( "click", this.onHitItem.bind( this ));
+
+        if (this.extraCurrs.length) {
+            this.extraCurrs.on( "click", this.onHitItem.bind( this ));
+        }
     }
 
 
@@ -246,6 +255,10 @@ class Slider {
         this.currs.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
         this.items.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
         this._swapFunc();
+
+        if (this.extraCurrs.length) {
+            this.extraCurrs.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
+        }
     }
 
 
