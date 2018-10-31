@@ -220,14 +220,10 @@ class Slider {
     bind () {
         if ( this.prev.length && this.next.length ) {
             this.prev.on( "click", () => {
-                if ( this.data.index !== 0 ) {
-                    this.rewind();
-                }
+                this.rewind();
             });
             this.next.on( "click", () => {
-                if ( this.data.index !== (this.data.length - 1) ) {
-                    this.advance();
-                }
+                this.advance();
             });
         }
         this.currs.on( "click", this.onHitItem.bind( this ));
@@ -256,6 +252,8 @@ class Slider {
     increment () {
         if ( this.data.index !== (this.data.length - 1) ) {
             this.data.index++;
+        } else {
+            this.data.index = 0;
         }
     }
 
@@ -263,6 +261,8 @@ class Slider {
     decrement () {
         if ( this.data.index !== 0 ) {
             this.data.index--;
+        } else {
+            this.data.index = this.data.length - 1;
         }
     }
 
