@@ -233,10 +233,10 @@
     }
 }
 .home__about-image {
+    position: absolute;
+    top: 12vw;
     left: 0;
     height: calc( 100vh - 12vw );
-    top: 12vw;
-    position: absolute;
     width: 100vw;
     transition: filter $long-duration $ease;
     filter: grayscale( 100% );
@@ -249,6 +249,8 @@
     .home--mobilized & {
         height: 70vh;
         width: calc(100vw - 50px);
+        top: 50px;
+        right: 50px;
     }
 
     .image {
@@ -373,10 +375,10 @@
         background-color: #000;
 
         @include respond( $break-mobile-full ) {
-            left: auto;
+            left: 50px;
             top: 50px;
-            width: 100vw;
-            height: calc( 100vh - 50px );
+            width: calc(100vw - 50px);
+            height: 90vw;
         }
     }
 }
@@ -416,9 +418,8 @@
 
         .home--mobilized & {
             top: 50px;
-            left: auto;
-            right: 0;
-            width: calc(77.5vw + 50px);
+            left: 50px;
+            width: calc(100vw - 50px);
             height: 90vw;
             transform: translate3d( 0, 0, 0 );
         }
@@ -511,8 +512,6 @@
     }
 }
 .home__stories-slider {
-    .home--mobilized & {}
-
     .image-wrap {
         padding-bottom: 56.25% !important;
     }

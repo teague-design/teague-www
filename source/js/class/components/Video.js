@@ -71,7 +71,7 @@ class Video {
     load () {
         this.node.on( "loadedmetadata", () => {
             this.isReadyState = true;
-            
+
             if ( !this.width || !this.height ) {
                 this.width = this.node[ 0 ].videoWidth;
                 this.height = this.node[ 0 ].videoHeight;
