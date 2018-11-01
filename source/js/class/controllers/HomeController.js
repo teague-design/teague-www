@@ -21,7 +21,7 @@ class HomeController {
         this.length = this.slices.length;
         this.isDisabled = false;
         this.isWheel = false;
-        this.wheelTime = 200;
+        this.wheelTime = 100;
         this._onMouseWheel = this.onMouseWheel.bind( this );
         this._onMouseWheelF = this.onMouseWheelF.bind( this );
         this._loadFunc = null;
@@ -162,7 +162,7 @@ class HomeController {
                     this.bindWheelF();
                     this.bindWheel();
 
-                }, 1000 );
+                }, 0 );
             }
         });
     }
