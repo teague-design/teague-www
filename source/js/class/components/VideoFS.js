@@ -34,10 +34,11 @@ class VideoFS {
         const nodeRect = { width: window.innerWidth, height: window.innerHeight };
         const windowRatio = nodeRect.width / nodeRect.height;
         const adjustRatio = this.videoRatio / windowRatio;
+        const magicNumber = 200; // quick fix to video resizing issue on mobile Safari
         let videoWidth = null;
 
         if ( windowRatio < this.videoRatio ) {
-            videoWidth = nodeRect.width * adjustRatio;
+            videoWidth = nodeRect.width * adjustRatio + magicNumber;
 
         } else {
             videoWidth = nodeRect.width;
