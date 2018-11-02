@@ -489,7 +489,7 @@ class HomeController {
         const desc = slice.find( ".js-home-stories-desc" );
 
         desc.addClass( "is-anim" );
-        core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
+        core.dom.html.removeClass( "is-home-controller" ).addClass( "is-theme-black" );
     }
     home_stories_unload () {
         const slice = this.slices.eq( this.index );
