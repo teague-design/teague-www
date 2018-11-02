@@ -247,6 +247,8 @@ class Slider {
 
         if ( canGo ) {
             this.goto( index );
+        } else if ( index === (this.data.length - 1) ) {
+            this.goto( 0 );
         }
     }
 
