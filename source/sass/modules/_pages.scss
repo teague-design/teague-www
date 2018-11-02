@@ -102,8 +102,11 @@
     white-space: nowrap;
     overflow: hidden;
     width: 100%;
-    position: relative;
     text-align: left;
+
+    @include respond( $mobile-width ) {
+        position: relative;
+    }
 }
 .highs__belt {
     transition: transform $base-duration $ease;
