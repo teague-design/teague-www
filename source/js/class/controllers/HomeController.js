@@ -162,7 +162,7 @@ class HomeController {
                     this.bindWheelF();
                     this.bindWheel();
 
-                }, 0 );
+                }, 100 );
             }
         });
     }
