@@ -184,7 +184,7 @@ class HomeController {
 
 
     home_reel_load_mobile () {
-        core.dom.html.removeClass( "is-theme-black" ).addClass( "is-theme-white" );
+        core.dom.html.removeClass( "is-theme-white" );
     }
     home_reel_unload_mobile () {}
     home_reel_load () {
@@ -199,6 +199,8 @@ class HomeController {
         const ex = slice.find( ".js-home-reel-ex" );
         const video = slice.find( ".js-home-reel-video" );
         const videoInstance = video.find( ".js-video" ).data().Video;
+
+        core.dom.html.removeClass( "is-theme-white" );
 
         mark.addClass( "is-full" );
 
@@ -489,7 +491,7 @@ class HomeController {
         const desc = slice.find( ".js-home-stories-desc" );
 
         desc.addClass( "is-anim" );
-        core.dom.html.removeClass( "is-home-controller" ).addClass( "is-theme-black" );
+        core.dom.html.removeClass( "is-theme-white" ).addClass( "is-theme-black" );
     }
     home_stories_unload () {
         const slice = this.slices.eq( this.index );

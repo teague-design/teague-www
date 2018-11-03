@@ -25,6 +25,10 @@
         }
     }
 
+    .is-home-controller & {
+        background-color: transparent;
+    }
+
     .is-theme-black & {
         background-color: $black;
     }
@@ -35,10 +39,6 @@
 
     .is-navi-mobile-open & {
         background-color: $white;
-    }
-
-    .is-home-controller & {
-        background-color: transparent;
     }
 
     @include respond( $navi-break ) {
