@@ -21,7 +21,7 @@ class HomeController {
         this.length = this.slices.length;
         this.isDisabled = false;
         this.isWheel = false;
-        this.wheelTime = 100;
+        this.wheelTime = 350;
         this._onMouseWheel = this.onMouseWheel.bind( this );
         this._onMouseWheelF = this.onMouseWheelF.bind( this );
         this._loadFunc = null;
