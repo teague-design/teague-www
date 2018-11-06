@@ -26,17 +26,36 @@ class Slice {
 
 
     init () {
+        console.log("init slice");
         // this.element[ 0 ].style.zIndex = this.data.index;
+
+        // TODO: clean this up
+        const titleEl = document.querySelector(".main__header__title")
+        const config = {
+            threshold: [0, 0.2, 0.4, 0.6, 0.8, 1]
+        };  
+        const intersectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => titleEl.style.opacity = entry.intersectionRatio);
+        }, config);
+          
+        // get your elements, by class name '.js-item'
+        const element = document.querySelector('.js-main-header-sentinal')
+        if(element) {
+            intersectionObserver.observe(element)
+        }
     }
 
 
     page_header () {
+        console.log("page_header");
         this.isFixedImage = false;
         this.page = this.element.find( ".js-page-header" );
         this.title = this.element.find( ".js-page-header-title" );
         this.image = this.element.find( ".js-page-header-image" );
         this.deets = this.element.find( ".js-page-header-deets" );
         this.tag = this.element.find( ".js-page-header-tag" );
+
+        
 
         if ( this.image.length ) {
             this.controller = new Controller();

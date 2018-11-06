@@ -5,14 +5,14 @@ locals { item, slices, scope }
 const config = locals.context.get( 'config' );
 const isSpacer = (scope !== config.homepage);
 %>
-<section class="slices <%= scope %>__slices">
+<section class="slices <%= scope %>__slices js-slice">
     <% locals.slices.forEach(( slice, i ) => { %>
         <%
         const sliceType = slice.slice_type.replace( /_+/g, '-' );
         const slicePartial = `../slices/${sliceType}.html`;
         %>
         <% if ( sliceType !== "page-header") { %>
-            <div class="slice slice--<%= sliceType %> js-slice" data-index="<%= i %>" data-prop="<%= slice.slice_type %>">
+            <div class="slice slice--<%= sliceType %>" data-index="<%= i %>" data-prop="<%= slice.slice_type %>">
         <% } %> 
             <%- include( slicePartial, {item, slice, scope} ) %>
         <% if ( sliceType !== "page-header") { %>

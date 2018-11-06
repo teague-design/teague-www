@@ -25,6 +25,14 @@
         width: 100vw;
     }
 }
+
+.main__header__sentinal {
+    background-color: transparent;
+    width: 90vw;
+    height: 80px;
+    position: absolute;
+}
+
 .main__header__deets {
     width: 90vw;
     display: flex;
@@ -88,7 +96,7 @@
     z-index: 1;
     width: 90vw;
     position: relative;
-    transition: color $fast-duration $ease;
+    transition: color $fast-duration $ease, opacity $fast-duration $ease;
 
     &.is-textchange {
         color: $white;
