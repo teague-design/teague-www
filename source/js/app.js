@@ -45,35 +45,26 @@ class App {
         });
 
         // TODO: clean this up
-        const intersectionObserver = new IntersectionObserver((entries, observer) => {
+        const intersectionObserver = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
               if (entry.intersectionRatio > 0) {
                 this.core.dom.html.addClass( "is-scroll-up" ).removeClass( "is-scroll-down" );
                 this.core.emitter.fire( "app--scrollup" );
-              }else{
+              } else {
                 this.core.dom.html.addClass( "is-scroll-down" ).removeClass( "is-scroll-up" );
                 this.core.emitter.fire( "app--scrolldown" );
               }
-              
-              // it's good to remove observer,
-              // if you don't need it any more
-            //   observer.unobserve(entry.target);
             });
           });
-          
-          // get your elements, by class name '.js-item'
           const elements = [...document.querySelectorAll('.js-header-sentinal')];
-          
-          // start observing your elements
+
           elements.forEach((element) => intersectionObserver.observe(element));
 
     }
 }
 
-
 // Create {app} instance
 window.app = new App();
-
 
 // Export {app} instance
 export default window.app;
