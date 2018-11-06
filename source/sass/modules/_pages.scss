@@ -102,8 +102,11 @@
     white-space: nowrap;
     overflow: hidden;
     width: 100%;
-    position: relative;
     text-align: left;
+
+    @include respond( $mobile-width ) {
+        position: relative;
+    }
 }
 .highs__belt {
     transition: transform $base-duration $ease;
@@ -162,6 +165,7 @@
 }
 .highs__timeline {
     margin-top: 100px;
+    margin-bottom: 5px;
     position: relative;
     width: 100%;
 
@@ -237,6 +241,11 @@
     background-color: $spot;
     transform: translate3d( 50%, -50%, 0 );
     border-radius: 10px;
+}
+.highs__navi {
+    @include respond-min($mobile-width) {
+        display: none;
+    }
 }
 
 
@@ -501,6 +510,11 @@
     width: 100%;
     height: auto;
     transform: translate3d( 0, -50%, 0 );
+
+    @include respond( $mobile-width ) {
+        left: -20%;
+        width: 140%;
+    }
 }
 .partners__image--hover {
     opacity: 0;
@@ -791,10 +805,8 @@
     &__text {
         position: absolute;
         top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        transform: translateY(-50%);
         width: 100%;
-        text-align: center;
         color: #fff;
         @include wrap();
 
@@ -856,15 +868,29 @@
     @include respond-min( $break-mobile-full ) {
         @include flex-left();
         flex-direction: row;
+        align-items: flex-start;
     }
 }
 
-.employee-testimonial--right {
+.employee-testimonial--right {  
     @include respond-min( $break-mobile-full ) {
+        @include flex-left();
+        align-items: flex-start;
+    }
+
+    @include respond-min( $break-tablet-small ) {
         @include flex-right();
+        align-items: flex-start;
     }
 }
 
+.employee-testimonial + .employee-testimonial {
+    margin-top: calc( #{$expander-2} / 2 );
+
+    @include respond-min( $mobile-width ) {
+        margin-top: calc( #{$expander-1} / 2 );
+    }
+}
 
 .employee-testimonial__photo {
     width: 100%;
@@ -872,7 +898,6 @@
 
     @include respond-min( $break-mobile-full ) {
         width: 46vw;
-        margin-top: -15vh;
     }
 
     @include respond-min( $break-tablet-small ) {
@@ -885,13 +910,18 @@
 }
 
 .employee-testimonial__text {
-    order: 1;
-
     @include respond-min( $break-mobile-full ) {
-        order: 0;
-        width: 32vw;
-        margin-right: -10vw;
+        width: 44vw;
+        margin-left: 20px;
         z-index: 1;
+    }
+
+    @include respond-min( $break-tablet-small ) {
+        width: 36vw;
+    }
+
+    @include respond-min( $break-tablet-medium ) {
+        width: 28vw;
     }
 }
 

@@ -19,6 +19,7 @@ class Slider {
         this.elemData = this.element.data();
         this.belt = this.element.find( ".js-slider-belt" );
         this.currs = this.element.find( ".js-slider-curr" );
+        this.extraCurrs = this.element.find( ".js-slider-extra-curr" );
         this.items = this.element.find( ".js-slider-item" );
         this.prev = this.element.find( ".js-slider-prev" );
         this.next = this.element.find( ".js-slider-next" );
@@ -36,6 +37,15 @@ class Slider {
                     exec: () => {
                         return this.isHomeMobilized;
                     }
+                }
+            },
+            enum: {
+                move: "(-50vw - 10vw)",
+                noop: {
+                    move: ( idx ) => {
+                        return `calc(-${this.items[ idx ].getBoundingClientRect().width * idx}px - ${idx * 10}vw)`;
+                    },
+                    width: 768
                 }
             },
             edge: {
@@ -102,6 +112,17 @@ class Slider {
 
     inMotion () {
         return (this.isMoving || this.isPanning);
+    }
+
+
+    spawn_enum_mobile () {
+        this.spawn_home_mobile();
+    }
+    spawn_enum () {
+        this.spawn_home();
+    }
+    swap_enum () {
+        this.swap_home();
     }
 
 
@@ -194,24 +215,28 @@ class Slider {
     init () {
         this.currs.first().addClass( "is-active" );
         this.items.first().addClass( "is-active" );
+
+        if (this.extraCurrs.length) {
+            this.extraCurrs.first().addClass( "is-active" );
+        }
     }
 
 
     bind () {
         if ( this.prev.length && this.next.length ) {
             this.prev.on( "click", () => {
-                if ( this.data.index !== 0 ) {
-                    this.rewind();
-                }
+                this.rewind();
             });
             this.next.on( "click", () => {
-                if ( this.data.index !== (this.data.length - 1) ) {
-                    this.advance();
-                }
+                this.advance();
             });
         }
         this.currs.on( "click", this.onHitItem.bind( this ));
         this.items.on( "click", this.onHitItem.bind( this ));
+
+        if (this.extraCurrs.length) {
+            this.extraCurrs.on( "click", this.onHitItem.bind( this ));
+        }
     }
 
 
@@ -222,6 +247,8 @@ class Slider {
 
         if ( canGo ) {
             this.goto( index );
+        } else if ( index === (this.data.length - 1) ) {
+            this.goto( 0 );
         }
     }
 
@@ -230,12 +257,18 @@ class Slider {
         this.currs.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
         this.items.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
         this._swapFunc();
+
+        if (this.extraCurrs.length) {
+            this.extraCurrs.removeClass( "is-active" ).eq( this.data.index ).addClass( "is-active" );
+        }
     }
 
 
     increment () {
         if ( this.data.index !== (this.data.length - 1) ) {
             this.data.index++;
+        } else {
+            this.data.index = 0;
         }
     }
 
@@ -243,6 +276,8 @@ class Slider {
     decrement () {
         if ( this.data.index !== 0 ) {
             this.data.index--;
+        } else {
+            this.data.index = this.data.length - 1;
         }
     }
 

@@ -21,7 +21,7 @@ class HomeController {
         this.length = this.slices.length;
         this.isDisabled = false;
         this.isWheel = false;
-        this.wheelTime = 200;
+        this.wheelTime = 350;
         this._onMouseWheel = this.onMouseWheel.bind( this );
         this._onMouseWheelF = this.onMouseWheelF.bind( this );
         this._loadFunc = null;
@@ -162,7 +162,7 @@ class HomeController {
                     this.bindWheelF();
                     this.bindWheel();
 
-                }, 1000 );
+                }, 100 );
             }
         });
     }
@@ -184,7 +184,7 @@ class HomeController {
 
 
     home_reel_load_mobile () {
-        core.dom.html.removeClass( "is-theme-black" ).addClass( "is-theme-white" );
+        core.dom.html.removeClass( "is-theme-white" );
     }
     home_reel_unload_mobile () {}
     home_reel_load () {
@@ -199,6 +199,8 @@ class HomeController {
         const ex = slice.find( ".js-home-reel-ex" );
         const video = slice.find( ".js-home-reel-video" );
         const videoInstance = video.find( ".js-video" ).data().Video;
+
+        core.dom.html.removeClass( "is-theme-white" );
 
         mark.addClass( "is-full" );
 

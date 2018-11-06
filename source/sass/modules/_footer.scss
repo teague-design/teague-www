@@ -40,7 +40,13 @@
     .footer__social {
         @include respond( $break-tablet-small ) {
             width: 100%;
-            justify-content: space-between;
+            justify-content: space-around;
+        }
+
+        @include respond( $break-mobile-small ) {
+            .footer__a {
+                font-size: 16px;
+            }
         }
     }
     .footer__legal {
@@ -48,6 +54,12 @@
             width: 100%;
             justify-content: center;
             margin-top: 40px;
+        }
+
+        @include respond( $break-mobile-small ) {
+            .footer__a {
+                font-size: 16px;
+            }
         }
     }
 }
@@ -67,4 +79,8 @@
 }
 .footer__a + .footer__a {
     margin-left: 30px;
+
+    @include respond( $break-mobile-medium ) {
+        margin-left: 15px;
+    }
 }
