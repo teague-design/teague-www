@@ -38,6 +38,8 @@ class Slice {
         this.deets = this.element.find( ".js-page-header-deets" );
         this.tag = this.element.find( ".js-page-header-tag" );
 
+        
+
         if ( this.image.length ) {
             this.controller = new Controller();
             this.controller.go(() => {
