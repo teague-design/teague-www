@@ -11,7 +11,6 @@ const isPage = (locals.item.type === 'page');
 const isIndustryPage = isPage && (locals.item.tags.length !== 0);
 const isDescText = dom.RichText.asText( locals.slice.primary.header_description ) !== "";
 %>  
-    <div class="main__header__ancestor"></div>
     <div class="main__header__title <% if ( isImage ) { %>main__header__title--has-image<% } %> cms -wrap">
         <% if ( isStory || isCasestudy ) { %>
             <div class="main__header__tag">
@@ -21,7 +20,7 @@ const isDescText = dom.RichText.asText( locals.slice.primary.header_description 
         <%- dom.RichText.asHtml( locals.slice.primary.header_title ) %>
     </div>
     <% if ( isImage ) { %>
-        <div class="main__header__sentinal js-main-header-sentinal">
+        <div class="main__header__sentinal js-main-header js-main-header-sentinal">
         </div>
         <div class="main__header__image">
             <%- include( '../partials/image.html', {image: locals.slice.primary.header_image} ) %>
