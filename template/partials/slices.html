@@ -11,9 +11,13 @@ const isSpacer = (scope !== config.homepage);
         const sliceType = slice.slice_type.replace( /_+/g, '-' );
         const slicePartial = `../slices/${sliceType}.html`;
         %>
-        <div class="slice slice--<%= sliceType %> js-slice" data-index="<%= i %>" data-prop="<%= slice.slice_type %>">
+        <% if ( sliceType !== "page-header") { %>
+            <div class="slice slice--<%= sliceType %> js-slice" data-index="<%= i %>" data-prop="<%= slice.slice_type %>">
+        <% } %> 
             <%- include( slicePartial, {item, slice, scope} ) %>
-        </div>
+        <% if ( sliceType !== "page-header") { %>
+            </div>
+        <% } %> 
         <% if ( isSpacer && i !== (locals.slices.length - 1) ) { %>
             <div class="spacer spacer--<%= item.type %> spacer--<%= item.uid %>"></div>
         <% } %>

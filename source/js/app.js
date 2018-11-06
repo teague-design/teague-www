@@ -7,7 +7,6 @@ import router from "./router";
 import * as core from "./core";
 import navi from "./modules/navi";
 import Tracker from "./class/services/Tracker";
-import ScrollController from "properjs-scrollcontroller";
 
 
 /**
@@ -20,7 +19,6 @@ import ScrollController from "properjs-scrollcontroller";
 class App {
     constructor () {
         this.tracker = new Tracker();
-        this.scroller = new ScrollController();
         this.core = core;
         this.router = router;
         this.navi = navi;
@@ -31,35 +29,6 @@ class App {
 
 
     bind () {
-        this.scroller.on( "scroll", () => {
-            this.core.emitter.fire( "app--scroll" );
-        });
-        this.scroller.on( "scrollup", () => {
-            const scrollY = this.scroller.getScrollY();
-
-            // Safari allows negative scroll event
-            if ( scrollY < 0 ) {
-                return false;
-            }
-
-            if ( scrollY <= 125 ) {
-                this.core.dom.html.addClass( "is-scroll-up" ).removeClass( "is-scroll-down" );
-            }
-
-            this.core.emitter.fire( "app--scrollup" );
-        });
-        this.scroller.on( "scrolldown", () => {
-            const scrollY = this.scroller.getScrollY();
-            const scrollMax = this.scroller.getScrollMax();
-
-            // Safari allows overscroll past max, just like negative below zero
-            if ( scrollY <= 0 || scrollY > scrollMax ) {
-                return false;
-            }
-
-            this.core.dom.html.addClass( "is-scroll-down" ).removeClass( "is-scroll-up" );
-            this.core.emitter.fire( "app--scrolldown" );
-        });
     }
 
 
@@ -74,6 +43,30 @@ class App {
         }).catch(( error ) => {
             this.core.log( "warn", error );
         });
+
+        // TODO: clean this up
+        const intersectionObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+              if (entry.intersectionRatio > 0) {
+                this.core.dom.html.addClass( "is-scroll-up" ).removeClass( "is-scroll-down" );
+                this.core.emitter.fire( "app--scrollup" );
+              }else{
+                this.core.dom.html.addClass( "is-scroll-down" ).removeClass( "is-scroll-up" );
+                this.core.emitter.fire( "app--scrolldown" );
+              }
+              
+              // it's good to remove observer,
+              // if you don't need it any more
+            //   observer.unobserve(entry.target);
+            });
+          });
+          
+          // get your elements, by class name '.js-item'
+          const elements = [...document.querySelectorAll('.js-header-sentinal')];
+          
+          // start observing your elements
+          elements.forEach((element) => intersectionObserver.observe(element));
+
     }
 }
 

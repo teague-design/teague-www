@@ -12,6 +12,7 @@ import Slider from "./components/Slider";
 import FormOver from "./components/FormOver";
 import Mapbox from "./components/Mapbox";
 import Triggers from "./components/Triggers";
+import MainHeader from "./components/MainHeader";
 
 
 
@@ -70,6 +71,7 @@ class Controllers {
         this.controllers = [];
 
         this.push( "slice", core.dom.body.find( ".js-slice" ), BaseController, Slice );
+        this.push( "mainheader", core.dom.body.find( ".js-main-header" ), BaseController, MainHeader );
         this.push( "form", core.dom.body.find( ".js-form" ), BaseController, Form );
         this.push( "view", core.dom.body.find( ".js-view" ), BaseController, View );
         this.push( "taxi", core.dom.body.find( ".js-taxi" ), BaseController, Taxi );

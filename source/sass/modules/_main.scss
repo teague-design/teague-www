@@ -1,6 +1,6 @@
 .main {
     transition: opacity $base-duration $ease;
-    overflow: hidden;
+    // overflow: hidden;
 
     .is-tranny & {
         opacity: 0;
@@ -8,7 +8,13 @@
     }
 }
 .main__header__image {
+    position: -webkit-sticky;
+    position: sticky;
     width: 90vw;
+    top: 80px;
+    margin-top: 80px;
+    z-index: 0;
+    transform: translateZ(0px);
 
     .work & .image-wrap:after {
         content: "";
@@ -19,12 +25,23 @@
         width: 100vw;
     }
 }
+
+.main__header__sentinal {
+    background-color: transparent;
+    width: 90vw;
+    height: 80px;
+    position: absolute;
+}
+
 .main__header__deets {
     width: 90vw;
     display: flex;
     justify-content: space-between;
     padding-right: 0;
     background-color: $white;
+    position: relative;
+    z-index: 3;
+    transform: translateZ(0px);
 
     .is-theme-black & {
         background-color: $black;
@@ -75,8 +92,11 @@
     padding-bottom: 0 !important;
 }
 .main__header__title {
+    @include topm();
+    z-index: 1;
     width: 90vw;
-    transition: color $fast-duration $ease;
+    position: relative;
+    transition: color $fast-duration $ease, opacity $fast-duration $ease;
 
     &.is-textchange {
         color: $white;
@@ -91,7 +111,10 @@
     }
 }
 
-
+.main__header__title.main__header__title--has-image {
+    position: -webkit-sticky;
+    position: sticky;
+}
 
 .terms,
 .privacy {

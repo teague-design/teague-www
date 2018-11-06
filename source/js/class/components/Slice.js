@@ -26,17 +26,19 @@ class Slice {
 
 
     init () {
-        // this.element[ 0 ].style.zIndex = this.data.index;
     }
 
 
     page_header () {
+        console.log("page_header");
         this.isFixedImage = false;
         this.page = this.element.find( ".js-page-header" );
         this.title = this.element.find( ".js-page-header-title" );
         this.image = this.element.find( ".js-page-header-image" );
         this.deets = this.element.find( ".js-page-header-deets" );
         this.tag = this.element.find( ".js-page-header-tag" );
+
+        
 
         if ( this.image.length ) {
             this.controller = new Controller();

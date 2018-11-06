@@ -10,23 +10,24 @@ const isCasestudy = (locals.item.type === 'casestudy');
 const isPage = (locals.item.type === 'page');
 const isIndustryPage = isPage && (locals.item.tags.length !== 0);
 const isDescText = dom.RichText.asText( locals.slice.primary.header_description ) !== "";
-%>
-<div class="main__header js-page-header <% if ( isImage ) { %>main__header--image<% } %> <% if ( isStory || isCasestudy || isIndustryPage ) { %>main__header--story<% } %>">
-    <div class="main__header__title js-page-header-title cms -wrap">
+%>  
+    <div class="main__header__title <% if ( isImage ) { %>main__header__title--has-image<% } %> cms -wrap">
         <% if ( isStory || isCasestudy ) { %>
-            <div class="main__header__tag js-page-header-tag">
+            <div class="main__header__tag">
                 <h6><%- locals.item.tags[ 0 ] %></h6>
             </div>
         <% } %>
         <%- dom.RichText.asHtml( locals.slice.primary.header_title ) %>
     </div>
     <% if ( isImage ) { %>
-        <div class="main__header__image js-page-header-image">
+        <div class="main__header__sentinal js-main-header js-main-header-sentinal">
+        </div>
+        <div class="main__header__image">
             <%- include( '../partials/image.html', {image: locals.slice.primary.header_image} ) %>
         </div>
     <% } %>
     <% if ( (isStory || isCasestudy || isPage) && isDescText ) { %>
-        <div class="main__header__deets js-page-header-deets cms -wrap">
+        <div class="main__header__deets cms -wrap">
             <div class="main__header__deets__l">
                 <div class="main__header__desc">
                     <%- dom.RichText.asHtml( locals.slice.primary.header_description ) %>
@@ -44,10 +45,9 @@ const isDescText = dom.RichText.asText( locals.slice.primary.header_description 
             <% } %>
         </div>
     <% } else if ( isDescText ) { %>
-        <div class="main__header__desc js-page-header-deets cms -wrap">
+        <div class="main__header__desc cms -wrap">
             <%- dom.RichText.asHtml( locals.slice.primary.header_description ) %>
         </div>
     <% } else { %>
-        <div class="main__header__desc-shim js-page-header-deets"></div>
+        <div class="main__header__desc-shim"></div>
     <% } %>
-</div>

@@ -232,6 +232,21 @@
         padding-top: calc( 310px + #{$header-height} );
     }
 }
+@mixin padbm() {
+    padding-bottom: calc( 16vw + #{$header-height} );
+
+    @include respond-min( $bind-width ) {
+        padding-bottom: calc( 310px + #{$header-height} );
+    }
+}
+@mixin topm() {
+    top: calc( 16vw + #{$header-height} );
+
+    @include respond-min( $bind-width ) {
+        top: calc( 310px + #{$header-height} );
+    }
+}
+
 @mixin arrow-hover() {
     width: 38px;
 
