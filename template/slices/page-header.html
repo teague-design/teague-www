@@ -11,7 +11,7 @@ const isPage = (locals.item.type === 'page');
 const isIndustryPage = isPage && (locals.item.tags.length !== 0);
 const isDescText = dom.RichText.asText( locals.slice.primary.header_description ) !== "";
 %>
-    <div class="main__header__title cms -wrap">
+    <div class="main__header__title <% if ( isImage ) { %>main__header__title--has-image<% } %> cms -wrap">
         <% if ( isStory || isCasestudy ) { %>
             <div class="main__header__tag">
                 <h6><%- locals.item.tags[ 0 ] %></h6>
