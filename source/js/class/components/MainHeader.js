@@ -27,18 +27,20 @@ class MainHeader {
     init () {
 
         // TODO: clean this up
-        const titleEl = document.querySelector(".main__header__title")
+        const titleEl = document.querySelector(".main__header__title");
         const config = {
             threshold: [0, 0.2, 0.4, 0.6, 0.8, 1]
-        };  
-        const intersectionObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach((entry) => titleEl.style.opacity = entry.intersectionRatio);
+        };
+        const intersectionObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                titleEl.style.opacity = entry.intersectionRatio;
+            });
         }, config);
-          
         // get your elements, by class name '.js-item'
-        const element = document.querySelector('.js-main-header-sentinal')
-        if(element) {
-            intersectionObserver.observe(element)
+        const element = document.querySelector('.js-main-header-sentinal');
+
+        if (element) {
+            intersectionObserver.observe(element);
         }
     }
 
